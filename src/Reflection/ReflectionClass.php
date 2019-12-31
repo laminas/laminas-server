@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
 /**
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
- * creating its own list of {@link Zend_Server_Reflection_Method}s.
+ * creating its own list of {@link Laminas_Server_Reflection_Method}s.
  *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
+ * @category   Laminas
+ * @package    Laminas_Server
+ * @subpackage Laminas_Server_Reflection
  */
 class ReflectionClass
 {
@@ -30,7 +28,7 @@ class ReflectionClass
     protected $config = array();
 
     /**
-     * Array of {@link \Zend\Server\Reflection\Method}s
+     * Array of {@link \Laminas\Server\Reflection\Method}s
      * @var array
      */
     protected $methods = array();
@@ -51,7 +49,7 @@ class ReflectionClass
      * Constructor
      *
      * Create array of dispatchable methods, each a
-     * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
+     * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
      * @param \ReflectionClass $reflection
      * @param string $namespace
@@ -125,7 +123,7 @@ class ReflectionClass
     }
 
     /**
-     * Return array of dispatchable {@link \Zend\Server\Reflection\Method}s.
+     * Return array of dispatchable {@link \Laminas\Server\Reflection\Method}s.
      *
      * @access public
      * @return array
