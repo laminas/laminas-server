@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server;
+namespace Laminas\Server;
 
 use Countable;
 use Iterator;
@@ -18,7 +17,7 @@ use Iterator;
 class Definition implements Countable, Iterator
 {
     /**
-     * @var array Array of \Zend\Server\Method\Definition objects
+     * @var array Array of \Laminas\Server\Method\Definition objects
      */
     protected $methods = array();
 
@@ -43,7 +42,7 @@ class Definition implements Countable, Iterator
      * Set flag indicating whether or not overwriting existing methods is allowed
      *
      * @param mixed $flag
-     * @return \Zend\Server\Definition
+     * @return \Laminas\Server\Definition
      */
     public function setOverwriteExistingMethods($flag)
     {
@@ -54,10 +53,10 @@ class Definition implements Countable, Iterator
     /**
      * Add method to definition
      *
-     * @param  array|\Zend\Server\Method\Definition $method
+     * @param  array|\Laminas\Server\Method\Definition $method
      * @param  null|string $name
-     * @return \Zend\Server\Definition
-     * @throws \Zend\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
+     * @return \Laminas\Server\Definition
+     * @throws \Laminas\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
      */
     public function addMethod($method, $name = null)
     {
@@ -89,8 +88,8 @@ class Definition implements Countable, Iterator
     /**
      * Add multiple methods
      *
-     * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
-     * @return \Zend\Server\Definition
+     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
+     * @return \Laminas\Server\Definition
      */
     public function addMethods(array $methods)
     {
@@ -103,8 +102,8 @@ class Definition implements Countable, Iterator
     /**
      * Set all methods at once (overwrite)
      *
-     * @param  array $methods Array of \Zend\Server\Method\Definition objects or arrays
-     * @return \Zend\Server\Definition
+     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
+     * @return \Laminas\Server\Definition
      */
     public function setMethods(array $methods)
     {
@@ -128,7 +127,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return null|\Zend\Server\Method\Definition
+     * @return null|\Laminas\Server\Method\Definition
      */
     public function getMethod($method)
     {
@@ -141,7 +140,7 @@ class Definition implements Countable, Iterator
     /**
      * Get all method definitions
      *
-     * @return array Array of \Zend\Server\Method\Definition objects
+     * @return array Array of \Laminas\Server\Method\Definition objects
      */
     public function getMethods()
     {
@@ -152,7 +151,7 @@ class Definition implements Countable, Iterator
      * Remove a method definition
      *
      * @param  string $method
-     * @return \Zend\Server\Definition
+     * @return \Laminas\Server\Definition
      */
     public function removeMethod($method)
     {
@@ -165,7 +164,7 @@ class Definition implements Countable, Iterator
     /**
      * Clear all method definitions
      *
-     * @return \Zend\Server\Definition
+     * @return \Laminas\Server\Definition
      */
     public function clearMethods()
     {
