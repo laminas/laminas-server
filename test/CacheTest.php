@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Cache;
+namespace LaminasTest\Cache;
 
+use Laminas\Server\Cache;
+use Laminas\Server\Definition;
+use Laminas\Server\Method\Callback;
+use Laminas\Server\Method\Definition as MethodDefinition;
+use Laminas\Server\Server;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
-use Zend\Server\Cache;
-use Zend\Server\Definition;
-use Zend\Server\Method\Callback;
-use Zend\Server\Method\Definition as MethodDefinition;
-use Zend\Server\Server;
 
 class CacheTest extends TestCase
 {
