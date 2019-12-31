@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server;
+namespace LaminasTest\Server;
 
-use Zend\Server\Reflection;
+use Laminas\Server\Reflection;
 
 /**
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,22 +20,22 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass()
     {
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass');
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
+        $reflection = Reflection::reflectClass('LaminasTest\Server\ReflectionTestClass');
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionClass', $reflection);
 
         $reflection = Reflection::reflectClass(new ReflectionTestClass());
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $reflection);
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionClass', $reflection);
     }
 
     public function testReflectClassThrowsExceptionOnInvalidClass()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid argv argument passed to reflectClass');
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', 'string');
+        $this->setExpectedException('Laminas\Server\Reflection\Exception\InvalidArgumentException', 'Invalid argv argument passed to reflectClass');
+        $reflection = Reflection::reflectClass('LaminasTest\Server\ReflectionTestClass', 'string');
     }
 
     public function testReflectClassThrowsExceptionOnInvalidParameter()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid class or object passed to attachClass');
+        $this->setExpectedException('Laminas\Server\Reflection\Exception\InvalidArgumentException', 'Invalid class or object passed to attachClass');
         $reflection = Reflection::reflectClass(false);
     }
 
@@ -45,7 +44,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectClass2()
     {
-        $reflection = Reflection::reflectClass('ZendTest\Server\ReflectionTestClass', false, 'zsr');
+        $reflection = Reflection::reflectClass('LaminasTest\Server\ReflectionTestClass', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
@@ -54,19 +53,19 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction');
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionFunction', $reflection);
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\reflectionTestFunction');
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionFunction', $reflection);
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
-        $reflection = Reflection::reflectFunction('ZendTest\Server\ReflectionTestClass', 'string');
+        $this->setExpectedException('Laminas\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\ReflectionTestClass', 'string');
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidParam()
     {
-        $this->setExpectedException('Zend\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
+        $this->setExpectedException('Laminas\Server\Reflection\Exception\InvalidArgumentException', 'Invalid function');
         $reflection = Reflection::reflectFunction(false);
     }
 
@@ -75,13 +74,13 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
      */
     public function testReflectFunction2()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 }
 
 /**
- * \ZendTest\Server\reflectionTestClass
+ * \LaminasTest\Server\reflectionTestClass
  *
  * Used to test reflectFunction generation of signatures
  *
@@ -96,7 +95,7 @@ function reflectionTestFunction($arg1, $arg2, $arg3 = 'string', $arg4 = 'array')
 }
 
 /**
- * \ZendTest\Server\ReflectionTestClass -- test class reflection
+ * \LaminasTest\Server\ReflectionTestClass -- test class reflection
  */
 class ReflectionTestClass
 {

@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#3](https://github.com/zendframework/zend-server/pull/3) adds support for
+- [zendframework/zend-server#3](https://github.com/zendframework/zend-server/pull/3) adds support for
   resolving `{@inheritdoc}` annotations to the original parent during
   reflection.
 
@@ -20,5 +20,5 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#2](https://github.com/zendframework/zend-server/pull/2) fixes misleading
+- [zendframework/zend-server#2](https://github.com/zendframework/zend-server/pull/2) fixes misleading
   exception in reflectFunction that referenced reflectClass.
