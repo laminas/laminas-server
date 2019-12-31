@@ -1,16 +1,15 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
 /**
- * Node Tree class for Zend\Server reflection operations
+ * Node Tree class for Laminas\Server reflection operations
  */
 class Node
 {
@@ -28,7 +27,7 @@ class Node
 
     /**
      * Parent node (if any)
-     * @var \Zend\Server\Reflection\Node
+     * @var \Laminas\Server\Reflection\Node
      */
     protected $parent = null;
 
@@ -36,8 +35,8 @@ class Node
      * Constructor
      *
      * @param mixed $value
-     * @param \Zend\Server\Reflection\Node $parent Optional
-     * @return \Zend\Server\Reflection\Node
+     * @param \Laminas\Server\Reflection\Node $parent Optional
+     * @return \Laminas\Server\Reflection\Node
      */
     public function __construct($value, Node $parent = null)
     {
@@ -52,7 +51,7 @@ class Node
     /**
      * Set parent node
      *
-     * @param \Zend\Server\Reflection\Node $node
+     * @param \Laminas\Server\Reflection\Node $node
      * @param  bool $new Whether or not the child node is newly created
      * and should always be attached
      * @return void
@@ -72,7 +71,7 @@ class Node
      *
      * @param mixed $value
      * @access public
-     * @return \Zend\Server\Reflection\Node New child node
+     * @return \Laminas\Server\Reflection\Node New child node
      */
     public function createChild($value)
     {
@@ -84,7 +83,7 @@ class Node
     /**
      * Attach a child node
      *
-     * @param \Zend\Server\Reflection\Node $node
+     * @param \Laminas\Server\Reflection\Node $node
      * @return void
      */
     public function attachChild(Node $node)
@@ -119,7 +118,7 @@ class Node
     /**
      * Return the parent node
      *
-     * @return null|\Zend\Server\Reflection\Node
+     * @return null|\Laminas\Server\Reflection\Node
      */
     public function getParent()
     {
