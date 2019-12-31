@@ -1,24 +1,22 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection;
+use Laminas\Server\Reflection;
 
 /**
- * Test case for \Zend\Server\Reflection\ClassReflection
+ * Test case for \Laminas\Server\Reflection\ClassReflection
  *
- * @category   Zend
- * @package    Zend_Server
+ * @category   Laminas
+ * @package    Laminas_Server
  * @subpackage UnitTests
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionClassTest extends \PHPUnit_Framework_TestCase
 {
@@ -36,7 +34,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__construct()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
         $this->assertTrue($r instanceof Reflection\ReflectionClass);
         $this->assertEquals('', $r->getNamespace());
 
@@ -46,7 +44,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($m instanceof Reflection\ReflectionMethod);
         }
 
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'), 'namespace');
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'), 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
@@ -63,9 +61,9 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__call()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
         $this->assertTrue(is_string($r->getName()));
-        $this->assertEquals('Zend\Server\Reflection', $r->getName());
+        $this->assertEquals('Laminas\Server\Reflection', $r->getName());
     }
 
     /**
@@ -73,7 +71,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSet()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
         $r->system = true;
         $this->assertTrue($r->system);
     }
@@ -87,7 +85,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethods()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
 
         $methods = $r->getMethods();
         $this->assertTrue(is_array($methods));
@@ -101,7 +99,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNamespace()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
         $this->assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -116,7 +114,7 @@ class ReflectionClassTest extends \PHPUnit_Framework_TestCase
      */
     public function test__wakeup()
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Zend\Server\Reflection'));
+        $r = new Reflection\ReflectionClass(new \ReflectionClass('\Laminas\Server\Reflection'));
         $s = serialize($r);
         $u = unserialize($s);
 
