@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Method;
+namespace Laminas\Server\Method;
 
-use Zend\Server;
+use Laminas\Server;
 
 /**
  * Method callback metadata
@@ -57,7 +56,7 @@ class Callback
      * Set object state from array of options
      *
      * @param  array $options
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setOptions(array $options)
     {
@@ -74,7 +73,7 @@ class Callback
      * Set callback class
      *
      * @param  string $class
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setClass($class)
     {
@@ -99,7 +98,7 @@ class Callback
      * Set callback function
      *
      * @param  string $function
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setFunction($function)
     {
@@ -122,7 +121,7 @@ class Callback
      * Set callback class method
      *
      * @param  string $method
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setMethod($method)
     {

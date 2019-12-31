@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Method;
+namespace Laminas\Server\Method;
 
 /**
  * Method parameter metadata
@@ -65,7 +64,7 @@ class Parameter
      * Set object state from array of options
      *
      * @param  array $options
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setOptions(array $options)
     {
@@ -82,7 +81,7 @@ class Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setDefaultValue($defaultValue)
     {
@@ -104,7 +103,7 @@ class Parameter
      * Set description
      *
      * @param  string $description
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setDescription($description)
     {
@@ -126,7 +125,7 @@ class Parameter
      * Set name
      *
      * @param  string $name
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setName($name)
     {
@@ -148,7 +147,7 @@ class Parameter
      * Set optional flag
      *
      * @param  bool $flag
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setOptional($flag)
     {
@@ -170,7 +169,7 @@ class Parameter
      * Set parameter type
      *
      * @param  string $type
-     * @return \Zend\Server\Method\Parameter
+     * @return \Laminas\Server\Method\Parameter
      */
     public function setType($type)
     {
