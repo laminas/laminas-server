@@ -1,26 +1,25 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection;
+use Laminas\Server\Reflection;
 
 /**
- * Test case for \Zend\Server\Reflection\ReflectionParameter
+ * Test case for \Laminas\Server\Reflection\ReflectionParameter
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
 {
     protected function getParameter()
     {
-        $method = new \ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
+        $method = new \ReflectionMethod('\Laminas\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }
@@ -42,7 +41,7 @@ class ReflectionParameterTest extends \PHPUnit_Framework_TestCase
         $parameter = $this->getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionParameter', $reflection);
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionParameter', $reflection);
     }
 
     /**

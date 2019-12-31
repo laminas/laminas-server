@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @link      http://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\TestAsset;
+namespace LaminasTest\Server\TestAsset;
 
 /**
- * \ZendTest\Server\TestAsset\ReflectionTestClass -- test class reflection
+ * \LaminasTest\Server\TestAsset\ReflectionTestClass -- test class reflection
  */
 class ReflectionTestClass
 {
