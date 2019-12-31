@@ -1,19 +1,20 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection;
-use Zend\Server\Reflection\ReflectionReturnValue;
+use Laminas\Server\Reflection;
+use Laminas\Server\Reflection\ReflectionReturnValue;
 
 /**
- * Test case for \Zend\Server\Reflection\ReflectionReturnValue
+ * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
 {

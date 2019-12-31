@@ -1,14 +1,15 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server;
+namespace Laminas\Server;
 
-use Zend\Server\Reflection\ReflectionClass;
-use Zend\Server\Reflection\ReflectionFunction;
+use Laminas\Server\Reflection\ReflectionClass;
+use Laminas\Server\Reflection\ReflectionFunction;
 
 /**
  * Reflection for determining method signatures to use with server classes
@@ -18,7 +19,7 @@ class Reflection
     /**
      * Perform class reflection to create dispatch signatures
      *
-     * Creates a {@link \Zend\Server\Reflection\ClassReflection} object for the class or
+     * Creates a {@link \Laminas\Server\Reflection\ClassReflection} object for the class or
      * object provided.
      *
      * If extra arguments should be passed to dispatchable methods, these may
@@ -29,8 +30,8 @@ class Reflection
      * @param string $namespace Optional namespace with which to prefix the
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
-     * @return \Zend\Server\Reflection\ReflectionClass
-     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
+     * @return \Laminas\Server\Reflection\ReflectionClass
+     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectClass($class, $argv = false, $namespace = '')
     {
@@ -53,7 +54,7 @@ class Reflection
      * Perform function reflection to create dispatch signatures
      *
      * Creates dispatch prototypes for a function. It returns a
-     * {@link Zend\Server\Reflection\FunctionReflection} object.
+     * {@link Laminas\Server\Reflection\FunctionReflection} object.
      *
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
@@ -63,8 +64,8 @@ class Reflection
      * @param string $namespace Optional namespace with which to prefix the
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
-     * @return \Zend\Server\Reflection\ReflectionFunction
-     * @throws \Zend\Server\Reflection\Exception\InvalidArgumentException
+     * @return \Laminas\Server\Reflection\ReflectionFunction
+     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {

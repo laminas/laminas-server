@@ -1,27 +1,28 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
+use Laminas\Server\Reflection;
+use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
-use Zend\Server\Reflection;
-use Zend\Server\Reflection\ReflectionParameter;
 
 /**
- * Test case for \Zend\Server\Reflection\ReflectionParameter
+ * Test case for \Laminas\Server\Reflection\ReflectionParameter
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionParameterTest extends TestCase
 {
     protected function getParameter()
     {
-        $method = new ReflectionMethod('\Zend\Server\Reflection\ReflectionParameter', 'setType');
+        $method = new ReflectionMethod('\Laminas\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }

@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server;
+namespace LaminasTest\Server;
 
+use Laminas\Server\Reflection;
+use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use Laminas\Server\Reflection\ReflectionClass;
+use Laminas\Server\Reflection\ReflectionFunction;
 use PHPUnit\Framework\TestCase;
-use Zend\Server\Reflection;
-use Zend\Server\Reflection\Exception\InvalidArgumentException;
-use Zend\Server\Reflection\ReflectionClass;
-use Zend\Server\Reflection\ReflectionFunction;
 
 /**
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionTest extends TestCase
 {
@@ -58,7 +59,7 @@ class ReflectionTest extends TestCase
      */
     public function testReflectFunction()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\TestAsset\reflectionTestFunction');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction');
         $this->assertInstanceOf(ReflectionFunction::class, $reflection);
     }
 
@@ -81,7 +82,7 @@ class ReflectionTest extends TestCase
      */
     public function testReflectFunction2()
     {
-        $reflection = Reflection::reflectFunction('ZendTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 }

@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Method;
+namespace Laminas\Server\Method;
 
 /**
  * Method prototype metadata
@@ -43,7 +44,7 @@ class Prototype
      * Set return value
      *
      * @param  string $returnType
-     * @return \Zend\Server\Method\Prototype
+     * @return \Laminas\Server\Method\Prototype
      */
     public function setReturnType($returnType)
     {
@@ -65,7 +66,7 @@ class Prototype
      * Add a parameter
      *
      * @param  string $parameter
-     * @return \Zend\Server\Method\Prototype
+     * @return \Laminas\Server\Method\Prototype
      */
     public function addParameter($parameter)
     {
@@ -87,7 +88,7 @@ class Prototype
      * Add parameters
      *
      * @param  array $parameters
-     * @return \Zend\Server\Method\Prototype
+     * @return \Laminas\Server\Method\Prototype
      */
     public function addParameters(array $parameters)
     {
@@ -101,7 +102,7 @@ class Prototype
      * Set parameters
      *
      * @param  array $parameters
-     * @return \Zend\Server\Method\Prototype
+     * @return \Laminas\Server\Method\Prototype
      */
     public function setParameters(array $parameters)
     {
@@ -139,7 +140,7 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|\Zend\Server\Method\Parameter
+     * @return null|\Laminas\Server\Method\Parameter
      */
     public function getParameter($index)
     {
@@ -159,7 +160,7 @@ class Prototype
      * Set object state from array
      *
      * @param  array $options
-     * @return \Zend\Server\Method\Prototype
+     * @return \Laminas\Server\Method\Prototype
      */
     public function setOptions(array $options)
     {

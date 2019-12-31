@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
+use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
-use Zend\Code\Reflection\DocBlockReflection;
 
 /**
  * Function/Method Reflection
@@ -21,7 +22,7 @@ use Zend\Code\Reflection\DocBlockReflection;
  * setting and retrieving the description (originally set using the docblock
  * contents), retrieving the callback and callback type, retrieving additional
  * method invocation arguments, and retrieving the
- * method {@link \Zend\Server\Reflection\Prototype prototypes}.
+ * method {@link \Laminas\Server\Reflection\Prototype prototypes}.
  */
 abstract class AbstractFunction
 {
@@ -120,7 +121,7 @@ abstract class AbstractFunction
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param \Zend\Server\Reflection\Node $parent
+     * @param \Laminas\Server\Reflection\Node $parent
      * @param int $level
      * @return void
      */
@@ -143,7 +144,7 @@ abstract class AbstractFunction
      *
      * Builds a signature tree starting at the return values and descending
      * through each method argument. Returns an array of
-     * {@link \Zend\Server\Reflection\Node}s.
+     * {@link \Laminas\Server\Reflection\Node}s.
      *
      * @return array
      */
@@ -246,9 +247,9 @@ abstract class AbstractFunction
 
         $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
         $helpText   = $scanner->getLongDescription();
-        /* @var \Zend\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
+        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
-        /* @var \Zend\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
+        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
         $returnTag = $scanner->getTag('return');
 
         if (empty($helpText)) {
@@ -419,7 +420,7 @@ abstract class AbstractFunction
 
     /**
      * Retrieve all prototypes as array of
-     * {@link \Zend\Server\Reflection\Prototype}s
+     * {@link \Laminas\Server\Reflection\Prototype}s
      *
      * @return Prototype[]
      */
