@@ -1,14 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
 /**
  * Function/Method Reflection
@@ -18,11 +16,11 @@ namespace Zend\Server\Reflection;
  * setting and retrieving the description (originally set using the docblock
  * contents), retrieving the callback and callback type, retrieving additional
  * method invocation arguments, and retrieving the
- * method {@link \Zend\Server\Reflection\Prototype prototypes}.
+ * method {@link \Laminas\Server\Reflection\Prototype prototypes}.
  *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Reflection
+ * @category   Laminas
+ * @package    Laminas_Server
+ * @subpackage Laminas_Server_Reflection
  */
 abstract class AbstractFunction
 {
@@ -119,7 +117,7 @@ abstract class AbstractFunction
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param \Zend\Server\Reflection\Node $parent
+     * @param \Laminas\Server\Reflection\Node $parent
      * @param int $level
      * @return void
      */
@@ -142,7 +140,7 @@ abstract class AbstractFunction
      *
      * Builds a signature tree starting at the return values and descending
      * through each method argument. Returns an array of
-     * {@link \Zend\Server\Reflection\Node}s.
+     * {@link \Laminas\Server\Reflection\Node}s.
      *
      * @return array
      */
@@ -429,7 +427,7 @@ abstract class AbstractFunction
 
     /**
      * Retrieve all prototypes as array of
-     * {@link \Zend\Server\Reflection\Prototype}s
+     * {@link \Laminas\Server\Reflection\Prototype}s
      *
      * @return array
      */
