@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
 /**
  * Method/Function prototypes
@@ -52,7 +51,7 @@ class Prototype
     /**
      * Retrieve the return value object
      *
-     * @return \Zend\Server\Reflection\ReflectionReturnValue
+     * @return \Laminas\Server\Reflection\ReflectionReturnValue
      */
     public function getReturnValue()
     {
@@ -62,7 +61,7 @@ class Prototype
     /**
      * Retrieve method parameters
      *
-     * @return ReflectionParameter[] Array of {@link \Zend\Server\Reflection\ReflectionParameter}s
+     * @return ReflectionParameter[] Array of {@link \Laminas\Server\Reflection\ReflectionParameter}s
      */
     public function getParameters()
     {
