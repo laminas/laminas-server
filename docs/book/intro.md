@@ -1,13 +1,13 @@
 # Introduction
 
-The zend-server family of classes provides functionality for the various server
-classes, including [zend-xmlrpc](https://docs.zendframework.com/zend-xmlrpc) and
-[zend-json-server](https://docs.zendframework.com/zend-json-server/).
-`Zend\Server\Server` provides an interface that mimics PHP’s `SoapServer` class;
+The laminas-server family of classes provides functionality for the various server
+classes, including [laminas-xmlrpc](https://docs.laminas.dev/laminas-xmlrpc) and
+[laminas-json-server](https://docs.laminas.dev/laminas-json-server/).
+`Laminas\Server\Server` provides an interface that mimics PHP’s `SoapServer` class;
 all RPC-style server classes should implement this interface in order to provide a
 standard server API.
 
-The `Zend\Server\Reflection` tree provides a standard mechanism for performing
+The `Laminas\Server\Reflection` tree provides a standard mechanism for performing
 function and class introspection for use as callbacks with the server classes,
-and provides data suitable for use with `Zend\Server\Server`'s `getFunctions()`
+and provides data suitable for use with `Laminas\Server\Server`'s `getFunctions()`
 and `loadFunctions()` methods.

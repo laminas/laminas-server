@@ -1,28 +1,29 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
+use Laminas\Server\Reflection;
+use Laminas\Server\Reflection\AbstractFunction;
+use Laminas\Server\Reflection\Prototype;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
-use Zend\Server\Reflection;
-use Zend\Server\Reflection\AbstractFunction;
-use Zend\Server\Reflection\Prototype;
 
 /**
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
-        $this->assertInstanceOf(\Zend\Server\Reflection\ReflectionFunction::class, $r);
+        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionFunction::class, $r);
         $this->assertInstanceOf(AbstractFunction::class, $r);
         $params = $r->getParameters();
 
@@ -41,7 +42,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testPropertyOverloading()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
 
         $r->system = true;
@@ -51,7 +52,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testNamespace()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
         $r->setNamespace('framework');
@@ -60,7 +61,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testDescription()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $this->assertContains('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
@@ -69,7 +70,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetPrototypes()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -83,7 +84,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetPrototypes2()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function2');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function2');
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -99,7 +100,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetInvokeArguments()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $args = $r->getInvokeArguments();
         $this->assertInternalType('array', $args);
@@ -113,17 +114,17 @@ class ReflectionFunctionTest extends TestCase
 
     public function testClassWakeup()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $s = serialize($r);
         $u = unserialize($s);
-        $this->assertInstanceOf(\Zend\Server\Reflection\ReflectionFunction::class, $u);
+        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionFunction::class, $u);
         $this->assertEquals('', $u->getNamespace());
     }
 
     public function testMultipleWhitespaceBetweenDoctagsAndTypes()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function3');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function3');
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -139,11 +140,11 @@ class ReflectionFunctionTest extends TestCase
     }
 
     /**
-     * @group ZF-6996
+     * @group Laminas-6996
      */
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription()
     {
-        $function = new ReflectionFunction('\ZendTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -155,7 +156,7 @@ class ReflectionFunctionTest extends TestCase
 }
 
 /**
- * \ZendTest\Server\Reflection\function1
+ * \LaminasTest\Server\Reflection\function1
  *
  * Test function for reflection unit tests
  *
@@ -169,7 +170,7 @@ function function1($var1, $var2, $var3 = null)
 }
 
 /**
- * \ZendTest\Server\Reflection\function2
+ * \LaminasTest\Server\Reflection\function2
  *
  * Test function for reflection unit tests; test what happens when no return
  * value or params specified in docblock.
@@ -179,7 +180,7 @@ function function2()
 }
 
 /**
- * \ZendTest\Server\Reflection\function3
+ * \LaminasTest\Server\Reflection\function3
  *
  * @param  string $var1
  * @return void

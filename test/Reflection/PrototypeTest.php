@@ -1,30 +1,31 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
+use Laminas\Server\Reflection;
+use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use Laminas\Server\Reflection\Prototype;
+use Laminas\Server\Reflection\ReflectionParameter;
+use Laminas\Server\Reflection\ReflectionReturnValue;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
-use Zend\Server\Reflection;
-use Zend\Server\Reflection\Exception\InvalidArgumentException;
-use Zend\Server\Reflection\Prototype;
-use Zend\Server\Reflection\ReflectionReturnValue;
-use Zend\Server\Reflection\ReflectionParameter;
 
 /**
- * Test case for \Zend\Server\Reflection\Prototype
+ * Test case for \Laminas\Server\Reflection\Prototype
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class PrototypeTest extends TestCase
 {
     /**
-     * \Zend\Server\Reflection\Prototype object
-     * @var \Zend\Server\Reflection\Prototype
+     * \Laminas\Server\Reflection\Prototype object
+     * @var \Laminas\Server\Reflection\Prototype
      */
     protected $r;
 
@@ -35,7 +36,7 @@ class PrototypeTest extends TestCase
     protected $parametersRaw;
 
     /**
-     * Array of \Zend\Server\Reflection\Parameters
+     * Array of \Laminas\Server\Reflection\Parameters
      * @var array
      */
     protected $parameters;
@@ -45,7 +46,7 @@ class PrototypeTest extends TestCase
      */
     public function setUp()
     {
-        $class = new ReflectionClass('\Zend\Server\Reflection');
+        $class = new ReflectionClass('\Laminas\Server\Reflection');
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->parametersRaw = $parameters;
@@ -109,7 +110,7 @@ class PrototypeTest extends TestCase
      *
      * Call as method call
      *
-     * Returns: \Zend\Server\Reflection\ReflectionReturnValue
+     * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
      */
     public function testGetReturnValue()
     {

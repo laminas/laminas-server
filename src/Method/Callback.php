@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-server for the canonical source repository
- * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-server/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Method;
+namespace Laminas\Server\Method;
 
-use Zend\Server;
+use Laminas\Server;
 
 /**
  * Method callback metadata
@@ -55,7 +56,7 @@ class Callback
      * Set object state from array of options
      *
      * @param  array $options
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setOptions(array $options)
     {
@@ -72,7 +73,7 @@ class Callback
      * Set callback class
      *
      * @param  string $class
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setClass($class)
     {
@@ -97,7 +98,7 @@ class Callback
      * Set callback function
      *
      * @param  string|callable $function
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setFunction($function)
     {
@@ -120,7 +121,7 @@ class Callback
      * Set callback class method
      *
      * @param  string $method
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function setMethod($method)
     {
@@ -142,7 +143,7 @@ class Callback
      * Set callback type
      *
      * @param  string $type
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      * @throws Server\Exception\InvalidArgumentException
      */
     public function setType($type)
