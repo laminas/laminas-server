@@ -1,28 +1,26 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- * @package   Zend_Server
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Method;
+namespace Laminas\Server\Method;
 
-use Zend\Server;
+use Laminas\Server;
 
 /**
  * Method definition metadata
  *
- * @category   Zend
- * @package    Zend_Server
- * @subpackage Zend_Server_Method
+ * @category   Laminas
+ * @package    Laminas_Server
+ * @subpackage Laminas_Server_Method
  */
 class Definition
 {
     /**
-     * @var \Zend\Server\Method\Callback
+     * @var \Laminas\Server\Method\Callback
      */
     protected $callback;
 
@@ -47,7 +45,7 @@ class Definition
     protected $object;
 
     /**
-     * @var array Array of \Zend\Server\Method\Prototype objects
+     * @var array Array of \Laminas\Server\Method\Prototype objects
      */
     protected $prototypes = array();
 
@@ -67,7 +65,7 @@ class Definition
      * Set object state from options
      *
      * @param  array $options
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setOptions(array $options)
     {
@@ -84,7 +82,7 @@ class Definition
      * Set method name
      *
      * @param  string $name
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setName($name)
     {
@@ -105,9 +103,9 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|\Zend\Server\Method\Callback $callback
+     * @param  array|\Laminas\Server\Method\Callback $callback
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setCallback($callback)
     {
@@ -123,7 +121,7 @@ class Definition
     /**
      * Get method callback
      *
-     * @return \Zend\Server\Method\Callback
+     * @return \Laminas\Server\Method\Callback
      */
     public function getCallback()
     {
@@ -133,9 +131,9 @@ class Definition
     /**
      * Add prototype to method definition
      *
-     * @param  array|\Zend\Server\Method\Prototype $prototype
+     * @param  array|\Laminas\Server\Method\Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function addPrototype($prototype)
     {
@@ -151,8 +149,8 @@ class Definition
     /**
      * Add multiple prototypes at once
      *
-     * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
-     * @return \Zend\Server\Method\Definition
+     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @return \Laminas\Server\Method\Definition
      */
     public function addPrototypes(array $prototypes)
     {
@@ -165,8 +163,8 @@ class Definition
     /**
      * Set all prototypes at once (overwrites)
      *
-     * @param  array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
-     * @return \Zend\Server\Method\Definition
+     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @return \Laminas\Server\Method\Definition
      */
     public function setPrototypes(array $prototypes)
     {
@@ -178,7 +176,7 @@ class Definition
     /**
      * Get all prototypes
      *
-     * @return array $prototypes Array of \Zend\Server\Method\Prototype objects or arrays
+     * @return array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
      */
     public function getPrototypes()
     {
@@ -189,7 +187,7 @@ class Definition
      * Set method help
      *
      * @param  string $methodHelp
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setMethodHelp($methodHelp)
     {
@@ -212,7 +210,7 @@ class Definition
      *
      * @param  object $object
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setObject($object)
     {
@@ -237,7 +235,7 @@ class Definition
      * Set invoke arguments
      *
      * @param  array $invokeArguments
-     * @return \Zend\Server\Method\Definition
+     * @return \Laminas\Server\Method\Definition
      */
     public function setInvokeArguments(array $invokeArguments)
     {
