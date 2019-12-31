@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection\Node;
+use Laminas\Server\Reflection\Node;
 
 /**
- * Test case for \Zend\Server\Node
+ * Test case for \Laminas\Server\Node
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class NodeTest extends \PHPUnit_Framework_TestCase
 {

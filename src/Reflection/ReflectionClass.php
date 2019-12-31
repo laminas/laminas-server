@@ -1,13 +1,12 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server\Reflection;
+namespace Laminas\Server\Reflection;
 
 use ReflectionClass as PhpReflectionClass;
 
@@ -15,7 +14,7 @@ use ReflectionClass as PhpReflectionClass;
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
- * creating its own list of {@link Zend\Server\Reflection\ReflectionMethod}s.
+ * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
  */
 class ReflectionClass
 {
@@ -27,7 +26,7 @@ class ReflectionClass
     protected $config = array();
 
     /**
-     * Array of {@link \Zend\Server\Reflection\Method}s
+     * Array of {@link \Laminas\Server\Reflection\Method}s
      * @var array
      */
     protected $methods = array();
@@ -48,7 +47,7 @@ class ReflectionClass
      * Constructor
      *
      * Create array of dispatchable methods, each a
-     * {@link Zend\Server\Reflection\ReflectionMethod}. Sets reflection object property.
+     * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      *
      * @param PhpReflectionClass $reflection
      * @param string $namespace
@@ -122,7 +121,7 @@ class ReflectionClass
     }
 
     /**
-     * Return array of dispatchable {@link \Zend\Server\Reflection\ReflectionMethod}s.
+     * Return array of dispatchable {@link \Laminas\Server\Reflection\ReflectionMethod}s.
      *
      * @access public
      * @return array

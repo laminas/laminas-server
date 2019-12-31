@@ -1,18 +1,17 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Server;
+namespace Laminas\Server;
 
-use Zend\Stdlib\ErrorHandler;
+use Laminas\Stdlib\ErrorHandler;
 
 /**
- * \Zend\Server\Cache: cache server definitions
+ * \Laminas\Server\Cache: cache server definitions
  */
 class Cache
 {
@@ -31,7 +30,7 @@ class Cache
      * on success.
      *
      * @param  string $filename
-     * @param  \Zend\Server\Server $server
+     * @param  \Laminas\Server\Server $server
      * @return bool
      */
     public static function save($filename, Server $server)
@@ -75,7 +74,7 @@ class Cache
      * request. Sample usage:
      *
      * <code>
-     * if (!Zend\Server\Cache::get($filename, $server)) {
+     * if (!Laminas\Server\Cache::get($filename, $server)) {
      *     require_once 'Some/Service/ServiceClass.php';
      *     require_once 'Another/Service/ServiceClass.php';
      *
@@ -85,7 +84,7 @@ class Cache
      *     // Attach Another\Service\ServiceClass with namespace 'another'
      *     $server->attach('Another\Service\ServiceClass', 'another');
      *
-     *     Zend\Server\Cache::save($filename, $server);
+     *     Laminas\Server\Cache::save($filename, $server);
      * }
      *
      * $response = $server->handle();
@@ -93,7 +92,7 @@ class Cache
      * </code>
      *
      * @param  string $filename
-     * @param  \Zend\Server\Server $server
+     * @param  \Laminas\Server\Server $server
      * @return bool
      */
     public static function get($filename, Server $server)
