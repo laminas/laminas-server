@@ -1,20 +1,19 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection\Node;
+use Laminas\Server\Reflection\Node;
 
 /**
- * Test case for \Zend\Server\Node
+ * Test case for \Laminas\Server\Node
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class NodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,14 +23,14 @@ class NodeTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         $node = new Node('string');
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $node);
+        $this->assertInstanceOf('Laminas\Server\Reflection\Node', $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf('Laminas\Server\Reflection\Node', $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
@@ -62,7 +61,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertInstanceOf('Zend\Server\Reflection\Node', $child);
+        $this->assertInstanceOf('Laminas\Server\Reflection\Node', $child);
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
         $this->assertEquals($child, $children[0]);

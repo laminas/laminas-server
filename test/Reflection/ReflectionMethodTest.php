@@ -1,15 +1,14 @@
 <?php
+
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/laminas/laminas-server for the canonical source repository
+ * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
+ * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Server\Reflection;
+namespace LaminasTest\Server\Reflection;
 
-use Zend\Server\Reflection;
+use Laminas\Server\Reflection;
 
 /**
  * Interface ReflectionMethodInterface
@@ -57,9 +56,9 @@ class ReflectionMethodNode extends Reflection\Node
 }
 
 /**
- * Test case for \Zend\Server\Reflection\ReflectionMethod
+ * Test case for \Laminas\Server\Reflection\ReflectionMethod
  *
- * @group      Zend_Server
+ * @group      Laminas_Server
  */
 class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 {
@@ -69,7 +68,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_classRaw = new \ReflectionClass('\Zend\Server\Reflection');
+        $this->_classRaw = new \ReflectionClass('\Laminas\Server\Reflection');
         $this->_method   = $this->_classRaw->getMethod('reflectClass');
         $this->_class    = new Reflection\ReflectionClass($this->_classRaw);
     }
@@ -90,8 +89,8 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
     public function test__construct()
     {
         $r = new Reflection\ReflectionMethod($this->_class, $this->_method);
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $r);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $r);
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionMethod', $r);
+        $this->assertInstanceOf('Laminas\Server\Reflection\AbstractFunction', $r);
 
         $r = new Reflection\ReflectionMethod($this->_class, $this->_method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -102,7 +101,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      *
      * Call as method call
      *
-     * Returns: \Zend\Server\Reflection\ReflectionClass
+     * Returns: \Laminas\Server\Reflection\ReflectionClass
      */
     public function testGetDeclaringClass()
     {
@@ -110,7 +109,7 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
 
         $class = $r->getDeclaringClass();
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionClass', $class);
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionClass', $class);
         $this->assertEquals($this->_class, $class);
     }
 
@@ -127,8 +126,8 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf('Zend\Server\Reflection\ReflectionMethod', $u);
-        $this->assertInstanceOf('Zend\Server\Reflection\AbstractFunction', $u);
+        $this->assertInstanceOf('Laminas\Server\Reflection\ReflectionMethod', $u);
+        $this->assertInstanceOf('Laminas\Server\Reflection\AbstractFunction', $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
@@ -138,11 +137,11 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromInterface()
     {
-        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodTestInstance');
+        $reflectionClass = new \ReflectionClass('LaminasTest\Server\Reflection\ReflectionMethodTestInstance');
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
-        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
-        list($prototype) = $zendReflectionMethod->getPrototypes();
+        $laminasReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        list($prototype) = $laminasReflectionMethod->getPrototypes();
         list($first, $second) = $prototype->getParameters();
 
         self::assertEquals('ReflectionMethodTest', $first->getType());
@@ -154,14 +153,14 @@ class ReflectionMethodTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodDocBlockFromParent()
     {
-        $reflectionClass = new \ReflectionClass('ZendTest\Server\Reflection\ReflectionMethodNode');
+        $reflectionClass = new \ReflectionClass('LaminasTest\Server\Reflection\ReflectionMethodNode');
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
-        $zendReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
-        $prototypes = $zendReflectionMethod->getPrototypes();
+        $laminasReflectionMethod = new Reflection\ReflectionMethod(new Reflection\ReflectionClass($reflectionClass), $reflectionMethod);
+        $prototypes = $laminasReflectionMethod->getPrototypes();
         list($first, $second) = $prototypes[1]->getParameters();
 
-        self::assertEquals('\Zend\Server\Reflection\Node', $first->getType());
+        self::assertEquals('\Laminas\Server\Reflection\Node', $first->getType());
         self::assertEquals('bool', $second->getType());
     }
 }

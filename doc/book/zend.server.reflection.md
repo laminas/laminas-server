@@ -1,8 +1,8 @@
-# Zend\\Server\\Reflection
+# Laminas\\Server\\Reflection
 
 ## Introduction
 
-`Zend\Server\Reflection` provides a standard mechanism for performing function and class
+`Laminas\Server\Reflection` provides a standard mechanism for performing function and class
 introspection for use with server classes. It is based on *PHP* 5's Reflection *API*, augmenting it
 with methods for retrieving parameter and return value types and descriptions, a full list of
 function and method prototypes (i.e., all possible valid calling combinations), and function or
@@ -15,8 +15,8 @@ Typically, this functionality will only be used by developers of server classes 
 Basic usage is simple:
 
 ```php
-$class    = Zend\Server\Reflection::reflectClass('My\Class');
-$function = Zend\Server\Reflection::reflectFunction('my_function');
+$class    = Laminas\Server\Reflection::reflectClass('My\Class');
+$function = Laminas\Server\Reflection::reflectFunction('my_function');
 
 // Get prototypes
 $prototypes = $function->getPrototypes();
@@ -43,6 +43,6 @@ foreach ($prototypes as $prototype) {
 $class->getNamespace();
 ```
 
-`reflectFunction()` returns a `Zend\Server\Reflection\Function` object; `reflectClass()` returns a
-`Zend\Server\Reflection\Class` object. Please refer to the *API* documentation to see what methods
+`reflectFunction()` returns a `Laminas\Server\Reflection\Function` object; `reflectClass()` returns a
+`Laminas\Server\Reflection\Class` object. Please refer to the *API* documentation to see what methods
 are available to each.
