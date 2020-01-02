@@ -2,8 +2,8 @@ docs_dir: docs/book
 site_dir: docs/html
 nav:
     - index.md
-    - { Intro: intro.md }
-    - { Reflection: reflection.md }
+    - Intro: intro.md
+    - Reflection: reflection.md
 site_name: laminas-server
 site_description: laminas-server
 repo_url: 'https://github.com/laminas/laminas-server'
