@@ -7,4 +7,6 @@ nav:
 site_name: laminas-server
 site_description: laminas-server
 repo_url: 'https://github.com/laminas/laminas-server'
-
+extra:
+    project: Components
+    project_url: 'https://docs.laminas.dev'
