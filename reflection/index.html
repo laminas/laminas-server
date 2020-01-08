@@ -20,7 +20,7 @@
     <div class="container">
         
         <a class="logo-link navbar-brand offset-md-2" href="https://getlaminas.org/" data-tooltip data-placement="bottom" title="Go to the Laminas homepage">
-            <img src="../img/laminas-foundation-white.svg" height="28" alt="Lamnias">
+            <img src="../img/laminas-foundation-white.svg" height="28" alt="Laminas">
         </a>
         <a class="navbar-title" href="https://docs.laminas.dev/" data-tooltip data-placement="bottom" title="Go to the Laminas Documentation">
             Documentation
@@ -36,13 +36,17 @@
             
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="https://getlaminas.org/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://getlaminas.org/blog" class="nav-link">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://docs.laminas.dev" class="nav-link">All Docs</a>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            All Docs
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="https://docs.laminas.dev/components">Components</a>
+                            <a class="dropdown-item" href="https://docs.mezzio.dev/">Mezzio</a>
+                            <a class="dropdown-item" href="https://api-tools.getlaminas.org/docs">API Tools</a>
+                            <a class="dropdown-item" href="https://docs.laminas.dev/mvc">MVC</a>
+                        </div>
+                    </div>
                 </li>
                 <li class="nav-item">
                     <a href="https://getlaminas.org/participate" class="nav-link">Community</a>
@@ -203,36 +207,35 @@ descriptions.</p>
 server classes for the framework.</p>
 <h2 id="usage">Usage</h2>
 <p>Basic usage is as follows:</p>
-<p> <div class=codehilite><pre><span></span><span class=x>use My\Entity;</span>
-<span class=x>use Laminas\Server\Reflection;</span>
+<pre class=codehilite><code class=language-php>use My\Entity;
+use Laminas\Server\Reflection;
 
-<span class=x>$class    = Reflection::reflectClass(Entity::class);</span>
-<span class=x>$function = Reflection::reflectFunction(&#39;my_function&#39;);</span>
+$class    = Reflection::reflectClass(Entity::class);
+$function = Reflection::reflectFunction('my_function');
 
-<span class=x>// Get prototypes</span>
-<span class=x>$prototypes = $function-&gt;getPrototypes();</span>
+// Get prototypes
+$prototypes = $function-&gt;getPrototypes();
 
-<span class=x>// Loop through each prototype for the function</span>
-<span class=x>foreach ($prototypes as $prototype) {</span>
+// Loop through each prototype for the function
+foreach ($prototypes as $prototype) {
 
-<span class=x>    // Get prototype return type</span>
-<span class=x>    printf(&quot;Return type: %s\n&quot;, $prototype-&gt;getReturnType());</span>
+    // Get prototype return type
+    printf(&quot;Return type: %s\n&quot;, $prototype-&gt;getReturnType());
 
-<span class=x>    // Get prototype parameters</span>
-<span class=x>    $parameters = $prototype-&gt;getParameters();</span>
+    // Get prototype parameters
+    $parameters = $prototype-&gt;getParameters();
 
-<span class=x>    echo &quot;Parameters: \n&quot;;</span>
-<span class=x>    foreach ($parameters as $parameter) {</span>
-<span class=x>        // Get parameter type</span>
-<span class=x>        printf(&quot;    %s\n&quot;, $parameter-&gt;getType());</span>
-<span class=x>    }</span>
-<span class=x>}</span>
+    echo &quot;Parameters: \n&quot;;
+    foreach ($parameters as $parameter) {
+        // Get parameter type
+        printf(&quot;    %s\n&quot;, $parameter-&gt;getType());
+    }
+}
 
-<span class=x>// Get namespace for a class, function, or method.</span>
-<span class=x>// Namespaces may be set at instantiation time (second argument), or using</span>
-<span class=x>// setNamespace().</span>
-<span class=x>$class-&gt;getNamespace();</span>
-</pre></div></p>
+// Get namespace for a class, function, or method.
+// Namespaces may be set at instantiation time (second argument), or using
+// setNamespace().
+$class-&gt;getNamespace();</code></pre>
 <p><code>reflectFunction()</code> returns a <code>Laminas\Server\Reflection\Function</code> object;
 <code>reflectClass()</code> returns a <code>Laminas\Server\Reflection\Class</code> object. Please refer
 to the API documentation to see what methods are available to each.</p>
@@ -344,9 +347,10 @@ to the API documentation to see what methods are available to each.</p>
             <div class="col-md-7 offset-md-2">
                 <h5>Laminas</h5>
                 <ul>
-                    <li>Laminas Project <a href="https://getlaminas.org/">Components and MVC for Enterprise Applications</a></li>
-                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 Middleware in Minutes</a></li>
-                    <li>Laminas API Tools: <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
+                    <li>Laminas Project <a href="https://getlaminas.org/">The new foundation for the community-supported, open source continuation of Zend Framework</a></li>
+                    <li>Laminas Components and MVC <a href="https://docs.laminas.dev/">Components and MVC for enterprise applications</a></li>
+                    <li>Mezzio <a href="https://docs.mezzio.dev/">PSR-15 middleware in minutes</a></li>
+                    <li>Laminas API Tools <a href="https://api-tools.getlaminas.org/">Build RESTful APIs in minutes</a></li>
                 </ul>
             </div>
         </div>
@@ -383,7 +387,7 @@ to the API documentation to see what methods are available to each.</p>
                 <h4 class="footer__headline">License</h4>
                 <p>
                     Code licensed under <a
-                        href="https://github.com/laminas/laminas-server//blob/master/LICENSE.md">BSD 3-Clause</a>.
+                        href="https://github.com/laminas/laminas-server/blob/master/LICENSE.md">BSD 3-Clause</a>.
                 </p>
             </div>
 
@@ -392,8 +396,8 @@ to the API documentation to see what methods are available to each.</p>
                 <h4 class="footer__headline">Copyright</h4>
                 <p>
                     <!--Built with love by the Laminas team with the help of our
-                    <a href="https://github.com/laminas/laminas-server//graphs/contributors">contributors</a>.<br>-->
-                    &copy; 2019-2019 by <a href="https://getlaminas.org/">The Laminas Project</a>.
+                    <a href="https://github.com/laminas/laminas-server/graphs/contributors">contributors</a>.<br>-->
+                    &copy; 2019-2020 by <a href="https://getlaminas.org/">The Laminas Project</a>.
                 </p>
             </div>
         </div>
