@@ -1,7 +1,7 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - index.md
+    - Home: index.md
     - Intro: intro.md
     - Reflection: reflection.md
 site_name: laminas-server
@@ -9,4 +9,3 @@ site_description: laminas-server
 repo_url: 'https://github.com/laminas/laminas-server'
 extra:
     project: Components
-    project_url: 'https://docs.laminas.dev'
