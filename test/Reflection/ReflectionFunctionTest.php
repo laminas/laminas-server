@@ -32,11 +32,11 @@ class ReflectionFunctionTest extends TestCase
 
         $argv = ['string1', 'string2'];
         $r = new Reflection\ReflectionFunction($function, 'namespace', $argv);
-        $this->assertInternalType('array', $r->getInvokeArguments());
+        $this->assertIsArray($r->getInvokeArguments());
         $this->assertEquals($argv, $r->getInvokeArguments());
 
         $prototypes = $r->getPrototypes();
-        $this->assertInternalType('array', $prototypes);
+        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
     }
 
@@ -63,7 +63,7 @@ class ReflectionFunctionTest extends TestCase
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
-        $this->assertContains('function for reflection', $r->getDescription());
+        $this->assertStringContainsString('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
         $this->assertEquals('Testing setting descriptions', $r->getDescription());
     }
@@ -74,7 +74,7 @@ class ReflectionFunctionTest extends TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertInternalType('array', $prototypes);
+        $this->assertIsArray($prototypes);
         $this->assertCount(8, $prototypes);
 
         foreach ($prototypes as $p) {
@@ -88,7 +88,7 @@ class ReflectionFunctionTest extends TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertInternalType('array', $prototypes);
+        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
         $this->assertCount(1, $prototypes);
 
@@ -103,7 +103,7 @@ class ReflectionFunctionTest extends TestCase
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
         $args = $r->getInvokeArguments();
-        $this->assertInternalType('array', $args);
+        $this->assertIsArray($args);
         $this->assertCount(0, $args);
 
         $argv = ['string1', 'string2'];
@@ -128,13 +128,13 @@ class ReflectionFunctionTest extends TestCase
         $r = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertInternalType('array', $prototypes);
+        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
         $this->assertCount(1, $prototypes);
 
         $proto = $prototypes[0];
         $params = $proto->getParameters();
-        $this->assertInternalType('array', $params);
+        $this->assertIsArray($params);
         $this->assertCount(1, $params);
         $this->assertEquals('string', $params[0]->getType());
     }
@@ -151,7 +151,7 @@ class ReflectionFunctionTest extends TestCase
         $prototype  = $prototypes[0];
         $params = $prototype->getParameters();
         $param  = $params[0];
-        $this->assertContains('Some description', $param->getDescription(), var_export($param, 1));
+        $this->assertStringContainsString('Some description', $param->getDescription(), var_export($param, 1));
     }
 }
 

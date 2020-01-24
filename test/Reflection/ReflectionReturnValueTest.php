@@ -16,7 +16,9 @@ use Laminas\Server\Reflection\ReflectionReturnValue;
  *
  * @group      Laminas_Server
  */
-class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
+use PHPUnit\Framework\TestCase;
+
+class ReflectionReturnValueTest extends TestCase
 {
     /**
      * __construct() test
