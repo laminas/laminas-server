@@ -39,7 +39,7 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
-        $this->assertInternalType('array', $methods);
+        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
@@ -62,7 +62,7 @@ class ReflectionClassTest extends TestCase
     public function testMethodOverloading()
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
-        $this->assertInternalType('string', $r->getName());
+        $this->assertIsString($r->getName());
         $this->assertEquals('Laminas\Server\Reflection', $r->getName());
     }
 
@@ -88,7 +88,7 @@ class ReflectionClassTest extends TestCase
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
-        $this->assertInternalType('array', $methods);
+        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }

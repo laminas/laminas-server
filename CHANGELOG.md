@@ -18,7 +18,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#3](https://github.com/laminas/laminas-server/pull/3) removes support for PHP versions prior to PHP 7.2.
+
+- [#3](https://github.com/laminas/laminas-server/pull/3) removes support for zend-code v2 releases.
+
+- [#3](https://github.com/laminas/laminas-server/pull/3) removes support for zend-stdlib v2 releases.
 
 ### Fixed
 

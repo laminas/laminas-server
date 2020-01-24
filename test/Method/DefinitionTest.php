@@ -25,7 +25,7 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    protected function setUp() : void
     {
         $this->definition = new Method\Definition();
     }
@@ -36,7 +36,7 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    protected function tearDown() : void
     {
     }
 
@@ -111,7 +111,7 @@ class DefinitionTest extends TestCase
     public function testInvokeArgumentsShouldBeEmptyArrayByDefault()
     {
         $args = $this->definition->getInvokeArguments();
-        $this->assertInternalType('array', $args);
+        $this->assertIsArray($args);
         $this->assertEmpty($args);
     }
 
@@ -126,7 +126,7 @@ class DefinitionTest extends TestCase
     public function testPrototypesShouldBeEmptyArrayByDefault()
     {
         $prototypes = $this->definition->getPrototypes();
-        $this->assertInternalType('array', $prototypes);
+        $this->assertIsArray($prototypes);
         $this->assertEmpty($prototypes);
     }
 
