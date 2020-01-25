@@ -24,14 +24,12 @@ class Prototype
     protected $parameterNameMap = [];
 
     /**
-     * @var array Method parameters
+     * @var Parameter[] Method parameters
      */
     protected $parameters = [];
 
     /**
-     * Constructor
-     *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -44,7 +42,7 @@ class Prototype
      * Set return value
      *
      * @param  string $returnType
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
     public function setReturnType($returnType)
     {
@@ -65,8 +63,8 @@ class Prototype
     /**
      * Add a parameter
      *
-     * @param  string $parameter
-     * @return \Laminas\Server\Method\Prototype
+     * @param  string|Parameter $parameter
+     * @return $this
      */
     public function addParameter($parameter)
     {
@@ -87,8 +85,8 @@ class Prototype
     /**
      * Add parameters
      *
-     * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @param  string[]|Parameter[] $parameters
+     * @return $this
      */
     public function addParameters(array $parameters)
     {
@@ -101,8 +99,8 @@ class Prototype
     /**
      * Set parameters
      *
-     * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @param  string[]|Parameter[] $parameters
+     * @return $this
      */
     public function setParameters(array $parameters)
     {
@@ -115,7 +113,7 @@ class Prototype
     /**
      * Retrieve parameters as list of types
      *
-     * @return array
+     * @return string[]
      */
     public function getParameters()
     {
@@ -129,7 +127,7 @@ class Prototype
     /**
      * Get parameter objects
      *
-     * @return array
+     * @return Parameter[]
      */
     public function getParameterObjects()
     {
@@ -140,12 +138,12 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|\Laminas\Server\Method\Parameter
+     * @return null|Parameter
      */
     public function getParameter($index)
     {
         if (! is_string($index) && ! is_numeric($index)) {
-            return;
+            return null;
         }
         if (array_key_exists($index, $this->parameterNameMap)) {
             $index = $this->parameterNameMap[$index];
@@ -153,14 +151,14 @@ class Prototype
         if (array_key_exists($index, $this->parameters)) {
             return $this->parameters[$index];
         }
-        return;
+        return null;
     }
 
     /**
      * Set object state from array
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
     public function setOptions(array $options)
     {

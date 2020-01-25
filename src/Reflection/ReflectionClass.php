@@ -14,7 +14,7 @@ use ReflectionClass as PhpReflectionClass;
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
- * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ * creating its own list of {@link ReflectionMethod}s.
  */
 class ReflectionClass
 {
@@ -26,38 +26,32 @@ class ReflectionClass
     protected $config = [];
 
     /**
-     * Array of {@link \Laminas\Server\Reflection\Method}s
-     * @var array
+     * @var ReflectionMethod[]
      */
     protected $methods = [];
 
     /**
-     * Namespace
-     * @var string
+     * @var string Namespace
      */
-    protected $namespace = null;
+    protected $namespace;
 
     /**
-     * ReflectionClass object
-     * @var PhpReflectionClass
+     * @var PhpReflectionClass ReflectionClass object
      */
     protected $reflection;
 
     /**
-     * Reflection class name (needed for serialization)
-     * @var string
+     * @var string Reflection class name (needed for serialization)
      */
     protected $name;
 
     /**
-     * Constructor
-     *
      * Create array of dispatchable methods, each a
-     * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
+     * {@link ReflectionMethod}. Sets reflection object property.
      *
      * @param PhpReflectionClass $reflection
      * @param string $namespace
-     * @param mixed $argv
+     * @param false|array $argv
      */
     public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
     {
@@ -110,7 +104,7 @@ class ReflectionClass
             return $this->config[$key];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -128,10 +122,7 @@ class ReflectionClass
     }
 
     /**
-     * Return array of dispatchable {@link \Laminas\Server\Reflection\ReflectionMethod}s.
-     *
-     * @access public
-     * @return array
+     * @return ReflectionMethod[]
      */
     public function getMethods()
     {

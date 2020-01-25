@@ -121,7 +121,7 @@ class ReflectionMethodTest extends TestCase
         $prototypes = $laminasReflectionMethod->getPrototypes();
         list($first, $second) = $prototypes[1]->getParameters();
 
-        self::assertEquals('\\' . Node::class, $first->getType());
+        self::assertEquals('self', $first->getType());
         self::assertEquals('bool', $second->getType());
     }
 }

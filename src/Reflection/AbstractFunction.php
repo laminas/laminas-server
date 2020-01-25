@@ -22,7 +22,7 @@ use ReflectionMethod as PhpReflectionMethod;
  * setting and retrieving the description (originally set using the docblock
  * contents), retrieving the callback and callback type, retrieving additional
  * method invocation arguments, and retrieving the
- * method {@link \Laminas\Server\Reflection\Prototype prototypes}.
+ * method {@link Prototype prototypes}.
  */
 abstract class AbstractFunction
 {
@@ -89,8 +89,6 @@ abstract class AbstractFunction
     protected $sigParamsDepth;
 
     /**
-     * Constructor
-     *
      * @param ReflectionFunctionAbstract $r
      * @param null|string $namespace
      * @param null|array $argv
@@ -129,7 +127,7 @@ abstract class AbstractFunction
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param \Laminas\Server\Reflection\Node $parent
+     * @param Node $parent
      * @param int $level
      * @return void
      */
@@ -151,10 +149,9 @@ abstract class AbstractFunction
      * Build the signature tree
      *
      * Builds a signature tree starting at the return values and descending
-     * through each method argument. Returns an array of
-     * {@link \Laminas\Server\Reflection\Node}s.
+     * through each method argument. Returns an array of {@link Node}s.
      *
-     * @return array
+     * @return Node[]
      */
     protected function buildTree()
     {
@@ -178,7 +175,7 @@ abstract class AbstractFunction
      * @param string $returnDesc Return value description
      * @param array $paramTypes Array of arguments (each an array of types)
      * @param array $paramDesc Array of parameter descriptions
-     * @return array
+     * @return void
      */
     protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
     {
@@ -241,7 +238,7 @@ abstract class AbstractFunction
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
      * @throws Exception\RuntimeException
-     * @return array
+     * @return void
      */
     protected function reflect()
     {
@@ -352,7 +349,7 @@ abstract class AbstractFunction
             return $this->config[$key];
         }
 
-        return;
+        return null;
     }
 
     /**
@@ -427,9 +424,6 @@ abstract class AbstractFunction
     }
 
     /**
-     * Retrieve all prototypes as array of
-     * {@link \Laminas\Server\Reflection\Prototype}s
-     *
      * @return Prototype[]
      */
     public function getPrototypes()

@@ -18,8 +18,10 @@ class Prototype
     /** @var ReflectionParameter[] */
     protected $params;
 
+    /** @var ReflectionReturnValue */
+    protected $return;
+
     /**
-     * Constructor
      *
      * @param ReflectionReturnValue $return
      * @param ReflectionParameter[] $params
@@ -51,7 +53,7 @@ class Prototype
     /**
      * Retrieve the return value object
      *
-     * @return \Laminas\Server\Reflection\ReflectionReturnValue
+     * @return ReflectionReturnValue
      */
     public function getReturnValue()
     {
@@ -61,7 +63,7 @@ class Prototype
     /**
      * Retrieve method parameters
      *
-     * @return ReflectionParameter[] Array of {@link \Laminas\Server\Reflection\ReflectionParameter}s
+     * @return ReflectionParameter[]
      */
     public function getParameters()
     {

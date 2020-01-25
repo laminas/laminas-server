@@ -14,55 +14,46 @@ namespace Laminas\Server\Reflection;
 class Node
 {
     /**
-     * Node value
-     * @var mixed
+     * @var mixed Node value
      */
     protected $value = null;
 
     /**
-     * Array of child nodes (if any)
-     * @var array
+     * @var self[] Array of child nodes
      */
     protected $children = [];
 
     /**
-     * Parent node (if any)
-     * @var \Laminas\Server\Reflection\Node
+     * @var null|self Parent node (if any)
      */
     protected $parent = null;
 
     /**
-     * Constructor
-     *
      * @param mixed $value
-     * @param \Laminas\Server\Reflection\Node $parent Optional
-     * @return \Laminas\Server\Reflection\Node
+     * @param self $parent Optional
      */
-    public function __construct($value, Node $parent = null)
+    public function __construct($value, self $parent = null)
     {
         $this->value = $value;
         if (null !== $parent) {
             $this->setParent($parent, true);
         }
-
-        return $this;
     }
 
     /**
      * Set parent node
      *
-     * @param \Laminas\Server\Reflection\Node $node
+     * @param  self $node
      * @param  bool $new Whether or not the child node is newly created
-     * and should always be attached
+     *                   and should always be attached
      * @return void
      */
-    public function setParent(Node $node, $new = false)
+    public function setParent(self $node, $new = false)
     {
         $this->parent = $node;
 
         if ($new) {
             $node->attachChild($this);
-            return;
         }
     }
 
@@ -70,23 +61,20 @@ class Node
      * Create and attach a new child node
      *
      * @param mixed $value
-     * @access public
-     * @return \Laminas\Server\Reflection\Node New child node
+     * @return static New child node
      */
     public function createChild($value)
     {
-        $child = new static($value, $this);
-
-        return $child;
+        return new static($value, $this);
     }
 
     /**
      * Attach a child node
      *
-     * @param \Laminas\Server\Reflection\Node $node
+     * @param  self $node
      * @return void
      */
-    public function attachChild(Node $node)
+    public function attachChild(self $node)
     {
         $this->children[] = $node;
 
@@ -98,7 +86,7 @@ class Node
     /**
      * Return an array of all child nodes
      *
-     * @return array
+     * @return self[]
      */
     public function getChildren()
     {
@@ -118,7 +106,7 @@ class Node
     /**
      * Return the parent node
      *
-     * @return null|\Laminas\Server\Reflection\Node
+     * @return null|self
      */
     public function getParent()
     {
@@ -153,7 +141,7 @@ class Node
      * getEndPoints() on all children. If a child is null, it returns the parent
      * as an end point.
      *
-     * @return array
+     * @return self[]
      */
     public function getEndPoints()
     {

@@ -30,7 +30,7 @@ class Cache
      * on success.
      *
      * @param  string $filename
-     * @param  \Laminas\Server\Server $server
+     * @param  Server $server
      * @return bool
      */
     public static function save($filename, Server $server)
@@ -79,7 +79,7 @@ class Cache
      * </code>
      *
      * @param  string $filename
-     * @param  \Laminas\Server\Server $server
+     * @param  Server $server
      * @return bool
      */
     public static function get($filename, Server $server)

@@ -26,10 +26,7 @@ abstract class AbstractServer implements Server
     protected $table;
 
     /**
-     * Constructor
-     *
      * Setup server description
-     *
      */
     public function __construct()
     {

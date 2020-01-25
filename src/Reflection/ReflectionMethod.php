@@ -19,14 +19,12 @@ class ReflectionMethod extends AbstractFunction
     const INHERIT_TAG = '{@inheritdoc}';
 
     /**
-     * Parent class name
-     * @var string
+     * @var string Parent class name
      */
     protected $class;
 
     /**
-     * Parent class reflection
-     * @var ReflectionClass|\ReflectionClass
+     * @var ReflectionClass|\ReflectionClass Parent class reflection
      */
     protected $classReflection;
 
@@ -68,7 +66,7 @@ class ReflectionMethod extends AbstractFunction
     /**
      * Return the reflection for the class that defines this method
      *
-     * @return \Laminas\Server\Reflection\ReflectionClass
+     * @return ReflectionClass
      */
     public function getDeclaringClass()
     {
@@ -143,9 +141,7 @@ class ReflectionMethod extends AbstractFunction
             $docCommentList
         );
 
-        $docComment = '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
-
-        return $docComment;
+        return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
     /**
@@ -154,18 +150,18 @@ class ReflectionMethod extends AbstractFunction
      * @param \ReflectionClass $reflectionClass
      * @param string           $methodName
      *
-     * @return array|void
+     * @return array|null
      */
     private function fetchRecursiveDocBlockFromParent($reflectionClass, $methodName)
     {
         $docComment = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
         if (! $parentReflectionClass) {
-            return;
+            return null;
         }
 
         if (! $parentReflectionClass->hasMethod($methodName)) {
-            return;
+            return null;
         }
 
         $methodReflection = $parentReflectionClass->getMethod($methodName);
@@ -183,14 +179,11 @@ class ReflectionMethod extends AbstractFunction
     /**
      * Return true if doc block inherit from parent or interface
      *
-     * @param string $docComment
-     *
+     * @param  string $docComment
      * @return bool
      */
     private function isInherit($docComment)
     {
-        $isInherit = strpos($docComment, self::INHERIT_TAG) !== false;
-
-        return $isInherit;
+        return strpos($docComment, self::INHERIT_TAG) !== false;
     }
 }

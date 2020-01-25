@@ -49,9 +49,7 @@ class Parameter
     protected $type = 'mixed';
 
     /**
-     * Constructor
-     *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -64,7 +62,7 @@ class Parameter
      * Set object state from array of options
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setOptions(array $options)
     {
@@ -81,7 +79,7 @@ class Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setDefaultValue($defaultValue)
     {
@@ -103,7 +101,7 @@ class Parameter
      * Set description
      *
      * @param  string $description
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setDescription($description)
     {
@@ -125,7 +123,7 @@ class Parameter
      * Set name
      *
      * @param  string $name
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setName($name)
     {
@@ -136,7 +134,7 @@ class Parameter
     /**
      * Retrieve name
      *
-     * @return string
+     * @return null|string
      */
     public function getName()
     {
@@ -147,7 +145,7 @@ class Parameter
      * Set optional flag
      *
      * @param  bool $flag
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setOptional($flag)
     {
@@ -169,7 +167,7 @@ class Parameter
      * Set parameter type
      *
      * @param  string $type
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
     public function setType($type)
     {

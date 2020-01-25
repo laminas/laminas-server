@@ -17,7 +17,7 @@ use Iterator;
 class Definition implements Countable, Iterator
 {
     /**
-     * @var array Array of \Laminas\Server\Method\Definition objects
+     * @var Method\Definition[]
      */
     protected $methods = [];
 
@@ -27,9 +27,7 @@ class Definition implements Countable, Iterator
     protected $overwriteExistingMethods = false;
 
     /**
-     * Constructor
-     *
-     * @param  null|array $methods
+     * @param null|array $methods
      */
     public function __construct($methods = null)
     {
@@ -41,8 +39,8 @@ class Definition implements Countable, Iterator
     /**
      * Set flag indicating whether or not overwriting existing methods is allowed
      *
-     * @param mixed $flag
-     * @return \Laminas\Server\Definition
+     * @param  bool $flag
+     * @return $this
      */
     public function setOverwriteExistingMethods($flag)
     {
@@ -53,10 +51,10 @@ class Definition implements Countable, Iterator
     /**
      * Add method to definition
      *
-     * @param  array|\Laminas\Server\Method\Definition $method
+     * @param  array|Method\Definition $method
      * @param  null|string $name
-     * @return \Laminas\Server\Definition
-     * @throws \Laminas\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
+     * @return $this
+     * @throws Exception\InvalidArgumentException if duplicate or invalid method provided
      */
     public function addMethod($method, $name = null)
     {
@@ -88,8 +86,8 @@ class Definition implements Countable, Iterator
     /**
      * Add multiple methods
      *
-     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
-     * @return \Laminas\Server\Definition
+     * @param  array[]|Method\Definition[] $methods
+     * @return $this
      */
     public function addMethods(array $methods)
     {
@@ -102,8 +100,8 @@ class Definition implements Countable, Iterator
     /**
      * Set all methods at once (overwrite)
      *
-     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
-     * @return \Laminas\Server\Definition
+     * @param  array[]|Method\Definition[] $methods
+     * @return $this
      */
     public function setMethods(array $methods)
     {
@@ -127,7 +125,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return null|\Laminas\Server\Method\Definition
+     * @return false|Method\Definition
      */
     public function getMethod($method)
     {
@@ -140,7 +138,7 @@ class Definition implements Countable, Iterator
     /**
      * Get all method definitions
      *
-     * @return array Array of \Laminas\Server\Method\Definition objects
+     * @return Method\Definition[]
      */
     public function getMethods()
     {
@@ -151,7 +149,7 @@ class Definition implements Countable, Iterator
      * Remove a method definition
      *
      * @param  string $method
-     * @return \Laminas\Server\Definition
+     * @return $this
      */
     public function removeMethod($method)
     {
@@ -164,7 +162,7 @@ class Definition implements Countable, Iterator
     /**
      * Clear all method definitions
      *
-     * @return \Laminas\Server\Definition
+     * @return $this
      */
     public function clearMethods()
     {
@@ -199,7 +197,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: current item
      *
-     * @return Method\Definition
+     * @return false|Method\Definition
      */
     public function current()
     {
@@ -209,7 +207,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: current item key
      *
-     * @return int|string
+     * @return null|int|string
      */
     public function key()
     {
@@ -219,7 +217,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: advance to next method
      *
-     * @return Method\Definition
+     * @return false|Method\Definition
      */
     public function next()
     {

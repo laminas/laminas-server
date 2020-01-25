@@ -16,7 +16,7 @@ use Laminas\Server;
 class Definition
 {
     /**
-     * @var \Laminas\Server\Method\Callback
+     * @var null|Callback
      */
     protected $callback;
 
@@ -31,7 +31,7 @@ class Definition
     protected $methodHelp = '';
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $name;
 
@@ -41,14 +41,12 @@ class Definition
     protected $object;
 
     /**
-     * @var array Array of \Laminas\Server\Method\Prototype objects
+     * @var Prototype[]
      */
     protected $prototypes = [];
 
     /**
-     * Constructor
-     *
-     * @param  null|array $options
+     * @param null|array $options
      */
     public function __construct($options = null)
     {
@@ -61,7 +59,7 @@ class Definition
      * Set object state from options
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setOptions(array $options)
     {
@@ -78,7 +76,7 @@ class Definition
      * Set method name
      *
      * @param  string $name
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setName($name)
     {
@@ -89,7 +87,7 @@ class Definition
     /**
      * Get method name
      *
-     * @return string
+     * @return null|string
      */
     public function getName()
     {
@@ -99,9 +97,9 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|\Laminas\Server\Method\Callback $callback
+     * @param  array|Callback $callback
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setCallback($callback)
     {
@@ -117,7 +115,7 @@ class Definition
     /**
      * Get method callback
      *
-     * @return \Laminas\Server\Method\Callback
+     * @return Callback
      */
     public function getCallback()
     {
@@ -127,9 +125,9 @@ class Definition
     /**
      * Add prototype to method definition
      *
-     * @param  array|\Laminas\Server\Method\Prototype $prototype
+     * @param  array|Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function addPrototype($prototype)
     {
@@ -145,8 +143,8 @@ class Definition
     /**
      * Add multiple prototypes at once
      *
-     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
-     * @return \Laminas\Server\Method\Definition
+     * @param  array[]|Prototype[] $prototypes
+     * @return $this
      */
     public function addPrototypes(array $prototypes)
     {
@@ -159,8 +157,8 @@ class Definition
     /**
      * Set all prototypes at once (overwrites)
      *
-     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
-     * @return \Laminas\Server\Method\Definition
+     * @param  array[]|Prototype[] $prototypes
+     * @return $this
      */
     public function setPrototypes(array $prototypes)
     {
@@ -172,7 +170,7 @@ class Definition
     /**
      * Get all prototypes
      *
-     * @return array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @return Prototype[]
      */
     public function getPrototypes()
     {
@@ -183,7 +181,7 @@ class Definition
      * Set method help
      *
      * @param  string $methodHelp
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setMethodHelp($methodHelp)
     {
@@ -204,9 +202,9 @@ class Definition
     /**
      * Set object to use with method calls
      *
-     * @param  object $object
+     * @param  null|object $object
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setObject($object)
     {
@@ -234,7 +232,7 @@ class Definition
      * Set invoke arguments
      *
      * @param  array $invokeArguments
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
     public function setInvokeArguments(array $invokeArguments)
     {

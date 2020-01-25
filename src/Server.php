@@ -21,8 +21,6 @@ interface Server
      *
      * @param  string $function
      * @param  string $namespace
-     * @param  null|array Optional array of arguments to pass to callback at
-     *                    dispatch.
      * @return void
      */
     public function addFunction($function, $namespace = '');
@@ -37,13 +35,13 @@ interface Server
      * Namespacing is primarily for xmlrpc, but could be used for other
      * implementations as well.
      *
-     * @param  mixed $class Class name or object instance to examine and attach
-     *                      to the server.
+     * @param  string|object $class Class name or object instance to examine and attach
+     *                              to the server.
      * @param  string $namespace Optional namespace with which to prepend method
      *                           names in the dispatch table.
      *                           methods in the class will be valid callbacks.
-     * @param  null|array Optional array of arguments to pass to callbacks at
-     *                    dispatch.
+     * @param  null|array $argv Optional array of arguments to pass to callbacks at
+     *                          dispatch.
      * @return void
      */
     public function setClass($class, $namespace = '', $argv = null);
@@ -105,7 +103,7 @@ interface Server
      * To unify all servers, default behavior should be to auto-emit response.
      *
      * @param  bool $flag
-     * @return Server Self instance.
+     * @return $this
      */
     public function setReturnResponse($flag = true);
 

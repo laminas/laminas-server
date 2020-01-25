@@ -16,22 +16,18 @@ namespace Laminas\Server\Reflection;
 class ReflectionReturnValue
 {
     /**
-     * Return value type
-     * @var string
+     * @var null|string Return value type
      */
     protected $type;
 
     /**
-     * Return value description
-     * @var string
+     * @var null|string Return value description
      */
     protected $description;
 
     /**
-     * Constructor
-     *
-     * @param string $type Return value type
-     * @param string $description Return value type
+     * @param null|string $type Return value type
+     * @param null|string $description Return value type
      */
     public function __construct($type = 'mixed', $description = '')
     {
@@ -40,9 +36,7 @@ class ReflectionReturnValue
     }
 
     /**
-     * Retrieve parameter type
-     *
-     * @return string
+     * @return null|string
      */
     public function getType()
     {
@@ -50,9 +44,7 @@ class ReflectionReturnValue
     }
 
     /**
-     * Set parameter type
-     *
-     * @param string|null $type
+     * @param  null|string $type
      * @throws Exception\InvalidArgumentException
      * @return void
      */
@@ -66,9 +58,7 @@ class ReflectionReturnValue
     }
 
     /**
-     * Retrieve parameter description
-     *
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -76,9 +66,7 @@ class ReflectionReturnValue
     }
 
     /**
-     * Set parameter description
-     *
-     * @param string|null $description
+     * @param  null|string $description
      * @throws Exception\InvalidArgumentException
      * @return void
      */

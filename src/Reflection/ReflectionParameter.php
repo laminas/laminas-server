@@ -21,38 +21,31 @@ class ReflectionParameter
     protected $reflection;
 
     /**
-     * Parameter position
-     * @var int
+     * @var int Parameter position
      */
     protected $position;
 
     /**
-     * Parameter type
-     * @var string
+     * @var null|string Parameter type
      */
     protected $type;
 
     /**
-     * Parameter description
-     * @var string
+     * @var null|string Parameter description
      */
     protected $description;
 
     /**
-     * Parameter name (needed for serialization)
-     * @var string
+     * @var string Parameter name (needed for serialization)
      */
     protected $name;
 
     /**
-     * Declaring function name (needed for serialization)
-     * @var string
+     * @var string Declaring function name (needed for serialization)
      */
     protected $functionName;
 
     /**
-     * Constructor
-     *
      * @param \ReflectionParameter $r
      * @param string $type Parameter type
      * @param string $description Parameter description
@@ -91,7 +84,7 @@ class ReflectionParameter
     /**
      * Retrieve parameter type
      *
-     * @return string
+     * @return null|string
      */
     public function getType()
     {
@@ -117,7 +110,7 @@ class ReflectionParameter
     /**
      * Retrieve parameter description
      *
-     * @return string
+     * @return null|string
      */
     public function getDescription()
     {
@@ -127,7 +120,7 @@ class ReflectionParameter
     /**
      * Set parameter description
      *
-     * @param string|null $description
+     * @param  null|string $description
      * @throws Exception\InvalidArgumentException
      * @return void
      */
