@@ -21,6 +21,8 @@ interface Server
      *
      * @param  string $function
      * @param  string $namespace
+     * @param  null|array Optional array of arguments to pass to callback at
+     *                    dispatch.
      * @return void
      */
     public function addFunction($function, $namespace = '');
