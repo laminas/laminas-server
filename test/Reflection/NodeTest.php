@@ -98,7 +98,7 @@ class NodeTest extends TestCase
             $types[] = $c->getValue();
         }
         $this->assertIsArray($children);
-        $this->assertCount(1, $children, var_export($types, 1));
+        $this->assertCount(1, $children, var_export($types, true));
         $this->assertEquals($child, $children[0]);
     }
 
@@ -178,7 +178,7 @@ class NodeTest extends TestCase
         $this->assertEquals(
             $test,
             $endPointsArray,
-            'Test was [' . var_export($test, 1) . ']; endPoints were [' . var_export($endPointsArray, 1) . ']'
+            'Test was [' . var_export($test, true) . ']; endPoints were [' . var_export($endPointsArray, true) . ']'
         );
     }
 }

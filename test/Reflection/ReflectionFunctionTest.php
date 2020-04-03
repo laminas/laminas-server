@@ -153,7 +153,7 @@ class ReflectionFunctionTest extends TestCase
         $prototype  = $prototypes[0];
         $params = $prototype->getParameters();
         $param  = $params[0];
-        $this->assertStringContainsString('Some description', $param->getDescription(), var_export($param, 1));
+        $this->assertStringContainsString('Some description', $param->getDescription(), var_export($param, true));
     }
 }
 
