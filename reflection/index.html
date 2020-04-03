@@ -266,7 +266,7 @@ descriptions.</p>
 server classes for the framework.</p>
 <h2 id="usage">Usage</h2>
 <p>Basic usage is as follows:</p>
-<pre class=codehilite><code class=language-php>use My\Entity;
+<pre class="highlight"><code class="language-php">use My\Entity;
 use Laminas\Server\Reflection;
 
 $class    = Reflection::reflectClass(Entity::class);
@@ -279,15 +279,15 @@ $prototypes = $function-&gt;getPrototypes();
 foreach ($prototypes as $prototype) {
 
     // Get prototype return type
-    printf(&quot;Return type: %s\n&quot;, $prototype-&gt;getReturnType());
+    printf("Return type: %s\n", $prototype-&gt;getReturnType());
 
     // Get prototype parameters
     $parameters = $prototype-&gt;getParameters();
 
-    echo &quot;Parameters: \n&quot;;
+    echo "Parameters: \n";
     foreach ($parameters as $parameter) {
         // Get parameter type
-        printf(&quot;    %s\n&quot;, $parameter-&gt;getType());
+        printf("    %s\n", $parameter-&gt;getType());
     }
 }
 
@@ -295,6 +295,7 @@ foreach ($prototypes as $prototype) {
 // Namespaces may be set at instantiation time (second argument), or using
 // setNamespace().
 $class-&gt;getNamespace();</code></pre>
+
 <p><code>reflectFunction()</code> returns a <code>Laminas\Server\Reflection\Function</code> object;
 <code>reflectClass()</code> returns a <code>Laminas\Server\Reflection\Class</code> object. Please refer
 to the API documentation to see what methods are available to each.</p>
