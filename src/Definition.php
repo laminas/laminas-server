@@ -12,6 +12,7 @@ namespace Laminas\Server;
 
 use Countable;
 use Iterator;
+use Laminas\Server\Exception\InvalidArgumentException;
 
 /**
  * Server methods metadata
@@ -58,7 +59,7 @@ class Definition implements Countable, Iterator
      * @param  array|\Laminas\Server\Method\Definition $method
      * @param  null|string $name
      * @return \Laminas\Server\Definition
-     * @throws \Laminas\Server\Exception\InvalidArgumentException if duplicate or invalid method provided
+     * @throws InvalidArgumentException if duplicate or invalid method provided
      */
     public function addMethod($method, $name = null)
     {

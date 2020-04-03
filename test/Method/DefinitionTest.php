@@ -13,6 +13,7 @@ namespace LaminasTest\Server\Method;
 use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 /**
  * Test class for \Laminas\Server\Method\Definition
@@ -98,7 +99,7 @@ class DefinitionTest extends TestCase
     public function testObjectShouldBeMutable()
     {
         $this->assertNull($this->definition->getObject());
-        $object = new \stdClass;
+        $object = new stdClass;
         $this->definition->setObject($object);
         $this->assertEquals($object, $this->definition->getObject());
     }
@@ -120,7 +121,7 @@ class DefinitionTest extends TestCase
     public function testInvokeArgumentsShouldBeMutable()
     {
         $this->testInvokeArgumentsShouldBeEmptyArrayByDefault();
-        $args = ['foo', ['bar', 'baz'], new \stdClass];
+        $args = ['foo', ['bar', 'baz'], new stdClass];
         $this->definition->setInvokeArguments($args);
         $this->assertSame($args, $this->definition->getInvokeArguments());
     }
@@ -174,7 +175,7 @@ class DefinitionTest extends TestCase
         $callback   = ['function' => 'foo', 'type' => 'function'];
         $prototypes = [['returnType' => 'struct', 'parameters' => ['string', 'array']]];
         $methodHelp = 'foo bar';
-        $object     = new \stdClass;
+        $object     = new stdClass;
         $invokeArgs = ['foo', ['bar', 'baz']];
         $this->definition->setName($name)
                          ->setCallback($callback)
@@ -198,7 +199,7 @@ class DefinitionTest extends TestCase
             'callback'        => ['function' => 'foo', 'type' => 'function'],
             'prototypes'      => [['returnType' => 'struct', 'parameters' => ['string', 'array']]],
             'methodHelp'      => 'foo bar',
-            'object'          => new \stdClass,
+            'object'          => new stdClass,
             'invokeArguments' => ['foo', ['bar', 'baz']],
         ];
         $definition = new Method\Definition($options);

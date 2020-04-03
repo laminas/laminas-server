@@ -10,8 +10,10 @@ declare(strict_types=1);
 
 namespace Laminas\Server;
 
+use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionFunction;
+use ReflectionObject;
 
 /**
  * Reflection for determining method signatures to use with server classes
@@ -33,12 +35,12 @@ class Reflection
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
      * @return \Laminas\Server\Reflection\ReflectionClass
-     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function reflectClass($class, $argv = false, $namespace = '')
     {
         if (is_object($class)) {
-            $reflection = new \ReflectionObject($class);
+            $reflection = new ReflectionObject($class);
         } elseif (is_string($class) && class_exists($class)) {
             $reflection = new \ReflectionClass($class);
         } else {
@@ -67,7 +69,7 @@ class Reflection
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
      * @return \Laminas\Server\Reflection\ReflectionFunction
-     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public static function reflectFunction($function, $argv = false, $namespace = '')
     {

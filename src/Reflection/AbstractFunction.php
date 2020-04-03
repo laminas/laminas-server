@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Laminas\Code\Reflection\DocBlock\Tag\ParamTag;
+use Laminas\Code\Reflection\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionFunction as PhpReflectionFunction;
@@ -257,9 +259,9 @@ abstract class AbstractFunction
 
         $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
         $helpText   = $scanner->getLongDescription();
-        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
+        /* @var ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
-        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
+        /* @var ReturnTag $returnTag */
         $returnTag = $scanner->getTag('return');
 
         if (empty($helpText)) {
