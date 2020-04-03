@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server;
 
 use Laminas\Server;
