@@ -19,7 +19,7 @@ class Node
      * Node value
      * @var mixed
      */
-    protected $value = null;
+    protected $value;
 
     /**
      * Array of child nodes (if any)
@@ -31,7 +31,7 @@ class Node
      * Parent node (if any)
      * @var \Laminas\Server\Reflection\Node
      */
-    protected $parent = null;
+    protected $parent;
 
     /**
      * Constructor

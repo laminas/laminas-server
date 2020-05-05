@@ -37,7 +37,7 @@ class ReflectionClass
      * Namespace
      * @var null|string
      */
-    protected $namespace = null;
+    protected $namespace;
 
     /**
      * ReflectionClass object
