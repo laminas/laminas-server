@@ -48,7 +48,7 @@ class PrototypeTest extends TestCase
      */
     protected function setUp() : void
     {
-        $class = new ReflectionClass('\Laminas\Server\Reflection');
+        $class = new ReflectionClass(Reflection::class);
         $method = $class->getMethod('reflectClass');
         $parameters = $method->getParameters();
         $this->parametersRaw = $parameters;

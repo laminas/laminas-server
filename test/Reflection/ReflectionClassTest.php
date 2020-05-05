@@ -65,7 +65,7 @@ class ReflectionClassTest extends TestCase
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertIsString($r->getName());
-        $this->assertEquals('Laminas\Server\Reflection', $r->getName());
+        $this->assertEquals(Reflection::class, $r->getName());
     }
 
     /**
