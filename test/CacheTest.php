@@ -25,7 +25,7 @@ class CacheTest extends TestCase
      */
     private $cacheFile;
 
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         if ($this->cacheFile) {
             unlink($this->cacheFile);

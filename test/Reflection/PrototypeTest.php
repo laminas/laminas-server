@@ -46,7 +46,7 @@ class PrototypeTest extends TestCase
     /**
      * Setup environment
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $class = new ReflectionClass(Reflection::class);
         $method = $class->getMethod('reflectClass');
@@ -65,7 +65,7 @@ class PrototypeTest extends TestCase
     /**
      * Teardown environment
      */
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
         unset($this->r);
         unset($this->parameters);

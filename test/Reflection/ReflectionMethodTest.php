@@ -23,7 +23,7 @@ class ReflectionMethodTest extends TestCase
     protected $class;
     protected $method;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->classRaw = new ReflectionClass(Reflection::class);
         $this->method   = $this->classRaw->getMethod('reflectClass');

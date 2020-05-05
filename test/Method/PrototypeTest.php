@@ -30,7 +30,7 @@ class PrototypeTest extends TestCase
      *
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->prototype = new Method\Prototype();
     }
@@ -41,7 +41,7 @@ class PrototypeTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
     }
 

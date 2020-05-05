@@ -30,7 +30,7 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->definition = new Server\Definition();
     }
@@ -41,7 +41,7 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
     }
 

@@ -29,7 +29,7 @@ class ParameterTest extends TestCase
      *
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->parameter = new Method\Parameter();
     }
@@ -40,7 +40,7 @@ class ParameterTest extends TestCase
      *
      * @return void
      */
-    protected function tearDown() : void
+    protected function tearDown(): void
     {
     }
 

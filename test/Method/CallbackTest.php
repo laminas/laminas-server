@@ -32,7 +32,7 @@ class CallbackTest extends TestCase
      *
      * @return void
      */
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->callback = new Method\Callback();
     }
