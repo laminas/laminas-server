@@ -36,7 +36,7 @@ class ReflectionParameter
 
     /**
      * Parameter description
-     * @var string
+     * @var null|string
      */
     protected $description;
 
@@ -95,7 +95,7 @@ class ReflectionParameter
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -107,7 +107,7 @@ class ReflectionParameter
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setType($type)
+    public function setType($type): void
     {
         if (! is_string($type) && (null !== $type)) {
             throw new Exception\InvalidArgumentException('Invalid parameter type');
@@ -119,9 +119,9 @@ class ReflectionParameter
     /**
      * Retrieve parameter description
      *
-     * @return string
+     * @return null|string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -133,7 +133,7 @@ class ReflectionParameter
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         if (! is_string($description) && (null !== $description)) {
             throw new Exception\InvalidArgumentException('Invalid parameter description');
@@ -145,20 +145,20 @@ class ReflectionParameter
     /**
      * Set parameter position
      *
-     * @param int $index
+     * @param null|int $index
      * @return void
      */
-    public function setPosition($index)
+    public function setPosition(?int $index = null): void
     {
-        $this->position = (int) $index;
+        $this->position = $index;
     }
 
     /**
      * Return parameter position
      *
-     * @return int
+     * @return null|int
      */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -166,12 +166,12 @@ class ReflectionParameter
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['position', 'type', 'description', 'name', 'functionName'];
     }
 
-    public function __wakeup()
+    public function __wakeup(): void
     {
         $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
     }

@@ -83,12 +83,12 @@ class PrototypeTest extends TestCase
      *
      * Returns: void
      */
-    public function testConstructWorks()
+    public function testConstructWorks(): void
     {
         $this->assertInstanceOf(Prototype::class, $this->r);
     }
 
-    public function testConstructionThrowsExceptionOnInvalidParam()
+    public function testConstructionThrowsExceptionOnInvalidParam(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('One or more params are invalid');
@@ -102,7 +102,7 @@ class PrototypeTest extends TestCase
      *
      * Returns: string
      */
-    public function testGetReturnType()
+    public function testGetReturnType(): void
     {
         $this->assertEquals('void', $this->r->getReturnType());
     }
@@ -114,7 +114,7 @@ class PrototypeTest extends TestCase
      *
      * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
      */
-    public function testGetReturnValue()
+    public function testGetReturnValue(): void
     {
         $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
     }
@@ -126,7 +126,7 @@ class PrototypeTest extends TestCase
      *
      * Returns: array
      */
-    public function testGetParameters()
+    public function testGetParameters(): void
     {
         $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();

@@ -46,7 +46,7 @@ class ReflectionReturnValue
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -58,7 +58,7 @@ class ReflectionReturnValue
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setType($type)
+    public function setType($type): void
     {
         if (! is_string($type) && (null !== $type)) {
             throw new Exception\InvalidArgumentException('Invalid parameter type');
@@ -72,7 +72,7 @@ class ReflectionReturnValue
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -84,7 +84,7 @@ class ReflectionReturnValue
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription($description): void
     {
         if (! is_string($description) && (null !== $description)) {
             throw new Exception\InvalidArgumentException('Invalid parameter description');

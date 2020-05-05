@@ -43,7 +43,7 @@ class ReflectionMethodTest extends TestCase
      *
      * Returns: void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $this->assertInstanceOf(ReflectionMethod::class, $r);
@@ -60,7 +60,7 @@ class ReflectionMethodTest extends TestCase
      *
      * Returns: \Laminas\Server\Reflection\ReflectionClass
      */
-    public function testGetDeclaringClass()
+    public function testGetDeclaringClass(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
 
@@ -77,7 +77,7 @@ class ReflectionMethodTest extends TestCase
      *
      * Returns: void
      */
-    public function testClassWakeup()
+    public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $s = serialize($r);
@@ -92,7 +92,7 @@ class ReflectionMethodTest extends TestCase
     /**
      * Test fetch method doc block from interface
      */
-    public function testMethodDocBlockFromInterface()
+    public function testMethodDocBlockFromInterface(): void
     {
         $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
@@ -111,7 +111,7 @@ class ReflectionMethodTest extends TestCase
     /**
      * Test fetch method doc block from parent class
      */
-    public function testMethodDocBlockFromParent()
+    public function testMethodDocBlockFromParent(): void
     {
         $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');

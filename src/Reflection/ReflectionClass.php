@@ -35,7 +35,7 @@ class ReflectionClass
 
     /**
      * Namespace
-     * @var string
+     * @var null|string
      */
     protected $namespace = null;
 
@@ -111,8 +111,6 @@ class ReflectionClass
         if (isset($this->config[$key])) {
             return $this->config[$key];
         }
-
-        return;
     }
 
     /**
@@ -124,7 +122,7 @@ class ReflectionClass
      * @param mixed $value
      * @return void
      */
-    public function __set($key, $value)
+    public function __set($key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -135,7 +133,7 @@ class ReflectionClass
      * @access public
      * @return array
      */
-    public function getMethods()
+    public function getMethods(): array
     {
         return $this->methods;
     }
@@ -143,9 +141,9 @@ class ReflectionClass
     /**
      * Get namespace for this class
      *
-     * @return string
+     * @return null|string
      */
-    public function getNamespace()
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -153,18 +151,18 @@ class ReflectionClass
     /**
      * Set namespace for this class
      *
-     * @param string $namespace
+     * @param null|string $namespace
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setNamespace($namespace)
+    public function setNamespace(?string $namespace): void
     {
         if (empty($namespace)) {
             $this->namespace = '';
             return;
         }
 
-        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
@@ -179,7 +177,7 @@ class ReflectionClass
      *
      * @return void
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         $this->reflection = new PhpReflectionClass($this->name);
     }
@@ -187,7 +185,7 @@ class ReflectionClass
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['config', 'methods', 'namespace', 'name'];
     }

@@ -46,7 +46,7 @@ abstract class AbstractServer implements Server
      *
      * @return Definition
      */
-    public function getFunctions()
+    public function getFunctions(): Definition
     {
         return $this->table;
     }
@@ -59,7 +59,7 @@ abstract class AbstractServer implements Server
      * @return Method\Callback
      */
     // @codingStandardsIgnoreStart
-    protected function _buildCallback(Reflection\AbstractFunction $reflection)
+    protected function _buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
     {
     // @codingStandardsIgnoreEnd
         $callback = new Method\Callback();
@@ -85,7 +85,7 @@ abstract class AbstractServer implements Server
      * @throws Exception\RuntimeException on duplicate entry
      */
     // @codingStandardsIgnoreStart
-    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
     {
     // @codingStandardsIgnoreEnd
         $ns         = $reflection->getNamespace();
@@ -175,6 +175,6 @@ abstract class AbstractServer implements Server
      * @param  string $type
      * @return string
      */
-    abstract protected function _fixType($type);
+    abstract protected function _fixType($type): string;
     // @codingStandardsIgnoreEnd
 }

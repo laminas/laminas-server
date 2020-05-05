@@ -38,7 +38,7 @@ class Node
      *
      * @param mixed $value
      * @param \Laminas\Server\Reflection\Node $parent Optional
-     * @return \Laminas\Server\Reflection\Node
+     * @return $this
      */
     public function __construct($value, Node $parent = null)
     {
@@ -58,13 +58,12 @@ class Node
      * and should always be attached
      * @return void
      */
-    public function setParent(Node $node, $new = false)
+    public function setParent(Node $node, $new = false): void
     {
         $this->parent = $node;
 
         if ($new) {
             $node->attachChild($this);
-            return;
         }
     }
 
@@ -73,9 +72,9 @@ class Node
      *
      * @param mixed $value
      * @access public
-     * @return \Laminas\Server\Reflection\Node New child node
+     * @return $this New child node
      */
-    public function createChild($value)
+    public function createChild($value): self
     {
         $child = new static($value, $this);
 
@@ -88,7 +87,7 @@ class Node
      * @param \Laminas\Server\Reflection\Node $node
      * @return void
      */
-    public function attachChild(Node $node)
+    public function attachChild(Node $node): void
     {
         $this->children[] = $node;
 
@@ -102,7 +101,7 @@ class Node
      *
      * @return array
      */
-    public function getChildren()
+    public function getChildren(): array
     {
         return $this->children;
     }
@@ -112,7 +111,7 @@ class Node
      *
      * @return bool
      */
-    public function hasChildren()
+    public function hasChildren(): bool
     {
         return count($this->children) > 0;
     }
@@ -120,9 +119,9 @@ class Node
     /**
      * Return the parent node
      *
-     * @return null|\Laminas\Server\Reflection\Node
+     * @return null|$this
      */
-    public function getParent()
+    public function getParent(): ?Node
     {
         return $this->parent;
     }
@@ -143,7 +142,7 @@ class Node
      * @param mixed $value
      * @return void
      */
-    public function setValue($value)
+    public function setValue($value): void
     {
         $this->value = $value;
     }
@@ -157,7 +156,7 @@ class Node
      *
      * @return array
      */
-    public function getEndPoints()
+    public function getEndPoints(): array
     {
         $endPoints = [];
         if (! $this->hasChildren()) {

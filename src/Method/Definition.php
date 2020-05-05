@@ -18,7 +18,7 @@ use Laminas\Server;
 class Definition
 {
     /**
-     * @var \Laminas\Server\Method\Callback
+     * @var null|\Laminas\Server\Method\Callback
      */
     protected $callback;
 
@@ -33,7 +33,7 @@ class Definition
     protected $methodHelp = '';
 
     /**
-     * @var string
+     * @var null|string
      */
     protected $name;
 
@@ -63,9 +63,9 @@ class Definition
      * Set object state from options
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -80,9 +80,9 @@ class Definition
      * Set method name
      *
      * @param  string $name
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setName($name)
+    public function setName($name): self
     {
         $this->name = (string) $name;
         return $this;
@@ -93,7 +93,7 @@ class Definition
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -103,9 +103,9 @@ class Definition
      *
      * @param  array|\Laminas\Server\Method\Callback $callback
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setCallback($callback)
+    public function setCallback($callback): self
     {
         if (is_array($callback)) {
             $callback = new Callback($callback);
@@ -121,7 +121,7 @@ class Definition
      *
      * @return \Laminas\Server\Method\Callback
      */
-    public function getCallback()
+    public function getCallback(): ?Callback
     {
         return $this->callback;
     }
@@ -131,9 +131,9 @@ class Definition
      *
      * @param  array|\Laminas\Server\Method\Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function addPrototype($prototype)
+    public function addPrototype($prototype): self
     {
         if (is_array($prototype)) {
             $prototype = new Prototype($prototype);
@@ -148,9 +148,9 @@ class Definition
      * Add multiple prototypes at once
      *
      * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function addPrototypes(array $prototypes)
+    public function addPrototypes(array $prototypes): self
     {
         foreach ($prototypes as $prototype) {
             $this->addPrototype($prototype);
@@ -162,9 +162,9 @@ class Definition
      * Set all prototypes at once (overwrites)
      *
      * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setPrototypes(array $prototypes)
+    public function setPrototypes(array $prototypes): self
     {
         $this->prototypes = [];
         $this->addPrototypes($prototypes);
@@ -176,7 +176,7 @@ class Definition
      *
      * @return array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
      */
-    public function getPrototypes()
+    public function getPrototypes(): array
     {
         return $this->prototypes;
     }
@@ -185,9 +185,9 @@ class Definition
      * Set method help
      *
      * @param  string $methodHelp
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setMethodHelp($methodHelp)
+    public function setMethodHelp($methodHelp): self
     {
         $this->methodHelp = (string) $methodHelp;
         return $this;
@@ -198,7 +198,7 @@ class Definition
      *
      * @return string
      */
-    public function getMethodHelp()
+    public function getMethodHelp(): string
     {
         return $this->methodHelp;
     }
@@ -208,9 +208,9 @@ class Definition
      *
      * @param  object $object
      * @throws Server\Exception\InvalidArgumentException
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setObject($object)
+    public function setObject($object): self
     {
         if (! is_object($object) && (null !== $object)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(
@@ -227,7 +227,7 @@ class Definition
      *
      * @return null|object
      */
-    public function getObject()
+    public function getObject(): ?object
     {
         return $this->object;
     }
@@ -236,9 +236,9 @@ class Definition
      * Set invoke arguments
      *
      * @param  array $invokeArguments
-     * @return \Laminas\Server\Method\Definition
+     * @return $this
      */
-    public function setInvokeArguments(array $invokeArguments)
+    public function setInvokeArguments(array $invokeArguments): self
     {
         $this->invokeArguments = $invokeArguments;
         return $this;
@@ -249,7 +249,7 @@ class Definition
      *
      * @return array
      */
-    public function getInvokeArguments()
+    public function getInvokeArguments(): array
     {
         return $this->invokeArguments;
     }
@@ -259,7 +259,7 @@ class Definition
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $prototypes = $this->getPrototypes();
         $signatures = [];

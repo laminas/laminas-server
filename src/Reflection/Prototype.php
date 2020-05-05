@@ -45,7 +45,7 @@ class Prototype
      *
      * @return string
      */
-    public function getReturnType()
+    public function getReturnType(): string
     {
         return $this->return->getType();
     }
@@ -55,7 +55,7 @@ class Prototype
      *
      * @return \Laminas\Server\Reflection\ReflectionReturnValue
      */
-    public function getReturnValue()
+    public function getReturnValue(): ReflectionReturnValue
     {
         return $this->return;
     }
@@ -65,7 +65,7 @@ class Prototype
      *
      * @return ReflectionParameter[] Array of {@link \Laminas\Server\Reflection\ReflectionParameter}s
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         return $this->params;
     }

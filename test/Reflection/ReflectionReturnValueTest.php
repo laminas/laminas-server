@@ -33,7 +33,7 @@ class ReflectionReturnValueTest extends TestCase
      *
      * Returns: void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
         $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
@@ -46,7 +46,7 @@ class ReflectionReturnValueTest extends TestCase
      *
      * Returns: string
      */
-    public function testGetType()
+    public function testGetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
         $this->assertEquals('mixed', $obj->getType());
@@ -65,7 +65,7 @@ class ReflectionReturnValueTest extends TestCase
      *
      * Returns: void
      */
-    public function testSetType()
+    public function testSetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
 
@@ -80,7 +80,7 @@ class ReflectionReturnValueTest extends TestCase
      *
      * Returns: string
      */
-    public function testGetDescription()
+    public function testGetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue('string', 'Some description');
         $this->assertEquals('Some description', $obj->getDescription());
@@ -99,7 +99,7 @@ class ReflectionReturnValueTest extends TestCase
      *
      * Returns: void
      */
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
 

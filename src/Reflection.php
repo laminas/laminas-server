@@ -37,7 +37,7 @@ class Reflection
      * @return \Laminas\Server\Reflection\ReflectionClass
      * @throws InvalidArgumentException
      */
-    public static function reflectClass($class, $argv = false, $namespace = '')
+    public static function reflectClass($class, $argv = false, $namespace = ''): ReflectionClass
     {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
@@ -71,7 +71,7 @@ class Reflection
      * @return \Laminas\Server\Reflection\ReflectionFunction
      * @throws InvalidArgumentException
      */
-    public static function reflectFunction($function, $argv = false, $namespace = '')
+    public static function reflectFunction($function, $argv = false, $namespace = ''): ReflectionFunction
     {
         if (! is_string($function) || ! function_exists($function)) {
             throw new Reflection\Exception\InvalidArgumentException(sprintf(

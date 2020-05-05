@@ -33,7 +33,7 @@ class ReflectionTestClass
      * @param array $arg2
      * @return string
      */
-    public function one($arg1, $arg2 = null)
+    public function one($arg1, $arg2 = null): ?string
     {
     }
 
@@ -47,7 +47,7 @@ class ReflectionTestClass
      * @return string
      */
     // @codingStandardsIgnoreStart
-    protected function _one($arg1, $arg2 = null)
+    protected function _one($arg1, $arg2 = null): ?string
     {
         // @codingStandardsIgnoreEnd
     }

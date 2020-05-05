@@ -70,7 +70,7 @@ abstract class AbstractFunction
 
     /**
      * Namespace with which to prefix function/method name
-     * @var string
+     * @var null|string
      */
     protected $namespace;
 
@@ -137,7 +137,7 @@ abstract class AbstractFunction
      * @param int $level
      * @return void
      */
-    protected function addTree(Node $parent, $level = 0)
+    protected function addTree(Node $parent, $level = 0): void
     {
         if ($level >= $this->sigParamsDepth) {
             return;
@@ -160,7 +160,7 @@ abstract class AbstractFunction
      *
      * @return array
      */
-    protected function buildTree()
+    protected function buildTree(): array
     {
         $returnTree = [];
         foreach ($this->return as $value) {
@@ -182,9 +182,9 @@ abstract class AbstractFunction
      * @param string $returnDesc Return value description
      * @param array $paramTypes Array of arguments (each an array of types)
      * @param array $paramDesc Array of parameter descriptions
-     * @return array
+     * @return void
      */
-    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
+    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc): void
     {
         $this->return         = $return;
         $this->returnDesc     = $returnDesc;
@@ -245,9 +245,9 @@ abstract class AbstractFunction
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
      * @throws Exception\RuntimeException
-     * @return array
+     * @return void
      */
-    protected function reflect()
+    protected function reflect(): void
     {
         $function   = $this->reflection;
         $paramCount = $function->getNumberOfParameters();
@@ -355,8 +355,6 @@ abstract class AbstractFunction
         if (isset($this->config[$key])) {
             return $this->config[$key];
         }
-
-        return;
     }
 
     /**
@@ -368,7 +366,7 @@ abstract class AbstractFunction
      * @param mixed $value
      * @return void
      */
-    public function __set($key, $value)
+    public function __set($key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -376,11 +374,11 @@ abstract class AbstractFunction
     /**
      * Set method's namespace
      *
-     * @param string $namespace
+     * @param null|string $namespace
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setNamespace($namespace)
+    public function setNamespace(?string $namespace = null): void
     {
         if (empty($namespace)) {
             $this->namespace = '';
@@ -397,9 +395,9 @@ abstract class AbstractFunction
     /**
      * Return method's namespace
      *
-     * @return string
+     * @return null|string
      */
-    public function getNamespace()
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -411,7 +409,7 @@ abstract class AbstractFunction
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setDescription($string)
+    public function setDescription($string): void
     {
         if (! is_string($string)) {
             throw new Exception\InvalidArgumentException('Invalid description');
@@ -425,7 +423,7 @@ abstract class AbstractFunction
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -436,7 +434,7 @@ abstract class AbstractFunction
      *
      * @return Prototype[]
      */
-    public function getPrototypes()
+    public function getPrototypes(): array
     {
         return $this->prototypes;
     }
@@ -446,7 +444,7 @@ abstract class AbstractFunction
      *
      * @return array
      */
-    public function getInvokeArguments()
+    public function getInvokeArguments(): array
     {
         return $this->argv;
     }
@@ -454,7 +452,7 @@ abstract class AbstractFunction
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         $serializable = [];
         foreach ($this as $name => $value) {
@@ -478,7 +476,7 @@ abstract class AbstractFunction
      *
      * @return void
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         if ($this->reflection instanceof PhpReflectionMethod) {
             $class = new PhpReflectionClass($this->class);

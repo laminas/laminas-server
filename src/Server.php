@@ -27,7 +27,7 @@ interface Server
      *                    dispatch.
      * @return void
      */
-    public function addFunction($function, $namespace = '');
+    public function addFunction($function, $namespace = ''): void;
 
     /**
      * Attach a class to a server
@@ -48,7 +48,7 @@ interface Server
      *                    dispatch.
      * @return void
      */
-    public function setClass($class, $namespace = '', $argv = null);
+    public function setClass($class, $namespace = '', $argv = null): void;
 
     /**
      * Generate a server fault
@@ -90,7 +90,7 @@ interface Server
      * @param  array $definition
      * @return void
      */
-    public function loadFunctions($definition);
+    public function loadFunctions($definition): void;
 
     /**
      * Set server persistence
@@ -99,7 +99,7 @@ interface Server
      * @param  int $mode
      * @return void
      */
-    public function setPersistence($mode);
+    public function setPersistence($mode): void;
 
     /**
      * Sets auto-response flag for the server.
@@ -107,16 +107,16 @@ interface Server
      * To unify all servers, default behavior should be to auto-emit response.
      *
      * @param  bool $flag
-     * @return Server Self instance.
+     * @return $this
      */
-    public function setReturnResponse($flag = true);
+    public function setReturnResponse($flag = true): self;
 
     /**
      * Returns auto-response flag of the server.
      *
      * @return bool $flag Current status.
      */
-    public function getReturnResponse();
+    public function getReturnResponse(): bool;
 
     /**
      * Returns last produced response.

@@ -32,7 +32,7 @@ class Parameter
     /**
      * Parameter variable name
      *
-     * @var string
+     * @var null|string
      */
     protected $name;
 
@@ -66,9 +66,9 @@ class Parameter
      * Set object state from array of options
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -83,9 +83,9 @@ class Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue($defaultValue): self
     {
         $this->defaultValue = $defaultValue;
         return $this;
@@ -105,11 +105,11 @@ class Parameter
      * Set description
      *
      * @param  string $description
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
-        $this->description = (string) $description;
+        $this->description = $description;
         return $this;
     }
 
@@ -118,7 +118,7 @@ class Parameter
      *
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -127,11 +127,11 @@ class Parameter
      * Set name
      *
      * @param  string $name
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setName($name)
+    public function setName(?string $name): self
     {
-        $this->name = (string) $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -140,7 +140,7 @@ class Parameter
      *
      * @return string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -149,11 +149,11 @@ class Parameter
      * Set optional flag
      *
      * @param  bool $flag
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setOptional($flag)
+    public function setOptional(bool $flag): self
     {
-        $this->optional = (bool) $flag;
+        $this->optional = $flag;
         return $this;
     }
 
@@ -162,7 +162,7 @@ class Parameter
      *
      * @return bool
      */
-    public function isOptional()
+    public function isOptional(): bool
     {
         return $this->optional;
     }
@@ -171,11 +171,11 @@ class Parameter
      * Set parameter type
      *
      * @param  string $type
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setType($type)
+    public function setType(string $type): self
     {
-        $this->type = (string) $type;
+        $this->type = $type;
         return $this;
     }
 
@@ -184,7 +184,7 @@ class Parameter
      *
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -194,7 +194,7 @@ class Parameter
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'type'         => $this->getType(),

@@ -46,9 +46,9 @@ class Prototype
      * Set return value
      *
      * @param  string $returnType
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
-    public function setReturnType($returnType)
+    public function setReturnType($returnType): self
     {
         $this->returnType = $returnType;
         return $this;
@@ -59,7 +59,7 @@ class Prototype
      *
      * @return string
      */
-    public function getReturnType()
+    public function getReturnType(): string
     {
         return $this->returnType;
     }
@@ -68,9 +68,9 @@ class Prototype
      * Add a parameter
      *
      * @param  string $parameter
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
-    public function addParameter($parameter)
+    public function addParameter($parameter): self
     {
         if ($parameter instanceof Parameter) {
             $this->parameters[] = $parameter;
@@ -90,9 +90,9 @@ class Prototype
      * Add parameters
      *
      * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
-    public function addParameters(array $parameters)
+    public function addParameters(array $parameters): self
     {
         foreach ($parameters as $parameter) {
             $this->addParameter($parameter);
@@ -104,9 +104,9 @@ class Prototype
      * Set parameters
      *
      * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
-    public function setParameters(array $parameters)
+    public function setParameters(array $parameters): self
     {
         $this->parameters       = [];
         $this->parameterNameMap = [];
@@ -119,7 +119,7 @@ class Prototype
      *
      * @return array
      */
-    public function getParameters()
+    public function getParameters(): array
     {
         $types = [];
         foreach ($this->parameters as $parameter) {
@@ -133,7 +133,7 @@ class Prototype
      *
      * @return array
      */
-    public function getParameterObjects()
+    public function getParameterObjects(): array
     {
         return $this->parameters;
     }
@@ -142,12 +142,12 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return void|\Laminas\Server\Method\Parameter
+     * @return null|\Laminas\Server\Method\Parameter
      */
-    public function getParameter($index)
+    public function getParameter($index): ?Parameter
     {
         if (! is_string($index) && ! is_numeric($index)) {
-            return;
+            return null;
         }
         if (array_key_exists($index, $this->parameterNameMap)) {
             $index = $this->parameterNameMap[$index];
@@ -161,9 +161,9 @@ class Prototype
      * Set object state from array
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Prototype
+     * @return $this
      */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -179,7 +179,7 @@ class Prototype
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'returnType' => $this->getReturnType(),

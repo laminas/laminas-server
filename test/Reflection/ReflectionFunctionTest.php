@@ -21,7 +21,7 @@ use ReflectionFunction;
  */
 class ReflectionFunctionTest extends TestCase
 {
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -42,7 +42,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertNotEmpty($prototypes);
     }
 
-    public function testPropertyOverloading()
+    public function testPropertyOverloading(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -52,7 +52,7 @@ class ReflectionFunctionTest extends TestCase
     }
 
 
-    public function testNamespace()
+    public function testNamespace(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function, 'namespace');
@@ -61,7 +61,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('framework', $r->getNamespace());
     }
 
-    public function testDescription()
+    public function testDescription(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -70,7 +70,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('Testing setting descriptions', $r->getDescription());
     }
 
-    public function testGetPrototypes()
+    public function testGetPrototypes(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -84,7 +84,7 @@ class ReflectionFunctionTest extends TestCase
         }
     }
 
-    public function testGetPrototypes2()
+    public function testGetPrototypes2(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function2');
         $r = new Reflection\ReflectionFunction($function);
@@ -100,7 +100,7 @@ class ReflectionFunctionTest extends TestCase
     }
 
 
-    public function testGetInvokeArguments()
+    public function testGetInvokeArguments(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -114,7 +114,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals($argv, $args);
     }
 
-    public function testClassWakeup()
+    public function testClassWakeup(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -124,7 +124,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('', $u->getNamespace());
     }
 
-    public function testMultipleWhitespaceBetweenDoctagsAndTypes()
+    public function testMultipleWhitespaceBetweenDoctagsAndTypes(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function3');
         $r = new Reflection\ReflectionFunction($function);
@@ -144,7 +144,7 @@ class ReflectionFunctionTest extends TestCase
     /**
      * @group Laminas-6996
      */
-    public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription()
+    public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r = new Reflection\ReflectionFunction($function);
@@ -167,7 +167,7 @@ class ReflectionFunctionTest extends TestCase
  * @param array $var3
  * @return null|array
  */
-function function1($var1, $var2, $var3 = null)
+function function1($var1, $var2, $var3 = null): ?array
 {
 }
 
@@ -177,7 +177,7 @@ function function1($var1, $var2, $var3 = null)
  * Test function for reflection unit tests; test what happens when no return
  * value or params specified in docblock.
  */
-function function2()
+function function2(): void
 {
 }
 
@@ -187,6 +187,6 @@ function function2()
  * @param  string $var1
  * @return void
  */
-function function3($var1)
+function function3($var1): void
 {
 }

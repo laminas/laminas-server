@@ -72,7 +72,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return \Laminas\Server\Reflection\ReflectionClass
      */
-    public function getDeclaringClass()
+    public function getDeclaringClass(): ReflectionClass
     {
         return $this->classReflection;
     }
@@ -85,7 +85,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return void
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         $this->classReflection = new ReflectionClass(
             new \ReflectionClass($this->class),
@@ -98,7 +98,7 @@ class ReflectionMethod extends AbstractFunction
     /**
      * {@inheritdoc}
      */
-    protected function reflect()
+    protected function reflect(): void
     {
         $docComment = $this->reflection->getDocComment();
         if (strpos($docComment, self::INHERIT_TAG) !== false) {
@@ -113,7 +113,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return string
      */
-    private function fetchRecursiveDocComment()
+    private function fetchRecursiveDocComment(): string
     {
         $currentMethodName = $this->reflection->getName();
         $docCommentList[] = $this->reflection->getDocComment();
@@ -156,18 +156,18 @@ class ReflectionMethod extends AbstractFunction
      * @param \ReflectionClass $reflectionClass
      * @param string           $methodName
      *
-     * @return array|void
+     * @return null|array
      */
-    private function fetchRecursiveDocBlockFromParent($reflectionClass, $methodName)
+    private function fetchRecursiveDocBlockFromParent($reflectionClass, $methodName): ?array
     {
         $docComment = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
         if (! $parentReflectionClass) {
-            return;
+            return null;
         }
 
         if (! $parentReflectionClass->hasMethod($methodName)) {
-            return;
+            return null;
         }
 
         $methodReflection = $parentReflectionClass->getMethod($methodName);
@@ -189,7 +189,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return bool
      */
-    private function isInherit($docComment)
+    private function isInherit($docComment): bool
     {
         $isInherit = strpos($docComment, self::INHERIT_TAG) !== false;
 
