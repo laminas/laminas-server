@@ -20,6 +20,9 @@ class Prototype
     /** @var ReflectionParameter[] */
     protected $params;
 
+    /** @var ReflectionReturnValue */
+    private $return;
+
     /**
      * Constructor
      *

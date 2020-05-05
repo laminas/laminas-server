@@ -21,6 +21,9 @@ use PHPUnit\Framework\TestCase;
  */
 class PrototypeTest extends TestCase
 {
+    /** @var Method\Prototype */
+    private $prototype;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.

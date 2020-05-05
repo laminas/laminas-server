@@ -20,6 +20,9 @@ use PHPUnit\Framework\TestCase;
  */
 class ParameterTest extends TestCase
 {
+    /** @var Method\Parameter */
+    private $parameter;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
