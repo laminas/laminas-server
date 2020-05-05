@@ -8,7 +8,7 @@
 
 declare(strict_types=1);
 
-namespace LaminasTest\Cache;
+namespace LaminasTest\Server;
 
 use Laminas\Server\Cache;
 use Laminas\Server\Definition;
