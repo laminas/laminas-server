@@ -46,8 +46,6 @@ class Node
         if (null !== $parent) {
             $this->setParent($parent, true);
         }
-
-        return $this;
     }
 
     /**
