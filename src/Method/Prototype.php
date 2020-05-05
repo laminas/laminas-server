@@ -142,7 +142,7 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|\Laminas\Server\Method\Parameter
+     * @return void|\Laminas\Server\Method\Parameter
      */
     public function getParameter($index)
     {
@@ -155,7 +155,6 @@ class Prototype
         if (array_key_exists($index, $this->parameters)) {
             return $this->parameters[$index];
         }
-        return;
     }
 
     /**

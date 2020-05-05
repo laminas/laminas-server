@@ -130,7 +130,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return null|\Laminas\Server\Method\Definition
+     * @return false|\Laminas\Server\Method\Definition
      */
     public function getMethod($method)
     {
