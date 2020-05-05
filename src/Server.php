@@ -22,12 +22,12 @@ interface Server
      * implementations to prevent naming collisions.
      *
      * @param  string $function
-     * @param  string $namespace
+     * @param  null|string $namespace
      * @param  null|array Optional array of arguments to pass to callback at
      *                    dispatch.
      * @return void
      */
-    public function addFunction($function, $namespace = ''): void;
+    public function addFunction(string $function, ?string $namespace = null): void;
 
     /**
      * Attach a class to a server
@@ -48,7 +48,7 @@ interface Server
      *                    dispatch.
      * @return void
      */
-    public function setClass($class, $namespace = '', $argv = null): void;
+    public function setClass($class, ?string $namespace = null, ?array $argv = null): void;
 
     /**
      * Generate a server fault
@@ -57,7 +57,7 @@ interface Server
      * @param  int $code
      * @return mixed
      */
-    public function fault($fault = null, $code = 404);
+    public function fault($fault = null, int $code = 404);
 
     /**
      * Handle a request
@@ -69,7 +69,7 @@ interface Server
      * @param  mixed $request
      * @return mixed
      */
-    public function handle($request = false);
+    public function handle($request = null);
 
     /**
      * Return a server definition array
@@ -90,7 +90,7 @@ interface Server
      * @param  array $definition
      * @return void
      */
-    public function loadFunctions($definition): void;
+    public function loadFunctions(array $definition): void;
 
     /**
      * Set server persistence
@@ -99,7 +99,7 @@ interface Server
      * @param  int $mode
      * @return void
      */
-    public function setPersistence($mode): void;
+    public function setPersistence(int $mode): void;
 
     /**
      * Sets auto-response flag for the server.
@@ -109,7 +109,7 @@ interface Server
      * @param  bool $flag
      * @return $this
      */
-    public function setReturnResponse($flag = true): self;
+    public function setReturnResponse(bool $flag = true): self;
 
     /**
      * Returns auto-response flag of the server.

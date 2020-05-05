@@ -35,7 +35,7 @@ class ReflectionReturnValue
      * @param string $type Return value type
      * @param string $description Return value type
      */
-    public function __construct($type = 'mixed', $description = '')
+    public function __construct(string $type = 'mixed', string $description = '')
     {
         $this->setType($type);
         $this->setDescription($description);
@@ -51,19 +51,8 @@ class ReflectionReturnValue
         return $this->type;
     }
 
-    /**
-     * Set parameter type
-     *
-     * @param string|null $type
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setType($type): void
+    public function setType(?string $type = null): void
     {
-        if (! is_string($type) && (null !== $type)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter type');
-        }
-
         $this->type = $type;
     }
 
@@ -77,19 +66,8 @@ class ReflectionReturnValue
         return $this->description;
     }
 
-    /**
-     * Set parameter description
-     *
-     * @param string|null $description
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setDescription($description): void
+    public function setDescription(?string $description = null): void
     {
-        if (! is_string($description) && (null !== $description)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter description');
-        }
-
         $this->description = $description;
     }
 }

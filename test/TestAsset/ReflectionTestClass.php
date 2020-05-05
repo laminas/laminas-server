@@ -30,11 +30,12 @@ class ReflectionTestClass
      * Public one
      *
      * @param string $arg1
-     * @param array $arg2
+     * @param null|array $arg2
      * @return string
      */
-    public function one($arg1, $arg2 = null): ?string
+    public function one(string $arg1, ?array $arg2 = null): string
     {
+        return 'foo';
     }
 
     /**
@@ -43,13 +44,14 @@ class ReflectionTestClass
      * Should not be reflected
      *
      * @param string $arg1
-     * @param array $arg2
+     * @param null|array $arg2
      * @return string
      */
     // @codingStandardsIgnoreStart
-    protected function _one($arg1, $arg2 = null): ?string
+    protected function _one(string $arg1, ?array $arg2 = null): string
     {
         // @codingStandardsIgnoreEnd
+        return 'foo';
     }
 
     /**
@@ -59,7 +61,7 @@ class ReflectionTestClass
      * @param string $arg2
      * @return bool|array
      */
-    public static function two($arg1, $arg2)
+    public static function two(string $arg1, string $arg2)
     {
     }
 }

@@ -30,25 +30,14 @@ class Prototype
      */
     protected $parameters = [];
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $options
-     */
-    public function __construct($options = null)
+    public function __construct(?array $options = null)
     {
         if ((null !== $options) && is_array($options)) {
             $this->setOptions($options);
         }
     }
 
-    /**
-     * Set return value
-     *
-     * @param  string $returnType
-     * @return $this
-     */
-    public function setReturnType($returnType): self
+    public function setReturnType(string $returnType): self
     {
         $this->returnType = $returnType;
         return $this;
@@ -67,7 +56,7 @@ class Prototype
     /**
      * Add a parameter
      *
-     * @param  string $parameter
+     * @param  string|Parameter $parameter
      * @return $this
      */
     public function addParameter($parameter): self

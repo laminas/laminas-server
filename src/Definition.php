@@ -34,7 +34,7 @@ class Definition implements Countable, Iterator
      *
      * @param  null|array $methods
      */
-    public function __construct($methods = null)
+    public function __construct(?array $methods = null)
     {
         if (is_array($methods)) {
             $this->setMethods($methods);
@@ -61,7 +61,7 @@ class Definition implements Countable, Iterator
      * @return $this
      * @throws InvalidArgumentException if duplicate or invalid method provided
      */
-    public function addMethod($method, $name = null): self
+    public function addMethod($method, ?string $name = null): self
     {
         if (is_array($method)) {
             $method = new Method\Definition($method);
@@ -69,9 +69,6 @@ class Definition implements Countable, Iterator
             throw new Exception\InvalidArgumentException('Invalid method provided');
         }
 
-        if (is_numeric($name)) {
-            $name = null;
-        }
         if (null !== $name) {
             $method->setName($name);
         } else {
@@ -97,6 +94,9 @@ class Definition implements Countable, Iterator
     public function addMethods(array $methods): self
     {
         foreach ($methods as $key => $method) {
+            if (is_numeric($key)) {
+                $key = null;
+            }
             $this->addMethod($method, $key);
         }
         return $this;
@@ -121,7 +121,7 @@ class Definition implements Countable, Iterator
      * @param  string $method
      * @return bool
      */
-    public function hasMethod($method): bool
+    public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->methods);
     }
@@ -132,7 +132,7 @@ class Definition implements Countable, Iterator
      * @param  string $method
      * @return false|\Laminas\Server\Method\Definition
      */
-    public function getMethod($method)
+    public function getMethod(string $method)
     {
         if ($this->hasMethod($method)) {
             return $this->methods[$method];
@@ -156,7 +156,7 @@ class Definition implements Countable, Iterator
      * @param  string $method
      * @return $this
      */
-    public function removeMethod($method): self
+    public function removeMethod(string $method): self
     {
         if ($this->hasMethod($method)) {
             unset($this->methods[$method]);

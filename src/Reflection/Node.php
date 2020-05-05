@@ -38,7 +38,6 @@ class Node
      *
      * @param mixed $value
      * @param \Laminas\Server\Reflection\Node $parent Optional
-     * @return $this
      */
     public function __construct($value, Node $parent = null)
     {
@@ -56,7 +55,7 @@ class Node
      * and should always be attached
      * @return void
      */
-    public function setParent(Node $node, $new = false): void
+    public function setParent(Node $node, bool $new = false): void
     {
         $this->parent = $node;
 

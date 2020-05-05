@@ -107,13 +107,6 @@ class DefinitionTest extends TestCase
         $this->assertEquals($object, $this->definition->getObject());
     }
 
-    public function testSettingObjectToNonObjectShouldThrowException(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid object passed to');
-        $this->definition->setObject('foo');
-    }
-
     public function testInvokeArgumentsShouldBeEmptyArrayByDefault(): void
     {
         $args = $this->definition->getInvokeArguments();

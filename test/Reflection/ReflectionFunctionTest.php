@@ -77,7 +77,7 @@ class ReflectionFunctionTest extends TestCase
 
         $prototypes = $r->getPrototypes();
         $this->assertIsArray($prototypes);
-        $this->assertCount(8, $prototypes);
+        $this->assertCount(4, $prototypes);
 
         foreach ($prototypes as $p) {
             $this->assertInstanceOf(Prototype::class, $p);
@@ -167,7 +167,7 @@ class ReflectionFunctionTest extends TestCase
  * @param array $var3
  * @return null|array
  */
-function function1($var1, $var2, $var3 = null): ?array
+function function1(string $var1, $var2, array $var3): ?array
 {
 }
 
@@ -187,6 +187,6 @@ function function2(): void
  * @param  string $var1
  * @return void
  */
-function function3($var1): void
+function function3(string $var1): void
 {
 }

@@ -42,12 +42,7 @@ class Callback
      */
     protected $types = ['function', 'static', 'instance'];
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $options
-     */
-    public function __construct($options = null)
+    public function __construct(?array $options = null)
     {
         if ((null !== $options) && is_array($options)) {
             $this->setOptions($options);
@@ -74,7 +69,7 @@ class Callback
     /**
      * Set callback class
      *
-     * @param  string $class
+     * @param  string|object $class
      * @return $this
      */
     public function setClass($class): self
@@ -125,7 +120,7 @@ class Callback
      * @param  string $method
      * @return $this
      */
-    public function setMethod($method): self
+    public function setMethod(string $method): self
     {
         $this->method = $method;
         return $this;
@@ -148,7 +143,7 @@ class Callback
      * @return $this
      * @throws Server\Exception\InvalidArgumentException
      */
-    public function setType($type): self
+    public function setType(string $type): self
     {
         if (! in_array($type, $this->types)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(

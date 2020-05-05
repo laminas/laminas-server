@@ -101,7 +101,7 @@ abstract class AbstractFunction
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct(ReflectionFunctionAbstract $r, $namespace = null, $argv = [])
+    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, ?array $argv = null)
     {
         $this->reflection = $r;
 
@@ -137,7 +137,7 @@ abstract class AbstractFunction
      * @param int $level
      * @return void
      */
-    protected function addTree(Node $parent, $level = 0): void
+    protected function addTree(Node $parent, int $level = 0): void
     {
         if ($level >= $this->sigParamsDepth) {
             return;
@@ -184,7 +184,7 @@ abstract class AbstractFunction
      * @param array $paramDesc Array of parameter descriptions
      * @return void
      */
-    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc): void
+    protected function buildSignatures(array $return, string $returnDesc, array $paramTypes, array $paramDesc): void
     {
         $this->return         = $return;
         $this->returnDesc     = $returnDesc;
@@ -274,7 +274,7 @@ abstract class AbstractFunction
 
         if ($returnTag) {
             $return     = [];
-            $returnDesc = $returnTag->getDescription();
+            $returnDesc = (string) $returnTag->getDescription();
             foreach ($returnTag->getTypes() as $type) {
                 $return[] = $type;
             }
@@ -332,7 +332,7 @@ abstract class AbstractFunction
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -350,7 +350,7 @@ abstract class AbstractFunction
      * @param string $key
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (isset($this->config[$key])) {
             return $this->config[$key];
@@ -366,7 +366,7 @@ abstract class AbstractFunction
      * @param mixed $value
      * @return void
      */
-    public function __set($key, $value): void
+    public function __set(string $key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -385,7 +385,7 @@ abstract class AbstractFunction
             return;
         }
 
-        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
@@ -409,12 +409,8 @@ abstract class AbstractFunction
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setDescription($string): void
+    public function setDescription(string $string): void
     {
-        if (! is_string($string)) {
-            throw new Exception\InvalidArgumentException('Invalid description');
-        }
-
         $this->description = $string;
     }
 

@@ -175,6 +175,6 @@ abstract class AbstractServer implements Server
      * @param  string $type
      * @return string
      */
-    abstract protected function _fixType($type): string;
+    abstract protected function _fixType(string $type): string;
     // @codingStandardsIgnoreEnd
 }

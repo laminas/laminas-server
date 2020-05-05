@@ -59,7 +59,7 @@ class ReflectionParameter
      * @param string $type Parameter type
      * @param string $description Parameter description
      */
-    public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
+    public function __construct(\ReflectionParameter $r, string $type = 'mixed', string $description = '')
     {
         $this->reflection = $r;
 
@@ -81,7 +81,7 @@ class ReflectionParameter
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -100,19 +100,8 @@ class ReflectionParameter
         return $this->type;
     }
 
-    /**
-     * Set parameter type
-     *
-     * @param string|null $type
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setType($type): void
+    public function setType(?string $type = null): void
     {
-        if (! is_string($type) && (null !== $type)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter type');
-        }
-
         $this->type = $type;
     }
 
@@ -126,28 +115,11 @@ class ReflectionParameter
         return $this->description;
     }
 
-    /**
-     * Set parameter description
-     *
-     * @param string|null $description
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setDescription($description): void
+    public function setDescription(?string $description = null): void
     {
-        if (! is_string($description) && (null !== $description)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter description');
-        }
-
         $this->description = $description;
     }
 
-    /**
-     * Set parameter position
-     *
-     * @param null|int $index
-     * @return void
-     */
     public function setPosition(?int $index = null): void
     {
         $this->position = $index;

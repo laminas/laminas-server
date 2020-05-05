@@ -30,14 +30,13 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param  bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
+     * @param  null|array $argv Optional arguments to be used during the method call
+     * @param null|string $namespace Optional namespace with which to prefix the
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
      * @return \Laminas\Server\Reflection\ReflectionClass
-     * @throws InvalidArgumentException
      */
-    public static function reflectClass($class, $argv = false, $namespace = ''): ReflectionClass
+    public static function reflectClass($class, ?array $argv = null, ?string $namespace = null): ReflectionClass
     {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
@@ -45,10 +44,6 @@ class Reflection
             $reflection = new \ReflectionClass($class);
         } else {
             throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
-        }
-
-        if ($argv && ! is_array($argv)) {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
         }
 
         return new ReflectionClass($reflection, $namespace, $argv);
@@ -63,25 +58,24 @@ class Reflection
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
      *
-     * @param string $function Function name
-     * @param  bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
+     * @param string|callable $function Function name
+     * @param  null|array $argv Optional arguments to be used during the method call
+     * @param null|string $namespace Optional namespace with which to prefix the
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
      * @return \Laminas\Server\Reflection\ReflectionFunction
      * @throws InvalidArgumentException
      */
-    public static function reflectFunction($function, $argv = false, $namespace = ''): ReflectionFunction
-    {
+    public static function reflectFunction(
+        $function,
+        ?array $argv = null,
+        ?string $namespace = null
+    ): ReflectionFunction {
         if (! is_string($function) || ! function_exists($function)) {
             throw new Reflection\Exception\InvalidArgumentException(sprintf(
                 'Invalid function "%s" passed to reflectFunction',
                 $function
             ));
-        }
-
-        if ($argv && ! is_array($argv)) {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectFunction');
         }
 
         return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);

@@ -59,9 +59,9 @@ class ReflectionClass
      *
      * @param PhpReflectionClass $reflection
      * @param string $namespace
-     * @param mixed $argv
+     * @param null|array $argv
      */
-    public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
+    public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, ?array $argv = null)
     {
         $this->reflection = $reflection;
         $this->name = $reflection->getName();
@@ -88,7 +88,7 @@ class ReflectionClass
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -106,7 +106,7 @@ class ReflectionClass
      * @param string $key
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (isset($this->config[$key])) {
             return $this->config[$key];
@@ -122,7 +122,7 @@ class ReflectionClass
      * @param mixed $value
      * @return void
      */
-    public function __set($key, $value): void
+    public function __set(string $key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -155,7 +155,7 @@ class ReflectionClass
      * @throws Exception\InvalidArgumentException
      * @return void
      */
-    public function setNamespace(?string $namespace): void
+    public function setNamespace(?string $namespace = null): void
     {
         if (empty($namespace)) {
             $this->namespace = '';

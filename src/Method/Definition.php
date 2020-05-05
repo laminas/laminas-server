@@ -47,12 +47,7 @@ class Definition
      */
     protected $prototypes = [];
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $options
-     */
-    public function __construct($options = null)
+    public function __construct(?array $options = null)
     {
         if ((null !== $options) && is_array($options)) {
             $this->setOptions($options);
@@ -82,9 +77,9 @@ class Definition
      * @param  string $name
      * @return $this
      */
-    public function setName($name): self
+    public function setName(string $name): self
     {
-        $this->name = (string) $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -187,9 +182,9 @@ class Definition
      * @param  string $methodHelp
      * @return $this
      */
-    public function setMethodHelp($methodHelp): self
+    public function setMethodHelp(string $methodHelp): self
     {
-        $this->methodHelp = (string) $methodHelp;
+        $this->methodHelp = $methodHelp;
         return $this;
     }
 
@@ -210,7 +205,7 @@ class Definition
      * @throws Server\Exception\InvalidArgumentException
      * @return $this
      */
-    public function setObject($object): self
+    public function setObject(object $object): self
     {
         if (! is_object($object) && (null !== $object)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(

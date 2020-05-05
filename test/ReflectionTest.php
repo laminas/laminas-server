@@ -33,13 +33,6 @@ class ReflectionTest extends TestCase
         $this->assertInstanceOf(ReflectionClass::class, $reflection);
     }
 
-    public function testReflectClassThrowsExceptionOnInvalidClass(): void
-    {
-        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid argv argument passed to reflectClass');
-        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, 'string');
-    }
-
     public function testReflectClassThrowsExceptionOnInvalidParameter(): void
     {
         $this->expectException(Reflection\Exception\InvalidArgumentException::class);
@@ -52,7 +45,7 @@ class ReflectionTest extends TestCase
      */
     public function testReflectClass2(): void
     {
-        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, false, 'zsr');
+        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, null, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
@@ -69,7 +62,7 @@ class ReflectionTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid function');
-        $reflection = Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, 'string');
+        Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, ['string']);
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidParam(): void
@@ -84,7 +77,7 @@ class ReflectionTest extends TestCase
      */
     public function testReflectFunction2(): void
     {
-        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 }

@@ -40,8 +40,12 @@ class ReflectionMethod extends AbstractFunction
      * @param string $namespace
      * @param array $argv
      */
-    public function __construct(ReflectionClass $class, \ReflectionMethod $r, $namespace = null, $argv = [])
-    {
+    public function __construct(
+        ReflectionClass $class,
+        \ReflectionMethod $r,
+        ?string $namespace = null,
+        ?array $argv = null
+    ) {
         $this->classReflection = $class;
         $this->reflection      = $r;
 
@@ -153,12 +157,12 @@ class ReflectionMethod extends AbstractFunction
     /**
      * Fetch recursive doc blocks from parent classes
      *
-     * @param \ReflectionClass $reflectionClass
+     * @param ReflectionClass $reflectionClass
      * @param string           $methodName
      *
      * @return null|array
      */
-    private function fetchRecursiveDocBlockFromParent($reflectionClass, $methodName): ?array
+    private function fetchRecursiveDocBlockFromParent(ReflectionClass $reflectionClass, string $methodName): ?array
     {
         $docComment = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
@@ -189,7 +193,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return bool
      */
-    private function isInherit($docComment): bool
+    private function isInherit(string $docComment): bool
     {
         $isInherit = strpos($docComment, self::INHERIT_TAG) !== false;
 
