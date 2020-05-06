@@ -14,11 +14,6 @@ use Laminas\Server\Method;
 use Laminas\Server\Method\Parameter;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for \Laminas\Server\Method\Prototype
- *
- * @group      Laminas_Server
- */
 class PrototypeTest extends TestCase
 {
     /** @var Method\Prototype */

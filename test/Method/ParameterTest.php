@@ -13,11 +13,6 @@ namespace LaminasTest\Server\Method;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for \Laminas\Server\Method\Parameter
- *
- * @group      Laminas_Server
- */
 class ParameterTest extends TestCase
 {
     /** @var Method\Parameter */

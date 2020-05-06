@@ -14,11 +14,6 @@ use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for \Laminas\Server\Method\Callback
- *
- * @group      Laminas_Server
- */
 class CallbackTest extends TestCase
 {
     /**

@@ -15,9 +15,6 @@ use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Server
- */
 class ReflectionClassTest extends TestCase
 {
     public function testConstructor(): void

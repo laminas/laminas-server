@@ -13,9 +13,6 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection\Node;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Server
- */
 class NodeTest extends TestCase
 {
     public function testConstructor(): void

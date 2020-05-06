@@ -16,9 +16,6 @@ use Laminas\Server\Reflection\Prototype;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
-/**
- * @group      Laminas_Server
- */
 class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor(): void
@@ -141,9 +138,6 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('string', $params[0]->getType());
     }
 
-    /**
-     * @group Laminas-6996
-     */
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');

@@ -13,9 +13,6 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionReturnValue;
 
-/**
- * @group      Laminas_Server
- */
 use PHPUnit\Framework\TestCase;
 
 class ReflectionReturnValueTest extends TestCase

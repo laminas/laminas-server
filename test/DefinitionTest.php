@@ -14,9 +14,6 @@ use Laminas\Server;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Server
- */
 class DefinitionTest extends TestCase
 {
     /** @var Server\Definition */

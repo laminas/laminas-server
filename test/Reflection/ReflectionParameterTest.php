@@ -15,9 +15,6 @@ use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 
-/**
- * @group      Laminas_Server
- */
 class ReflectionParameterTest extends TestCase
 {
     protected function getParameter(): \ReflectionParameter

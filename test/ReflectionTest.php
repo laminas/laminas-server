@@ -15,9 +15,6 @@ use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\ReflectionClass;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Server
- */
 class ReflectionTest extends TestCase
 {
     public function testReflectClass(): void
