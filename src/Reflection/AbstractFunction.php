@@ -126,7 +126,7 @@ abstract class AbstractFunction
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
      *
-     * @param \Laminas\Server\Reflection\Node $parent
+     * @param Node $parent
      * @param int $level
      * @return void
      */
