@@ -55,6 +55,10 @@ class Definition implements Countable, Iterator
             throw new Exception\InvalidArgumentException('Invalid method provided');
         }
 
+        if (is_numeric($name)) {
+            $name = null;
+        }
+
         if (null !== $name) {
             $method->setName($name);
         } else {

@@ -41,6 +41,25 @@ class DefinitionTest extends TestCase
         $this->assertSame($method, $this->definition->getMethod('foo'));
     }
 
+    public function testConstructorNumericKeyWillBeReplacedByMethodName(): void
+    {
+        $method = new Method\Definition(['name' => 'foo']);
+        $definition = new Server\Definition(['100' => $method]);
+
+        $this->assertCount(1, $definition);
+        $this->assertSame($method, $definition->getMethod('foo'));
+    }
+
+    public function testAddMethodNumericKeyWillBeReplacedByMethodName(): void
+    {
+        $method = new Method\Definition(['name' => 'foo']);
+        $definition = new Server\Definition();
+        $definition->addMethod($method, '100');
+
+        $this->assertCount(1, $definition);
+        $this->assertSame($method, $definition->getMethod('foo'));
+    }
+
     public function testDefinitionShouldAllowAddingMultipleMethods(): void
     {
         $method1 = new Method\Definition(['name' => 'foo']);
