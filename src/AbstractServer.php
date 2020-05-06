@@ -141,7 +141,7 @@ abstract class AbstractServer implements Server
         $callback = $invokable->getCallback();
         $type     = $callback->getType();
 
-        if ('function' == $type) {
+        if ('function' === $type) {
             $function = $callback->getFunction();
             return call_user_func_array($function, $params);
         }
@@ -149,7 +149,7 @@ abstract class AbstractServer implements Server
         $class  = $callback->getClass();
         $method = $callback->getMethod();
 
-        if ('static' == $type) {
+        if ('static' === $type) {
             return call_user_func_array([$class, $method], $params);
         }
 
