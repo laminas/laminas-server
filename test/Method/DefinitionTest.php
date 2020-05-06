@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\Method;
 
-use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 use stdClass;
