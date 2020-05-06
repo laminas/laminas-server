@@ -18,7 +18,7 @@ use Laminas\Server;
 class Definition
 {
     /**
-     * @var null|\Laminas\Server\Method\Callback
+     * @var null|Callback
      */
     protected $callback;
 
@@ -43,7 +43,7 @@ class Definition
     protected $object;
 
     /**
-     * @var array Array of \Laminas\Server\Method\Prototype objects
+     * @var Prototype[]
      */
     protected $prototypes = [];
 
@@ -96,7 +96,7 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|\Laminas\Server\Method\Callback $callback
+     * @param  array|Callback $callback
      * @throws Server\Exception\InvalidArgumentException
      * @return $this
      */
@@ -114,7 +114,7 @@ class Definition
     /**
      * Get method callback
      *
-     * @return \Laminas\Server\Method\Callback
+     * @return null|Callback
      */
     public function getCallback(): ?Callback
     {
@@ -124,7 +124,7 @@ class Definition
     /**
      * Add prototype to method definition
      *
-     * @param  array|\Laminas\Server\Method\Prototype $prototype
+     * @param  array|Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
      * @return $this
      */
@@ -142,7 +142,7 @@ class Definition
     /**
      * Add multiple prototypes at once
      *
-     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @param  Prototype[] $prototypes
      * @return $this
      */
     public function addPrototypes(array $prototypes): self
@@ -156,7 +156,7 @@ class Definition
     /**
      * Set all prototypes at once (overwrites)
      *
-     * @param  array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @param  Prototype[] $prototypes
      * @return $this
      */
     public function setPrototypes(array $prototypes): self
@@ -169,7 +169,7 @@ class Definition
     /**
      * Get all prototypes
      *
-     * @return array $prototypes Array of \Laminas\Server\Method\Prototype objects or arrays
+     * @return Prototype[] $prototypes
      */
     public function getPrototypes(): array
     {
