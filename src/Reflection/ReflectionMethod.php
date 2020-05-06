@@ -18,7 +18,7 @@ class ReflectionMethod extends AbstractFunction
     /**
      * Doc block inherit tag for search
      */
-    const INHERIT_TAG = '{@inheritdoc}';
+    public const INHERIT_TAG = '{@inheritdoc}';
 
     /**
      * Parent class name
