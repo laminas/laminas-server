@@ -38,7 +38,6 @@ class ReflectionMethod extends AbstractFunction
      * @param \ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
-     * @throws ReflectionException
      */
     public function __construct(
         ReflectionClass $class,
@@ -97,7 +96,6 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * {@inheritdoc}
-     * @throws ReflectionException
      */
     protected function reflect(): void
     {
@@ -113,7 +111,6 @@ class ReflectionMethod extends AbstractFunction
      * Fetch all doc comments for inherit values
      *
      * @return string
-     * @throws ReflectionException
      */
     private function fetchRecursiveDocComment(): string
     {
