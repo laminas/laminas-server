@@ -16,24 +16,10 @@ use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test case for \Laminas\Server\Reflection\ClassReflection
- *
  * @group      Laminas_Server
  */
 class ReflectionClassTest extends TestCase
 {
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - reflection:
-     * - namespace: Optional;
-     * - argv: Optional; has default;
-     *
-     * Returns: void
-     */
     public function testConstructor(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
@@ -50,17 +36,6 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
-    /**
-     * __call() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - method:
-     * - args:
-     *
-     * Returns: mixed
-     */
     public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
@@ -68,9 +43,6 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals(Reflection::class, $r->getName());
     }
 
-    /**
-     * test __get/set
-     */
     public function testGetSet(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
@@ -78,13 +50,6 @@ class ReflectionClassTest extends TestCase
         $this->assertTrue($r->system);
     }
 
-    /**
-     * getMethods() test
-     *
-     * Call as method call
-     *
-     * Returns: array
-     */
     public function testGetMethods(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
@@ -96,9 +61,6 @@ class ReflectionClassTest extends TestCase
         }
     }
 
-    /**
-     * namespace test
-     */
     public function testGetNamespace(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
@@ -107,13 +69,6 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
-    /**
-     * __wakeup() test
-     *
-     * Call as method call
-     *
-     * Returns: void
-     */
     public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));

@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use ReflectionParameter as PhpReflectionParameter;
+
 /**
  * Parameter Reflection
  *
@@ -18,24 +20,21 @@ namespace Laminas\Server\Reflection;
 class ReflectionParameter
 {
     /**
-     * @var \ReflectionParameter
+     * @var PhpReflectionParameter
      */
     protected $reflection;
 
     /**
-     * Parameter position
      * @var int
      */
     protected $position;
 
     /**
-     * Parameter type
      * @var string
      */
     protected $type;
 
     /**
-     * Parameter description
      * @var null|string
      */
     protected $description;
@@ -52,14 +51,7 @@ class ReflectionParameter
      */
     protected $functionName;
 
-    /**
-     * Constructor
-     *
-     * @param \ReflectionParameter $r
-     * @param string $type Parameter type
-     * @param string $description Parameter description
-     */
-    public function __construct(\ReflectionParameter $r, string $type = 'mixed', string $description = '')
+    public function __construct(PhpReflectionParameter $r, string $type = 'mixed', string $description = '')
     {
         $this->reflection = $r;
 
@@ -90,11 +82,6 @@ class ReflectionParameter
         throw new Exception\BadMethodCallException('Invalid reflection method');
     }
 
-    /**
-     * Retrieve parameter type
-     *
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
@@ -105,11 +92,6 @@ class ReflectionParameter
         $this->type = $type;
     }
 
-    /**
-     * Retrieve parameter description
-     *
-     * @return null|string
-     */
     public function getDescription(): ?string
     {
         return $this->description;
@@ -125,11 +107,6 @@ class ReflectionParameter
         $this->position = $index;
     }
 
-    /**
-     * Return parameter position
-     *
-     * @return null|int
-     */
     public function getPosition(): ?int
     {
         return $this->position;
@@ -145,6 +122,6 @@ class ReflectionParameter
 
     public function __wakeup(): void
     {
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+        $this->reflection = new PhpReflectionParameter($this->functionName, $this->name);
     }
 }

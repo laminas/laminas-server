@@ -14,6 +14,7 @@ use Laminas\Code\Reflection\DocBlock\Tag\ParamTag;
 use Laminas\Code\Reflection\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
+use ReflectionException;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
@@ -74,16 +75,8 @@ abstract class AbstractFunction
      */
     protected $namespace;
 
-    /**
-     * Prototypes
-     * @var array
-     */
     protected $prototypes = [];
 
-    /**
-     * Phpdoc comment
-     * @var string
-     */
     protected $docComment = '';
 
     protected $return;
@@ -392,11 +385,6 @@ abstract class AbstractFunction
         $this->namespace = $namespace;
     }
 
-    /**
-     * Return method's namespace
-     *
-     * @return null|string
-     */
     public function getNamespace(): ?string
     {
         return $this->namespace;
@@ -414,11 +402,6 @@ abstract class AbstractFunction
         $this->description = $string;
     }
 
-    /**
-     * Retrieve the description
-     *
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
@@ -435,11 +418,6 @@ abstract class AbstractFunction
         return $this->prototypes;
     }
 
-    /**
-     * Retrieve additional invocation arguments
-     *
-     * @return array
-     */
     public function getInvokeArguments(): array
     {
         return $this->argv;
@@ -471,6 +449,7 @@ abstract class AbstractFunction
      * reflection object on wakeup.
      *
      * @return void
+     * @throws ReflectionException
      */
     public function __wakeup(): void
     {

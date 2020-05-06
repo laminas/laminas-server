@@ -16,29 +16,20 @@ namespace Laminas\Server\Reflection;
 class Node
 {
     /**
-     * Node value
      * @var mixed
      */
     protected $value;
 
     /**
-     * Array of child nodes (if any)
-     * @var array
+     * @var Node[]
      */
     protected $children = [];
 
     /**
-     * Parent node (if any)
-     * @var \Laminas\Server\Reflection\Node
+     * @var null|Node
      */
     protected $parent;
 
-    /**
-     * Constructor
-     *
-     * @param mixed $value
-     * @param \Laminas\Server\Reflection\Node $parent Optional
-     */
     public function __construct($value, Node $parent = null)
     {
         $this->value = $value;
@@ -64,24 +55,11 @@ class Node
         }
     }
 
-    /**
-     * Create and attach a new child node
-     *
-     * @param mixed $value
-     * @access public
-     * @return $this New child node
-     */
     public function createChild($value): self
     {
         return new static($value, $this);
     }
 
-    /**
-     * Attach a child node
-     *
-     * @param \Laminas\Server\Reflection\Node $node
-     * @return void
-     */
     public function attachChild(Node $node): void
     {
         $this->children[] = $node;
@@ -94,49 +72,28 @@ class Node
     /**
      * Return an array of all child nodes
      *
-     * @return array
+     * @return Node[]
      */
     public function getChildren(): array
     {
         return $this->children;
     }
 
-    /**
-     * Does this node have children?
-     *
-     * @return bool
-     */
     public function hasChildren(): bool
     {
         return count($this->children) > 0;
     }
 
-    /**
-     * Return the parent node
-     *
-     * @return null|$this
-     */
     public function getParent(): ?Node
     {
         return $this->parent;
     }
 
-    /**
-     * Return the node's current value
-     *
-     * @return mixed
-     */
     public function getValue()
     {
         return $this->value;
     }
 
-    /**
-     * Set the node value
-     *
-     * @param mixed $value
-     * @return void
-     */
     public function setValue($value): void
     {
         $this->value = $value;

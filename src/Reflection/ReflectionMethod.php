@@ -10,9 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-/**
- * Method Reflection
- */
+use ReflectionException;
+
 class ReflectionMethod extends AbstractFunction
 {
     /**
@@ -28,7 +27,7 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Parent class reflection
-     * @var ReflectionClass|\ReflectionClass
+     * @var ReflectionClass
      */
     protected $classReflection;
 
@@ -39,6 +38,7 @@ class ReflectionMethod extends AbstractFunction
      * @param \ReflectionMethod $r
      * @param string $namespace
      * @param array $argv
+     * @throws ReflectionException
      */
     public function __construct(
         ReflectionClass $class,
@@ -71,11 +71,6 @@ class ReflectionMethod extends AbstractFunction
         $this->reflect();
     }
 
-    /**
-     * Return the reflection for the class that defines this method
-     *
-     * @return \Laminas\Server\Reflection\ReflectionClass
-     */
     public function getDeclaringClass(): ReflectionClass
     {
         return $this->classReflection;
@@ -88,6 +83,7 @@ class ReflectionMethod extends AbstractFunction
      * reflection object on wakeup.
      *
      * @return void
+     * @throws ReflectionException
      */
     public function __wakeup(): void
     {
@@ -101,6 +97,7 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * {@inheritdoc}
+     * @throws ReflectionException
      */
     protected function reflect(): void
     {
@@ -116,6 +113,7 @@ class ReflectionMethod extends AbstractFunction
      * Fetch all doc comments for inherit values
      *
      * @return string
+     * @throws ReflectionException
      */
     private function fetchRecursiveDocComment(): string
     {
@@ -127,7 +125,6 @@ class ReflectionMethod extends AbstractFunction
         if ($docCommentFetched) {
             $docCommentList = array_merge($docCommentList, $docCommentFetched);
         }
-
 
         // fetch doc blocks from interfaces
         $interfaceReflectionList = $this->classReflection->getInterfaces();
@@ -152,14 +149,6 @@ class ReflectionMethod extends AbstractFunction
         return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
-    /**
-     * Fetch recursive doc blocks from parent classes
-     *
-     * @param ReflectionClass $reflectionClass
-     * @param string           $methodName
-     *
-     * @return null|array
-     */
     private function fetchRecursiveDocBlockFromParent(ReflectionClass $reflectionClass, string $methodName): ?array
     {
         $docComment = [];
@@ -184,13 +173,6 @@ class ReflectionMethod extends AbstractFunction
         return $docComment;
     }
 
-    /**
-     * Return true if doc block inherit from parent or interface
-     *
-     * @param string $docComment
-     *
-     * @return bool
-     */
     private function isInherit(string $docComment): bool
     {
         return strpos($docComment, self::INHERIT_TAG) !== false;

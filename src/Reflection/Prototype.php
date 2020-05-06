@@ -43,31 +43,16 @@ class Prototype
         $this->params = $params;
     }
 
-    /**
-     * Retrieve return type
-     *
-     * @return string
-     */
     public function getReturnType(): string
     {
         return $this->return->getType();
     }
 
-    /**
-     * Retrieve the return value object
-     *
-     * @return \Laminas\Server\Reflection\ReflectionReturnValue
-     */
     public function getReturnValue(): ReflectionReturnValue
     {
         return $this->return;
     }
 
-    /**
-     * Retrieve method parameters
-     *
-     * @return ReflectionParameter[] Array of {@link \Laminas\Server\Reflection\ReflectionParameter}s
-     */
     public function getParameters(): array
     {
         return $this->params;

@@ -16,8 +16,6 @@ use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 
 /**
- * Test case for \Laminas\Server\Reflection\ReflectionParameter
- *
  * @group      Laminas_Server
  */
 class ReflectionParameterTest extends TestCase
@@ -29,18 +27,6 @@ class ReflectionParameterTest extends TestCase
         return $parameters[0];
     }
 
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - r:
-     * - type: Optional; has default;
-     * - description: Optional; has default;
-     *
-     * Returns: void
-     */
     public function testConstructor(): void
     {
         $parameter = $this->getParameter();
@@ -49,17 +35,6 @@ class ReflectionParameterTest extends TestCase
         $this->assertInstanceOf(ReflectionParameter::class, $reflection);
     }
 
-    /**
-     * __call() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - method:
-     * - args:
-     *
-     * Returns: mixed
-     */
     public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
@@ -69,9 +44,6 @@ class ReflectionParameterTest extends TestCase
         $this->assertIsBool($r->isOptional());
     }
 
-    /**
-     * get/setType() test
-     */
     public function testGetSetType(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
@@ -81,9 +53,6 @@ class ReflectionParameterTest extends TestCase
         $this->assertEquals('string', $r->getType());
     }
 
-    /**
-     * get/setDescription() test
-     */
     public function testGetDescription(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
@@ -93,9 +62,6 @@ class ReflectionParameterTest extends TestCase
         $this->assertEquals('parameter description', $r->getDescription());
     }
 
-    /**
-     * get/setPosition() test
-     */
     public function testSetPosition(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());

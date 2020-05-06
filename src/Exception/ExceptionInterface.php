@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Exception;
 
-/**
- * Laminas\Server exceptions
- */
 interface ExceptionInterface
 {
 }

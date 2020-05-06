@@ -14,38 +14,29 @@ use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionParameter;
-use Laminas\Server\Reflection\ReflectionReturnValue;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
- * Test case for \Laminas\Server\Reflection\Prototype
- *
  * @group      Laminas_Server
  */
 class PrototypeTest extends TestCase
 {
     /**
-     * \Laminas\Server\Reflection\Prototype object
-     * @var \Laminas\Server\Reflection\Prototype
+     * @var Prototype
      */
     protected $r;
 
     /**
-     * Array of ReflectionParameters
-     * @var array
+     * @var ReflectionParameter[]
      */
     protected $parametersRaw;
 
     /**
-     * Array of \Laminas\Server\Reflection\Parameters
-     * @var array
+     * @var ReflectionParameter[]
      */
     protected $parameters;
 
-    /**
-     * Setup environment
-     */
     protected function setUp(): void
     {
         $class = new ReflectionClass(Reflection::class);
@@ -59,12 +50,9 @@ class PrototypeTest extends TestCase
         }
         $this->parameters = $fParameters;
 
-        $this->r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
+        $this->r = new Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
     }
 
-    /**
-     * Teardown environment
-     */
     protected function tearDown(): void
     {
         unset($this->r);
@@ -72,17 +60,6 @@ class PrototypeTest extends TestCase
         unset($this->parametersRaw);
     }
 
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - return:
-     * - params: Optional;
-     *
-     * Returns: void
-     */
     public function testConstructWorks(): void
     {
         $this->assertInstanceOf(Prototype::class, $this->r);
@@ -92,31 +69,17 @@ class PrototypeTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('One or more params are invalid');
-        $r1 = new Reflection\Prototype($this->r->getReturnValue(), $this->parametersRaw);
+        $r1 = new Prototype($this->r->getReturnValue(), $this->parametersRaw);
     }
 
-    /**
-     * getReturnType() test
-     *
-     * Call as method call
-     *
-     * Returns: string
-     */
     public function testGetReturnType(): void
     {
         $this->assertEquals('void', $this->r->getReturnType());
     }
 
-    /**
-     * getParameters() test
-     *
-     * Call as method call
-     *
-     * Returns: array
-     */
     public function testGetParameters(): void
     {
-        $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
+        $r = new Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
 
         $this->assertIsArray($p);

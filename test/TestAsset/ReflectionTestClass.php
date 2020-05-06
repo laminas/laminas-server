@@ -10,9 +10,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\TestAsset;
 
-/**
- * \LaminasTest\Server\TestAsset\ReflectionTestClass -- test class reflection
- */
 class ReflectionTestClass
 {
     /**

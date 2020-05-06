@@ -14,26 +14,18 @@ use Countable;
 use Iterator;
 use Laminas\Server\Exception\InvalidArgumentException;
 
-/**
- * Server methods metadata
- */
 class Definition implements Countable, Iterator
 {
     /**
-     * @var array Array of \Laminas\Server\Method\Definition objects
+     * @var Method\Definition[]
      */
     protected $methods = [];
 
     /**
-     * @var bool Whether or not overwriting existing methods is allowed
+     * @var bool
      */
     protected $overwriteExistingMethods = false;
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $methods
-     */
     public function __construct(?array $methods = null)
     {
         if (is_array($methods)) {
@@ -41,22 +33,16 @@ class Definition implements Countable, Iterator
         }
     }
 
-    /**
-     * Set flag indicating whether or not overwriting existing methods is allowed
-     *
-     * @param mixed $flag
-     * @return $this
-     */
-    public function setOverwriteExistingMethods($flag): self
+    public function setOverwriteExistingMethods(bool $flag): self
     {
-        $this->overwriteExistingMethods = (bool) $flag;
+        $this->overwriteExistingMethods = $flag;
         return $this;
     }
 
     /**
      * Add method to definition
      *
-     * @param  array|\Laminas\Server\Method\Definition $method
+     * @param  array|Method\Definition $method
      * @param  null|string $name
      * @return $this
      * @throws InvalidArgumentException if duplicate or invalid method provided
@@ -85,12 +71,6 @@ class Definition implements Countable, Iterator
         return $this;
     }
 
-    /**
-     * Add multiple methods
-     *
-     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
-     * @return $this
-     */
     public function addMethods(array $methods): self
     {
         foreach ($methods as $key => $method) {
@@ -105,7 +85,7 @@ class Definition implements Countable, Iterator
     /**
      * Set all methods at once (overwrite)
      *
-     * @param  array $methods Array of \Laminas\Server\Method\Definition objects or arrays
+     * @param  Method\Definition[]
      * @return $this
      */
     public function setMethods(array $methods): self
@@ -115,12 +95,6 @@ class Definition implements Countable, Iterator
         return $this;
     }
 
-    /**
-     * Does the definition have the given method?
-     *
-     * @param  string $method
-     * @return bool
-     */
     public function hasMethod(string $method): bool
     {
         return array_key_exists($method, $this->methods);
@@ -130,7 +104,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return false|\Laminas\Server\Method\Definition
+     * @return false|Method\Definition
      */
     public function getMethod(string $method)
     {
@@ -140,22 +114,11 @@ class Definition implements Countable, Iterator
         return false;
     }
 
-    /**
-     * Get all method definitions
-     *
-     * @return array Array of \Laminas\Server\Method\Definition objects
-     */
     public function getMethods(): array
     {
         return $this->methods;
     }
 
-    /**
-     * Remove a method definition
-     *
-     * @param  string $method
-     * @return $this
-     */
     public function removeMethod(string $method): self
     {
         if ($this->hasMethod($method)) {
@@ -164,22 +127,12 @@ class Definition implements Countable, Iterator
         return $this;
     }
 
-    /**
-     * Clear all method definitions
-     *
-     * @return $this
-     */
     public function clearMethods(): self
     {
         $this->methods = [];
         return $this;
     }
 
-    /**
-     * Cast definition to an array
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $methods = [];
@@ -189,11 +142,6 @@ class Definition implements Countable, Iterator
         return $methods;
     }
 
-    /**
-     * Countable: count of methods
-     *
-     * @return int
-     */
     public function count(): int
     {
         return count($this->methods);
@@ -229,21 +177,11 @@ class Definition implements Countable, Iterator
         return next($this->methods);
     }
 
-    /**
-     * Iterator: return to first method
-     *
-     * @return void
-     */
     public function rewind(): void
     {
         reset($this->methods);
     }
 
-    /**
-     * Iterator: is the current index valid?
-     *
-     * @return bool
-     */
     public function valid(): bool
     {
         return (bool) $this->current();

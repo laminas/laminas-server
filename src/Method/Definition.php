@@ -12,9 +12,6 @@ namespace Laminas\Server\Method;
 
 use Laminas\Server;
 
-/**
- * Method definition metadata
- */
 class Definition
 {
     /**
@@ -54,12 +51,6 @@ class Definition
         }
     }
 
-    /**
-     * Set object state from options
-     *
-     * @param  array $options
-     * @return $this
-     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -71,23 +62,12 @@ class Definition
         return $this;
     }
 
-    /**
-     * Set method name
-     *
-     * @param  string $name
-     * @return $this
-     */
     public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * Get method name
-     *
-     * @return string
-     */
     public function getName(): ?string
     {
         return $this->name;
@@ -111,11 +91,6 @@ class Definition
         return $this;
     }
 
-    /**
-     * Get method callback
-     *
-     * @return null|Callback
-     */
     public function getCallback(): ?Callback
     {
         return $this->callback;
@@ -176,23 +151,12 @@ class Definition
         return $this->prototypes;
     }
 
-    /**
-     * Set method help
-     *
-     * @param  string $methodHelp
-     * @return $this
-     */
     public function setMethodHelp(string $methodHelp): self
     {
         $this->methodHelp = $methodHelp;
         return $this;
     }
 
-    /**
-     * Get method help
-     *
-     * @return string
-     */
     public function getMethodHelp(): string
     {
         return $this->methodHelp;
@@ -217,43 +181,22 @@ class Definition
         return $this;
     }
 
-    /**
-     * Get object to use with method calls
-     *
-     * @return null|object
-     */
     public function getObject(): ?object
     {
         return $this->object;
     }
 
-    /**
-     * Set invoke arguments
-     *
-     * @param  array $invokeArguments
-     * @return $this
-     */
     public function setInvokeArguments(array $invokeArguments): self
     {
         $this->invokeArguments = $invokeArguments;
         return $this;
     }
 
-    /**
-     * Retrieve invoke arguments
-     *
-     * @return array
-     */
     public function getInvokeArguments(): array
     {
         return $this->invokeArguments;
     }
 
-    /**
-     * Serialize to array
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $prototypes = $this->getPrototypes();

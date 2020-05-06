@@ -13,6 +13,7 @@ namespace Laminas\Server;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionFunction;
+use ReflectionException;
 use ReflectionObject;
 
 /**
@@ -30,11 +31,12 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param  null|array $argv Optional arguments to be used during the method call
+     * @param null|array $argv Optional arguments to be used during the method call
      * @param null|string $namespace Optional namespace with which to prefix the
      * method name (used for the signature key). Primarily to avoid collisions,
      * also for XmlRpc namespacing
-     * @return \Laminas\Server\Reflection\ReflectionClass
+     * @return ReflectionClass
+     * @throws ReflectionException
      */
     public static function reflectClass($class, ?array $argv = null, ?string $namespace = null): ReflectionClass
     {
@@ -63,8 +65,8 @@ class Reflection
      * @param null|string $namespace Optional namespace with which to prefix the
      * function name (used for the signature key). Primarily to avoid
      * collisions, also for XmlRpc namespacing
-     * @return \Laminas\Server\Reflection\ReflectionFunction
-     * @throws InvalidArgumentException
+     * @return ReflectionFunction
+     * @throws InvalidArgumentException|ReflectionException
      */
     public static function reflectFunction(
         $function,

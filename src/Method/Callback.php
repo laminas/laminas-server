@@ -12,33 +12,34 @@ namespace Laminas\Server\Method;
 
 use Laminas\Server;
 
-/**
- * Method callback metadata
- */
 class Callback
 {
     /**
-     * @var string Class name for class method callback
+     * @var string
      */
     protected $class;
 
     /**
-     * @var string|callable Function name or callable for function callback
+     * Function name or callable for function callback
+     *
+     * @var string|callable
      */
     protected $function;
 
     /**
-     * @var string Method name for class method callback
+     * @var string
      */
     protected $method;
 
     /**
-     * @var null|string Callback type
+     * @var null|string
      */
     protected $type;
 
     /**
-     * @var array Valid callback types
+     * Valid callback types
+     *
+     * @var array
      */
     protected $types = ['function', 'static', 'instance'];
 
@@ -49,12 +50,6 @@ class Callback
         }
     }
 
-    /**
-     * Set object state from array of options
-     *
-     * @param  array $options
-     * @return $this
-     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -81,11 +76,6 @@ class Callback
         return $this;
     }
 
-    /**
-     * Get callback class
-     *
-     * @return string|null
-     */
     public function getClass(): ?string
     {
         return $this->class;
@@ -114,23 +104,12 @@ class Callback
         return $this->function;
     }
 
-    /**
-     * Set callback class method
-     *
-     * @param  string $method
-     * @return $this
-     */
     public function setMethod(string $method): self
     {
         $this->method = $method;
         return $this;
     }
 
-    /**
-     * Get callback class  method
-     *
-     * @return null|string
-     */
     public function getMethod(): ?string
     {
         return $this->method;
@@ -156,21 +135,11 @@ class Callback
         return $this;
     }
 
-    /**
-     * Get callback type
-     *
-     * @return string
-     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * Cast callback to array
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         $type = $this->getType();

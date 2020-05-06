@@ -18,34 +18,21 @@ namespace Laminas\Server\Reflection;
 class ReflectionReturnValue
 {
     /**
-     * Return value type
      * @var string
      */
     protected $type;
 
     /**
-     * Return value description
      * @var string
      */
     protected $description;
 
-    /**
-     * Constructor
-     *
-     * @param string $type Return value type
-     * @param string $description Return value type
-     */
     public function __construct(string $type = 'mixed', string $description = '')
     {
         $this->setType($type);
         $this->setDescription($description);
     }
 
-    /**
-     * Retrieve parameter type
-     *
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
@@ -56,11 +43,6 @@ class ReflectionReturnValue
         $this->type = $type;
     }
 
-    /**
-     * Retrieve parameter description
-     *
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;

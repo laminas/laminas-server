@@ -24,25 +24,9 @@ class PrototypeTest extends TestCase
     /** @var Method\Prototype */
     private $prototype;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->prototype = new Method\Prototype();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
     }
 
     public function testReturnTypeShouldBeVoidByDefault(): void

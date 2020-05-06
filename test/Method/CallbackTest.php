@@ -26,12 +26,6 @@ class CallbackTest extends TestCase
      */
     private $callback;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->callback = new Method\Callback();

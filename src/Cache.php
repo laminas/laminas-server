@@ -10,15 +10,13 @@ declare(strict_types=1);
 
 namespace Laminas\Server;
 
+use ErrorException;
 use Laminas\Stdlib\ErrorHandler;
 
-/**
- * \Laminas\Server\Cache: cache server definitions
- */
 class Cache
 {
     /**
-     * @var array Methods to skip when caching server
+     * @var string[]
      */
     protected static $skipMethods = [];
 
@@ -31,9 +29,10 @@ class Cache
      * Returns false on any error (typically, inability to write to file), true
      * on success.
      *
-     * @param  string $filename
-     * @param  \Laminas\Server\Server $server
+     * @param string $filename
+     * @param Server $server
      * @return bool
+     * @throws ErrorException
      */
     public static function save(string $filename, Server $server): bool
     {
@@ -80,9 +79,10 @@ class Cache
      * echo $response;
      * </code>
      *
-     * @param  string $filename
-     * @param  \Laminas\Server\Server $server
+     * @param string $filename
+     * @param Server $server
      * @return bool
+     * @throws ErrorException
      */
     public static function get(string $filename, Server $server): bool
     {
@@ -109,12 +109,6 @@ class Cache
         return true;
     }
 
-    /**
-     * Remove a cache file
-     *
-     * @param  string $filename
-     * @return bool
-     */
     public static function delete(string $filename): bool
     {
         if (file_exists($filename)) {

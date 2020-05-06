@@ -12,9 +12,6 @@ namespace Laminas\Server\Reflection\Exception;
 
 use Laminas\Server\Exception\ExceptionInterface as Exception;
 
-/**
- * Laminas\Server\Reflection exceptions
- */
 interface ExceptionInterface extends Exception
 {
 }

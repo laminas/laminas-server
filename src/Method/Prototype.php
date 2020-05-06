@@ -16,17 +16,19 @@ namespace Laminas\Server\Method;
 class Prototype
 {
     /**
-     * @var string Return type
+     * @var string
      */
     protected $returnType = 'void';
 
     /**
-     * @var array Map parameter names to parameter index
+     * Map parameter names to parameter index
+     *
+     * @var array
      */
     protected $parameterNameMap = [];
 
     /**
-     * @var array Method parameters
+     * @var array
      */
     protected $parameters = [];
 
@@ -43,11 +45,6 @@ class Prototype
         return $this;
     }
 
-    /**
-     * Retrieve return type
-     *
-     * @return string
-     */
     public function getReturnType(): string
     {
         return $this->returnType;
@@ -75,12 +72,6 @@ class Prototype
         return $this;
     }
 
-    /**
-     * Add parameters
-     *
-     * @param  array $parameters
-     * @return $this
-     */
     public function addParameters(array $parameters): self
     {
         foreach ($parameters as $parameter) {
@@ -89,12 +80,6 @@ class Prototype
         return $this;
     }
 
-    /**
-     * Set parameters
-     *
-     * @param  array $parameters
-     * @return $this
-     */
     public function setParameters(array $parameters): self
     {
         $this->parameters       = [];
@@ -117,11 +102,6 @@ class Prototype
         return $types;
     }
 
-    /**
-     * Get parameter objects
-     *
-     * @return array
-     */
     public function getParameterObjects(): array
     {
         return $this->parameters;
@@ -131,7 +111,7 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|\Laminas\Server\Method\Parameter
+     * @return null|Parameter
      */
     public function getParameter($index): ?Parameter
     {
@@ -146,12 +126,6 @@ class Prototype
         }
     }
 
-    /**
-     * Set object state from array
-     *
-     * @param  array $options
-     * @return $this
-     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -163,11 +137,6 @@ class Prototype
         return $this;
     }
 
-    /**
-     * Serialize to array
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         return [

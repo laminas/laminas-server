@@ -11,14 +11,12 @@ declare(strict_types=1);
 namespace Laminas\Server;
 
 use ReflectionClass;
+use ReflectionException;
 
-/**
- * Abstract Server implementation
- */
 abstract class AbstractServer implements Server
 {
     /**
-     * @var bool Flag; whether or not overwriting existing methods is allowed
+     * @var bool
      */
     protected $overwriteExistingMethods = false;
 
@@ -27,25 +25,12 @@ abstract class AbstractServer implements Server
      */
     protected $table;
 
-    /**
-     * Constructor
-     *
-     * Setup server description
-     *
-     */
     public function __construct()
     {
         $this->table = new Definition();
         $this->table->setOverwriteExistingMethods($this->overwriteExistingMethods);
     }
 
-    /**
-     * Returns a list of registered methods
-     *
-     * Returns an array of method definitions.
-     *
-     * @return Definition
-     */
     public function getFunctions(): Definition
     {
         return $this->table;
@@ -128,11 +113,12 @@ abstract class AbstractServer implements Server
     /**
      * Dispatch method
      *
+     * @param Method\Definition $invokable
+     * @param array $params
+     * @return mixed
+     * @throws ReflectionException
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
      *     prefix in 3.0.
-     * @param  Method\Definition $invokable
-     * @param  array $params
-     * @return mixed
      */
     // @codingStandardsIgnoreStart
     protected function _dispatch(Method\Definition $invokable, array $params)

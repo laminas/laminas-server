@@ -16,36 +16,26 @@ namespace Laminas\Server\Method;
 class Parameter
 {
     /**
-     * Default parameter value
-     *
      * @var mixed
      */
     protected $defaultValue;
 
     /**
-     * Parameter description
-     *
      * @var string
      */
     protected $description = '';
 
     /**
-     * Parameter variable name
-     *
      * @var null|string
      */
     protected $name;
 
     /**
-     * Is parameter optional?
-     *
      * @var bool
      */
     protected $optional = false;
 
     /**
-     * Parameter type
-     *
      * @var string
      */
     protected $type = 'mixed';
@@ -57,12 +47,6 @@ class Parameter
         }
     }
 
-    /**
-     * Set object state from array of options
-     *
-     * @param  array $options
-     * @return $this
-     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -96,99 +80,50 @@ class Parameter
         return $this->defaultValue;
     }
 
-    /**
-     * Set description
-     *
-     * @param  string $description
-     * @return $this
-     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
     }
 
-    /**
-     * Retrieve description
-     *
-     * @return string
-     */
     public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Set name
-     *
-     * @param  string $name
-     * @return $this
-     */
     public function setName(?string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    /**
-     * Retrieve name
-     *
-     * @return string
-     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set optional flag
-     *
-     * @param  bool $flag
-     * @return $this
-     */
     public function setOptional(bool $flag): self
     {
         $this->optional = $flag;
         return $this;
     }
 
-    /**
-     * Is the parameter optional?
-     *
-     * @return bool
-     */
     public function isOptional(): bool
     {
         return $this->optional;
     }
 
-    /**
-     * Set parameter type
-     *
-     * @param  string $type
-     * @return $this
-     */
     public function setType(string $type): self
     {
         $this->type = $type;
         return $this;
     }
 
-    /**
-     * Retrieve parameter type
-     *
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Cast to array
-     *
-     * @return array
-     */
     public function toArray(): array
     {
         return [

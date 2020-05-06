@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Laminas\Server\Reflection;
 
 use ReflectionClass as PhpReflectionClass;
+use ReflectionException;
 
 /**
  * Class/Object reflection
@@ -28,19 +29,16 @@ class ReflectionClass
     protected $config = [];
 
     /**
-     * Array of {@link \Laminas\Server\Reflection\Method}s
-     * @var array
+     * @var ReflectionMethod[]
      */
     protected $methods = [];
 
     /**
-     * Namespace
      * @var null|string
      */
     protected $namespace;
 
     /**
-     * ReflectionClass object
      * @var PhpReflectionClass
      */
     protected $reflection;
@@ -127,22 +125,11 @@ class ReflectionClass
         $this->config[$key] = $value;
     }
 
-    /**
-     * Return array of dispatchable {@link \Laminas\Server\Reflection\ReflectionMethod}s.
-     *
-     * @access public
-     * @return array
-     */
     public function getMethods(): array
     {
         return $this->methods;
     }
 
-    /**
-     * Get namespace for this class
-     *
-     * @return null|string
-     */
     public function getNamespace(): ?string
     {
         return $this->namespace;
@@ -158,7 +145,7 @@ class ReflectionClass
     public function setNamespace(?string $namespace = null): void
     {
         if (empty($namespace)) {
-            $this->namespace = '';
+            $this->namespace = null;
             return;
         }
 
@@ -176,6 +163,7 @@ class ReflectionClass
      * reflection object on wakeup.
      *
      * @return void
+     * @throws ReflectionException
      */
     public function __wakeup(): void
     {

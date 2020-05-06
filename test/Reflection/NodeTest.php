@@ -14,15 +14,10 @@ use Laminas\Server\Reflection\Node;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test case for \Laminas\Server\Node
- *
  * @group      Laminas_Server
  */
 class NodeTest extends TestCase
 {
-    /**
-     * __construct() test
-     */
     public function testConstructor(): void
     {
         $node = new Node('string');
@@ -43,9 +38,6 @@ class NodeTest extends TestCase
         $this->assertEquals($child, $children[0]);
     }
 
-    /**
-     * setParent() test
-     */
     public function testSetParent(): void
     {
         $parent = new Node('string');
@@ -56,9 +48,6 @@ class NodeTest extends TestCase
         $this->assertEquals($parent, $child->getParent());
     }
 
-    /**
-     * createChild() test
-     */
     public function testCreateChild(): void
     {
         $parent = new Node('string');
@@ -69,9 +58,6 @@ class NodeTest extends TestCase
         $this->assertEquals($child, $children[0]);
     }
 
-    /**
-     * attachChild() test
-     */
     public function testAttachChild(): void
     {
         $parent = new Node('string');
@@ -83,9 +69,6 @@ class NodeTest extends TestCase
         $this->assertEquals($child, $children[0]);
     }
 
-    /**
-     * getChildren() test
-     */
     public function testGetChildren(): void
     {
         $parent = new Node('string');
@@ -101,9 +84,6 @@ class NodeTest extends TestCase
         $this->assertEquals($child, $children[0]);
     }
 
-    /**
-     * hasChildren() test
-     */
     public function testHasChildren(): void
     {
         $parent = new Node('string');
@@ -113,9 +93,6 @@ class NodeTest extends TestCase
         $this->assertTrue($parent->hasChildren());
     }
 
-    /**
-     * getParent() test
-     */
     public function testGetParent(): void
     {
         $parent = new Node('string');
@@ -125,18 +102,12 @@ class NodeTest extends TestCase
         $this->assertEquals($parent, $child->getParent());
     }
 
-    /**
-     * getValue() test
-     */
     public function testGetValue(): void
     {
         $parent = new Node('string');
         $this->assertEquals('string', $parent->getValue());
     }
 
-    /**
-     * setValue() test
-     */
     public function testSetValue(): void
     {
         $parent = new Node('string');
@@ -145,9 +116,6 @@ class NodeTest extends TestCase
         $this->assertEquals('array', $parent->getValue());
     }
 
-    /**
-     * getEndPoints() test
-     */
     public function testGetEndPoints(): void
     {
         $root = new Node('root');

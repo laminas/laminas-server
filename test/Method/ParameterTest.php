@@ -23,25 +23,9 @@ class ParameterTest extends TestCase
     /** @var Method\Parameter */
     private $parameter;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
     protected function setUp(): void
     {
         $this->parameter = new Method\Parameter();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
     }
 
     public function testDefaultValueShouldBeNullByDefault(): void
