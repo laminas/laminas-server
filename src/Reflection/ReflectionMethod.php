@@ -149,9 +149,7 @@ class ReflectionMethod extends AbstractFunction
             $docCommentList
         );
 
-        $docComment = '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
-
-        return $docComment;
+        return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
     /**
@@ -195,8 +193,6 @@ class ReflectionMethod extends AbstractFunction
      */
     private function isInherit(string $docComment): bool
     {
-        $isInherit = strpos($docComment, self::INHERIT_TAG) !== false;
-
-        return $isInherit;
+        return strpos($docComment, self::INHERIT_TAG) !== false;
     }
 }
