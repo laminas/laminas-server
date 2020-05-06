@@ -108,18 +108,6 @@ class PrototypeTest extends TestCase
     }
 
     /**
-     * getReturnValue() test
-     *
-     * Call as method call
-     *
-     * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
-     */
-    public function testGetReturnValue(): void
-    {
-        $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
-    }
-
-    /**
      * getParameters() test
      *
      * Call as method call

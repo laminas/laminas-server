@@ -66,7 +66,6 @@ class ReflectionMethodTest extends TestCase
 
         $class = $r->getDeclaringClass();
 
-        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionClass::class, $class);
         $this->assertEquals($this->class, $class);
     }
 

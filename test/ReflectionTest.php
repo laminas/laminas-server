@@ -49,15 +49,6 @@ class ReflectionTest extends TestCase
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
-    /**
-     * reflectFunction() test
-     */
-    public function testReflectFunction(): void
-    {
-        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction');
-        $this->assertInstanceOf(ReflectionFunction::class, $reflection);
-    }
-
     public function testReflectFunctionThrowsExceptionOnInvalidFunction(): void
     {
         $this->expectException(InvalidArgumentException::class);

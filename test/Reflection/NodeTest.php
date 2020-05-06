@@ -64,7 +64,6 @@ class NodeTest extends TestCase
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
         $this->assertEquals($child, $children[0]);
