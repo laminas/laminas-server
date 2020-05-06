@@ -102,7 +102,7 @@ class ReflectionMethod extends AbstractFunction
     protected function reflect(): void
     {
         $docComment = $this->reflection->getDocComment();
-        if (strpos($docComment, self::INHERIT_TAG) !== false) {
+        if (false !== $docComment && strpos($docComment, self::INHERIT_TAG) !== false) {
             $this->docComment = $this->fetchRecursiveDocComment();
         }
 
