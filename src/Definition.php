@@ -108,7 +108,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return false|Method\Definition
+     * @return bool|Method\Definition
      */
     public function getMethod(string $method)
     {
@@ -154,7 +154,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: current item
      *
-     * @return false|Method\Definition
+     * @return bool|Method\Definition
      */
     public function current()
     {
@@ -174,7 +174,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: advance to next method
      *
-     * @return false|Method\Definition
+     * @return bool|Method\Definition
      */
     public function next()
     {
