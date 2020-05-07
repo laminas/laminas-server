@@ -24,8 +24,6 @@ class Prototype
     private $return;
 
     /**
-     * Constructor
-     *
      * @param ReflectionReturnValue $return
      * @param ReflectionParameter[] $params
      * @throws Exception\InvalidArgumentException

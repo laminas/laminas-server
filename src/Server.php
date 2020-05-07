@@ -83,9 +83,6 @@ interface Server
      * Load server definition
      *
      * Used for persistence; loads a construct as returned by {@link getFunctions()}.
-     *
-     * @param  array $definition
-     * @return void
      */
     public function loadFunctions(array $definition): void;
 
@@ -93,8 +90,6 @@ interface Server
      * Set server persistence
      *
      * @todo Determine how to implement this
-     * @param  int $mode
-     * @return void
      */
     public function setPersistence(int $mode): void;
 
@@ -102,16 +97,11 @@ interface Server
      * Sets auto-response flag for the server.
      *
      * To unify all servers, default behavior should be to auto-emit response.
-     *
-     * @param  bool $flag
-     * @return $this
      */
     public function setReturnResponse(bool $flag = true): self;
 
     /**
      * Returns auto-response flag of the server.
-     *
-     * @return bool $flag Current status.
      */
     public function getReturnResponse(): bool;
 

@@ -31,14 +31,6 @@ class ReflectionMethod extends AbstractFunction
      */
     protected $classReflection;
 
-    /**
-     * Constructor
-     *
-     * @param ReflectionClass $class
-     * @param \ReflectionMethod $r
-     * @param string $namespace
-     * @param array $argv
-     */
     public function __construct(
         ReflectionClass $class,
         \ReflectionMethod $r,
@@ -81,7 +73,6 @@ class ReflectionMethod extends AbstractFunction
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
      *
-     * @return void
      * @throws ReflectionException
      */
     public function __wakeup(): void
@@ -94,9 +85,6 @@ class ReflectionMethod extends AbstractFunction
         $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected function reflect(): void
     {
         $docComment = $this->reflection->getDocComment();
@@ -109,8 +97,6 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Fetch all doc comments for inherit values
-     *
-     * @return string
      */
     private function fetchRecursiveDocComment(): string
     {

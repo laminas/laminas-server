@@ -29,9 +29,6 @@ class Cache
      * Returns false on any error (typically, inability to write to file), true
      * on success.
      *
-     * @param string $filename
-     * @param Server $server
-     * @return bool
      * @throws ErrorException
      */
     public static function save(string $filename, Server $server): bool
@@ -79,9 +76,6 @@ class Cache
      * echo $response;
      * </code>
      *
-     * @param string $filename
-     * @param Server $server
-     * @return bool
      * @throws ErrorException
      */
     public static function get(string $filename, Server $server): bool

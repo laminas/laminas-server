@@ -88,9 +88,6 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionFunctionAbstract $r
-     * @param null|string $namespace
-     * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
@@ -125,10 +122,6 @@ abstract class AbstractFunction
      * Recursive method to build the signature node tree. Increments through
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
-     *
-     * @param Node $parent
-     * @param int $level
-     * @return void
      */
     protected function addTree(Node $parent, int $level = 0): void
     {
@@ -150,8 +143,6 @@ abstract class AbstractFunction
      * Builds a signature tree starting at the return values and descending
      * through each method argument. Returns an array of
      * {@link \Laminas\Server\Reflection\Node}s.
-     *
-     * @return array
      */
     protected function buildTree(): array
     {
@@ -238,7 +229,6 @@ abstract class AbstractFunction
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
      * @throws Exception\RuntimeException
-     * @return void
      */
     protected function reflect(): void
     {
@@ -367,9 +357,7 @@ abstract class AbstractFunction
     /**
      * Set method's namespace
      *
-     * @param null|string $namespace
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
     public function setNamespace(?string $namespace = null): void
     {
@@ -393,9 +381,7 @@ abstract class AbstractFunction
     /**
      * Set the description
      *
-     * @param string $string
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
     public function setDescription(string $string): void
     {
@@ -448,7 +434,6 @@ abstract class AbstractFunction
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
      *
-     * @return void
      * @throws ReflectionException
      */
     public function __wakeup(): void

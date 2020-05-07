@@ -118,8 +118,6 @@ class Callback
     /**
      * Set callback type
      *
-     * @param  string $type
-     * @return $this
      * @throws Server\Exception\InvalidArgumentException
      */
     public function setType(string $type): self

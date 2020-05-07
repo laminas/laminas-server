@@ -40,8 +40,6 @@ abstract class AbstractServer implements Server
      * Build callback for method signature
      *
      * @deprecated Since 2.7.0; method will have private visibility starting in 3.0.
-     * @param  Reflection\AbstractFunction $reflection
-     * @return Method\Callback
      */
     // @codingStandardsIgnoreStart
     protected function _buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
@@ -113,8 +111,6 @@ abstract class AbstractServer implements Server
     /**
      * Dispatch method
      *
-     * @param Method\Definition $invokable
-     * @param array $params
      * @return mixed
      * @throws ReflectionException
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
@@ -158,8 +154,6 @@ abstract class AbstractServer implements Server
      *
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
      *     prefix in 3.0.
-     * @param  string $type
-     * @return string
      */
     abstract protected function _fixType(string $type): string;
     // @codingStandardsIgnoreEnd

@@ -54,10 +54,6 @@ class ReflectionClass
      *
      * Create array of dispatchable methods, each a
      * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
-     *
-     * @param PhpReflectionClass $reflection
-     * @param string $namespace
-     * @param null|array $argv
      */
     public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, ?array $argv = null)
     {
@@ -138,9 +134,7 @@ class ReflectionClass
     /**
      * Set namespace for this class
      *
-     * @param null|string $namespace
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
     public function setNamespace(?string $namespace = null): void
     {
@@ -162,7 +156,6 @@ class ReflectionClass
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
      *
-     * @return void
      * @throws ReflectionException
      */
     public function __wakeup(): void
