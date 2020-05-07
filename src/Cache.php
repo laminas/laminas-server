@@ -36,7 +36,7 @@ class Cache
      */
     public static function save(string $filename, Server $server): bool
     {
-        if (! is_string($filename) || (! file_exists($filename) && ! is_writable(dirname($filename)))) {
+        if (! file_exists($filename) && ! is_writable(dirname($filename))) {
             return false;
         }
 
