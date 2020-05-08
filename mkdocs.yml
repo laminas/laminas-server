@@ -2,8 +2,6 @@ docs_dir: docs/book
 site_dir: docs/html
 extra:
     project: Components
-    base_url: https://docs.laminas.dev/
-    project_url: https://docs.laminas.dev/components/
     current_version: v3
     versions:
         - v3
