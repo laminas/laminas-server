@@ -5,7 +5,7 @@ extra:
     base_url: https://docs.laminas.dev/
     project_url: https://docs.laminas.dev/components/
     current_version: v3
-    version:
+    versions:
         - v3
         - v2
 nav:
