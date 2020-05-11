@@ -45,6 +45,14 @@ class CacheTest extends TestCase
         $r->setValue(Cache::class, $methods);
     }
 
+    public function testSaveNonExistentFileReturnsFalse(): void
+    {
+        $server = $this->createStub(Server::class);
+        $result = Cache::save('~/non-existent-file.tmp', $server);
+
+        $this->assertFalse($result);
+    }
+
     public function testCacheCanAcceptAServerReturningAnArrayOfFunctions(): void
     {
         $functions = [
