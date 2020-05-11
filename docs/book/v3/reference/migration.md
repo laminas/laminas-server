@@ -23,6 +23,9 @@ consumers.
 Previously the non-represented state of `$argv` in the `reflectClass()` and
 `reflectFunction()` methods was false. This changed to `null`.
 
+To represent a non-present state of `$namespace` in the `reflectClass()` and
+`reflectFunction()`, the default value changed from an empty string to `null`.
+
 ### Server
 
 Namespacing is not required by all `Server` implementations and thus optional.
