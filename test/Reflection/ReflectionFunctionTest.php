@@ -61,6 +61,14 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('framework', $r->getNamespace());
     }
 
+    public function testSetNamespaceSetsEmptyStringToNull(): void
+    {
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $r        = new Reflection\ReflectionFunction($function, 'namespace');
+        $r->setNamespace('');
+        $this->assertNull($r->getNamespace());
+    }
+
     public function testDescription(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');

@@ -70,6 +70,13 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
+    public function testSetNamespaceSetsEmptyStringToNull(): void
+    {
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r->setNamespace('');
+        $this->assertNull($r->getNamespace());
+    }
+
     public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
