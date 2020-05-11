@@ -69,6 +69,14 @@ class ReflectionFunctionTest extends TestCase
         $this->assertNull($r->getNamespace());
     }
 
+    public function testSetNamespaceThrowsInvalidArgumentException(): void
+    {
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $r        = new Reflection\ReflectionFunction($function, 'namespace');
+        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
+        $r->setNamespace('äöü');
+    }
+
     public function testDescription(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');

@@ -77,6 +77,13 @@ class ReflectionClassTest extends TestCase
         $this->assertNull($r->getNamespace());
     }
 
+    public function testSetNamespaceThrowsInvalidArgumentException(): void
+    {
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
+        $r->setNamespace('äöü');
+    }
+
     public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
