@@ -14,7 +14,7 @@ nav:
         - Reference:
               - Migration: v3/reference/migration.md
     - v2:
-        - Intro: v2/intro.md
+        - Introduction: v2/intro.md
         - Reflection: v2/reflection.md
 site_name: laminas-server
 site_description: laminas-server
