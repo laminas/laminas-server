@@ -158,4 +158,20 @@ class CacheTest extends TestCase
 
         $this->assertEquals($expected, $actual);
     }
+
+    public function testGetNonExistentFileReturnsFalse(): void
+    {
+        $server = $this->createStub(Server::class);
+        $result = Cache::get('~/non-existent-file.tmp', $server);
+
+        $this->assertFalse($result);
+    }
+
+    public function testDeleteNonExistentFileReturnsFalse(): void
+    {
+        $server = $this->createStub(Server::class);
+        $result = Cache::delete('~/non-existent-file.tmp', $server);
+
+        $this->assertFalse($result);
+    }
 }
