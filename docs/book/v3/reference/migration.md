@@ -20,8 +20,8 @@ consumers.
 
 ### Reflection
 
-Previously the non-represented state of `$argv` in the `reflectClass()` method
-was false. This changed to `null`.
+Previously the non-represented state of `$argv` in the `reflectClass()` and
+`reflectFunction()` methods was false. This changed to `null`.
 
 ### Server
 
