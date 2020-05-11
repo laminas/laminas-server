@@ -34,7 +34,7 @@ class ReflectionReturnValue
         return $this->type;
     }
 
-    public function setType(?string $type = null): void
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
