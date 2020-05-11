@@ -14,4 +14,4 @@ Starting in 3.0 this component supports only PHP 7.2+.
 ## Strict Typing
 
 Argument type declarations have been added. Passing a wrong argument type which
-previously might have worked, will not raise a TypeError.
+previously might have worked, will now raise a TypeError.
