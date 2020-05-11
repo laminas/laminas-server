@@ -43,7 +43,7 @@ class ReflectionParameter
      */
     protected $functionName;
 
-    public function __construct(PhpReflectionParameter $r, string $type = 'mixed', string $description = '')
+    public function __construct(PhpReflectionParameter $r, string $type = 'mixed', ?string $description = null)
     {
         $this->reflection = $r;
 
