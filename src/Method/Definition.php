@@ -13,9 +13,7 @@ namespace Laminas\Server\Method;
 use Laminas\Server;
 
 use function is_array;
-use function is_object;
 use function method_exists;
-use function sprintf;
 use function ucfirst;
 
 class Definition
