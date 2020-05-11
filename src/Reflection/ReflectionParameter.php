@@ -93,7 +93,7 @@ class ReflectionParameter
         $this->description = $description;
     }
 
-    public function setPosition(?int $index = null): void
+    public function setPosition(int $index): void
     {
         $this->position = $index;
     }
