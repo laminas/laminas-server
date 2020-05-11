@@ -177,7 +177,7 @@ class DefinitionTest extends TestCase
             'invokeArguments' => ['foo', ['bar', 'baz']],
         ];
         $definition = new Method\Definition($options);
-        $test = $definition->toArray();
+        $test       = $definition->toArray();
         $this->assertEquals($options['name'], $test['name']);
         $this->assertEquals($options['callback'], $test['callback']);
         $this->assertEquals($options['prototypes'], $test['prototypes']);

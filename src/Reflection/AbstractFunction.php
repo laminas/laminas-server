@@ -10,8 +10,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-use Laminas\Code\Reflection\DocBlock\Tag\ParamTag;
-use Laminas\Code\Reflection\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
@@ -31,13 +29,12 @@ use ReflectionMethod as PhpReflectionMethod;
  */
 abstract class AbstractFunction
 {
-    /**
-     * @var ReflectionFunctionAbstract
-     */
+    /** @var ReflectionFunctionAbstract */
     protected $reflection;
 
     /**
      * Additional arguments to pass to method on invocation
+     *
      * @var array
      */
     protected $argv = [];
@@ -47,30 +44,35 @@ abstract class AbstractFunction
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
+     *
      * @var array
      */
     protected $config = [];
 
     /**
      * Declaring class (needed for when serialization occurs)
+     *
      * @var string
      */
     protected $class;
 
     /**
      * Function name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Function/method description
+     *
      * @var string
      */
     protected $description = '';
 
     /**
      * Namespace with which to prefix function/method name
+     *
      * @var null|string
      */
     protected $namespace;
@@ -162,11 +164,10 @@ abstract class AbstractFunction
      * Builds method signatures using the array of return types and the array of
      * parameters types
      *
-     * @param array $return Array of return types
+     * @param array  $return Array of return types
      * @param string $returnDesc Return value description
-     * @param array $paramTypes Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
-     * @return void
+     * @param array  $paramTypes Array of arguments (each an array of types)
+     * @param array  $paramDesc Array of parameter descriptions
      */
     protected function buildSignatures(array $return, string $returnDesc, array $paramTypes, array $paramDesc): void
     {
@@ -310,8 +311,6 @@ abstract class AbstractFunction
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -330,7 +329,6 @@ abstract class AbstractFunction
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
      * @return mixed
      */
     public function __get(string $key)
@@ -345,9 +343,7 @@ abstract class AbstractFunction
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
      * @param mixed $value
-     * @return void
      */
     public function __set(string $key, $value): void
     {
@@ -439,7 +435,7 @@ abstract class AbstractFunction
     public function __wakeup(): void
     {
         if ($this->reflection instanceof PhpReflectionMethod) {
-            $class = new PhpReflectionClass($this->class);
+            $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
             $this->reflection = new PhpReflectionFunction($this->name);

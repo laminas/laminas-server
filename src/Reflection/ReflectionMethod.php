@@ -21,12 +21,14 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Parent class name
+     *
      * @var string
      */
     protected $class;
 
     /**
      * Parent class reflection
+     *
      * @var ReflectionClass
      */
     protected $classReflection;
@@ -56,7 +58,7 @@ class ReflectionMethod extends AbstractFunction
 
         // If method call, need to store some info on the class
         $this->class = $class->getName();
-        $this->name = $r->getName();
+        $this->name  = $r->getName();
 
         // Perform some introspection
         $this->reflect();
@@ -82,7 +84,7 @@ class ReflectionMethod extends AbstractFunction
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
-        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
+        $this->reflection      = new \ReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
     protected function reflect(): void
@@ -101,7 +103,7 @@ class ReflectionMethod extends AbstractFunction
     private function fetchRecursiveDocComment(): string
     {
         $currentMethodName = $this->reflection->getName();
-        $docCommentList[] = $this->reflection->getDocComment();
+        $docCommentList[]  = $this->reflection->getDocComment();
 
         // fetch all doc blocks for method from parent classes
         $docCommentFetched = $this->fetchRecursiveDocBlockFromParent($this->classReflection, $currentMethodName);
@@ -134,7 +136,7 @@ class ReflectionMethod extends AbstractFunction
 
     private function fetchRecursiveDocBlockFromParent(ReflectionClass $reflectionClass, string $methodName): ?array
     {
-        $docComment = [];
+        $docComment            = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
         if (! $parentReflectionClass) {
             return null;
@@ -145,8 +147,8 @@ class ReflectionMethod extends AbstractFunction
         }
 
         $methodReflection = $parentReflectionClass->getMethod($methodName);
-        $docCommentLast = $methodReflection->getDocComment();
-        $docComment[] = $docCommentLast;
+        $docCommentLast   = $methodReflection->getDocComment();
+        $docComment[]     = $docCommentLast;
         if ($this->isInherit($docCommentLast)) {
             if ($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
                 $docComment = array_merge($docComment, $docCommentFetched);

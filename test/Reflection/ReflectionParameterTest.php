@@ -19,7 +19,7 @@ class ReflectionParameterTest extends TestCase
 {
     protected function getParameter(): \ReflectionParameter
     {
-        $method = new ReflectionMethod(ReflectionParameter::class, 'setType');
+        $method     = new ReflectionMethod(ReflectionParameter::class, 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }

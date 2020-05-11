@@ -14,9 +14,7 @@ use Laminas\Server;
 
 class Callback
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $class;
 
     /**
@@ -26,14 +24,10 @@ class Callback
      */
     protected $function;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $method;
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     protected $type;
 
     /**
@@ -140,7 +134,7 @@ class Callback
 
     public function toArray(): array
     {
-        $type = $this->getType();
+        $type  = $this->getType();
         $array = [
             'type' => $type,
         ];

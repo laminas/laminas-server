@@ -12,41 +12,30 @@ namespace Laminas\Server\Reflection;
 
 use ReflectionParameter as PhpReflectionParameter;
 
-/**
- * Parameter Reflection
- *
- * Decorates a ReflectionParameter to allow setting the parameter type
- */
 class ReflectionParameter
 {
-    /**
-     * @var PhpReflectionParameter
-     */
+    /** @var PhpReflectionParameter */
     protected $reflection;
 
-    /**
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     protected $description;
 
     /**
      * Parameter name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Declaring function name (needed for serialization)
+     *
      * @var string
      */
     protected $functionName;
@@ -56,7 +45,7 @@ class ReflectionParameter
         $this->reflection = $r;
 
         // Store parameters needed for (un)serialization
-        $this->name = $r->getName();
+        $this->name         = $r->getName();
         $this->functionName = $r->getDeclaringClass()
             ? [$r->getDeclaringClass()->getName(), $r->getDeclaringFunction()->getName()]
             : $r->getDeclaringFunction()->getName();
@@ -68,7 +57,6 @@ class ReflectionParameter
     /**
      * Proxy reflection calls
      *
-     * @param string $method
      * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed

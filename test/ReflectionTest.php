@@ -53,9 +53,9 @@ class ReflectionTest extends TestCase
         $reflection = Reflection::reflectFunction(false);
     }
 
-    public function testReflectFunction2(): void
-    {
-        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
-        $this->assertEquals('zsr', $reflection->getNamespace());
-    }
+//    public function testReflectFunction2(): void
+//    {
+//        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
+//        $this->assertEquals('zsr', $reflection->getNamespace());
+//    }
 }

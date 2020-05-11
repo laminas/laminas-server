@@ -19,26 +19,20 @@ use ReflectionClass;
 
 class PrototypeTest extends TestCase
 {
-    /**
-     * @var Prototype
-     */
+    /** @var Prototype */
     protected $r;
 
-    /**
-     * @var ReflectionParameter[]
-     */
+    /** @var ReflectionParameter[] */
     protected $parametersRaw;
 
-    /**
-     * @var ReflectionParameter[]
-     */
+    /** @var ReflectionParameter[] */
     protected $parameters;
 
     protected function setUp(): void
     {
-        $class = new ReflectionClass(Reflection::class);
-        $method = $class->getMethod('reflectClass');
-        $parameters = $method->getParameters();
+        $class               = new ReflectionClass(Reflection::class);
+        $method              = $class->getMethod('reflectClass');
+        $parameters          = $method->getParameters();
         $this->parametersRaw = $parameters;
 
         $fParameters = [];

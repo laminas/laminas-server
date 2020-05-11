@@ -17,7 +17,7 @@ class ReflectionTestClass
      *
      * This shouldn't be reflected
      *
-     * @param mixed $arg
+     * @param null|mixed $arg
      */
     public function __construct($arg = null)
     {
@@ -25,10 +25,6 @@ class ReflectionTestClass
 
     /**
      * Public one
-     *
-     * @param string $arg1
-     * @param null|array $arg2
-     * @return string
      */
     public function one(string $arg1, ?array $arg2 = null): string
     {
@@ -54,8 +50,6 @@ class ReflectionTestClass
     /**
      * Public two
      *
-     * @param string $arg1
-     * @param string $arg2
      * @return bool|array
      */
     public static function two(string $arg1, string $arg2)

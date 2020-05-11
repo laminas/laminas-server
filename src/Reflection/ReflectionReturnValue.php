@@ -17,14 +17,10 @@ namespace Laminas\Server\Reflection;
  */
 class ReflectionReturnValue
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description;
 
     public function __construct(string $type = 'mixed', string $description = '')

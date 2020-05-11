@@ -10,11 +10,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-/**
- * Method/Function prototypes
- *
- * Contains accessors for the return value and all method arguments.
- */
 class Prototype
 {
     /** @var ReflectionParameter[] */
@@ -24,7 +19,6 @@ class Prototype
     private $return;
 
     /**
-     * @param ReflectionReturnValue $return
      * @param ReflectionParameter[] $params
      * @throws Exception\InvalidArgumentException
      */

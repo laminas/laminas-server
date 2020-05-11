@@ -16,14 +16,10 @@ use Laminas\Server\Exception\InvalidArgumentException;
 
 class Definition implements Countable, Iterator
 {
-    /**
-     * @var Method\Definition[]
-     */
+    /** @var Method\Definition[] */
     protected $methods = [];
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $overwriteExistingMethods = false;
 
     public function __construct(?array $methods = null)
@@ -107,7 +103,6 @@ class Definition implements Countable, Iterator
     /**
      * Get a given method definition
      *
-     * @param  string $method
      * @return bool|Method\Definition
      */
     public function getMethod(string $method)

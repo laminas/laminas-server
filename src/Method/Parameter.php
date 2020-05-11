@@ -10,34 +10,21 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
-/**
- * Method parameter metadata
- */
 class Parameter
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $defaultValue;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $description = '';
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     protected $name;
 
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $optional = false;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $type = 'mixed';
 
     public function __construct(?array $options = null)

@@ -14,34 +14,22 @@ use Laminas\Server;
 
 class Definition
 {
-    /**
-     * @var null|Callback
-     */
+    /** @var null|Callback */
     protected $callback;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $invokeArguments = [];
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $methodHelp = '';
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     protected $name;
 
-    /**
-     * @var null|object
-     */
+    /** @var null|object */
     protected $object;
 
-    /**
-     * @var Prototype[]
-     */
+    /** @var Prototype[] */
     protected $prototypes = [];
 
     public function __construct(?array $options = null)
@@ -165,9 +153,7 @@ class Definition
     /**
      * Set object to use with method calls
      *
-     * @param  object $object
      * @throws Server\Exception\InvalidArgumentException
-     * @return $this
      */
     public function setObject(object $object): self
     {

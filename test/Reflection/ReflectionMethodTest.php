@@ -79,7 +79,7 @@ class ReflectionMethodTest extends TestCase
 
     public function testMethodDocBlockFromParent(): void
     {
-        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
+        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(

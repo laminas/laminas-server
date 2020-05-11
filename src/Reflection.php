@@ -16,9 +16,6 @@ use Laminas\Server\Reflection\ReflectionFunction;
 use ReflectionException;
 use ReflectionObject;
 
-/**
- * Reflection for determining method signatures to use with server classes
- */
 class Reflection
 {
     /**

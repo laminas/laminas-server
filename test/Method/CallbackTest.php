@@ -16,9 +16,7 @@ use PHPUnit\Framework\TestCase;
 
 class CallbackTest extends TestCase
 {
-    /**
-     * @var Method\Callback
-     */
+    /** @var Method\Callback */
     private $callback;
 
     protected function setUp(): void
@@ -104,13 +102,13 @@ class CallbackTest extends TestCase
 
     public function testConstructorShouldSetStateFromOptions(): void
     {
-        $options = [
+        $options  = [
             'type'   => 'static',
             'class'  => 'Foo',
             'method' => 'bar',
         ];
         $callback = new Method\Callback($options);
-        $test = $callback->toArray();
+        $test     = $callback->toArray();
         $this->assertSame($options, $test);
     }
 

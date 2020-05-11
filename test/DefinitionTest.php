@@ -14,6 +14,9 @@ use Laminas\Server;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
+use function array_shift;
+use function array_values;
+
 class DefinitionTest extends TestCase
 {
     /** @var Server\Definition */
@@ -43,7 +46,7 @@ class DefinitionTest extends TestCase
 
     public function testConstructorNumericKeyWillBeReplacedByMethodName(): void
     {
-        $method = new Method\Definition(['name' => 'foo']);
+        $method     = new Method\Definition(['name' => 'foo']);
         $definition = new Server\Definition(['100' => $method]);
 
         $this->assertCount(1, $definition);
@@ -52,7 +55,7 @@ class DefinitionTest extends TestCase
 
     public function testAddMethodNumericKeyWillBeReplacedByMethodName(): void
     {
-        $method = new Method\Definition(['name' => 'foo']);
+        $method     = new Method\Definition(['name' => 'foo']);
         $definition = new Server\Definition();
         $definition->addMethod($method, '100');
 
@@ -114,19 +117,19 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldSerializeToArray(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
         $definition = new Server\Definition();
@@ -142,24 +145,24 @@ class DefinitionTest extends TestCase
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
-        $options = [$method];
+        $options    = [$method];
         $definition = new Server\Definition($options);
-        $test = $definition->toArray();
+        $test       = $definition->toArray();
         $this->assertCount(1, $test);
         $test = array_shift($test);
         $this->assertEquals($method['name'], $test['name']);

@@ -24,27 +24,23 @@ class ReflectionClass
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
+     *
      * @var array
      */
     protected $config = [];
 
-    /**
-     * @var ReflectionMethod[]
-     */
+    /** @var ReflectionMethod[] */
     protected $methods = [];
 
-    /**
-     * @var null|string
-     */
+    /** @var null|string */
     protected $namespace;
 
-    /**
-     * @var PhpReflectionClass
-     */
+    /** @var PhpReflectionClass */
     protected $reflection;
 
     /**
      * Reflection class name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
@@ -58,7 +54,7 @@ class ReflectionClass
     public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, ?array $argv = null)
     {
         $this->reflection = $reflection;
-        $this->name = $reflection->getName();
+        $this->name       = $reflection->getName();
         $this->setNamespace($namespace);
 
         foreach ($reflection->getMethods() as $method) {
@@ -77,8 +73,6 @@ class ReflectionClass
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
@@ -97,7 +91,6 @@ class ReflectionClass
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
      * @return mixed
      */
     public function __get(string $key)
@@ -112,9 +105,7 @@ class ReflectionClass
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
      * @param mixed $value
-     * @return void
      */
     public function __set(string $key, $value): void
     {

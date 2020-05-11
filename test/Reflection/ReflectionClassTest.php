@@ -42,7 +42,7 @@ class ReflectionClassTest extends TestCase
 
     public function testGetSet(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r         = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $r->system = true;
         $this->assertTrue($r->system);
     }

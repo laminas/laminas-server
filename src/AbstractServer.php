@@ -15,14 +15,10 @@ use ReflectionException;
 
 abstract class AbstractServer implements Server
 {
-    /**
-     * @var bool
-     */
+    /** @var bool */
     protected $overwriteExistingMethods = false;
 
-    /**
-     * @var Definition
-     */
+    /** @var Definition */
     protected $table;
 
     public function __construct()
@@ -62,6 +58,7 @@ abstract class AbstractServer implements Server
      *
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
      *     prefix in 3.0.
+     *
      * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
      * @return Method\Definition
@@ -71,9 +68,9 @@ abstract class AbstractServer implements Server
     protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
     {
     // @codingStandardsIgnoreEnd
-        $ns         = $reflection->getNamespace();
-        $name       = $reflection->getName();
-        $method     = empty($ns) ? $name : $ns . '.' . $name;
+        $ns     = $reflection->getNamespace();
+        $name   = $reflection->getName();
+        $method = empty($ns) ? $name : $ns . '.' . $name;
 
         if (! $this->overwriteExistingMethods && $this->table->hasMethod($method)) {
             throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
@@ -111,10 +108,11 @@ abstract class AbstractServer implements Server
     /**
      * Dispatch method
      *
-     * @return mixed
-     * @throws ReflectionException
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
      *     prefix in 3.0.
+     *
+     * @return mixed
+     * @throws ReflectionException
      */
     // @codingStandardsIgnoreStart
     protected function _dispatch(Method\Definition $invokable, array $params)

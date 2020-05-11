@@ -10,14 +10,9 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
-/**
- * Method prototype metadata
- */
 class Prototype
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $returnType = 'void';
 
     /**
@@ -27,9 +22,7 @@ class Prototype
      */
     protected $parameterNameMap = [];
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $parameters = [];
 
     public function __construct(?array $options = null)
@@ -64,7 +57,7 @@ class Prototype
                 $this->parameterNameMap[$name] = count($this->parameters) - 1;
             }
         } else {
-            $parameter = new Parameter([
+            $parameter          = new Parameter([
                 'type' => (string) $parameter,
             ]);
             $this->parameters[] = $parameter;
@@ -90,8 +83,6 @@ class Prototype
 
     /**
      * Retrieve parameters as list of types
-     *
-     * @return array
      */
     public function getParameters(): array
     {
@@ -111,7 +102,6 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|Parameter
      */
     public function getParameter($index): ?Parameter
     {

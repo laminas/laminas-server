@@ -15,9 +15,7 @@ use Laminas\Stdlib\ErrorHandler;
 
 class Cache
 {
-    /**
-     * @var string[]
-     */
+    /** @var string[] */
     protected static $skipMethods = [];
 
     /**
@@ -114,7 +112,7 @@ class Cache
     }
 
     /**
-     * @var array|Definition $methods
+     * @var array|Definition
      * @return array|Definition
      */
     private static function createDefinition($methods)

@@ -10,27 +10,18 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-/**
- * Node Tree class for Laminas\Server reflection operations
- */
 class Node
 {
-    /**
-     * @var mixed
-     */
+    /** @var mixed */
     protected $value;
 
-    /**
-     * @var Node[]
-     */
+    /** @var Node[] */
     protected $children = [];
 
-    /**
-     * @var null|Node
-     */
+    /** @var null|Node */
     protected $parent;
 
-    public function __construct($value, Node $parent = null)
+    public function __construct($value, ?self $parent = null)
     {
         $this->value = $value;
         if (null !== $parent) {
@@ -44,7 +35,6 @@ class Node
      * @param \Laminas\Server\Reflection\Node $node
      * @param  bool $new Whether or not the child node is newly created
      * and should always be attached
-     * @return void
      */
     public function setParent(Node $node, bool $new = false): void
     {
@@ -79,7 +69,7 @@ class Node
         return count($this->children) > 0;
     }
 
-    public function getParent(): ?Node
+    public function getParent(): ?self
     {
         return $this->parent;
     }
