@@ -102,7 +102,7 @@ abstract class AbstractFunction
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, ?array $argv = null)
+    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, array $argv = [])
     {
         $this->reflection = $r;
 
@@ -112,9 +112,7 @@ abstract class AbstractFunction
         }
 
         // Determine arguments
-        if (is_array($argv)) {
-            $this->argv = $argv;
-        }
+        $this->argv = $argv;
 
         // If method call, need to store some info on the class
         if ($r instanceof PhpReflectionMethod) {
