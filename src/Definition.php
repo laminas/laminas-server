@@ -94,7 +94,7 @@ class Definition implements Countable, Iterator
     /**
      * Set all methods at once (overwrite)
      *
-     * @param  Method\Definition[]
+     * @param  Method\Definition[] $methods
      * @return $this
      */
     public function setMethods(array $methods): self
