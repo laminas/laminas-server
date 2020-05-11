@@ -362,10 +362,10 @@ abstract class AbstractFunction
      *
      * @throws Exception\InvalidArgumentException
      */
-    public function setNamespace(?string $namespace = null): void
+    public function setNamespace(?string $namespace): void
     {
         if (empty($namespace)) {
-            $this->namespace = '';
+            $this->namespace = null;
             return;
         }
 
