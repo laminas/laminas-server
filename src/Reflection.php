@@ -34,13 +34,13 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param null|array    $argv Optional arguments to be used during the method call
+     * @param array         $argv Optional arguments to be used during the method call
      * @param null|string   $namespace Optional namespace with which to prefix the
      *   method name (used for the signature key). Primarily to avoid collisions,
      *   also for XmlRpc namespacing
      * @throws ReflectionException
      */
-    public static function reflectClass($class, ?array $argv = null, ?string $namespace = null): ReflectionClass
+    public static function reflectClass($class, array $argv = [], ?string $namespace = null): ReflectionClass
     {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);

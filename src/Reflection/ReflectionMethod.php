@@ -46,7 +46,7 @@ class ReflectionMethod extends AbstractFunction
         ReflectionClass $class,
         \ReflectionMethod $r,
         ?string $namespace = null,
-        ?array $argv = null
+        array $argv = []
     ) {
         $this->classReflection = $class;
         $this->reflection      = $r;
@@ -61,9 +61,7 @@ class ReflectionMethod extends AbstractFunction
         }
 
         // Determine arguments
-        if (is_array($argv)) {
-            $this->argv = $argv;
-        }
+        $this->argv = $argv;
 
         // If method call, need to store some info on the class
         $this->class = $class->getName();

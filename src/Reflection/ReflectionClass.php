@@ -56,7 +56,7 @@ class ReflectionClass
      * Create array of dispatchable methods, each a
      * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      */
-    public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, ?array $argv = null)
+    public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, array $argv = [])
     {
         $this->reflection = $reflection;
         $this->name       = $reflection->getName();

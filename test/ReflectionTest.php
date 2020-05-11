@@ -35,7 +35,7 @@ class ReflectionTest extends TestCase
 
     public function testReflectClass2(): void
     {
-        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, null, 'zsr');
+        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, [], 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
