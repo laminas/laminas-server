@@ -18,6 +18,11 @@ previously might have worked, will now raise a TypeError.
 The following signatures changed that could affect class extension and/or
 consumers.
 
+### Reflection
+
+Previously the non-represented state of `$argv` in the `reflectClass()` method
+was false. This changed to `null`.
+
 ### Server
 
 Namespacing is not required by all `Server` implementations and thus optional.
