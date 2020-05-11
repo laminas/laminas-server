@@ -16,6 +16,12 @@ use Laminas\Server\Reflection\ReflectionFunction;
 use ReflectionException;
 use ReflectionObject;
 
+use function class_exists;
+use function function_exists;
+use function is_object;
+use function is_string;
+use function sprintf;
+
 class Reflection
 {
     /**
@@ -28,11 +34,10 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param null|array $argv Optional arguments to be used during the method call
-     * @param null|string $namespace Optional namespace with which to prefix the
-     * method name (used for the signature key). Primarily to avoid collisions,
-     * also for XmlRpc namespacing
-     * @return ReflectionClass
+     * @param null|array    $argv Optional arguments to be used during the method call
+     * @param null|string   $namespace Optional namespace with which to prefix the
+     *   method name (used for the signature key). Primarily to avoid collisions,
+     *   also for XmlRpc namespacing
      * @throws ReflectionException
      */
     public static function reflectClass($class, ?array $argv = null, ?string $namespace = null): ReflectionClass
@@ -42,7 +47,7 @@ class Reflection
         } elseif (is_string($class) && class_exists($class)) {
             $reflection = new \ReflectionClass($class);
         } else {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
+            throw new InvalidArgumentException('Invalid class or object passed to attachClass()');
         }
 
         return new ReflectionClass($reflection, $namespace, $argv);
@@ -58,11 +63,10 @@ class Reflection
      * may be provided as an array to $argv.
      *
      * @param string|callable $function Function name
-     * @param  null|array $argv Optional arguments to be used during the method call
-     * @param null|string $namespace Optional namespace with which to prefix the
-     * function name (used for the signature key). Primarily to avoid
-     * collisions, also for XmlRpc namespacing
-     * @return ReflectionFunction
+     * @param  null|array      $argv Optional arguments to be used during the method call
+     * @param null|string     $namespace Optional namespace with which to prefix the
+     *     function name (used for the signature key). Primarily to avoid
+     *     collisions, also for XmlRpc namespacing
      * @throws InvalidArgumentException|ReflectionException
      */
     public static function reflectFunction(
@@ -71,7 +75,7 @@ class Reflection
         ?string $namespace = null
     ): ReflectionFunction {
         if (! is_string($function) || ! function_exists($function)) {
-            throw new Reflection\Exception\InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'Invalid function "%s" passed to reflectFunction',
                 $function
             ));

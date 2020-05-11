@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use function array_merge;
+use function count;
+
 class Node
 {
     /** @var mixed */

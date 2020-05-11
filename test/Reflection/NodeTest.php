@@ -13,6 +13,8 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection\Node;
 use PHPUnit\Framework\TestCase;
 
+use function var_export;
+
 class NodeTest extends TestCase
 {
     public function testConstructor(): void
@@ -136,7 +138,7 @@ class NodeTest extends TestCase
             'child1grand2',
             'child2grand1',
             'child2grand2',
-            'child2grand2great2'
+            'child2grand2great2',
         ];
 
         $this->assertEquals(

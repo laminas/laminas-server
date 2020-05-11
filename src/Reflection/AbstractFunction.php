@@ -17,6 +17,15 @@ use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
 
+use function array_merge;
+use function array_shift;
+use function array_unshift;
+use function call_user_func_array;
+use function count;
+use function is_array;
+use function method_exists;
+use function preg_match;
+
 /**
  * Function/Method Reflection
  *
@@ -243,9 +252,9 @@ abstract class AbstractFunction
 
         $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
         $helpText   = $scanner->getLongDescription();
-        /* @var ParamTag[] $paramTags */
+        /** @var ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
-        /* @var ReturnTag $returnTag */
+        /** @var ReturnTag $returnTag */
         $returnTag = $scanner->getTag('return');
 
         if (empty($helpText)) {

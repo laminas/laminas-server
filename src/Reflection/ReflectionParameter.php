@@ -12,6 +12,9 @@ namespace Laminas\Server\Reflection;
 
 use ReflectionParameter as PhpReflectionParameter;
 
+use function call_user_func_array;
+use function method_exists;
+
 class ReflectionParameter
 {
     /** @var PhpReflectionParameter */

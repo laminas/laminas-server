@@ -17,6 +17,9 @@ use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
+use function serialize;
+use function unserialize;
+
 class ReflectionMethodTest extends TestCase
 {
     protected $classRaw;
@@ -63,15 +66,15 @@ class ReflectionMethodTest extends TestCase
 
     public function testMethodDocBlockFromInterface(): void
     {
-        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
+        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(
             new Reflection\ReflectionClass($reflectionClass),
             $reflectionMethod
         );
-        list($prototype) = $laminasReflectionMethod->getPrototypes();
-        list($first, $second) = $prototype->getParameters();
+        [$prototype]             = $laminasReflectionMethod->getPrototypes();
+        [$first, $second]        = $prototype->getParameters();
 
         self::assertEquals('ReflectionMethodTest', $first->getType());
         self::assertEquals('array', $second->getType());
@@ -86,8 +89,8 @@ class ReflectionMethodTest extends TestCase
             new Reflection\ReflectionClass($reflectionClass),
             $reflectionMethod
         );
-        $prototypes = $laminasReflectionMethod->getPrototypes();
-        list($first, $second) = $prototypes[1]->getParameters();
+        $prototypes              = $laminasReflectionMethod->getPrototypes();
+        [$first, $second]        = $prototypes[1]->getParameters();
 
         self::assertEquals('\\' . Node::class, $first->getType());
         self::assertEquals('bool', $second->getType());

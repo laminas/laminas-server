@@ -13,6 +13,9 @@ namespace Laminas\Server;
 use ReflectionClass;
 use ReflectionException;
 
+use function call_user_func_array;
+use function is_object;
+
 abstract class AbstractServer implements Server
 {
     /** @var bool */
@@ -140,7 +143,7 @@ abstract class AbstractServer implements Server
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {
-                $object = new $class;
+                $object = new $class();
             }
         }
         return call_user_func_array([$object, $method], $params);

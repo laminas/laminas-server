@@ -17,7 +17,7 @@ class ReflectionMethodNode extends Node
     /**
      * {@inheritdoc}
      */
-    public function setParent(Node $node, bool $new = false): void
+    public function setParent(parent $node, bool $new = false): void
     {
         // it doesn`t matter
     }

@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
+use function is_array;
+use function method_exists;
+use function ucfirst;
+
 class Parameter
 {
     /** @var mixed */

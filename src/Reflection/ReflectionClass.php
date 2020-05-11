@@ -13,6 +13,11 @@ namespace Laminas\Server\Reflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
 
+use function call_user_func_array;
+use function method_exists;
+use function preg_match;
+use function substr;
+
 /**
  * Class/Object reflection
  *

@@ -10,6 +10,14 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
+use function array_key_exists;
+use function count;
+use function is_array;
+use function is_numeric;
+use function is_string;
+use function method_exists;
+use function ucfirst;
+
 class Prototype
 {
     /** @var string */

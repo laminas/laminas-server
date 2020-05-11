@@ -13,6 +13,8 @@ namespace LaminasTest\Server\Method;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
+use function compact;
+
 class ParameterTest extends TestCase
 {
     /** @var Method\Parameter */

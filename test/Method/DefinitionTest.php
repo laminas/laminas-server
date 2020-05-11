@@ -80,7 +80,7 @@ class DefinitionTest extends TestCase
     public function testObjectShouldBeMutable(): void
     {
         $this->assertNull($this->definition->getObject());
-        $object = new stdClass;
+        $object = new stdClass();
         $this->definition->setObject($object);
         $this->assertEquals($object, $this->definition->getObject());
     }
@@ -95,7 +95,7 @@ class DefinitionTest extends TestCase
     public function testInvokeArgumentsShouldBeMutable(): void
     {
         $this->testInvokeArgumentsShouldBeEmptyArrayByDefault();
-        $args = ['foo', ['bar', 'baz'], new stdClass];
+        $args = ['foo', ['bar', 'baz'], new stdClass()];
         $this->definition->setInvokeArguments($args);
         $this->assertSame($args, $this->definition->getInvokeArguments());
     }
@@ -110,12 +110,12 @@ class DefinitionTest extends TestCase
     public function testDefinitionShouldAllowAddingSinglePrototypes(): void
     {
         $this->testPrototypesShouldBeEmptyArrayByDefault();
-        $prototype1 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
         $this->definition->addPrototype($prototype1);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
 
-        $prototype2 = new Method\Prototype;
+        $prototype2 = new Method\Prototype();
         $this->definition->addPrototype($prototype2);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
@@ -124,8 +124,8 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldAllowAddingMultiplePrototypes(): void
     {
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = [$prototype1, $prototype2];
         $this->definition->addPrototypes($prototypes);
         $this->assertSame($prototypes, $this->definition->getPrototypes());
@@ -135,8 +135,8 @@ class DefinitionTest extends TestCase
     {
         $this->testDefinitionShouldAllowAddingMultiplePrototypes();
 
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = [$prototype1, $prototype2];
         $this->assertNotSame($prototypes, $this->definition->getPrototypes());
         $this->definition->setPrototypes($prototypes);
@@ -149,7 +149,7 @@ class DefinitionTest extends TestCase
         $callback   = ['function' => 'foo', 'type' => 'function'];
         $prototypes = [['returnType' => 'struct', 'parameters' => ['string', 'array']]];
         $methodHelp = 'foo bar';
-        $object     = new stdClass;
+        $object     = new stdClass();
         $invokeArgs = ['foo', ['bar', 'baz']];
         $this->definition->setName($name)
                          ->setCallback($callback)
@@ -168,12 +168,12 @@ class DefinitionTest extends TestCase
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
-        $options = [
+        $options    = [
             'name'            => 'foo.bar',
             'callback'        => ['function' => 'foo', 'type' => 'function'],
             'prototypes'      => [['returnType' => 'struct', 'parameters' => ['string', 'array']]],
             'methodHelp'      => 'foo bar',
-            'object'          => new stdClass,
+            'object'          => new stdClass(),
             'invokeArguments' => ['foo', ['bar', 'baz']],
         ];
         $definition = new Method\Definition($options);

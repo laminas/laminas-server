@@ -16,13 +16,17 @@ use Laminas\Server\Reflection\Prototype;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
+use function serialize;
+use function unserialize;
+use function var_export;
+
 class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
-        $r = new Reflection\ReflectionFunction($function);
-        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionFunction::class, $r);
+        $r        = new Reflection\ReflectionFunction($function);
+        $this->assertInstanceOf(Reflection\ReflectionFunction::class, $r);
         $this->assertInstanceOf(AbstractFunction::class, $r);
         $params = $r->getParameters();
 
@@ -112,10 +116,10 @@ class ReflectionFunctionTest extends TestCase
     public function testClassWakeup(): void
     {
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
-        $r = new Reflection\ReflectionFunction($function);
-        $s = serialize($r);
-        $u = unserialize($s);
-        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionFunction::class, $u);
+        $r        = new Reflection\ReflectionFunction($function);
+        $s        = serialize($r);
+        $u        = unserialize($s);
+        $this->assertInstanceOf(Reflection\ReflectionFunction::class, $u);
         $this->assertEquals('', $u->getNamespace());
     }
 

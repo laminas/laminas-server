@@ -15,6 +15,10 @@ use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
 
+use function count;
+use function serialize;
+use function unserialize;
+
 class ReflectionClassTest extends TestCase
 {
     public function testConstructor(): void

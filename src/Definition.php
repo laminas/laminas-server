@@ -14,6 +14,16 @@ use Countable;
 use Iterator;
 use Laminas\Server\Exception\InvalidArgumentException;
 
+use function array_key_exists;
+use function count;
+use function current;
+use function is_array;
+use function is_numeric;
+use function key;
+use function next;
+use function reset;
+use function sprintf;
+
 class Definition implements Countable, Iterator
 {
     /** @var Method\Definition[] */
@@ -39,7 +49,6 @@ class Definition implements Countable, Iterator
      * Add method to definition
      *
      * @param  array|Method\Definition $method
-     * @param  null|string $name
      * @return $this
      * @throws InvalidArgumentException if duplicate or invalid method provided
      */
@@ -48,7 +57,7 @@ class Definition implements Countable, Iterator
         if (is_array($method)) {
             $method = new Method\Definition($method);
         } elseif (! $method instanceof Method\Definition) {
-            throw new Exception\InvalidArgumentException('Invalid method provided');
+            throw new InvalidArgumentException('Invalid method provided');
         }
 
         if (is_numeric($name)) {
@@ -61,11 +70,11 @@ class Definition implements Countable, Iterator
             $name = $method->getName();
         }
         if (null === $name) {
-            throw new Exception\InvalidArgumentException('No method name provided');
+            throw new InvalidArgumentException('No method name provided');
         }
 
         if (! $this->overwriteExistingMethods && array_key_exists($name, $this->methods)) {
-            throw new Exception\InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
+            throw new InvalidArgumentException(sprintf('Method by name of "%s" already exists', $name));
         }
         $this->methods[$name] = $method;
         return $this;

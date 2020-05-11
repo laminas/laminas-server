@@ -12,6 +12,15 @@ namespace Laminas\Server\Reflection;
 
 use ReflectionException;
 
+use function array_map;
+use function array_merge;
+use function implode;
+use function is_array;
+use function str_replace;
+use function strpos;
+
+use const PHP_EOL;
+
 class ReflectionMethod extends AbstractFunction
 {
     /**

@@ -13,6 +13,21 @@ namespace Laminas\Server;
 use ErrorException;
 use Laminas\Stdlib\ErrorHandler;
 
+use function array_keys;
+use function dirname;
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function in_array;
+use function is_array;
+use function is_readable;
+use function is_writable;
+use function serialize;
+use function unlink;
+use function unserialize;
+
+use const E_NOTICE;
+
 class Cache
 {
     /** @var string[] */

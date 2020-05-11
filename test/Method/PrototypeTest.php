@@ -134,7 +134,7 @@ class PrototypeTest extends TestCase
 
     public function testConstructorShouldSetObjectStateFromOptions(): void
     {
-        $options = [
+        $options   = [
             'returnType' => 'string',
             'parameters' => [
                 'bool',
@@ -143,7 +143,7 @@ class PrototypeTest extends TestCase
             ],
         ];
         $prototype = new Method\Prototype($options);
-        $test = $prototype->toArray();
+        $test      = $prototype->toArray();
         $this->assertSame($options, $test);
     }
 }
