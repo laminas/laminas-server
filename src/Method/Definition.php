@@ -156,19 +156,8 @@ class Definition
         return $this->methodHelp;
     }
 
-    /**
-     * Set object to use with method calls
-     *
-     * @throws Server\Exception\InvalidArgumentException
-     */
     public function setObject(object $object): self
     {
-        if (! is_object($object) && (null !== $object)) {
-            throw new Server\Exception\InvalidArgumentException(sprintf(
-                'Invalid object passed to %s',
-                __METHOD__
-            ));
-        }
         $this->object = $object;
         return $this;
     }
