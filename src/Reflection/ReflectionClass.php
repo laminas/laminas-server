@@ -60,7 +60,10 @@ class ReflectionClass
     {
         $this->reflection = $reflection;
         $this->name       = $reflection->getName();
-        $this->setNamespace($namespace);
+
+        if (null !== $namespace) {
+            $this->setNamespace($namespace);
+        }
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
@@ -132,7 +135,7 @@ class ReflectionClass
      *
      * @throws Exception\InvalidArgumentException
      */
-    public function setNamespace(?string $namespace = null): void
+    public function setNamespace(?string $namespace): void
     {
         if (empty($namespace)) {
             $this->namespace = null;
