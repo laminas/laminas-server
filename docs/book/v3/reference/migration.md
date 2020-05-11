@@ -15,3 +15,15 @@ Starting in 3.0 this component supports only PHP 7.2+.
 
 Argument type declarations have been added. Passing a wrong argument type which
 previously might have worked, will now raise a TypeError.
+
+## Signature changes
+
+The following signatures changed that could affect class extension and/or
+consumers.
+
+### Server
+
+Namespacing is not required by all `Server` implementations and thus optional.
+Method argument type declarations have been updated to reflect this state.
+`addFunction` and `setClass` methods now accept namespace variables of nullable
+strings, where previously they suggested a `string`-only usage.
