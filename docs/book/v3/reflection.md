@@ -46,6 +46,8 @@ foreach ($prototypes as $prototype) {
 $class->getNamespace();
 ```
 
-`reflectFunction()` returns a `Laminas\Server\Reflection\Function` object;
-`reflectClass()` returns a `Laminas\Server\Reflection\Class` object. Please refer
-to the API documentation to see what methods are available to each.
+`reflectFunction()` returns a
+[`Laminas\Server\Reflection\ReflectionFunction`](https://github.com/laminas/laminas-server/blob/master/src/Reflection/ReflectionFunction.php)
+object; `reflectClass()` returns a
+[`Laminas\Server\Reflection\ReflectionClass`](https://github.com/laminas/laminas-server/blob/master/src/Reflection/ReflectionClass.php)
+object.
