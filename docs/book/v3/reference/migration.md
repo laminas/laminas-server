@@ -1,6 +1,6 @@
 # Migration to version 3.0
 
-However, starting in this version, we offer a few changes affecting the
+Starting in version 3.0, we offer a few changes affecting the
 following that you should be aware of, and potentially update your application
 to adopt:
 
@@ -11,7 +11,7 @@ Starting in 3.0 this component supports only PHP 7.2+.
 ## Strict Typing
 
 Argument type declarations have been added. Passing a wrong argument type which
-previously might have worked, will now raise a TypeError.
+previously might have worked will now raise a `TypeError`.
 
 ## Signature changes
 
