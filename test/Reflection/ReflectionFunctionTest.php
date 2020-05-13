@@ -169,6 +169,7 @@ class ReflectionFunctionTest extends TestCase
     }
 }
 
+// phpcs:disable
 /**
  * \LaminasTest\Server\Reflection\function1
  *
@@ -182,6 +183,7 @@ class ReflectionFunctionTest extends TestCase
 function function1(string $var1, $var2, array $var3): ?array
 {
 }
+// phpcs:enable
 
 /**
  * \LaminasTest\Server\Reflection\function2
@@ -193,12 +195,14 @@ function function2(): void
 {
 }
 
+// phpcs:disable
 /**
  * \LaminasTest\Server\Reflection\function3
  *
  * @param  string $var1
  * @return void
  */
+// phpcs:enable
 function function3(string $var1): void
 {
 }

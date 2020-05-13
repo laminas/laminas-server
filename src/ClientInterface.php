@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server;
 
-interface Client
+interface ClientInterface
 {
     /**
      * Executes remote call

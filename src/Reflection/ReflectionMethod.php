@@ -10,12 +10,13 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
+use ReflectionMethod as PhpReflectionMethod;
 
 use function array_map;
 use function array_merge;
 use function implode;
-use function is_array;
 use function str_replace;
 use function strpos;
 
@@ -44,7 +45,7 @@ class ReflectionMethod extends AbstractFunction
 
     public function __construct(
         ReflectionClass $class,
-        \ReflectionMethod $r,
+        PhpReflectionMethod $r,
         ?string $namespace = null,
         array $argv = []
     ) {
@@ -87,11 +88,11 @@ class ReflectionMethod extends AbstractFunction
     public function __wakeup(): void
     {
         $this->classReflection = new ReflectionClass(
-            new \ReflectionClass($this->class),
+            new PhpReflectionClass($this->class),
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
-        $this->reflection      = new \ReflectionMethod($this->classReflection->getName(), $this->name);
+        $this->reflection      = new PhpReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
     protected function reflect(): void

@@ -22,7 +22,6 @@ use function array_shift;
 use function array_unshift;
 use function call_user_func_array;
 use function count;
-use function is_array;
 use function method_exists;
 use function preg_match;
 
@@ -219,7 +218,7 @@ abstract class AbstractFunction
                 $param = new ReflectionParameter(
                     $params[$key],
                     $type,
-                    (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null)
+                    $this->paramDesc[$key] ?? null
                 );
                 $param->setPosition($key);
                 $tmp[] = $param;
@@ -248,8 +247,8 @@ abstract class AbstractFunction
             $this->docComment = $function->getDocComment();
         }
 
-        $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
-        $helpText   = $scanner->getLongDescription();
+        $scanner  = new DocBlockReflection($this->docComment ? : '/***/');
+        $helpText = $scanner->getLongDescription();
         /** @var ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
         /** @var ReturnTag $returnTag */
@@ -278,14 +277,14 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
-                $paramTypesTmp[] = [($param->isArray()) ? 'array' : 'mixed'];
+                $paramTypesTmp[] = [$param->isArray() ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
         } else {
             $paramDesc = [];
             foreach ($paramTags as $paramTag) {
                 $paramTypesTmp[] = $paramTag->getTypes();
-                $paramDesc[]     = ($paramTag->getDescription()) ? : '';
+                $paramDesc[]     = $paramTag->getDescription() ? : '';
             }
         }
 
@@ -419,7 +418,8 @@ abstract class AbstractFunction
     {
         $serializable = [];
         foreach ($this as $name => $value) {
-            if ($value instanceof PhpReflectionFunction
+            if (
+                $value instanceof PhpReflectionFunction
                 || $value instanceof PhpReflectionMethod
             ) {
                 continue;

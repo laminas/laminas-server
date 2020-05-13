@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\TestAsset;
 
+// phpcs:disable
 /**
  * \LaminasTest\Server\reflectionTestFunction
  *
@@ -23,3 +24,4 @@ namespace LaminasTest\Server\TestAsset;
 function reflectionTestFunction(bool $arg1, $arg2, string $arg3 = 'string', $arg4 = 'array')
 {
 }
+// phpcs:enable

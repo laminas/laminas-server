@@ -16,7 +16,7 @@ use ReflectionException;
 use function call_user_func_array;
 use function is_object;
 
-abstract class AbstractServer implements Server
+abstract class AbstractServer implements ServerInterface
 {
     /** @var bool */
     protected $overwriteExistingMethods = false;
@@ -40,10 +40,10 @@ abstract class AbstractServer implements Server
      *
      * @deprecated Since 2.7.0; method will have private visibility starting in 3.0.
      */
-    // @codingStandardsIgnoreStart
+    // phpcs:disable
     protected function _buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
     {
-    // @codingStandardsIgnoreEnd
+    // phpcs:enable
         $callback = new Method\Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
@@ -67,10 +67,10 @@ abstract class AbstractServer implements Server
      * @return Method\Definition
      * @throws Exception\RuntimeException on duplicate entry
      */
-    // @codingStandardsIgnoreStart
+    // phpcs:disable
     protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
     {
-    // @codingStandardsIgnoreEnd
+    // phpcs:enable
         $ns     = $reflection->getNamespace();
         $name   = $reflection->getName();
         $method = empty($ns) ? $name : $ns . '.' . $name;
@@ -117,23 +117,27 @@ abstract class AbstractServer implements Server
      * @return mixed
      * @throws ReflectionException
      */
-    // @codingStandardsIgnoreStart
+    // phpcs:disable
     protected function _dispatch(Method\Definition $invokable, array $params)
     {
-    // @codingStandardsIgnoreEnd
+    // phpcs:enable
         $callback = $invokable->getCallback();
         $type     = $callback->getType();
 
         if ('function' === $type) {
             $function = $callback->getFunction();
+            // phpcs:disable
             return call_user_func_array($function, $params);
+            // phpcs:enable
         }
 
         $class  = $callback->getClass();
         $method = $callback->getMethod();
 
         if ('static' === $type) {
+            // phpcs:disable
             return call_user_func_array([$class, $method], $params);
+            // phpcs:enable
         }
 
         $object = $invokable->getObject();
@@ -146,10 +150,12 @@ abstract class AbstractServer implements Server
                 $object = new $class();
             }
         }
+        // phpcs:disable
         return call_user_func_array([$object, $method], $params);
+        // phpcs:enable
     }
 
-    // @codingStandardsIgnoreStart
+    // phpcs:disable
     /**
      * Map PHP type to protocol type
      *
@@ -157,5 +163,5 @@ abstract class AbstractServer implements Server
      *     prefix in 3.0.
      */
     abstract protected function _fixType(string $type): string;
-    // @codingStandardsIgnoreEnd
+    // phpcs:enable
 }

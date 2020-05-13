@@ -18,12 +18,15 @@ class Node
     /** @var mixed */
     protected $value;
 
-    /** @var Node[] */
+    /** @var self[] */
     protected $children = [];
 
-    /** @var null|Node */
+    /** @var null|self */
     protected $parent;
 
+    /**
+     * @param mixed $value
+     */
     public function __construct($value, ?self $parent = null)
     {
         $this->value = $value;
@@ -32,6 +35,7 @@ class Node
         }
     }
 
+    // phpcs:disable
     /**
      * Set parent node
      *
@@ -39,7 +43,8 @@ class Node
      * @param  bool $new Whether or not the child node is newly created
      * and should always be attached
      */
-    public function setParent(Node $node, bool $new = false): void
+    // phpcs:enable
+    public function setParent(self $node, bool $new = false): void
     {
         $this->parent = $node;
 
@@ -48,12 +53,16 @@ class Node
         }
     }
 
+    /**
+     * @param mixed $value
+     * @return static
+     */
     public function createChild($value): self
     {
         return new static($value, $this);
     }
 
-    public function attachChild(Node $node): void
+    public function attachChild(self $node): void
     {
         $this->children[] = $node;
 
@@ -77,11 +86,17 @@ class Node
         return $this->parent;
     }
 
+    /**
+     * @return mixed
+     */
     public function getValue()
     {
         return $this->value;
     }
 
+    /**
+     * @param mixed $value
+     */
     public function setValue($value): void
     {
         $this->value = $value;

@@ -13,7 +13,9 @@ namespace Laminas\Server;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionFunction;
+use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
+use ReflectionFunction as PhpReflectionFunction;
 use ReflectionObject;
 
 use function class_exists;
@@ -45,7 +47,7 @@ class Reflection
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
         } elseif (is_string($class) && class_exists($class)) {
-            $reflection = new \ReflectionClass($class);
+            $reflection = new PhpReflectionClass($class);
         } else {
             throw new InvalidArgumentException('Invalid class or object passed to attachClass()');
         }
@@ -81,6 +83,6 @@ class Reflection
             ));
         }
 
-        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
+        return new ReflectionFunction(new PhpReflectionFunction($function), $namespace, $argv);
     }
 }

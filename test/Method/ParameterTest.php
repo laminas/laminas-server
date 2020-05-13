@@ -13,8 +13,6 @@ namespace LaminasTest\Server\Method;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-use function compact;
-
 class ParameterTest extends TestCase
 {
     /** @var Method\Parameter */
@@ -95,7 +93,13 @@ class ParameterTest extends TestCase
         $optional     = true;
         $defaultValue = 'bar';
         $description  = 'Foo bar!';
-        $parameter    = compact('type', 'name', 'optional', 'defaultValue', 'description');
+        $parameter    = [
+            'type'         => $type,
+            'name'         => $name,
+            'optional'     => $optional,
+            'defaultValue' => $defaultValue,
+            'description'  => $description,
+        ];
         $this->parameter->setType($type)
                         ->setName($name)
                         ->setOptional($optional)
@@ -112,7 +116,13 @@ class ParameterTest extends TestCase
         $optional     = true;
         $defaultValue = 'bar';
         $description  = 'Foo bar!';
-        $options      = compact('type', 'name', 'optional', 'defaultValue', 'description');
+        $options      = [
+            'type'         => $type,
+            'name'         => $name,
+            'optional'     => $optional,
+            'defaultValue' => $defaultValue,
+            'description'  => $description,
+        ];
         $parameter    = new Method\Parameter($options);
         $test         = $parameter->toArray();
         $this->assertEquals($options, $test);

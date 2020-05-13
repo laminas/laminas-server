@@ -10,16 +10,13 @@ declare(strict_types=1);
 
 namespace Laminas\Server;
 
-interface Server
+interface ServerInterface
 {
     /**
      * Attach a function as a server method
      *
      * Namespacing is primarily for xmlrpc, but may be used with other
      * implementations to prevent naming collisions.
-     *
-     * @param  null|array Optional array of arguments to pass to callback at
-     *                    dispatch.
      */
     public function addFunction(string $function, ?string $namespace = null): void;
 
@@ -33,13 +30,13 @@ interface Server
      * Namespacing is primarily for xmlrpc, but could be used for other
      * implementations as well.
      *
-     * @param  mixed $class Class name or object instance to examine and attach
-     *                      to the server.
-     * @param  string $namespace Optional namespace with which to prepend method
-     *                           names in the dispatch table.
-     *                           methods in the class will be valid callbacks.
-     * @param  null|array Optional array of arguments to pass to callbacks at
-     *                    dispatch.
+     * @param  mixed       $class Class name or object instance to examine and attach
+     *                            to the server.
+     * @param  null|string $namespace Optional namespace with which to prepend method
+     *                                names in the dispatch table.
+     *                                methods in the class will be valid callbacks.
+     * @param  null|array  $argv Optional array of arguments to pass to callbacks at
+     *                           dispatch.
      */
     public function setClass($class, ?string $namespace = null, ?array $argv = null): void;
 
