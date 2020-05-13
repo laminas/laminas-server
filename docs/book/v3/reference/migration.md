@@ -18,6 +18,14 @@ previously might have worked will now raise a `TypeError`.
 The following signatures changed that could affect class extension and/or
 consumers.
 
+### Interface suffix
+
+As of
+[laminas-coding-standard](https://github.com/laminas/laminas-coding-standard)
+version `2.0`, interface names must have an `Interface` suffix. The `Server`
+interface has been renamed to `ServerInterface` and the `Client` interface to
+`ClientInterface`.
+
 ### Reflection
 
 Previously the non-represented state of `$argv` in the `reflectClass()` and
