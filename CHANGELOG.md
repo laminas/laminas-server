@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#6](https://github.com/laminas/laminas-server/pull/6) changes the code to provide explicit parameter and return type hints wherever possible, and enable strict typechecks. This means that most signatures have changed, which impacts any code extending classes from this package.
 
 ### Deprecated
 
