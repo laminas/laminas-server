@@ -13,7 +13,7 @@ use ReflectionClass;
 /**
  * Abstract Server implementation
  */
-abstract class AbstractServer implements Server
+abstract class AbstractServer implements ServerInterface
 {
     /**
      * @var bool Flag; whether or not overwriting existing methods is allowed

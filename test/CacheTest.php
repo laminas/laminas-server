@@ -12,7 +12,7 @@ use Laminas\Server\Cache;
 use Laminas\Server\Definition;
 use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Definition as MethodDefinition;
-use Laminas\Server\Server;
+use Laminas\Server\ServerInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -39,14 +39,14 @@ class CacheTest extends TestCase
         $r->setValue(Cache::class, $methods);
     }
 
-    public function testCacheCanAcceptAServerReturningAnArrayOfFunctions()
+    public function testCacheCanAcceptAServerInterfaceReturningAnArrayOfFunctions()
     {
         $functions = [
             'strpos' => 'strpos',
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->prophesize(Server::class);
+        $server = $this->prophesize(ServerInterface::class);
         $server->getFunctions()->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -58,7 +58,7 @@ class CacheTest extends TestCase
         $this->assertEquals($functions, $data);
     }
 
-    public function testCacheCanAcceptAServerReturningADefinition()
+    public function testCacheCanAcceptAServerInterfaceReturningADefinition()
     {
         $definition = new Definition();
         foreach (['strpos', 'substr', 'strlen'] as $function) {
@@ -72,7 +72,7 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->prophesize(Server::class);
+        $server = $this->prophesize(ServerInterface::class);
         $server->getFunctions()->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -93,7 +93,7 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->prophesize(Server::class);
+        $server = $this->prophesize(ServerInterface::class);
         $server->getFunctions()->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -125,7 +125,7 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->prophesize(Server::class);
+        $server = $this->prophesize(ServerInterface::class);
         $server->getFunctions()->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
