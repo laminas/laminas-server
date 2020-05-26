@@ -52,14 +52,11 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Build callback for method signature
      *
-     * @deprecated Since 2.7.0; method will have private visibility starting in 3.0.
      * @param  Reflection\AbstractFunction $reflection
      * @return Method\Callback
      */
-    // @codingStandardsIgnoreStart
-    protected function _buildCallback(Reflection\AbstractFunction $reflection)
+    protected function buildCallback(Reflection\AbstractFunction $reflection)
     {
-    // @codingStandardsIgnoreEnd
         $callback = new Method\Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
@@ -70,6 +67,21 @@ abstract class AbstractServer implements ServerInterface
                      ->setFunction($reflection->getName());
         }
         return $callback;
+    }
+
+    /**
+     * Build callback for method signature
+     *
+     * @deprecated Since 2.7.0; method will be removed in 3.0, use
+     *             buildCallback() instead.
+     * @param  Reflection\AbstractFunction $reflection
+     * @return Method\Callback
+     */
+    // @codingStandardsIgnoreStart
+    protected function _buildCallback(Reflection\AbstractFunction $reflection)
+    {
+    // @codingStandardsIgnoreEnd
+        return $this->buildCallback($reflection);
     }
 
     /**
@@ -96,7 +108,7 @@ abstract class AbstractServer implements ServerInterface
 
         $definition = new Method\Definition();
         $definition->setName($method)
-                   ->setCallback($this->_buildCallback($reflection))
+                   ->setCallback($this->buildCallback($reflection))
                    ->setMethodHelp($reflection->getDescription())
                    ->setInvokeArguments($reflection->getInvokeArguments());
 
