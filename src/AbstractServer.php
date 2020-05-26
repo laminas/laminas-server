@@ -87,17 +87,13 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Build a method signature
      *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
      * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
      * @return Method\Definition
      * @throws Exception\RuntimeException on duplicate entry
      */
-    // @codingStandardsIgnoreStart
-    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null)
     {
-    // @codingStandardsIgnoreEnd
         $ns         = $reflection->getNamespace();
         $name       = $reflection->getName();
         $method     = empty($ns) ? $name : $ns . '.' . $name;
