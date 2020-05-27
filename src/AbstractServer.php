@@ -132,6 +132,23 @@ abstract class AbstractServer implements Server
     }
 
     /**
+     * Build a method signature
+     *
+     * @deprecated Since 2.7.0; method will be removed in 3.0, use
+     *             buildSignature() instead.
+     * @param  Reflection\AbstractFunction $reflection
+     * @param  null|string|object $class
+     * @return Method\Definition
+     * @throws Exception\RuntimeException on duplicate entry
+     */
+    // @codingStandardsIgnoreStart
+    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    {
+    // @codingStandardsIgnoreEnd
+        return $this->buildSignature($reflection, $class);
+    }
+
+    /**
      * Dispatch method
      *
      * @deprecated Since 2.7.0; method will be renamed to remove underscore
