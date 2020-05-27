@@ -10,7 +10,7 @@ namespace Laminas\Server;
 
 /**
  * Server Interface
- * @deprecated Server is replaced by ServerInterface and will be removed in 3.0.
+ * @deprecated Since 2.9.0; Server is replaced by ServerInterface and will be removed in 3.0.
  */
 interface Server extends ServerInterface
 {
