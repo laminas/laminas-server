@@ -38,12 +38,11 @@ abstract class AbstractServer implements Server
     /**
      * Build callback for method signature
      *
-     * @deprecated Since 2.7.0; method will have private visibility starting in 3.0.
+     * @param  Reflection\AbstractFunction $reflection
+     * @return Method\Callback
      */
-    // @codingStandardsIgnoreStart
-    protected function _buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
+    protected function buildCallback(Reflection\AbstractFunction $reflection)
     {
-    // @codingStandardsIgnoreEnd
         $callback = new Method\Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
@@ -57,23 +56,33 @@ abstract class AbstractServer implements Server
     }
 
     /**
-     * Build a method signature
+     * Build callback for method signature
      *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
+     * @deprecated Since 2.7.0; method will be removed in 3.0, use
+     *             buildCallback() instead.
+     * @param  Reflection\AbstractFunction $reflection
+     * @return Method\Callback
+     */
+    // @codingStandardsIgnoreStart
+    protected function _buildCallback(Reflection\AbstractFunction $reflection)
+    {
+    // @codingStandardsIgnoreEnd
+        return $this->buildCallback($reflection);
+    }
+
+    /**
+     * Build a method signature
      *
      * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
      * @return Method\Definition
      * @throws Exception\RuntimeException on duplicate entry
      */
-    // @codingStandardsIgnoreStart
-    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
+    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null)
     {
-    // @codingStandardsIgnoreEnd
-        $ns     = $reflection->getNamespace();
-        $name   = $reflection->getName();
-        $method = empty($ns) ? $name : $ns . '.' . $name;
+        $ns         = $reflection->getNamespace();
+        $name       = $reflection->getName();
+        $method     = empty($ns) ? $name : $ns . '.' . $name;
 
         if (! $this->overwriteExistingMethods && $this->table->hasMethod($method)) {
             throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
@@ -81,7 +90,7 @@ abstract class AbstractServer implements Server
 
         $definition = new Method\Definition();
         $definition->setName($method)
-                   ->setCallback($this->_buildCallback($reflection))
+                   ->setCallback($this->buildCallback($reflection))
                    ->setMethodHelp($reflection->getDescription())
                    ->setInvokeArguments($reflection->getInvokeArguments());
 
@@ -106,6 +115,23 @@ abstract class AbstractServer implements Server
         }
         $this->table->addMethod($definition);
         return $definition;
+    }
+
+    /**
+     * Build a method signature
+     *
+     * @deprecated Since 2.7.0; method will be removed in 3.0, use
+     *             buildSignature() instead.
+     * @param  Reflection\AbstractFunction $reflection
+     * @param  null|string|object $class
+     * @return Method\Definition
+     * @throws Exception\RuntimeException on duplicate entry
+     */
+    // @codingStandardsIgnoreStart
+    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    {
+    // @codingStandardsIgnoreEnd
+        return $this->buildSignature($reflection, $class);
     }
 
     /**
