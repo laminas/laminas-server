@@ -30,10 +30,10 @@ class Cache
      * on success.
      *
      * @param  string $filename
-     * @param  \Laminas\Server\ServerInterface $server
+     * @param  \Laminas\Server\Server $server
      * @return bool
      */
-    public static function save($filename, ServerInterface $server)
+    public static function save($filename, Server $server)
     {
         if (! is_string($filename) || (! file_exists($filename) && ! is_writable(dirname($filename)))) {
             return false;
@@ -79,10 +79,10 @@ class Cache
      * </code>
      *
      * @param  string $filename
-     * @param  \Laminas\Server\ServerInterface $server
+     * @param  \Laminas\Server\Server $server
      * @return bool
      */
-    public static function get($filename, ServerInterface $server)
+    public static function get($filename, Server $server)
     {
         if (! is_string($filename) || ! file_exists($filename) || ! is_readable($filename)) {
             return false;
