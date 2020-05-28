@@ -16,7 +16,7 @@ use ReflectionException;
 use function call_user_func_array;
 use function is_object;
 
-abstract class AbstractServer implements Server
+abstract class AbstractServer implements ServerInterface
 {
     /** @var bool */
     protected $overwriteExistingMethods = false;
@@ -37,52 +37,32 @@ abstract class AbstractServer implements Server
 
     /**
      * Build callback for method signature
-     *
-     * @param  Reflection\AbstractFunction $reflection
-     * @return Method\Callback
      */
-    protected function buildCallback(Reflection\AbstractFunction $reflection)
+    private function buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
     {
         $callback = new Method\Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
-                     ->setClass($reflection->getDeclaringClass()->getName())
-                     ->setMethod($reflection->getName());
+                ->setClass($reflection->getDeclaringClass()->getName())
+                ->setMethod($reflection->getName());
         } elseif ($reflection instanceof Reflection\ReflectionFunction) {
             $callback->setType('function')
-                     ->setFunction($reflection->getName());
+                ->setFunction($reflection->getName());
         }
         return $callback;
     }
 
     /**
-     * Build callback for method signature
-     *
-     * @deprecated Since 2.7.0; method will be removed in 3.0, use
-     *             buildCallback() instead.
-     * @param  Reflection\AbstractFunction $reflection
-     * @return Method\Callback
-     */
-    // @codingStandardsIgnoreStart
-    protected function _buildCallback(Reflection\AbstractFunction $reflection)
-    {
-    // @codingStandardsIgnoreEnd
-        return $this->buildCallback($reflection);
-    }
-
-    /**
      * Build a method signature
      *
-     * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
-     * @return Method\Definition
-     * @throws Exception\RuntimeException on duplicate entry
+     * @throws Exception\RuntimeException On duplicate entry.
      */
-    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
     {
-        $ns         = $reflection->getNamespace();
-        $name       = $reflection->getName();
-        $method     = empty($ns) ? $name : $ns . '.' . $name;
+        $ns     = $reflection->getNamespace();
+        $name   = $reflection->getName();
+        $method = empty($ns) ? $name : $ns . '.' . $name;
 
         if (! $this->overwriteExistingMethods && $this->table->hasMethod($method)) {
             throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
@@ -90,16 +70,16 @@ abstract class AbstractServer implements Server
 
         $definition = new Method\Definition();
         $definition->setName($method)
-                   ->setCallback($this->buildCallback($reflection))
-                   ->setMethodHelp($reflection->getDescription())
-                   ->setInvokeArguments($reflection->getInvokeArguments());
+            ->setCallback($this->buildCallback($reflection))
+            ->setMethodHelp($reflection->getDescription())
+            ->setInvokeArguments($reflection->getInvokeArguments());
 
         foreach ($reflection->getPrototypes() as $proto) {
             $prototype = new Method\Prototype();
-            $prototype->setReturnType($this->_fixType($proto->getReturnType()));
+            $prototype->setReturnType($this->fixType($proto->getReturnType()));
             foreach ($proto->getParameters() as $parameter) {
                 $param = new Method\Parameter([
-                    'type'     => $this->_fixType($parameter->getType()),
+                    'type'     => $this->fixType($parameter->getType()),
                     'name'     => $parameter->getName(),
                     'optional' => $parameter->isOptional(),
                 ]);
@@ -118,48 +98,30 @@ abstract class AbstractServer implements Server
     }
 
     /**
-     * Build a method signature
-     *
-     * @deprecated Since 2.7.0; method will be removed in 3.0, use
-     *             buildSignature() instead.
-     * @param  Reflection\AbstractFunction $reflection
-     * @param  null|string|object $class
-     * @return Method\Definition
-     * @throws Exception\RuntimeException on duplicate entry
-     */
-    // @codingStandardsIgnoreStart
-    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
-    {
-    // @codingStandardsIgnoreEnd
-        return $this->buildSignature($reflection, $class);
-    }
-
-    /**
      * Dispatch method
-     *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
      *
      * @return mixed
      * @throws ReflectionException
      */
-    // @codingStandardsIgnoreStart
-    protected function _dispatch(Method\Definition $invokable, array $params)
+    protected function dispatch(Method\Definition $invokable, array $params)
     {
-    // @codingStandardsIgnoreEnd
         $callback = $invokable->getCallback();
         $type     = $callback->getType();
 
         if ('function' === $type) {
             $function = $callback->getFunction();
+            // phpcs:disable
             return call_user_func_array($function, $params);
+            // phpcs:enable
         }
 
         $class  = $callback->getClass();
         $method = $callback->getMethod();
 
         if ('static' === $type) {
+            // phpcs:disable
             return call_user_func_array([$class, $method], $params);
+            // phpcs:enable
         }
 
         $object = $invokable->getObject();
@@ -172,16 +134,13 @@ abstract class AbstractServer implements Server
                 $object = new $class();
             }
         }
+        // phpcs:disable
         return call_user_func_array([$object, $method], $params);
+        // phpcs:enable
     }
 
-    // @codingStandardsIgnoreStart
     /**
      * Map PHP type to protocol type
-     *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
      */
-    abstract protected function _fixType(string $type): string;
-    // @codingStandardsIgnoreEnd
+    abstract protected function fixType(string $type): string;
 }

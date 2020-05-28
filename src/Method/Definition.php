@@ -136,7 +136,7 @@ class Definition
     /**
      * Get all prototypes
      *
-     * @return Prototype[] $prototypes
+     * @return Prototype[]
      */
     public function getPrototypes(): array
     {

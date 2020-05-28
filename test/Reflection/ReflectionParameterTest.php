@@ -14,10 +14,11 @@ use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+use ReflectionParameter as PhpReflectionParameter;
 
 class ReflectionParameterTest extends TestCase
 {
-    protected function getParameter(): \ReflectionParameter
+    protected function getParameter(): PhpReflectionParameter
     {
         $method     = new ReflectionMethod(ReflectionParameter::class, 'setType');
         $parameters = $method->getParameters();
@@ -28,7 +29,7 @@ class ReflectionParameterTest extends TestCase
     {
         $parameter = $this->getParameter();
 
-        $reflection = new Reflection\ReflectionParameter($parameter);
+        $reflection = new ReflectionParameter($parameter);
         $this->assertInstanceOf(ReflectionParameter::class, $reflection);
     }
 

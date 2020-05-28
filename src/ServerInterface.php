@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server;
 
 interface ServerInterface
@@ -15,14 +17,8 @@ interface ServerInterface
      *
      * Namespacing is primarily for xmlrpc, but may be used with other
      * implementations to prevent naming collisions.
-     *
-     * @param  string $function
-     * @param  string $namespace
-     * @param  null|array Optional array of arguments to pass to callback at
-     *                    dispatch.
-     * @return void
      */
-    public function addFunction($function, $namespace = '');
+    public function addFunction(string $function, ?string $namespace = null): void;
 
     /**
      * Attach a class to a server
@@ -34,25 +30,23 @@ interface ServerInterface
      * Namespacing is primarily for xmlrpc, but could be used for other
      * implementations as well.
      *
-     * @param  mixed $class Class name or object instance to examine and attach
-     *                      to the server.
-     * @param  string $namespace Optional namespace with which to prepend method
-     *                           names in the dispatch table.
-     *                           methods in the class will be valid callbacks.
-     * @param  null|array Optional array of arguments to pass to callbacks at
-     *                    dispatch.
-     * @return void
+     * @param  mixed       $class Class name or object instance to examine and attach
+     *                            to the server.
+     * @param  null|string $namespace Optional namespace with which to prepend method
+     *                                names in the dispatch table.
+     *                                methods in the class will be valid callbacks.
+     * @param  null|array  $argv Optional array of arguments to pass to callbacks at
+     *                           dispatch.
      */
-    public function setClass($class, $namespace = '', $argv = null);
+    public function setClass($class, ?string $namespace = null, ?array $argv = null): void;
 
     /**
      * Generate a server fault
      *
-     * @param  mixed $fault
-     * @param  int $code
+     * @param  null|mixed $fault
      * @return mixed
      */
-    public function fault($fault = null, $code = 404);
+    public function fault($fault = null, int $code = 404);
 
     /**
      * Handle a request
@@ -61,10 +55,10 @@ interface ServerInterface
      * request based on defaults. Dispatches server request to appropriate
      * method and returns a response
      *
-     * @param  mixed $request
+     * @param  null|mixed $request
      * @return mixed
      */
-    public function handle($request = false);
+    public function handle($request = null);
 
     /**
      * Return a server definition array
@@ -81,37 +75,27 @@ interface ServerInterface
      * Load server definition
      *
      * Used for persistence; loads a construct as returned by {@link getFunctions()}.
-     *
-     * @param  array $definition
-     * @return void
      */
-    public function loadFunctions($definition);
+    public function loadFunctions(array $definition): void;
 
     /**
      * Set server persistence
      *
      * @todo Determine how to implement this
-     * @param  int $mode
-     * @return void
      */
-    public function setPersistence($mode);
+    public function setPersistence(int $mode): void;
 
     /**
      * Sets auto-response flag for the server.
      *
      * To unify all servers, default behavior should be to auto-emit response.
-     *
-     * @param  bool $flag
-     * @return ServerInterface Self instance.
      */
-    public function setReturnResponse($flag = true);
+    public function setReturnResponse(bool $flag = true): self;
 
     /**
      * Returns auto-response flag of the server.
-     *
-     * @return bool $flag Current status.
      */
-    public function getReturnResponse();
+    public function getReturnResponse(): bool;
 
     /**
      * Returns last produced response.

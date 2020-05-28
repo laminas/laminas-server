@@ -44,7 +44,7 @@ class Cache
      *
      * @throws ErrorException
      */
-    public static function save(string $filename, Server $server): bool
+    public static function save(string $filename, ServerInterface $server): bool
     {
         if (! file_exists($filename) && ! is_writable(dirname($filename))) {
             return false;
@@ -91,7 +91,7 @@ class Cache
      *
      * @throws ErrorException
      */
-    public static function get(string $filename, Server $server): bool
+    public static function get(string $filename, ServerInterface $server): bool
     {
         if (! file_exists($filename) || ! is_readable($filename)) {
             return false;
@@ -127,7 +127,7 @@ class Cache
     }
 
     /**
-     * @var array|Definition
+     * @param array|Definition $methods
      * @return array|Definition
      */
     private static function createDefinition($methods)

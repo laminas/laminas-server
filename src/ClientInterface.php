@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server;
 
 interface ClientInterface
@@ -16,7 +18,7 @@ interface ClientInterface
      * Unified interface for calling custom remote methods.
      *
      * @param  string $method Remote call name.
-     * @param  array $params Call parameters.
+     * @param  array  $params Call parameters.
      * @return mixed Remote call results.
      */
     public function call($method, $params = []);

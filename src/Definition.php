@@ -50,7 +50,7 @@ class Definition implements Countable, Iterator
      *
      * @param  array|Method\Definition $method
      * @return $this
-     * @throws InvalidArgumentException if duplicate or invalid method provided
+     * @throws InvalidArgumentException If duplicate or invalid method provided.
      */
     public function addMethod($method, ?string $name = null): self
     {
