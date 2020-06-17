@@ -110,9 +110,7 @@ abstract class AbstractServer implements ServerInterface
 
         if ('function' === $type) {
             $function = $callback->getFunction();
-            // phpcs:disable
-            return call_user_func_array($function, $params);
-            // phpcs:enable
+            return $function(...$params);
         }
 
         $class  = $callback->getClass();
