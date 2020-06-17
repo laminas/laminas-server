@@ -13,7 +13,6 @@ namespace Laminas\Server;
 use ReflectionClass;
 use ReflectionException;
 
-use function call_user_func_array;
 use function is_object;
 
 abstract class AbstractServer implements ServerInterface
@@ -131,9 +130,8 @@ abstract class AbstractServer implements ServerInterface
                 $object = new $class();
             }
         }
-        // phpcs:disable
-        return call_user_func_array([$object, $method], $params);
-        // phpcs:enable
+        $callback = [$object, $method];
+        return $callback(...$params);
     }
 
     /**
