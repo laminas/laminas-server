@@ -20,11 +20,9 @@ consumers.
 
 ### Interface suffix
 
-As of
-[laminas-coding-standard](https://github.com/laminas/laminas-coding-standard)
-version `2.0`, interface names must have an `Interface` suffix. The `Server`
-interface has been renamed to `ServerInterface` and the `Client` interface to
-`ClientInterface`.
+For consistency with the rest of the project, where we have standardized on the
+Interface suffix, the `Server` interface has been renamed to `ServerInterface`
+and the `Client` interface to `ClientInterface`.
 
 ### Reflection
 
