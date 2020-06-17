@@ -6,9 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds `Laminas\Server\ClientInterface`, which now defines the methods originally in `Laminas\Server\Client`, and which will replace that interface in version 3.0.
+- [#8](https://github.com/laminas/laminas-server/pull/8) and [#9](https://github.com/laminas/laminas-server/pull/9) add `Laminas\Server\ClientInterface`, which extends `Laminas\Server\Client`, and which will replace that interface in version 3.0.
 
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds `Laminas\Server\ServerInterface`, which now defines the methods originally in `Laminas\Server\Server`, and which will replace that interface in version 3.0.
+- [#8](https://github.com/laminas/laminas-server/pull/8) and [#9](https://github.com/laminas/laminas-server/pull/9) add `Laminas\Server\ServerInterface`, which extends `Laminas\Server\Server`, and which will replace that interface in version 3.0.
 
 ### Changed
 
