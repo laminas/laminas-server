@@ -117,9 +117,8 @@ abstract class AbstractServer implements ServerInterface
         $method = $callback->getMethod();
 
         if ('static' === $type) {
-            // phpcs:disable
-            return call_user_func_array([$class, $method], $params);
-            // phpcs:enable
+            $callback = [$class, $method];
+            return $callback(...$params);
         }
 
         $object = $invokable->getObject();
