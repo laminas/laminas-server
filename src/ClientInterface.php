@@ -8,16 +8,6 @@
 
 namespace Laminas\Server;
 
-interface ClientInterface
+interface ClientInterface extends Client
 {
-    /**
-     * Executes remote call
-     *
-     * Unified interface for calling custom remote methods.
-     *
-     * @param  string $method Remote call name.
-     * @param  array $params Call parameters.
-     * @return mixed Remote call results.
-     */
-    public function call($method, $params = []);
 }
