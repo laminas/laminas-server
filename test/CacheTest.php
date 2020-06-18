@@ -16,6 +16,7 @@ use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Definition as MethodDefinition;
 use Laminas\Server\ServerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionProperty;
 
 use function file_get_contents;
@@ -26,6 +27,8 @@ use function unserialize;
 
 class CacheTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var string */
     private $cacheFile;
 

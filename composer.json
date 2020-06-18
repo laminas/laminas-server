@@ -25,13 +25,14 @@
         }
     },
     "require": {
-        "php": "^7.2",
+        "php": "^7.4",
         "laminas/laminas-code": "^3.4.1",
         "laminas/laminas-stdlib": "^3.2.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.0.0",
-        "phpunit/phpunit": "^8.5.2"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.2"
     },
     "autoload": {
         "psr-4": {
