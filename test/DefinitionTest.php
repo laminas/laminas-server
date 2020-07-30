@@ -30,8 +30,8 @@ class DefinitionTest extends TestCase
     public function testMethodsShouldBeEmptyArrayByDefault(): void
     {
         $methods = $this->definition->getMethods();
-        $this->assertIsArray($methods);
-        $this->assertEmpty($methods);
+        self::assertIsArray($methods);
+        self::assertEmpty($methods);
     }
 
     public function testDefinitionShouldAllowAddingSingleMethods(): void
@@ -39,9 +39,9 @@ class DefinitionTest extends TestCase
         $method = new Method\Definition(['name' => 'foo']);
         $this->definition->addMethod($method);
         $methods = $this->definition->getMethods();
-        $this->assertCount(1, $methods);
-        $this->assertSame($method, $methods['foo']);
-        $this->assertSame($method, $this->definition->getMethod('foo'));
+        self::assertCount(1, $methods);
+        self::assertSame($method, $methods['foo']);
+        self::assertSame($method, $this->definition->getMethod('foo'));
     }
 
     public function testConstructorNumericKeyWillBeReplacedByMethodName(): void
@@ -49,8 +49,8 @@ class DefinitionTest extends TestCase
         $method     = new Method\Definition(['name' => 'foo']);
         $definition = new Server\Definition(['100' => $method]);
 
-        $this->assertCount(1, $definition);
-        $this->assertSame($method, $definition->getMethod('foo'));
+        self::assertCount(1, $definition);
+        self::assertSame($method, $definition->getMethod('foo'));
     }
 
     public function testAddMethodNumericKeyWillBeReplacedByMethodName(): void
@@ -59,8 +59,8 @@ class DefinitionTest extends TestCase
         $definition = new Server\Definition();
         $definition->addMethod($method, '100');
 
-        $this->assertCount(1, $definition);
-        $this->assertSame($method, $definition->getMethod('foo'));
+        self::assertCount(1, $definition);
+        self::assertSame($method, $definition->getMethod('foo'));
     }
 
     public function testDefinitionShouldAllowAddingMultipleMethods(): void
@@ -69,11 +69,11 @@ class DefinitionTest extends TestCase
         $method2 = new Method\Definition(['name' => 'bar']);
         $this->definition->addMethods([$method1, $method2]);
         $methods = $this->definition->getMethods();
-        $this->assertCount(2, $methods);
-        $this->assertSame($method1, $methods['foo']);
-        $this->assertSame($method1, $this->definition->getMethod('foo'));
-        $this->assertSame($method2, $methods['bar']);
-        $this->assertSame($method2, $this->definition->getMethod('bar'));
+        self::assertCount(2, $methods);
+        self::assertSame($method1, $methods['foo']);
+        self::assertSame($method1, $this->definition->getMethod('foo'));
+        self::assertSame($method2, $methods['bar']);
+        self::assertSame($method2, $this->definition->getMethod('bar'));
     }
 
     public function testSetMethodsShouldOverwriteExistingMethods(): void
@@ -82,29 +82,29 @@ class DefinitionTest extends TestCase
         $method1 = new Method\Definition(['name' => 'foo']);
         $method2 = new Method\Definition(['name' => 'bar']);
         $methods = [$method1, $method2];
-        $this->assertNotEquals($methods, $this->definition->getMethods());
+        self::assertNotEquals($methods, $this->definition->getMethods());
         $this->definition->setMethods($methods);
         $test = $this->definition->getMethods();
-        $this->assertEquals(array_values($methods), array_values($test));
+        self::assertEquals(array_values($methods), array_values($test));
     }
 
     public function testHasMethodShouldReturnFalseWhenMethodNotRegisteredWithDefinition(): void
     {
-        $this->assertFalse($this->definition->hasMethod('foo'));
+        self::assertFalse($this->definition->hasMethod('foo'));
     }
 
     public function testHasMethodShouldReturnTrueWhenMethodRegisteredWithDefinition(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
-        $this->assertTrue($this->definition->hasMethod('foo'));
+        self::assertTrue($this->definition->hasMethod('foo'));
     }
 
     public function testDefinitionShouldAllowRemovingIndividualMethods(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
-        $this->assertTrue($this->definition->hasMethod('foo'));
+        self::assertTrue($this->definition->hasMethod('foo'));
         $this->definition->removeMethod('foo');
-        $this->assertFalse($this->definition->hasMethod('foo'));
+        self::assertFalse($this->definition->hasMethod('foo'));
     }
 
     public function testDefinitionShouldAllowClearingAllMethods(): void
@@ -112,7 +112,7 @@ class DefinitionTest extends TestCase
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $this->definition->clearMethods();
         $test = $this->definition->getMethods();
-        $this->assertEmpty($test);
+        self::assertEmpty($test);
     }
 
     public function testDefinitionShouldSerializeToArray(): void
@@ -135,12 +135,12 @@ class DefinitionTest extends TestCase
         $definition = new Server\Definition();
         $definition->addMethod($method);
         $test = $definition->toArray();
-        $this->assertCount(1, $test);
+        self::assertCount(1, $test);
         $test = array_shift($test);
-        $this->assertEquals($method['name'], $test['name']);
-        $this->assertEquals($method['methodHelp'], $test['methodHelp']);
-        $this->assertEquals($method['invokeArguments'], $test['invokeArguments']);
-        $this->assertEquals($method['prototypes'][0]['returnType'], $test['prototypes'][0]['returnType']);
+        self::assertEquals($method['name'], $test['name']);
+        self::assertEquals($method['methodHelp'], $test['methodHelp']);
+        self::assertEquals($method['invokeArguments'], $test['invokeArguments']);
+        self::assertEquals($method['prototypes'][0]['returnType'], $test['prototypes'][0]['returnType']);
     }
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
@@ -163,11 +163,11 @@ class DefinitionTest extends TestCase
         $options    = [$method];
         $definition = new Server\Definition($options);
         $test       = $definition->toArray();
-        $this->assertCount(1, $test);
+        self::assertCount(1, $test);
         $test = array_shift($test);
-        $this->assertEquals($method['name'], $test['name']);
-        $this->assertEquals($method['methodHelp'], $test['methodHelp']);
-        $this->assertEquals($method['invokeArguments'], $test['invokeArguments']);
-        $this->assertEquals($method['prototypes'][0]['returnType'], $test['prototypes'][0]['returnType']);
+        self::assertEquals($method['name'], $test['name']);
+        self::assertEquals($method['methodHelp'], $test['methodHelp']);
+        self::assertEquals($method['invokeArguments'], $test['invokeArguments']);
+        self::assertEquals($method['prototypes'][0]['returnType'], $test['prototypes'][0]['returnType']);
     }
 }

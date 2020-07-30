@@ -36,11 +36,11 @@ class ReflectionMethodTest extends TestCase
     public function testConstructor(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
-        $this->assertInstanceOf(ReflectionMethod::class, $r);
-        $this->assertInstanceOf(AbstractFunction::class, $r);
+        self::assertInstanceOf(ReflectionMethod::class, $r);
+        self::assertInstanceOf(AbstractFunction::class, $r);
 
         $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
-        $this->assertEquals('namespace', $r->getNamespace());
+        self::assertEquals('namespace', $r->getNamespace());
     }
 
     public function testGetDeclaringClass(): void
@@ -49,7 +49,7 @@ class ReflectionMethodTest extends TestCase
 
         $class = $r->getDeclaringClass();
 
-        $this->assertEquals($this->class, $class);
+        self::assertEquals($this->class, $class);
     }
 
     public function testClassWakeup(): void
@@ -58,10 +58,10 @@ class ReflectionMethodTest extends TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf(ReflectionMethod::class, $u);
-        $this->assertInstanceOf(AbstractFunction::class, $u);
-        $this->assertEquals($r->getName(), $u->getName());
-        $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
+        self::assertInstanceOf(ReflectionMethod::class, $u);
+        self::assertInstanceOf(AbstractFunction::class, $u);
+        self::assertEquals($r->getName(), $u->getName());
+        self::assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
 
     public function testMethodDocBlockFromInterface(): void

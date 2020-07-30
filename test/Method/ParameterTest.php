@@ -25,65 +25,65 @@ class ParameterTest extends TestCase
 
     public function testDefaultValueShouldBeNullByDefault(): void
     {
-        $this->assertNull($this->parameter->getDefaultValue());
+        self::assertNull($this->parameter->getDefaultValue());
     }
 
     public function testDefaultValueShouldBeMutable(): void
     {
-        $this->assertNull($this->parameter->getDefaultValue());
+        self::assertNull($this->parameter->getDefaultValue());
         $this->parameter->setDefaultValue('foo');
-        $this->assertSame('foo', $this->parameter->getDefaultValue());
+        self::assertSame('foo', $this->parameter->getDefaultValue());
     }
 
     public function testDescriptionShouldBeEmptyStringByDefault(): void
     {
-        $this->assertSame('', $this->parameter->getDescription());
+        self::assertSame('', $this->parameter->getDescription());
     }
 
     public function testDescriptionShouldBeMutable(): void
     {
         $message = 'This is a description';
-        $this->assertSame('', $this->parameter->getDescription());
+        self::assertSame('', $this->parameter->getDescription());
         $this->parameter->setDescription($message);
-        $this->assertSame($message, $this->parameter->getDescription());
+        self::assertSame($message, $this->parameter->getDescription());
     }
 
     public function testNameShouldBeNullByDefault(): void
     {
-        $this->assertNull($this->parameter->getName());
+        self::assertNull($this->parameter->getName());
     }
 
     public function testNameShouldBeMutable(): void
     {
         $name = 'foo';
-        $this->assertNull($this->parameter->getName());
+        self::assertNull($this->parameter->getName());
         $this->parameter->setName($name);
-        $this->assertSame($name, $this->parameter->getName());
+        self::assertSame($name, $this->parameter->getName());
     }
 
     public function testParameterShouldBeRequiredByDefault(): void
     {
-        $this->assertFalse($this->parameter->isOptional());
+        self::assertFalse($this->parameter->isOptional());
     }
 
     public function testParameterShouldAllowBeingOptional(): void
     {
-        $this->assertFalse($this->parameter->isOptional());
+        self::assertFalse($this->parameter->isOptional());
         $this->parameter->setOptional(true);
-        $this->assertTrue($this->parameter->isOptional());
+        self::assertTrue($this->parameter->isOptional());
     }
 
     public function testTypeShouldBeMixedByDefault(): void
     {
-        $this->assertEquals('mixed', $this->parameter->getType());
+        self::assertEquals('mixed', $this->parameter->getType());
     }
 
     public function testTypeShouldBeMutable(): void
     {
         $type = 'string';
-        $this->assertEquals('mixed', $this->parameter->getType());
+        self::assertEquals('mixed', $this->parameter->getType());
         $this->parameter->setType($type);
-        $this->assertSame($type, $this->parameter->getType());
+        self::assertSame($type, $this->parameter->getType());
     }
 
     public function testParameterShouldSerializeToArray(): void
@@ -106,7 +106,7 @@ class ParameterTest extends TestCase
                         ->setDefaultValue($defaultValue)
                         ->setDescription($description);
         $test = $this->parameter->toArray();
-        $this->assertEquals($parameter, $test);
+        self::assertEquals($parameter, $test);
     }
 
     public function testConstructorShouldSetObjectStateFromPassedOptions(): void
@@ -125,6 +125,6 @@ class ParameterTest extends TestCase
         ];
         $parameter    = new Method\Parameter($options);
         $test         = $parameter->toArray();
-        $this->assertEquals($options, $test);
+        self::assertEquals($options, $test);
     }
 }

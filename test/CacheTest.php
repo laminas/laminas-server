@@ -53,7 +53,7 @@ class CacheTest extends TestCase
         $server = $this->createStub(ServerInterface::class);
         $result = Cache::save('~/non-existent-file.tmp', $server);
 
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     public function testCacheCanAcceptAServerReturningAnArrayOfFunctions(): void
@@ -68,11 +68,11 @@ class CacheTest extends TestCase
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        self::assertTrue(Cache::save($this->cacheFile, $server->reveal()));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
-        $this->assertEquals($functions, $data);
+        self::assertEquals($functions, $data);
     }
 
     public function testCacheCanAcceptAServerReturningADefinition(): void
@@ -94,11 +94,11 @@ class CacheTest extends TestCase
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        self::assertTrue(Cache::save($this->cacheFile, $server->reveal()));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
-        $this->assertEquals($definition, $data);
+        self::assertEquals($definition, $data);
     }
 
     public function testCacheSkipsMethodsWhenGivenAnArrayOfFunctions(): void
@@ -115,7 +115,7 @@ class CacheTest extends TestCase
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        self::assertTrue(Cache::save($this->cacheFile, $server->reveal()));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -123,7 +123,7 @@ class CacheTest extends TestCase
         $expected = $functions;
         unset($expected['substr']);
 
-        $this->assertEquals($expected, $data);
+        self::assertEquals($expected, $data);
     }
 
     public function testCacheSkipsMethodsWhenGivenADefinition(): void
@@ -147,7 +147,7 @@ class CacheTest extends TestCase
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        self::assertTrue(Cache::save($this->cacheFile, $server->reveal()));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -159,7 +159,7 @@ class CacheTest extends TestCase
             $actual[] = $method->getName();
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testGetNonExistentFileReturnsFalse(): void
@@ -167,7 +167,7 @@ class CacheTest extends TestCase
         $server = $this->createStub(ServerInterface::class);
         $result = Cache::get('~/non-existent-file.tmp', $server);
 
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     public function testDeleteNonExistentFileReturnsFalse(): void
@@ -175,6 +175,6 @@ class CacheTest extends TestCase
         $server = $this->createStub(ServerInterface::class);
         $result = Cache::delete('~/non-existent-file.tmp', $server);
 
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 }

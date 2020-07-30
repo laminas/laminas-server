@@ -20,10 +20,10 @@ class ReflectionTest extends TestCase
     public function testReflectClass(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class);
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
+        self::assertInstanceOf(ReflectionClass::class, $reflection);
 
         $reflection = Reflection::reflectClass(new TestAsset\ReflectionTestClass());
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
+        self::assertInstanceOf(ReflectionClass::class, $reflection);
     }
 
     public function testReflectClassThrowsExceptionOnInvalidParameter(): void
@@ -36,7 +36,7 @@ class ReflectionTest extends TestCase
     public function testReflectClass2(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, [], 'zsr');
-        $this->assertEquals('zsr', $reflection->getNamespace());
+        self::assertEquals('zsr', $reflection->getNamespace());
     }
 
     public function testReflectFunctionThrowsExceptionOnInvalidFunction(): void
@@ -56,6 +56,6 @@ class ReflectionTest extends TestCase
 //    public function testReflectFunction2(): void
 //    {
 //        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
-//        $this->assertEquals('zsr', $reflection->getNamespace());
+//        self::assertEquals('zsr', $reflection->getNamespace());
 //    }
 }

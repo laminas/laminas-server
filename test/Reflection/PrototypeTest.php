@@ -53,7 +53,7 @@ class PrototypeTest extends TestCase
 
     public function testConstructWorks(): void
     {
-        $this->assertInstanceOf(Prototype::class, $this->r);
+        self::assertInstanceOf(Prototype::class, $this->r);
     }
 
     public function testConstructionThrowsExceptionOnInvalidParam(): void
@@ -65,7 +65,7 @@ class PrototypeTest extends TestCase
 
     public function testGetReturnType(): void
     {
-        $this->assertEquals('void', $this->r->getReturnType());
+        self::assertEquals('void', $this->r->getReturnType());
     }
 
     public function testGetParameters(): void
@@ -73,11 +73,11 @@ class PrototypeTest extends TestCase
         $r = new Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
 
-        $this->assertIsArray($p);
+        self::assertIsArray($p);
         foreach ($p as $parameter) {
-            $this->assertInstanceOf(ReflectionParameter::class, $parameter);
+            self::assertInstanceOf(ReflectionParameter::class, $parameter);
         }
 
-        $this->assertEquals($this->parameters, $p);
+        self::assertEquals($this->parameters, $p);
     }
 }

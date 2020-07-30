@@ -25,31 +25,31 @@ class ReflectionClassTest extends TestCase
     public function testConstructor(): void
     {
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
-        $this->assertInstanceOf(ReflectionClass::class, $r);
-        $this->assertEquals('', $r->getNamespace());
+        self::assertInstanceOf(ReflectionClass::class, $r);
+        self::assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
+        self::assertIsArray($methods);
         foreach ($methods as $m) {
-            $this->assertInstanceOf(ReflectionMethod::class, $m);
+            self::assertInstanceOf(ReflectionMethod::class, $m);
         }
 
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class), 'namespace');
-        $this->assertEquals('namespace', $r->getNamespace());
+        self::assertEquals('namespace', $r->getNamespace());
     }
 
     public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
-        $this->assertIsString($r->getName());
-        $this->assertEquals(Reflection::class, $r->getName());
+        self::assertIsString($r->getName());
+        self::assertEquals(Reflection::class, $r->getName());
     }
 
     public function testGetSet(): void
     {
         $r         = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $r->system = true;
-        $this->assertTrue($r->system);
+        self::assertTrue($r->system);
     }
 
     public function testGetMethods(): void
@@ -57,25 +57,25 @@ class ReflectionClassTest extends TestCase
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
+        self::assertIsArray($methods);
         foreach ($methods as $m) {
-            $this->assertInstanceOf(ReflectionMethod::class, $m);
+            self::assertInstanceOf(ReflectionMethod::class, $m);
         }
     }
 
     public function testGetNamespace(): void
     {
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
-        $this->assertEquals('', $r->getNamespace());
+        self::assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
-        $this->assertEquals('namespace', $r->getNamespace());
+        self::assertEquals('namespace', $r->getNamespace());
     }
 
     public function testSetNamespaceSetsEmptyStringToNull(): void
     {
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $r->setNamespace('');
-        $this->assertNull($r->getNamespace());
+        self::assertNull($r->getNamespace());
     }
 
     public function testSetNamespaceThrowsInvalidArgumentException(): void
@@ -91,12 +91,12 @@ class ReflectionClassTest extends TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf(ReflectionClass::class, $u);
-        $this->assertEquals('', $u->getNamespace());
-        $this->assertEquals($r->getName(), $u->getName());
+        self::assertInstanceOf(ReflectionClass::class, $u);
+        self::assertEquals('', $u->getNamespace());
+        self::assertEquals($r->getName(), $u->getName());
         $rMethods = $r->getMethods();
         $uMethods = $r->getMethods();
 
-        $this->assertCount(count($rMethods), $uMethods);
+        self::assertCount(count($rMethods), $uMethods);
     }
 }

@@ -26,21 +26,21 @@ class PrototypeTest extends TestCase
 
     public function testReturnTypeShouldBeVoidByDefault(): void
     {
-        $this->assertEquals('void', $this->prototype->getReturnType());
+        self::assertEquals('void', $this->prototype->getReturnType());
     }
 
     public function testReturnTypeShouldBeMutable(): void
     {
-        $this->assertEquals('void', $this->prototype->getReturnType());
+        self::assertEquals('void', $this->prototype->getReturnType());
         $this->prototype->setReturnType('string');
-        $this->assertEquals('string', $this->prototype->getReturnType());
+        self::assertEquals('string', $this->prototype->getReturnType());
     }
 
     public function testParametersShouldBeEmptyArrayByDefault(): void
     {
         $params = $this->prototype->getParameters();
-        $this->assertIsArray($params);
-        $this->assertEmpty($params);
+        self::assertIsArray($params);
+        self::assertEmpty($params);
     }
 
     public function testPrototypeShouldAllowAddingSingleParameters(): void
@@ -48,15 +48,15 @@ class PrototypeTest extends TestCase
         $this->testParametersShouldBeEmptyArrayByDefault();
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
-        $this->assertIsArray($params);
-        $this->assertCount(1, $params);
-        $this->assertEquals('string', $params[0]);
+        self::assertIsArray($params);
+        self::assertCount(1, $params);
+        self::assertEquals('string', $params[0]);
 
         $this->prototype->addParameter('array');
         $params = $this->prototype->getParameters();
-        $this->assertCount(2, $params);
-        $this->assertEquals('string', $params[0]);
-        $this->assertEquals('array', $params[1]);
+        self::assertCount(2, $params);
+        self::assertEquals('string', $params[0]);
+        self::assertEquals('array', $params[1]);
     }
 
     public function testPrototypeShouldAllowAddingParameterObjects(): void
@@ -66,7 +66,7 @@ class PrototypeTest extends TestCase
             'name' => 'foo',
         ]);
         $this->prototype->addParameter($parameter);
-        $this->assertSame($parameter, $this->prototype->getParameter('foo'));
+        self::assertSame($parameter, $this->prototype->getParameter('foo'));
     }
 
     public function testPrototypeShouldAllowFetchingParameterByNameOrIndex(): void
@@ -78,9 +78,9 @@ class PrototypeTest extends TestCase
         $this->prototype->addParameter($parameter);
         $test1 = $this->prototype->getParameter('foo');
         $test2 = $this->prototype->getParameter(0);
-        $this->assertSame($test1, $test2);
-        $this->assertSame($parameter, $test1);
-        $this->assertSame($parameter, $test2);
+        self::assertSame($test1, $test2);
+        self::assertSame($parameter, $test1);
+        self::assertSame($parameter, $test2);
     }
 
     public function testPrototypeShouldAllowRetrievingParameterObjects(): void
@@ -88,7 +88,7 @@ class PrototypeTest extends TestCase
         $this->prototype->addParameters(['string', 'array']);
         $parameters = $this->prototype->getParameterObjects();
         foreach ($parameters as $parameter) {
-            $this->assertInstanceOf(Parameter::class, $parameter);
+            self::assertInstanceOf(Parameter::class, $parameter);
         }
     }
 
@@ -101,7 +101,7 @@ class PrototypeTest extends TestCase
         ];
         $this->prototype->addParameters($params);
         $test = $this->prototype->getParameters();
-        $this->assertSame($params, $test);
+        self::assertSame($params, $test);
     }
 
     public function testSetParametersShouldOverwriteParameters(): void
@@ -114,7 +114,7 @@ class PrototypeTest extends TestCase
         ];
         $this->prototype->setParameters($params);
         $test = $this->prototype->getParameters();
-        $this->assertSame($params, $test);
+        self::assertSame($params, $test);
     }
 
     public function testPrototypeShouldSerializeToArray(): void
@@ -128,8 +128,8 @@ class PrototypeTest extends TestCase
         $this->prototype->setReturnType($return)
                         ->setParameters($params);
         $test = $this->prototype->toArray();
-        $this->assertEquals($return, $test['returnType']);
-        $this->assertEquals($params, $test['parameters']);
+        self::assertEquals($return, $test['returnType']);
+        self::assertEquals($params, $test['parameters']);
     }
 
     public function testConstructorShouldSetObjectStateFromOptions(): void
@@ -144,6 +144,6 @@ class PrototypeTest extends TestCase
         ];
         $prototype = new Method\Prototype($options);
         $test      = $prototype->toArray();
-        $this->assertSame($options, $test);
+        self::assertSame($options, $test);
     }
 }

@@ -26,38 +26,38 @@ class CallbackTest extends TestCase
 
     public function testClassShouldBeNullByDefault(): void
     {
-        $this->assertNull($this->callback->getClass());
+        self::assertNull($this->callback->getClass());
     }
 
     public function testClassShouldBeMutable(): void
     {
-        $this->assertNull($this->callback->getClass());
+        self::assertNull($this->callback->getClass());
         $this->callback->setClass('Foo');
-        $this->assertEquals('Foo', $this->callback->getClass());
+        self::assertEquals('Foo', $this->callback->getClass());
     }
 
     public function testMethodShouldBeNullByDefault(): void
     {
-        $this->assertNull($this->callback->getMethod());
+        self::assertNull($this->callback->getMethod());
     }
 
     public function testMethodShouldBeMutable(): void
     {
-        $this->assertNull($this->callback->getMethod());
+        self::assertNull($this->callback->getMethod());
         $this->callback->setMethod('foo');
-        $this->assertEquals('foo', $this->callback->getMethod());
+        self::assertEquals('foo', $this->callback->getMethod());
     }
 
     public function testFunctionShouldBeNullByDefault(): void
     {
-        $this->assertNull($this->callback->getFunction());
+        self::assertNull($this->callback->getFunction());
     }
 
     public function testFunctionShouldBeMutable(): void
     {
-        $this->assertNull($this->callback->getFunction());
+        self::assertNull($this->callback->getFunction());
         $this->callback->setFunction('foo');
-        $this->assertEquals('foo', $this->callback->getFunction());
+        self::assertEquals('foo', $this->callback->getFunction());
     }
 
     public function testFunctionMayBeCallable(): void
@@ -66,19 +66,19 @@ class CallbackTest extends TestCase
             return true;
         };
         $this->callback->setFunction($callable);
-        $this->assertEquals($callable, $this->callback->getFunction());
+        self::assertEquals($callable, $this->callback->getFunction());
     }
 
     public function testTypeShouldBeAnEmptyStringByDefault(): void
     {
-        $this->assertNull($this->callback->getType());
+        self::assertNull($this->callback->getType());
     }
 
     public function testTypeShouldBeMutable(): void
     {
-        $this->assertNull($this->callback->getType());
+        self::assertNull($this->callback->getType());
         $this->callback->setType('instance');
-        $this->assertEquals('instance', $this->callback->getType());
+        self::assertEquals('instance', $this->callback->getType());
     }
 
     public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided(): void
@@ -94,10 +94,10 @@ class CallbackTest extends TestCase
                        ->setMethod('bar')
                        ->setType('instance');
         $test = $this->callback->toArray();
-        $this->assertIsArray($test);
-        $this->assertEquals('Foo', $test['class']);
-        $this->assertEquals('bar', $test['method']);
-        $this->assertEquals('instance', $test['type']);
+        self::assertIsArray($test);
+        self::assertEquals('Foo', $test['class']);
+        self::assertEquals('bar', $test['method']);
+        self::assertEquals('instance', $test['type']);
     }
 
     public function testConstructorShouldSetStateFromOptions(): void
@@ -109,13 +109,13 @@ class CallbackTest extends TestCase
         ];
         $callback = new Method\Callback($options);
         $test     = $callback->toArray();
-        $this->assertSame($options, $test);
+        self::assertSame($options, $test);
     }
 
     public function testSettingFunctionShouldSetTypeAsFunction(): void
     {
-        $this->assertNull($this->callback->getType());
+        self::assertNull($this->callback->getType());
         $this->callback->setFunction('foo');
-        $this->assertEquals('function', $this->callback->getType());
+        self::assertEquals('function', $this->callback->getType());
     }
 }

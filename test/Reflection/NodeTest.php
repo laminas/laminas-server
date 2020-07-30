@@ -20,21 +20,21 @@ class NodeTest extends TestCase
     public function testConstructor(): void
     {
         $node = new Node('string');
-        $this->assertInstanceOf(Node::class, $node);
-        $this->assertEquals('string', $node->getValue());
-        $this->assertNull($node->getParent());
+        self::assertInstanceOf(Node::class, $node);
+        self::assertEquals('string', $node->getValue());
+        self::assertNull($node->getParent());
         $children = $node->getChildren();
-        $this->assertEmpty($children);
+        self::assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf(Node::class, $child);
-        $this->assertEquals('array', $child->getValue());
-        $this->assertEquals($node, $child->getParent());
+        self::assertInstanceOf(Node::class, $child);
+        self::assertEquals('array', $child->getValue());
+        self::assertEquals($node, $child->getParent());
         $children = $child->getChildren();
-        $this->assertEmpty($children);
+        self::assertEmpty($children);
 
         $children = $node->getChildren();
-        $this->assertEquals($child, $children[0]);
+        self::assertEquals($child, $children[0]);
     }
 
     public function testSetParent(): void
@@ -44,7 +44,7 @@ class NodeTest extends TestCase
 
         $child->setParent($parent);
 
-        $this->assertEquals($parent, $child->getParent());
+        self::assertEquals($parent, $child->getParent());
     }
 
     public function testCreateChild(): void
@@ -52,9 +52,9 @@ class NodeTest extends TestCase
         $parent = new Node('string');
         $child  = $parent->createChild('array');
 
-        $this->assertEquals($parent, $child->getParent());
+        self::assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
-        $this->assertEquals($child, $children[0]);
+        self::assertEquals($child, $children[0]);
     }
 
     public function testAttachChild(): void
@@ -63,9 +63,9 @@ class NodeTest extends TestCase
         $child  = new Node('array');
 
         $parent->attachChild($child);
-        $this->assertEquals($parent, $child->getParent());
+        self::assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
-        $this->assertEquals($child, $children[0]);
+        self::assertEquals($child, $children[0]);
     }
 
     public function testGetChildren(): void
@@ -78,18 +78,18 @@ class NodeTest extends TestCase
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
-        $this->assertIsArray($children);
-        $this->assertCount(1, $children, var_export($types, true));
-        $this->assertEquals($child, $children[0]);
+        self::assertIsArray($children);
+        self::assertCount(1, $children, var_export($types, true));
+        self::assertEquals($child, $children[0]);
     }
 
     public function testHasChildren(): void
     {
         $parent = new Node('string');
 
-        $this->assertFalse($parent->hasChildren());
+        self::assertFalse($parent->hasChildren());
         $parent->createChild('array');
-        $this->assertTrue($parent->hasChildren());
+        self::assertTrue($parent->hasChildren());
     }
 
     public function testGetParent(): void
@@ -97,22 +97,22 @@ class NodeTest extends TestCase
         $parent = new Node('string');
         $child  = $parent->createChild('array');
 
-        $this->assertNull($parent->getParent());
-        $this->assertEquals($parent, $child->getParent());
+        self::assertNull($parent->getParent());
+        self::assertEquals($parent, $child->getParent());
     }
 
     public function testGetValue(): void
     {
         $parent = new Node('string');
-        $this->assertEquals('string', $parent->getValue());
+        self::assertEquals('string', $parent->getValue());
     }
 
     public function testSetValue(): void
     {
         $parent = new Node('string');
-        $this->assertEquals('string', $parent->getValue());
+        self::assertEquals('string', $parent->getValue());
         $parent->setValue('array');
-        $this->assertEquals('array', $parent->getValue());
+        self::assertEquals('array', $parent->getValue());
     }
 
     public function testGetEndPoints(): void
@@ -141,7 +141,7 @@ class NodeTest extends TestCase
             'child2grand2great2',
         ];
 
-        $this->assertEquals(
+        self::assertEquals(
             $test,
             $endPointsArray,
             'Test was [' . var_export($test, true) . ']; endPoints were [' . var_export($endPointsArray, true) . ']'

@@ -30,7 +30,7 @@ class ReflectionParameterTest extends TestCase
         $parameter = $this->getParameter();
 
         $reflection = new ReflectionParameter($parameter);
-        $this->assertInstanceOf(ReflectionParameter::class, $reflection);
+        self::assertInstanceOf(ReflectionParameter::class, $reflection);
     }
 
     public function testMethodOverloading(): void
@@ -38,34 +38,34 @@ class ReflectionParameterTest extends TestCase
         $r = new Reflection\ReflectionParameter($this->getParameter());
 
         // just test a few call proxies...
-        $this->assertIsBool($r->allowsNull());
-        $this->assertIsBool($r->isOptional());
+        self::assertIsBool($r->allowsNull());
+        self::assertIsBool($r->isOptional());
     }
 
     public function testGetSetType(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
-        $this->assertEquals('mixed', $r->getType());
+        self::assertEquals('mixed', $r->getType());
 
         $r->setType('string');
-        $this->assertEquals('string', $r->getType());
+        self::assertEquals('string', $r->getType());
     }
 
     public function testGetDescription(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
-        $this->assertEquals('', $r->getDescription());
+        self::assertEquals('', $r->getDescription());
 
         $r->setDescription('parameter description');
-        $this->assertEquals('parameter description', $r->getDescription());
+        self::assertEquals('parameter description', $r->getDescription());
     }
 
     public function testSetPosition(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
-        $this->assertEquals(null, $r->getPosition());
+        self::assertEquals(null, $r->getPosition());
 
         $r->setPosition(3);
-        $this->assertEquals(3, $r->getPosition());
+        self::assertEquals(3, $r->getPosition());
     }
 }

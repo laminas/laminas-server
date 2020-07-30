@@ -19,16 +19,16 @@ class ReflectionReturnValueTest extends TestCase
     public function testConstructor(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
+        self::assertInstanceOf(ReflectionReturnValue::class, $obj);
     }
 
     public function testGetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertEquals('mixed', $obj->getType());
+        self::assertEquals('mixed', $obj->getType());
 
         $obj->setType('array');
-        $this->assertEquals('array', $obj->getType());
+        self::assertEquals('array', $obj->getType());
     }
 
     public function testSetType(): void
@@ -36,16 +36,16 @@ class ReflectionReturnValueTest extends TestCase
         $obj = new Reflection\ReflectionReturnValue();
 
         $obj->setType('array');
-        $this->assertEquals('array', $obj->getType());
+        self::assertEquals('array', $obj->getType());
     }
 
     public function testGetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue('string', 'Some description');
-        $this->assertEquals('Some description', $obj->getDescription());
+        self::assertEquals('Some description', $obj->getDescription());
 
         $obj->setDescription('New Description');
-        $this->assertEquals('New Description', $obj->getDescription());
+        self::assertEquals('New Description', $obj->getDescription());
     }
 
     public function testSetDescription(): void
@@ -53,6 +53,6 @@ class ReflectionReturnValueTest extends TestCase
         $obj = new Reflection\ReflectionReturnValue();
 
         $obj->setDescription('New Description');
-        $this->assertEquals('New Description', $obj->getDescription());
+        self::assertEquals('New Description', $obj->getDescription());
     }
 }
