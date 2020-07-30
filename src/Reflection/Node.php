@@ -19,10 +19,9 @@ class Node
     protected $value;
 
     /** @var self[] */
-    protected $children = [];
+    protected array $children = [];
 
-    /** @var null|self */
-    protected $parent;
+    protected ?Node $parent = null;
 
     /**
      * @param mixed $value

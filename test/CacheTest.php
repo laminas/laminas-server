@@ -29,8 +29,7 @@ class CacheTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var string */
-    private $cacheFile;
+    private ?string $cacheFile = null;
 
     protected function tearDown(): void
     {

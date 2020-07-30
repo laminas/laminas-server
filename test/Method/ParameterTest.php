@@ -10,17 +10,16 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\Method;
 
-use Laminas\Server\Method;
+use Laminas\Server\Method\Parameter;
 use PHPUnit\Framework\TestCase;
 
 class ParameterTest extends TestCase
 {
-    /** @var Method\Parameter */
-    private $parameter;
+    private Parameter $parameter;
 
     protected function setUp(): void
     {
-        $this->parameter = new Method\Parameter();
+        $this->parameter = new Parameter();
     }
 
     public function testDefaultValueShouldBeNullByDefault(): void
@@ -123,7 +122,7 @@ class ParameterTest extends TestCase
             'defaultValue' => $defaultValue,
             'description'  => $description,
         ];
-        $parameter    = new Method\Parameter($options);
+        $parameter    = new Parameter($options);
         $test         = $parameter->toArray();
         self::assertEquals($options, $test);
     }

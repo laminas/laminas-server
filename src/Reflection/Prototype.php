@@ -13,10 +13,9 @@ namespace Laminas\Server\Reflection;
 class Prototype
 {
     /** @var ReflectionParameter[] */
-    protected $params;
+    protected array $params;
 
-    /** @var ReflectionReturnValue */
-    private $return;
+    private ReflectionReturnValue $return;
 
     /**
      * @param ReflectionParameter[] $params

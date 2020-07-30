@@ -17,28 +17,24 @@ use function method_exists;
 
 class ReflectionParameter
 {
-    /** @var PhpReflectionParameter */
-    protected $reflection;
+    protected PhpReflectionParameter $reflection;
 
-    /** @var int */
-    protected $position;
+    protected ?int $position = null;
 
-    /** @var string */
-    protected $type;
+    protected string $type;
 
-    /** @var null|string */
-    protected $description;
+    protected ?string $description = null;
 
     /**
      * Parameter name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Declaring function name (needed for serialization)
      *
+     * @todo Figure out correct type for $functionName. It is set to either a
+     *       string or array of strings in the constructor.
      * @var string
      */
     protected $functionName;

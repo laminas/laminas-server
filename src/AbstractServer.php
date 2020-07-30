@@ -17,11 +17,9 @@ use function is_object;
 
 abstract class AbstractServer implements ServerInterface
 {
-    /** @var bool */
-    protected $overwriteExistingMethods = false;
+    protected bool $overwriteExistingMethods = false;
 
-    /** @var Definition */
-    protected $table;
+    protected Definition $table;
 
     public function __construct()
     {

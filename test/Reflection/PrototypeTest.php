@@ -19,14 +19,13 @@ use ReflectionClass;
 
 class PrototypeTest extends TestCase
 {
-    /** @var Prototype */
-    protected $r;
+    protected Prototype $r;
 
     /** @var ReflectionParameter[] */
-    protected $parametersRaw;
+    protected array $parametersRaw = [];
 
     /** @var ReflectionParameter[] */
-    protected $parameters;
+    protected array $parameters = [];
 
     protected function setUp(): void
     {

@@ -31,7 +31,7 @@ use const E_NOTICE;
 class Cache
 {
     /** @var string[] */
-    protected static $skipMethods = [];
+    protected static array $skipMethods = [];
 
     /**
      * Cache a file containing the dispatch list.

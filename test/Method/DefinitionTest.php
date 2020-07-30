@@ -10,18 +10,19 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\Method;
 
-use Laminas\Server\Method;
+use Laminas\Server\Method\Callback;
+use Laminas\Server\Method\Definition;
+use Laminas\Server\Method\Prototype;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 class DefinitionTest extends TestCase
 {
-    /** @var Method\Definition */
-    private $definition;
+    private Definition $definition;
 
     protected function setUp(): void
     {
-        $this->definition = new Method\Definition();
+        $this->definition = new Definition();
     }
 
     public function testCallbackShouldBeNullByDefault(): void
@@ -31,7 +32,7 @@ class DefinitionTest extends TestCase
 
     public function testSetCallbackShouldAcceptMethodCallback(): void
     {
-        $callback = new Method\Callback();
+        $callback = new Callback();
         $this->definition->setCallback($callback);
         $test = $this->definition->getCallback();
         self::assertSame($callback, $test);
@@ -110,12 +111,12 @@ class DefinitionTest extends TestCase
     public function testDefinitionShouldAllowAddingSinglePrototypes(): void
     {
         $this->testPrototypesShouldBeEmptyArrayByDefault();
-        $prototype1 = new Method\Prototype();
+        $prototype1 = new Prototype();
         $this->definition->addPrototype($prototype1);
         $test = $this->definition->getPrototypes();
         self::assertSame($prototype1, $test[0]);
 
-        $prototype2 = new Method\Prototype();
+        $prototype2 = new Prototype();
         $this->definition->addPrototype($prototype2);
         $test = $this->definition->getPrototypes();
         self::assertSame($prototype1, $test[0]);
@@ -124,8 +125,8 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldAllowAddingMultiplePrototypes(): void
     {
-        $prototype1 = new Method\Prototype();
-        $prototype2 = new Method\Prototype();
+        $prototype1 = new Prototype();
+        $prototype2 = new Prototype();
         $prototypes = [$prototype1, $prototype2];
         $this->definition->addPrototypes($prototypes);
         self::assertSame($prototypes, $this->definition->getPrototypes());
@@ -135,8 +136,8 @@ class DefinitionTest extends TestCase
     {
         $this->testDefinitionShouldAllowAddingMultiplePrototypes();
 
-        $prototype1 = new Method\Prototype();
-        $prototype2 = new Method\Prototype();
+        $prototype1 = new Prototype();
+        $prototype2 = new Prototype();
         $prototypes = [$prototype1, $prototype2];
         self::assertNotSame($prototypes, $this->definition->getPrototypes());
         $this->definition->setPrototypes($prototypes);
@@ -176,7 +177,7 @@ class DefinitionTest extends TestCase
             'object'          => new stdClass(),
             'invokeArguments' => ['foo', ['bar', 'baz']],
         ];
-        $definition = new Method\Definition($options);
+        $definition = new Definition($options);
         $test       = $definition->toArray();
         self::assertEquals($options['name'], $test['name']);
         self::assertEquals($options['callback'], $test['callback']);

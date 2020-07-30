@@ -11,17 +11,16 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Exception\InvalidArgumentException;
-use Laminas\Server\Method;
+use Laminas\Server\Method\Callback;
 use PHPUnit\Framework\TestCase;
 
 class CallbackTest extends TestCase
 {
-    /** @var Method\Callback */
-    private $callback;
+    private Callback $callback;
 
     protected function setUp(): void
     {
-        $this->callback = new Method\Callback();
+        $this->callback = new Callback();
     }
 
     public function testClassShouldBeNullByDefault(): void
@@ -107,7 +106,7 @@ class CallbackTest extends TestCase
             'class'  => 'Foo',
             'method' => 'bar',
         ];
-        $callback = new Method\Callback($options);
+        $callback = new Callback($options);
         $test     = $callback->toArray();
         self::assertSame($options, $test);
     }

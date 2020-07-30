@@ -20,18 +20,12 @@ use function ucfirst;
 
 class Prototype
 {
-    /** @var string */
-    protected $returnType = 'void';
+    protected string $returnType = 'void';
 
-    /**
-     * Map parameter names to parameter index
-     *
-     * @var array
-     */
-    protected $parameterNameMap = [];
+    /** Map parameter names to parameter index */
+    protected array $parameterNameMap = [];
 
-    /** @var array */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     public function __construct(?array $options = null)
     {

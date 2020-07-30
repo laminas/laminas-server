@@ -13,24 +13,26 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\AbstractFunction;
 use Laminas\Server\Reflection\Node;
+use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
-use ReflectionClass;
+use ReflectionClass as PhpReflectionClass;
+use ReflectionMethod as PhpReflectionMethod;
 
 use function serialize;
 use function unserialize;
 
 class ReflectionMethodTest extends TestCase
 {
-    protected $classRaw;
-    protected $class;
-    protected $method;
+    protected PhpReflectionClass $classRaw;
+    protected ReflectionClass $class;
+    protected PhpReflectionMethod $method;
 
     protected function setUp(): void
     {
-        $this->classRaw = new ReflectionClass(Reflection::class);
+        $this->classRaw = new PhpReflectionClass(Reflection::class);
         $this->method   = $this->classRaw->getMethod('reflectClass');
-        $this->class    = new Reflection\ReflectionClass($this->classRaw);
+        $this->class    = new ReflectionClass($this->classRaw);
     }
 
     public function testConstructor(): void
@@ -66,11 +68,11 @@ class ReflectionMethodTest extends TestCase
 
     public function testMethodDocBlockFromInterface(): void
     {
-        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
+        $reflectionClass  = new PhpReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(
-            new Reflection\ReflectionClass($reflectionClass),
+            new ReflectionClass($reflectionClass),
             $reflectionMethod
         );
         [$prototype]             = $laminasReflectionMethod->getPrototypes();
@@ -82,11 +84,11 @@ class ReflectionMethodTest extends TestCase
 
     public function testMethodDocBlockFromParent(): void
     {
-        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
+        $reflectionClass  = new PhpReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(
-            new Reflection\ReflectionClass($reflectionClass),
+            new ReflectionClass($reflectionClass),
             $reflectionMethod
         );
         $prototypes              = $laminasReflectionMethod->getPrototypes();

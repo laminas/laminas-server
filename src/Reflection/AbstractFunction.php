@@ -37,56 +37,34 @@ use function preg_match;
  */
 abstract class AbstractFunction
 {
-    /** @var ReflectionFunctionAbstract */
-    protected $reflection;
+    protected ?ReflectionFunctionAbstract $reflection = null;
 
-    /**
-     * Additional arguments to pass to method on invocation
-     *
-     * @var array
-     */
-    protected $argv = [];
+    /** Additional arguments to pass to method on invocation */
+    protected array $argv = [];
 
     /**
      * Used to store extra configuration for the method (typically done by the
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
-    /**
-     * Declaring class (needed for when serialization occurs)
-     *
-     * @var string
-     */
-    protected $class;
+    /** Declaring class (needed for when serialization occurs) */
+    protected string $class;
 
-    /**
-     * Function name (needed for serialization)
-     *
-     * @var string
-     */
-    protected $name;
+    /** Function name (needed for serialization) */
+    protected string $name;
 
-    /**
-     * Function/method description
-     *
-     * @var string
-     */
-    protected $description = '';
+    /** Function/method description */
+    protected string $description = '';
 
-    /**
-     * Namespace with which to prefix function/method name
-     *
-     * @var null|string
-     */
-    protected $namespace;
+    /** Namespace with which to prefix function/method name */
+    protected ?string $namespace = null;
 
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
+    /** @var string|bool */
     protected $docComment = '';
 
     protected $return;

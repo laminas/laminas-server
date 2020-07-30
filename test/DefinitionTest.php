@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server;
 
-use Laminas\Server;
+use Laminas\Server\Definition;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
@@ -19,12 +19,11 @@ use function array_values;
 
 class DefinitionTest extends TestCase
 {
-    /** @var Server\Definition */
-    private $definition;
+    private Definition $definition;
 
     protected function setUp(): void
     {
-        $this->definition = new Server\Definition();
+        $this->definition = new Definition();
     }
 
     public function testMethodsShouldBeEmptyArrayByDefault(): void
@@ -47,7 +46,7 @@ class DefinitionTest extends TestCase
     public function testConstructorNumericKeyWillBeReplacedByMethodName(): void
     {
         $method     = new Method\Definition(['name' => 'foo']);
-        $definition = new Server\Definition(['100' => $method]);
+        $definition = new Definition(['100' => $method]);
 
         self::assertCount(1, $definition);
         self::assertSame($method, $definition->getMethod('foo'));
@@ -56,7 +55,7 @@ class DefinitionTest extends TestCase
     public function testAddMethodNumericKeyWillBeReplacedByMethodName(): void
     {
         $method     = new Method\Definition(['name' => 'foo']);
-        $definition = new Server\Definition();
+        $definition = new Definition();
         $definition->addMethod($method, '100');
 
         self::assertCount(1, $definition);
@@ -132,7 +131,7 @@ class DefinitionTest extends TestCase
             'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
-        $definition = new Server\Definition();
+        $definition = new Definition();
         $definition->addMethod($method);
         $test = $definition->toArray();
         self::assertCount(1, $test);
@@ -161,7 +160,7 @@ class DefinitionTest extends TestCase
             'invokeArguments' => ['foo'],
         ];
         $options    = [$method];
-        $definition = new Server\Definition($options);
+        $definition = new Definition($options);
         $test       = $definition->toArray();
         self::assertCount(1, $test);
         $test = array_shift($test);

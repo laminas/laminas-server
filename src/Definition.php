@@ -27,10 +27,9 @@ use function sprintf;
 class Definition implements Countable, Iterator
 {
     /** @var Method\Definition[] */
-    protected $methods = [];
+    protected array $methods = [];
 
-    /** @var bool */
-    protected $overwriteExistingMethods = false;
+    protected bool $overwriteExistingMethods = false;
 
     public function __construct(?array $methods = null)
     {

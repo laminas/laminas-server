@@ -29,26 +29,20 @@ class ReflectionClass
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /** @var ReflectionMethod[] */
-    protected $methods = [];
+    protected array $methods = [];
 
-    /** @var null|string */
-    protected $namespace;
+    protected ?string $namespace = null;
 
-    /** @var PhpReflectionClass */
-    protected $reflection;
+    protected PhpReflectionClass $reflection;
 
     /**
      * Reflection class name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Constructor

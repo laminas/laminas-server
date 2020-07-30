@@ -31,17 +31,13 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Parent class name
-     *
-     * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * Parent class reflection
-     *
-     * @var ReflectionClass
      */
-    protected $classReflection;
+    protected ReflectionClass $classReflection;
 
     public function __construct(
         ReflectionClass $class,

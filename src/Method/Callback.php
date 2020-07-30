@@ -23,8 +23,7 @@ use function ucfirst;
 
 class Callback
 {
-    /** @var string */
-    protected $class;
+    protected ?string $class = null;
 
     /**
      * Function name or callable for function callback
@@ -33,18 +32,12 @@ class Callback
      */
     protected $function;
 
-    /** @var string */
-    protected $method;
+    protected ?string $method = null;
 
-    /** @var null|string */
-    protected $type;
+    protected ?string $type = null;
 
-    /**
-     * Valid callback types
-     *
-     * @var array
-     */
-    protected $types = ['function', 'static', 'instance'];
+    /** Valid callback types */
+    protected array $types = ['function', 'static', 'instance'];
 
     public function __construct(?array $options = null)
     {

@@ -21,20 +21,16 @@ class Definition
     /** @var null|Callback */
     protected $callback;
 
-    /** @var array */
-    protected $invokeArguments = [];
+    protected array $invokeArguments = [];
 
-    /** @var string */
-    protected $methodHelp = '';
+    protected string $methodHelp = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var null|object */
-    protected $object;
+    protected ?object $object = null;
 
     /** @var Prototype[] */
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
     public function __construct(?array $options = null)
     {

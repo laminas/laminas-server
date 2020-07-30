@@ -19,17 +19,13 @@ class Parameter
     /** @var mixed */
     protected $defaultValue;
 
-    /** @var string */
-    protected $description = '';
+    protected string $description = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var bool */
-    protected $optional = false;
+    protected bool $optional = false;
 
-    /** @var string */
-    protected $type = 'mixed';
+    protected string $type = 'mixed';
 
     public function __construct(?array $options = null)
     {

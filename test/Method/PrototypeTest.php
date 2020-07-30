@@ -10,18 +10,17 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\Method;
 
-use Laminas\Server\Method;
 use Laminas\Server\Method\Parameter;
+use Laminas\Server\Method\Prototype;
 use PHPUnit\Framework\TestCase;
 
 class PrototypeTest extends TestCase
 {
-    /** @var Method\Prototype */
-    private $prototype;
+    private Prototype $prototype;
 
     protected function setUp(): void
     {
-        $this->prototype = new Method\Prototype();
+        $this->prototype = new Prototype();
     }
 
     public function testReturnTypeShouldBeVoidByDefault(): void
@@ -61,7 +60,7 @@ class PrototypeTest extends TestCase
 
     public function testPrototypeShouldAllowAddingParameterObjects(): void
     {
-        $parameter = new Method\Parameter([
+        $parameter = new Parameter([
             'type' => 'string',
             'name' => 'foo',
         ]);
@@ -71,7 +70,7 @@ class PrototypeTest extends TestCase
 
     public function testPrototypeShouldAllowFetchingParameterByNameOrIndex(): void
     {
-        $parameter = new Method\Parameter([
+        $parameter = new Parameter([
             'type' => 'string',
             'name' => 'foo',
         ]);
@@ -142,7 +141,7 @@ class PrototypeTest extends TestCase
                 'struct',
             ],
         ];
-        $prototype = new Method\Prototype($options);
+        $prototype = new Prototype($options);
         $test      = $prototype->toArray();
         self::assertSame($options, $test);
     }
