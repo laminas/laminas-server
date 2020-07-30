@@ -22,7 +22,7 @@ use function substr;
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
- * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ * creating its own list of {@link \Laminas\Server\Reflection\ReflectionMethod}s.
  */
 class ReflectionClass
 {
@@ -48,7 +48,7 @@ class ReflectionClass
      * Constructor
      *
      * Create array of dispatchable methods, each a
-     * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
+     * {@link \Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
      */
     public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, array $argv = [])
     {

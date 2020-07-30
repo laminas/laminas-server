@@ -59,7 +59,7 @@ class Reflection
      * Perform function reflection to create dispatch signatures
      *
      * Creates dispatch prototypes for a function. It returns a
-     * {@link Laminas\Server\Reflection\FunctionReflection} object.
+     * {@link \Laminas\Server\Reflection\FunctionReflection} object.
      *
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
