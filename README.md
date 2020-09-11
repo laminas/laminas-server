@@ -1,7 +1,7 @@
 # laminas-server
 
-[![Build Status](https://travis-ci.com/laminas/laminas-server.svg?branch=master)](https://travis-ci.com/laminas/laminas-server)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-server/badge.svg?branch=master)](https://coveralls.io/github/laminas/laminas-server?branch=master)
+[![Build Status](https://travis-ci.com/laminas/laminas-server.svg)](https://travis-ci.com/laminas/laminas-server)
+[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-server/badge.svg)](https://coveralls.io/github/laminas/laminas-server)
 
 The laminas-server family of classes provides functionality for the various server
 classes, including
