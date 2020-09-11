@@ -28,56 +28,6 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 2.9.0 - TBD
-
-### Added
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds `Laminas\Server\ClientInterface`, which now defines the methods originally in `Laminas\Server\Client`, and which will replace that interface in version 3.0.
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds `Laminas\Server\ServerInterface`, which now defines the methods originally in `Laminas\Server\Server`, and which will replace that interface in version 3.0.
-
-### Changed
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds a new method to `Laminas\Server\AbstractServer`, `buildSignature()`. The method brings in the content of `_buildSignature()`, which has been marked deprecated, and which now proxies to `buildSignature()`. If you are calling `_buildSignature()` in your own code, please update to use `buildSignature()` instead.
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) adds a new method to `Laminas\Server\AbstractServer`, `buildCallback()`. The method brings in the content of `_buildCallback()`, which has been marked deprecated, and which now proxies to `buildCallback()`. If you are calling `_buildCallback()` in your own code, please update to use `buildCallback()` instead.
-
-### Deprecated
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) deprecates `Laminas\Server\Client`. The interface will be removed in version 3.0; please implement `Laminas\Server\ClientInterface` instead.
-
-- [#8](https://github.com/laminas/laminas-server/pull/8) deprecates `Laminas\Server\Server`. The interface will be removed in version 3.0; please implement `Laminas\Server\ServerInterface` instead.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.8.2 - TBD
-
-### Added
-
-- Nothing.
-
-### Changed
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
 ## 2.8.1 - 2019-10-16
 
 ### Added
