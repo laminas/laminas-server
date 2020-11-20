@@ -24,7 +24,7 @@ class ParameterTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->parameter = new Method\Parameter();
     }
@@ -35,7 +35,7 @@ class ParameterTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 

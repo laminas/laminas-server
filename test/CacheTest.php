@@ -14,16 +14,19 @@ use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Definition as MethodDefinition;
 use Laminas\Server\Server;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use ReflectionProperty;
 
 class CacheTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var string
      */
     private $cacheFile;
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if ($this->cacheFile) {
             unlink($this->cacheFile);

@@ -25,7 +25,7 @@ class PrototypeTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->prototype = new Method\Prototype();
     }
@@ -36,7 +36,7 @@ class PrototypeTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
@@ -55,7 +55,7 @@ class PrototypeTest extends TestCase
     public function testParametersShouldBeEmptyArrayByDefault()
     {
         $params = $this->prototype->getParameters();
-        $this->assertInternalType('array', $params);
+        $this->assertIsArray($params);
         $this->assertEmpty($params);
     }
 
@@ -64,7 +64,7 @@ class PrototypeTest extends TestCase
         $this->testParametersShouldBeEmptyArrayByDefault();
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
-        $this->assertInternalType('array', $params);
+        $this->assertIsArray($params);
         $this->assertCount(1, $params);
         $this->assertEquals('string', $params[0]);
 

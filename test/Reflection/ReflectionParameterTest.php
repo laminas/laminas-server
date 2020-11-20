@@ -63,8 +63,8 @@ class ReflectionParameterTest extends TestCase
         $r = new Reflection\ReflectionParameter($this->getParameter());
 
         // just test a few call proxies...
-        $this->assertInternalType('bool', $r->allowsNull());
-        $this->assertInternalType('bool', $r->isOptional());
+        $this->assertIsBool($r->allowsNull());
+        $this->assertIsBool($r->isOptional());
     }
 
     /**

@@ -44,7 +44,7 @@ class PrototypeTest extends TestCase
     /**
      * Setup environment
      */
-    public function setUp()
+    public function setUp(): void
     {
         $class = new ReflectionClass('\Laminas\Server\Reflection');
         $method = $class->getMethod('reflectClass');
@@ -63,7 +63,7 @@ class PrototypeTest extends TestCase
     /**
      * Teardown environment
      */
-    public function tearDown()
+    public function tearDown(): void
     {
         unset($this->r);
         unset($this->parameters);
@@ -129,7 +129,7 @@ class PrototypeTest extends TestCase
         $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
 
-        $this->assertInternalType('array', $p);
+        $this->assertIsArray($p);
         foreach ($p as $parameter) {
             $this->assertInstanceOf(ReflectionParameter::class, $parameter);
         }

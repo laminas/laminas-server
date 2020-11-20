@@ -30,7 +30,7 @@ class CallbackTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->callback = new Method\Callback();
     }
@@ -105,7 +105,7 @@ class CallbackTest extends TestCase
                        ->setMethod('bar')
                        ->setType('instance');
         $test = $this->callback->toArray();
-        $this->assertInternalType('array', $test);
+        $this->assertIsArray($test);
         $this->assertEquals('Foo', $test['class']);
         $this->assertEquals('bar', $test['method']);
         $this->assertEquals('instance', $test['type']);

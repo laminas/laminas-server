@@ -25,7 +25,7 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    public function setUp()
+    public function setUp(): void
     {
         $this->definition = new Server\Definition();
     }
@@ -36,14 +36,14 @@ class DefinitionTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown(): void
     {
     }
 
     public function testMethodsShouldBeEmptyArrayByDefault()
     {
         $methods = $this->definition->getMethods();
-        $this->assertInternalType('array', $methods);
+        $this->assertIsArray($methods);
         $this->assertEmpty($methods);
     }
 
