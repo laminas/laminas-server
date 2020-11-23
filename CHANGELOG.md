@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#15](https://github.com/laminas/laminas-server/pull/15) adds support for PHP 8.
+
 - [#8](https://github.com/laminas/laminas-server/pull/8) and [#9](https://github.com/laminas/laminas-server/pull/9) add `Laminas\Server\ClientInterface`, which extends `Laminas\Server\Client`, and which will replace that interface in version 3.0.
 
 - [#8](https://github.com/laminas/laminas-server/pull/8) and [#9](https://github.com/laminas/laminas-server/pull/9) add `Laminas\Server\ServerInterface`, which extends `Laminas\Server\Server`, and which will replace that interface in version 3.0.
@@ -24,7 +26,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#15](https://github.com/laminas/laminas-server/pull/15) removes support for PHP versions prior to 7.3.
 
 ### Fixed
 
