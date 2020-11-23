@@ -24,6 +24,8 @@ matrix:
     - php: 7.4
       env:
         - DEPS=latest
+        - CS_CHECK=true
+        - TEST_COVERAGE=true
     - php: 'nightly'
       env:
         - DEPS=lowest
@@ -46,6 +48,7 @@ install:
 
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer static-analysis ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:

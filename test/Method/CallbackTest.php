@@ -35,83 +35,85 @@ class CallbackTest extends TestCase
         $this->callback = new Method\Callback();
     }
 
-    public function testClassShouldBeNullByDefault()
+    public function testClassShouldBeNullByDefault(): void
     {
         $this->assertNull($this->callback->getClass());
     }
 
-    public function testClassShouldBeMutable()
+    public function testClassShouldBeMutable(): void
     {
         $this->assertNull($this->callback->getClass());
         $this->callback->setClass('Foo');
         $this->assertEquals('Foo', $this->callback->getClass());
     }
 
-    public function testMethodShouldBeNullByDefault()
+    public function testMethodShouldBeNullByDefault(): void
     {
         $this->assertNull($this->callback->getMethod());
     }
 
-    public function testMethodShouldBeMutable()
+    public function testMethodShouldBeMutable(): void
     {
         $this->assertNull($this->callback->getMethod());
         $this->callback->setMethod('foo');
         $this->assertEquals('foo', $this->callback->getMethod());
     }
 
-    public function testFunctionShouldBeNullByDefault()
+    public function testFunctionShouldBeNullByDefault(): void
     {
         $this->assertNull($this->callback->getFunction());
     }
 
-    public function testFunctionShouldBeMutable()
+    public function testFunctionShouldBeMutable(): void
     {
         $this->assertNull($this->callback->getFunction());
         $this->callback->setFunction('foo');
         $this->assertEquals('foo', $this->callback->getFunction());
     }
 
-    public function testFunctionMayBeCallable()
+    public function testFunctionMayBeCallable(): void
     {
-        $callable = function () {
+        $callable = /**
+         * @return true
+         */
+        function (): bool {
             return true;
         };
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }
 
-    public function testTypeShouldBeNullByDefault()
+    public function testTypeShouldBeNullByDefault(): void
     {
         $this->assertNull($this->callback->getType());
     }
 
-    public function testTypeShouldBeMutable()
+    public function testTypeShouldBeMutable(): void
     {
         $this->assertNull($this->callback->getType());
         $this->callback->setType('instance');
         $this->assertEquals('instance', $this->callback->getType());
     }
 
-    public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided()
+    public function testSettingTypeShouldThrowExceptionWhenInvalidTypeProvided(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid method callback type');
         $this->callback->setType('bogus');
     }
 
-    public function testCallbackShouldSerializeToArray()
+    public function testCallbackShouldSerializeToArray(): void
     {
         $this->callback->setClass('Foo')
                        ->setMethod('bar')
                        ->setType('instance');
         $test = $this->callback->toArray();
-        $this->assertIsArray($test);
         $this->assertEquals('Foo', $test['class']);
         $this->assertEquals('bar', $test['method']);
         $this->assertEquals('instance', $test['type']);
     }
 
-    public function testConstructorShouldSetStateFromOptions()
+    public function testConstructorShouldSetStateFromOptions(): void
     {
         $options = [
             'type'   => 'static',
@@ -123,7 +125,7 @@ class CallbackTest extends TestCase
         $this->assertSame($options, $test);
     }
 
-    public function testSettingFunctionShouldSetTypeAsFunction()
+    public function testSettingFunctionShouldSetTypeAsFunction(): void
     {
         $this->assertNull($this->callback->getType());
         $this->callback->setFunction('foo');

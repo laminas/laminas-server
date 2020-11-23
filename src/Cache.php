@@ -115,7 +115,7 @@ class Cache
      */
     public static function delete($filename)
     {
-        if (is_string($filename) && file_exists($filename)) {
+        if (file_exists($filename)) {
             unlink($filename);
             return true;
         }
@@ -124,7 +124,7 @@ class Cache
     }
 
     /**
-     * @var array|Definition $methods
+     * @param array|Definition $methods
      * @return array|Definition
      */
     private static function createDefinition($methods)
@@ -133,11 +133,7 @@ class Cache
             return self::createDefinitionFromMethodsDefinition($methods);
         }
 
-        if (is_array($methods)) {
-            return self::createDefinitionFromMethodsArray($methods);
-        }
-
-        return $methods;
+        return self::createDefinitionFromMethodsArray($methods);
     }
 
     /**

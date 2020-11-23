@@ -52,7 +52,7 @@ class Definition
      */
     public function __construct($options = null)
     {
-        if ((null !== $options) && is_array($options)) {
+        if (is_array($options)) {
             $this->setOptions($options);
         }
     }

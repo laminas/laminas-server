@@ -10,8 +10,6 @@ namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use Laminas\Server\Reflection\Prototype;
-use Laminas\Server\Reflection\ReflectionParameter;
 use Laminas\Server\Reflection\ReflectionReturnValue;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
@@ -24,20 +22,19 @@ use ReflectionClass;
 class PrototypeTest extends TestCase
 {
     /**
-     * \Laminas\Server\Reflection\Prototype object
      * @var \Laminas\Server\Reflection\Prototype
      */
     protected $r;
 
     /**
-     * Array of ReflectionParameters
      * @var array
+     * @psalm-var array<array-key, \ReflectionParameter>
      */
     protected $parametersRaw;
 
     /**
-     * Array of \Laminas\Server\Reflection\Parameters
      * @var array
+     * @psalm-var list<Reflection\ReflectionParameter>
      */
     protected $parameters;
 
@@ -80,17 +77,12 @@ class PrototypeTest extends TestCase
      * - params: Optional;
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testConstructWorks()
+    public function testConstructWorks(): void
     {
-        $this->assertInstanceOf(Prototype::class, $this->r);
-    }
-
-    public function testConstructionThrowsExceptionOnInvalidParam()
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('One or more params are invalid');
-        $r1 = new Reflection\Prototype($this->r->getReturnValue(), $this->parametersRaw);
+        $this->assertSame('void', $this->r->getReturnType());
     }
 
     /**
@@ -99,8 +91,10 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: string
+     *
+     * @return void
      */
-    public function testGetReturnType()
+    public function testGetReturnType(): void
     {
         $this->assertEquals('void', $this->r->getReturnType());
     }
@@ -111,8 +105,10 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
+     *
+     * @return void
      */
-    public function testGetReturnValue()
+    public function testGetReturnValue(): void
     {
         $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
     }
@@ -123,16 +119,13 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: array
+     *
+     * @return void
      */
-    public function testGetParameters()
+    public function testGetParameters(): void
     {
         $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
-
-        $this->assertIsArray($p);
-        foreach ($p as $parameter) {
-            $this->assertInstanceOf(ReflectionParameter::class, $parameter);
-        }
 
         $this->assertEquals($this->parameters, $p);
     }

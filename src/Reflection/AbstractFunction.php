@@ -178,9 +178,10 @@ abstract class AbstractFunction
      * @param string $returnDesc Return value description
      * @param array $paramTypes Array of arguments (each an array of types)
      * @param array $paramDesc Array of parameter descriptions
-     * @return array
+     *
+     * @return void
      */
-    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc)
+    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc): void
     {
         $this->return         = $return;
         $this->returnDesc     = $returnDesc;
@@ -241,7 +242,8 @@ abstract class AbstractFunction
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
      * @throws Exception\RuntimeException
-     * @return array
+     *
+     * @return void
      */
     protected function reflect()
     {

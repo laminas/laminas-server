@@ -9,16 +9,19 @@
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\AbstractFunction;
 use Laminas\Server\Reflection\Node;
-use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 class ReflectionMethodTest extends TestCase
 {
+    /** @var ReflectionClass */
     protected $classRaw;
+
+    /** @var Reflection\ReflectionClass */
     protected $class;
+
+    /** @var \ReflectionMethod */
     protected $method;
 
     protected function setUp(): void
@@ -40,12 +43,13 @@ class ReflectionMethodTest extends TestCase
      * - argv: Optional; has default;
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
-        $this->assertInstanceOf(ReflectionMethod::class, $r);
-        $this->assertInstanceOf(AbstractFunction::class, $r);
+        $this->assertEquals('', $r->getNamespace());
 
         $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -57,8 +61,10 @@ class ReflectionMethodTest extends TestCase
      * Call as method call
      *
      * Returns: \Laminas\Server\Reflection\ReflectionClass
+     *
+     * @return void
      */
-    public function testGetDeclaringClass()
+    public function testGetDeclaringClass(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
 
@@ -74,23 +80,26 @@ class ReflectionMethodTest extends TestCase
      * Call as method call
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testClassWakeup()
+    public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf(ReflectionMethod::class, $u);
-        $this->assertInstanceOf(AbstractFunction::class, $u);
+        $this->assertInstanceOf(Reflection\ReflectionMethod::class, $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
 
     /**
      * Test fetch method doc block from interface
+     *
+     * @return void
      */
-    public function testMethodDocBlockFromInterface()
+    public function testMethodDocBlockFromInterface(): void
     {
         $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
@@ -108,8 +117,10 @@ class ReflectionMethodTest extends TestCase
 
     /**
      * Test fetch method doc block from parent class
+     *
+     * @return void
      */
-    public function testMethodDocBlockFromParent()
+    public function testMethodDocBlockFromParent(): void
     {
         $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');

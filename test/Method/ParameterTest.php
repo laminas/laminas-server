@@ -18,6 +18,9 @@ use PHPUnit\Framework\TestCase;
  */
 class ParameterTest extends TestCase
 {
+    /** @var Method\Parameter */
+    private $parameter;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -39,24 +42,24 @@ class ParameterTest extends TestCase
     {
     }
 
-    public function testDefaultValueShouldBeNullByDefault()
+    public function testDefaultValueShouldBeNullByDefault(): void
     {
         $this->assertNull($this->parameter->getDefaultValue());
     }
 
-    public function testDefaultValueShouldBeMutable()
+    public function testDefaultValueShouldBeMutable(): void
     {
         $this->assertNull($this->parameter->getDefaultValue());
         $this->parameter->setDefaultValue('foo');
         $this->assertEquals('foo', $this->parameter->getDefaultValue());
     }
 
-    public function testDescriptionShouldBeEmptyStringByDefault()
+    public function testDescriptionShouldBeEmptyStringByDefault(): void
     {
         $this->assertSame('', $this->parameter->getDescription());
     }
 
-    public function testDescriptionShouldBeMutable()
+    public function testDescriptionShouldBeMutable(): void
     {
         $message = 'This is a description';
         $this->assertSame('', $this->parameter->getDescription());
@@ -64,21 +67,22 @@ class ParameterTest extends TestCase
         $this->assertEquals($message, $this->parameter->getDescription());
     }
 
-    public function testSettingDescriptionShouldCastToString()
+    public function testSettingDescriptionShouldCastToString(): void
     {
         $message = 123456;
+        /** @psalm-suppress InvalidScalarArgument */
         $this->parameter->setDescription($message);
         $test = $this->parameter->getDescription();
         $this->assertNotSame($message, $test);
         $this->assertEquals($message, $test);
     }
 
-    public function testNameShouldBeNullByDefault()
+    public function testNameShouldBeNullByDefault(): void
     {
         $this->assertNull($this->parameter->getName());
     }
 
-    public function testNameShouldBeMutable()
+    public function testNameShouldBeMutable(): void
     {
         $name = 'foo';
         $this->assertNull($this->parameter->getName());
@@ -86,33 +90,34 @@ class ParameterTest extends TestCase
         $this->assertEquals($name, $this->parameter->getName());
     }
 
-    public function testSettingNameShouldCastToString()
+    public function testSettingNameShouldCastToString(): void
     {
         $name = 123456;
+        /** @psalm-suppress InvalidScalarArgument */
         $this->parameter->setName($name);
         $test = $this->parameter->getName();
         $this->assertNotSame($name, $test);
         $this->assertEquals($name, $test);
     }
 
-    public function testParameterShouldBeRequiredByDefault()
+    public function testParameterShouldBeRequiredByDefault(): void
     {
         $this->assertFalse($this->parameter->isOptional());
     }
 
-    public function testParameterShouldAllowBeingOptional()
+    public function testParameterShouldAllowBeingOptional(): void
     {
         $this->assertFalse($this->parameter->isOptional());
         $this->parameter->setOptional(true);
         $this->assertTrue($this->parameter->isOptional());
     }
 
-    public function testTypeShouldBeMixedByDefault()
+    public function testTypeShouldBeMixedByDefault(): void
     {
         $this->assertEquals('mixed', $this->parameter->getType());
     }
 
-    public function testTypeShouldBeMutable()
+    public function testTypeShouldBeMutable(): void
     {
         $type = 'string';
         $this->assertEquals('mixed', $this->parameter->getType());
@@ -120,16 +125,17 @@ class ParameterTest extends TestCase
         $this->assertEquals($type, $this->parameter->getType());
     }
 
-    public function testSettingTypeShouldCastToString()
+    public function testSettingTypeShouldCastToString(): void
     {
         $type = 123456;
+        /** @psalm-suppress InvalidScalarArgument */
         $this->parameter->setType($type);
         $test = $this->parameter->getType();
         $this->assertNotSame($type, $test);
         $this->assertEquals($type, $test);
     }
 
-    public function testParameterShouldSerializeToArray()
+    public function testParameterShouldSerializeToArray(): void
     {
         $type         = 'string';
         $name         = 'foo';
@@ -146,7 +152,7 @@ class ParameterTest extends TestCase
         $this->assertEquals($parameter, $test);
     }
 
-    public function testConstructorShouldSetObjectStateFromPassedOptions()
+    public function testConstructorShouldSetObjectStateFromPassedOptions(): void
     {
         $type         = 'string';
         $name         = 'foo';

@@ -13,12 +13,13 @@ namespace LaminasTest\Server\TestAsset;
  *
  * Used to test reflectFunction generation of signatures
  *
- * @param  bool $arg1
+ * @param bool $arg1
  * @param string|array $arg2
  * @param string $arg3 Optional argument
  * @param string|struct|false $arg4 Optional argument
- * @return bool|array
+ *
+ * @return void
  */
-function reflectionTestFunction($arg1, $arg2, $arg3 = 'string', $arg4 = 'array')
+function reflectionTestFunction($arg1, $arg2, $arg3 = 'string', $arg4 = 'array'): void
 {
 }

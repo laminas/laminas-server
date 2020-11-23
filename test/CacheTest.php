@@ -32,14 +32,14 @@ class CacheTest extends TestCase
         $this->resetSkipMethods();
     }
 
-    public function resetSkipMethods(array $methods = [])
+    public function resetSkipMethods(array $methods = []): void
     {
         $r = new ReflectionProperty(Cache::class, 'skipMethods');
         $r->setAccessible(true);
         $r->setValue(Cache::class, $methods);
     }
 
-    public function testCacheCanAcceptAServerReturningAnArrayOfFunctions()
+    public function testCacheCanAcceptAServerReturningAnArrayOfFunctions(): void
     {
         $functions = [
             'strpos' => 'strpos',
@@ -58,7 +58,7 @@ class CacheTest extends TestCase
         $this->assertEquals($functions, $data);
     }
 
-    public function testCacheCanAcceptAServerReturningADefinition()
+    public function testCacheCanAcceptAServerReturningADefinition(): void
     {
         $definition = new Definition();
         foreach (['strpos', 'substr', 'strlen'] as $function) {
@@ -84,7 +84,7 @@ class CacheTest extends TestCase
         $this->assertEquals($definition, $data);
     }
 
-    public function testCacheSkipsMethodsWhenGivenAnArrayOfFunctions()
+    public function testCacheSkipsMethodsWhenGivenAnArrayOfFunctions(): void
     {
         $this->resetSkipMethods(['substr']);
 
@@ -109,7 +109,7 @@ class CacheTest extends TestCase
         $this->assertEquals($expected, $data);
     }
 
-    public function testCacheSkipsMethodsWhenGivenADefinition()
+    public function testCacheSkipsMethodsWhenGivenADefinition(): void
     {
         $this->resetSkipMethods(['substr']);
 

@@ -9,7 +9,6 @@
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\ReflectionReturnValue;
 
 /**
  * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
@@ -28,11 +27,13 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - description: Optional; has default;
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
+        $this->assertSame('mixed', $obj->getType());
     }
 
     /**
@@ -41,8 +42,10 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * Call as method call
      *
      * Returns: string
+     *
+     * @return void
      */
-    public function testGetType()
+    public function testGetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
         $this->assertEquals('mixed', $obj->getType());
@@ -60,8 +63,10 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - type:
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testSetType()
+    public function testSetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
 
@@ -75,8 +80,10 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * Call as method call
      *
      * Returns: string
+     *
+     * @return void
      */
-    public function testGetDescription()
+    public function testGetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue('string', 'Some description');
         $this->assertEquals('Some description', $obj->getDescription());
@@ -94,8 +101,10 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - description:
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testSetDescription()
+    public function testSetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
 

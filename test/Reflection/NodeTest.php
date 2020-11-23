@@ -20,18 +20,18 @@ class NodeTest extends TestCase
 {
     /**
      * __construct() test
+     *
+     * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $node = new Node('string');
-        $this->assertInstanceOf(Node::class, $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
@@ -43,8 +43,10 @@ class NodeTest extends TestCase
 
     /**
      * setParent() test
+     *
+     * @return void
      */
-    public function testSetParent()
+    public function testSetParent(): void
     {
         $parent = new Node('string');
         $child  = new Node('array');
@@ -56,13 +58,14 @@ class NodeTest extends TestCase
 
     /**
      * createChild() test
+     *
+     * @return void
      */
-    public function testCreateChild()
+    public function testCreateChild(): void
     {
         $parent = new Node('string');
         $child = $parent->createChild('array');
 
-        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
         $this->assertEquals($child, $children[0]);
@@ -70,8 +73,10 @@ class NodeTest extends TestCase
 
     /**
      * attachChild() test
+     *
+     * @return void
      */
-    public function testAttachChild()
+    public function testAttachChild(): void
     {
         $parent = new Node('string');
         $child  = new Node('array');
@@ -84,8 +89,10 @@ class NodeTest extends TestCase
 
     /**
      * getChildren() test
+     *
+     * @return void
      */
-    public function testGetChildren()
+    public function testGetChildren(): void
     {
         $parent = new Node('string');
         $child = $parent->createChild('array');
@@ -95,15 +102,16 @@ class NodeTest extends TestCase
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
-        $this->assertIsArray($children);
         $this->assertCount(1, $children, var_export($types, 1));
         $this->assertEquals($child, $children[0]);
     }
 
     /**
      * hasChildren() test
+     *
+     * @return void
      */
-    public function testHasChildren()
+    public function testHasChildren(): void
     {
         $parent = new Node('string');
 
@@ -114,8 +122,10 @@ class NodeTest extends TestCase
 
     /**
      * getParent() test
+     *
+     * @return void
      */
-    public function testGetParent()
+    public function testGetParent(): void
     {
         $parent = new Node('string');
         $child = $parent->createChild('array');
@@ -126,8 +136,10 @@ class NodeTest extends TestCase
 
     /**
      * getValue() test
+     *
+     * @return void
      */
-    public function testGetValue()
+    public function testGetValue(): void
     {
         $parent = new Node('string');
         $this->assertEquals('string', $parent->getValue());
@@ -135,8 +147,10 @@ class NodeTest extends TestCase
 
     /**
      * setValue() test
+     *
+     * @return void
      */
-    public function testSetValue()
+    public function testSetValue(): void
     {
         $parent = new Node('string');
         $this->assertEquals('string', $parent->getValue());
@@ -146,8 +160,10 @@ class NodeTest extends TestCase
 
     /**
      * getEndPoints() test
+     *
+     * @return void
      */
-    public function testGetEndPoints()
+    public function testGetEndPoints(): void
     {
         $root = new Node('root');
         $child1 = $root->createChild('child1');

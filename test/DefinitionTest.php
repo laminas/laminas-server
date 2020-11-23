@@ -19,6 +19,9 @@ use PHPUnit\Framework\TestCase;
  */
 class DefinitionTest extends TestCase
 {
+    /** @var Server\Definition */
+    private $definition;
+
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
@@ -40,14 +43,13 @@ class DefinitionTest extends TestCase
     {
     }
 
-    public function testMethodsShouldBeEmptyArrayByDefault()
+    public function testMethodsShouldBeEmptyArrayByDefault(): void
     {
         $methods = $this->definition->getMethods();
-        $this->assertIsArray($methods);
         $this->assertEmpty($methods);
     }
 
-    public function testDefinitionShouldAllowAddingSingleMethods()
+    public function testDefinitionShouldAllowAddingSingleMethods(): void
     {
         $method = new Method\Definition(['name' => 'foo']);
         $this->definition->addMethod($method);
@@ -57,7 +59,7 @@ class DefinitionTest extends TestCase
         $this->assertSame($method, $this->definition->getMethod('foo'));
     }
 
-    public function testDefinitionShouldAllowAddingMultipleMethods()
+    public function testDefinitionShouldAllowAddingMultipleMethods(): void
     {
         $method1 = new Method\Definition(['name' => 'foo']);
         $method2 = new Method\Definition(['name' => 'bar']);
@@ -70,7 +72,7 @@ class DefinitionTest extends TestCase
         $this->assertSame($method2, $this->definition->getMethod('bar'));
     }
 
-    public function testSetMethodsShouldOverwriteExistingMethods()
+    public function testSetMethodsShouldOverwriteExistingMethods(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $method1 = new Method\Definition(['name' => 'foo']);
@@ -82,18 +84,18 @@ class DefinitionTest extends TestCase
         $this->assertEquals(array_values($methods), array_values($test));
     }
 
-    public function testHasMethodShouldReturnFalseWhenMethodNotRegisteredWithDefinition()
+    public function testHasMethodShouldReturnFalseWhenMethodNotRegisteredWithDefinition(): void
     {
         $this->assertFalse($this->definition->hasMethod('foo'));
     }
 
-    public function testHasMethodShouldReturnTrueWhenMethodRegisteredWithDefinition()
+    public function testHasMethodShouldReturnTrueWhenMethodRegisteredWithDefinition(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $this->assertTrue($this->definition->hasMethod('foo'));
     }
 
-    public function testDefinitionShouldAllowRemovingIndividualMethods()
+    public function testDefinitionShouldAllowRemovingIndividualMethods(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $this->assertTrue($this->definition->hasMethod('foo'));
@@ -101,7 +103,7 @@ class DefinitionTest extends TestCase
         $this->assertFalse($this->definition->hasMethod('foo'));
     }
 
-    public function testDefinitionShouldAllowClearingAllMethods()
+    public function testDefinitionShouldAllowClearingAllMethods(): void
     {
         $this->testDefinitionShouldAllowAddingMultipleMethods();
         $this->definition->clearMethods();
@@ -109,7 +111,7 @@ class DefinitionTest extends TestCase
         $this->assertEmpty($test);
     }
 
-    public function testDefinitionShouldSerializeToArray()
+    public function testDefinitionShouldSerializeToArray(): void
     {
         $method = [
             'name' => 'foo.bar',
@@ -137,7 +139,7 @@ class DefinitionTest extends TestCase
         $this->assertEquals($method['prototypes'][0]['returnType'], $test['prototypes'][0]['returnType']);
     }
 
-    public function testPassingOptionsToConstructorShouldSetObjectState()
+    public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
         $method = [
             'name' => 'foo.bar',

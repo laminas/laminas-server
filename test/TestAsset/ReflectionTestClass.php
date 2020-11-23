@@ -29,9 +29,10 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param array $arg2
-     * @return string
+     *
+     * @return void
      */
-    public function one($arg1, $arg2 = null)
+    public function one($arg1, $arg2 = null): void
     {
     }
 
@@ -42,10 +43,10 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param array $arg2
-     * @return string
+     *
+     * @return void
      */
-    // @codingStandardsIgnoreStart
-    protected function _one($arg1, $arg2 = null)
+    protected function _one($arg1, $arg2 = null): void
     {
         // @codingStandardsIgnoreEnd
     }
@@ -55,9 +56,10 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param string $arg2
-     * @return bool|array
+     *
+     * @return void
      */
-    public static function two($arg1, $arg2)
+    public static function two($arg1, $arg2): void
     {
     }
 }

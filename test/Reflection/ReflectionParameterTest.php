@@ -20,7 +20,7 @@ use ReflectionMethod;
  */
 class ReflectionParameterTest extends TestCase
 {
-    protected function getParameter()
+    protected function getParameter(): \ReflectionParameter
     {
         $method = new ReflectionMethod('\Laminas\Server\Reflection\ReflectionParameter', 'setType');
         $parameters = $method->getParameters();
@@ -38,13 +38,15 @@ class ReflectionParameterTest extends TestCase
      * - description: Optional; has default;
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $parameter = $this->getParameter();
 
         $reflection = new Reflection\ReflectionParameter($parameter);
-        $this->assertInstanceOf(ReflectionParameter::class, $reflection);
+        $this->assertSame('type', $reflection->getName());
     }
 
     /**
@@ -57,8 +59,10 @@ class ReflectionParameterTest extends TestCase
      * - args:
      *
      * Returns: mixed
+     *
+     * @return void
      */
-    public function testMethodOverloading()
+    public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
 
@@ -69,8 +73,10 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setType() test
+     *
+     * @return void
      */
-    public function testGetSetType()
+    public function testGetSetType(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals('mixed', $r->getType());
@@ -81,8 +87,10 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setDescription() test
+     *
+     * @return void
      */
-    public function testGetDescription()
+    public function testGetDescription(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals('', $r->getDescription());
@@ -93,8 +101,10 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setPosition() test
+     *
+     * @return void
      */
-    public function testSetPosition()
+    public function testSetPosition(): void
     {
         $r = new Reflection\ReflectionParameter($this->getParameter());
         $this->assertEquals(null, $r->getPosition());

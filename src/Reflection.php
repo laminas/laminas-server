@@ -37,7 +37,7 @@ class Reflection
     {
         if (is_object($class)) {
             $reflection = new \ReflectionObject($class);
-        } elseif (is_string($class) && class_exists($class)) {
+        } elseif (class_exists($class)) {
             $reflection = new \ReflectionClass($class);
         } else {
             throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');

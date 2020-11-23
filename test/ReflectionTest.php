@@ -10,8 +10,6 @@ namespace LaminasTest\Server;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use Laminas\Server\Reflection\ReflectionClass;
-use Laminas\Server\Reflection\ReflectionFunction;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -21,34 +19,35 @@ class ReflectionTest extends TestCase
 {
     /**
      * reflectClass() test
+     *
+     * @return void
      */
-    public function testReflectClass()
+    public function testReflectClass(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class);
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
-
-        $reflection = Reflection::reflectClass(new TestAsset\ReflectionTestClass());
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
+        $this->assertSame(TestAsset\ReflectionTestClass::class, $reflection->getName());
     }
 
-    public function testReflectClassThrowsExceptionOnInvalidClass()
+    public function testReflectClassThrowsExceptionOnInvalidClass(): void
     {
         $this->expectException(Reflection\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid argv argument passed to reflectClass');
-        $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, 'string');
+        Reflection::reflectClass(TestAsset\ReflectionTestClass::class, 'string');
     }
 
-    public function testReflectClassThrowsExceptionOnInvalidParameter()
+    public function testReflectClassThrowsExceptionOnInvalidParameter(): void
     {
         $this->expectException(Reflection\Exception\InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid class or object passed to attachClass');
-        $reflection = Reflection::reflectClass(false);
+        Reflection::reflectClass(false);
     }
 
     /**
      * reflectClass() test; test namespaces
+     *
+     * @return void
      */
-    public function testReflectClass2()
+    public function testReflectClass2(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
@@ -56,31 +55,35 @@ class ReflectionTest extends TestCase
 
     /**
      * reflectFunction() test
+     *
+     * @return void
      */
-    public function testReflectFunction()
+    public function testReflectFunction(): void
     {
         $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction');
-        $this->assertInstanceOf(ReflectionFunction::class, $reflection);
+        $this->assertSame('LaminasTest\Server\TestAsset\reflectionTestFunction', $reflection->getName());
     }
 
-    public function testReflectFunctionThrowsExceptionOnInvalidFunction()
+    public function testReflectFunctionThrowsExceptionOnInvalidFunction(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid function');
-        $reflection = Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, 'string');
+        Reflection::reflectFunction(TestAsset\ReflectionTestClass::class, 'string');
     }
 
-    public function testReflectFunctionThrowsExceptionOnInvalidParam()
+    public function testReflectFunctionThrowsExceptionOnInvalidParam(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Invalid function');
-        $reflection = Reflection::reflectFunction(false);
+        Reflection::reflectFunction(false);
     }
 
     /**
      * reflectFunction() test; test namespaces
+     *
+     * @return void
      */
-    public function testReflectFunction2()
+    public function testReflectFunction2(): void
     {
         $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());

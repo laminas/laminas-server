@@ -14,6 +14,8 @@ class ReflectionMethodTestInstance implements ReflectionMethodInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything)
     {

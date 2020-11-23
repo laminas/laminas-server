@@ -35,7 +35,7 @@ class Prototype
      */
     public function __construct($options = null)
     {
-        if ((null !== $options) && is_array($options)) {
+        if (is_array($options)) {
             $this->setOptions($options);
         }
     }
@@ -65,16 +65,15 @@ class Prototype
     /**
      * Add a parameter
      *
-     * @param  string $parameter
+     * @param  string|Parameter $parameter
      * @return \Laminas\Server\Method\Prototype
      */
     public function addParameter($parameter)
     {
         if ($parameter instanceof Parameter) {
             $this->parameters[] = $parameter;
-            if (null !== ($name = $parameter->getName())) {
-                $this->parameterNameMap[$name] = count($this->parameters) - 1;
-            }
+            $name = $parameter->getName();
+            $this->parameterNameMap[$name] = count($this->parameters) - 1;
         } else {
             $parameter = new Parameter([
                 'type' => (string) $parameter,

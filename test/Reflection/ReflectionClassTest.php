@@ -31,15 +31,15 @@ class ReflectionClassTest extends TestCase
      * - argv: Optional; has default;
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testConstructor()
+    public function testConstructor(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
-        $this->assertInstanceOf(ReflectionClass::class, $r);
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
@@ -58,8 +58,10 @@ class ReflectionClassTest extends TestCase
      * - args:
      *
      * Returns: mixed
+     *
+     * @return void
      */
-    public function testMethodOverloading()
+    public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertIsString($r->getName());
@@ -68,8 +70,10 @@ class ReflectionClassTest extends TestCase
 
     /**
      * test __get/set
+     *
+     * @return void
      */
-    public function testGetSet()
+    public function testGetSet(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $r->system = true;
@@ -82,13 +86,14 @@ class ReflectionClassTest extends TestCase
      * Call as method call
      *
      * Returns: array
+     *
+     * @return void
      */
-    public function testGetMethods()
+    public function testGetMethods(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
@@ -96,8 +101,10 @@ class ReflectionClassTest extends TestCase
 
     /**
      * namespace test
+     *
+     * @return void
      */
-    public function testGetNamespace()
+    public function testGetNamespace(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertEquals('', $r->getNamespace());
@@ -111,8 +118,10 @@ class ReflectionClassTest extends TestCase
      * Call as method call
      *
      * Returns: void
+     *
+     * @return void
      */
-    public function testClassWakeup()
+    public function testClassWakeup(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $s = serialize($r);
