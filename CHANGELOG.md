@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.9.0 - TBD
+## 2.9.0 - 2020-11-23
 
 ### Added
 
@@ -28,9 +28,29 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#15](https://github.com/laminas/laminas-server/pull/15) removes support for PHP versions prior to 7.3.
 
-### Fixed
 
-- Nothing.
+-----
+
+### Release Notes for [2.9.0](https://github.com/laminas/laminas-server/milestone/2)
+
+
+
+### 2.9.0
+
+- Total issues resolved: **1**
+- Total pull requests resolved: **4**
+- Total contributors: **3**
+
+#### Enhancement
+
+ - [16: Psalm integration](https://github.com/laminas/laminas-server/pull/16) thanks to @weierophinney
+ - [15: Add PHP 8.0 support](https://github.com/laminas/laminas-server/pull/15) thanks to @bfoosness
+ - [9: Change class inheritance path by having new interfaces extend current interfaces](https://github.com/laminas/laminas-server/pull/9) thanks to @arueckauer
+ - [8: 3.0 Preparation](https://github.com/laminas/laminas-server/pull/8) thanks to @arueckauer
+
+#### Documentation
+
+ - [10: Add purpose to AbstractServer::fixType() method comment](https://github.com/laminas/laminas-server/issues/10) thanks to @arueckauer
 
 ## 2.8.1 - 2019-10-16
 
