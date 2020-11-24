@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\ReflectionReturnValue;
 use PHPUnit\Framework\TestCase;
 
 class ReflectionReturnValueTest extends TestCase
@@ -19,7 +18,7 @@ class ReflectionReturnValueTest extends TestCase
     public function testConstructor(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
-        $this->assertInstanceOf(ReflectionReturnValue::class, $obj);
+        $this->assertSame('mixed', $obj->getType());
     }
 
     public function testGetType(): void

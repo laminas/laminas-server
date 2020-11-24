@@ -29,7 +29,6 @@ class ReflectionClassTest extends TestCase
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
@@ -57,7 +56,6 @@ class ReflectionClassTest extends TestCase
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
-        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }

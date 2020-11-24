@@ -101,10 +101,10 @@ class ParameterTest extends TestCase
             'description'  => $description,
         ];
         $this->parameter->setType($type)
-                        ->setName($name)
-                        ->setOptional($optional)
-                        ->setDefaultValue($defaultValue)
-                        ->setDescription($description);
+            ->setName($name)
+            ->setOptional($optional)
+            ->setDefaultValue($defaultValue)
+            ->setDescription($description);
         $test = $this->parameter->toArray();
         $this->assertEquals($parameter, $test);
     }

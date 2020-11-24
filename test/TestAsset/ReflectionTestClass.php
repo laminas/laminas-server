@@ -47,7 +47,7 @@ class ReflectionTestClass
         return 'foo';
     }
 
-    public static function two(string $arg1, string $arg2)
+    public static function two(string $arg1, string $arg2): void
     {
     }
 }

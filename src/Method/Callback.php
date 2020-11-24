@@ -48,7 +48,7 @@ class Callback
 
     public function __construct(?array $options = null)
     {
-        if ((null !== $options) && is_array($options)) {
+        if (is_array($options)) {
             $this->setOptions($options);
         }
     }

@@ -19,7 +19,6 @@ use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
 use function in_array;
-use function is_array;
 use function is_readable;
 use function is_writable;
 use function serialize;
@@ -136,11 +135,7 @@ class Cache
             return self::createDefinitionFromMethodsDefinition($methods);
         }
 
-        if (is_array($methods)) {
-            return self::createDefinitionFromMethodsArray($methods);
-        }
-
-        return $methods;
+        return self::createDefinitionFromMethodsArray($methods);
     }
 
     private static function createDefinitionFromMethodsDefinition(Definition $methods): Definition

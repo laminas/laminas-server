@@ -10,8 +10,10 @@ declare(strict_types=1);
 
 namespace Laminas\Server;
 
+use Laminas\Server\Method\Callback;
 use ReflectionClass;
 use ReflectionException;
+use Webmozart\Assert\Assert;
 
 use function is_object;
 
@@ -37,9 +39,9 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Build callback for method signature
      */
-    private function buildCallback(Reflection\AbstractFunction $reflection): Method\Callback
+    private function buildCallback(Reflection\AbstractFunction $reflection): Callback
     {
-        $callback = new Method\Callback();
+        $callback = new Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
                 ->setClass($reflection->getDeclaringClass()->getName())
@@ -105,10 +107,12 @@ abstract class AbstractServer implements ServerInterface
     protected function dispatch(Method\Definition $invokable, array $params)
     {
         $callback = $invokable->getCallback();
-        $type     = $callback->getType();
+        Assert::isInstanceOf($callback, Callback::class);
 
+        $type = $callback->getType();
         if ('function' === $type) {
             $function = $callback->getFunction();
+            Assert::isCallable($function);
             return $function(...$params);
         }
 
@@ -127,6 +131,9 @@ abstract class AbstractServer implements ServerInterface
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {
+                Assert::isString($class);
+                Assert::classExists($class);
+                /** @psalm-suppress MixedMethodCall */
                 $object = new $class();
             }
         }

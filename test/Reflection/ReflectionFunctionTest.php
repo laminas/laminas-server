@@ -13,9 +13,11 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\AbstractFunction;
 use Laminas\Server\Reflection\Prototype;
+use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
+use function is_array;
 use function serialize;
 use function unserialize;
 use function var_export;
@@ -28,7 +30,6 @@ class ReflectionFunctionTest extends TestCase
         $r        = new Reflection\ReflectionFunction($function);
         $this->assertInstanceOf(Reflection\ReflectionFunction::class, $r);
         $this->assertInstanceOf(AbstractFunction::class, $r);
-        $params = $r->getParameters();
 
         $r = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -39,7 +40,6 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals($argv, $r->getInvokeArguments());
 
         $prototypes = $r->getPrototypes();
-        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
     }
 
@@ -92,7 +92,6 @@ class ReflectionFunctionTest extends TestCase
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertIsArray($prototypes);
         $this->assertCount(4, $prototypes);
 
         foreach ($prototypes as $p) {
@@ -106,12 +105,11 @@ class ReflectionFunctionTest extends TestCase
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
         $this->assertCount(1, $prototypes);
 
         foreach ($prototypes as $p) {
-            $this->assertInstanceOf(Prototype::class, $p);
+            $this->assertSame('void', $p->getReturnType());
         }
     }
 
@@ -120,7 +118,6 @@ class ReflectionFunctionTest extends TestCase
         $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
         $r        = new Reflection\ReflectionFunction($function);
         $args     = $r->getInvokeArguments();
-        $this->assertIsArray($args);
         $this->assertCount(0, $args);
 
         $argv = ['string1', 'string2'];
@@ -145,15 +142,16 @@ class ReflectionFunctionTest extends TestCase
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertIsArray($prototypes);
         $this->assertNotEmpty($prototypes);
         $this->assertCount(1, $prototypes);
 
         $proto  = $prototypes[0];
         $params = $proto->getParameters();
-        $this->assertIsArray($params);
         $this->assertCount(1, $params);
-        $this->assertEquals('string', $params[0]->getType());
+
+        $param = $params[0];
+        $this->assertInstanceOf(ReflectionParameter::class, $param);
+        $this->assertEquals('string', $param->getType());
     }
 
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription(): void
@@ -165,11 +163,15 @@ class ReflectionFunctionTest extends TestCase
         $prototype  = $prototypes[0];
         $params     = $prototype->getParameters();
         $param      = $params[0];
-        $this->assertStringContainsString('Some description', $param->getDescription(), var_export($param, true));
+
+        $description = $param->getDescription();
+        $this->assertNotNull($description);
+        $this->assertStringContainsString('Some description', $description, var_export($param, true));
     }
 }
 
 // phpcs:disable
+
 /**
  * \LaminasTest\Server\Reflection\function1
  *
@@ -182,8 +184,13 @@ class ReflectionFunctionTest extends TestCase
  */
 function function1(string $var1, $var2, array $var3): ?array
 {
+    // The body of this is nonsense written to appease Psalm.
+    if (is_array($var2)) {
+        return $var3;
+    }
+
+    return null;
 }
-// phpcs:enable
 
 /**
  * \LaminasTest\Server\Reflection\function2
@@ -195,14 +202,13 @@ function function2(): void
 {
 }
 
-// phpcs:disable
 /**
  * \LaminasTest\Server\Reflection\function3
  *
- * @param  string $var1
- * @return void
+ * @param string $var1
  */
-// phpcs:enable
 function function3(string $var1): void
 {
 }
+
+// phpcs:enable

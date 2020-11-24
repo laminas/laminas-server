@@ -20,14 +20,12 @@ class NodeTest extends TestCase
     public function testConstructor(): void
     {
         $node = new Node('string');
-        $this->assertInstanceOf(Node::class, $node);
         $this->assertEquals('string', $node->getValue());
         $this->assertNull($node->getParent());
         $children = $node->getChildren();
         $this->assertEmpty($children);
 
         $child = new Node('array', $node);
-        $this->assertInstanceOf(Node::class, $child);
         $this->assertEquals('array', $child->getValue());
         $this->assertEquals($node, $child->getParent());
         $children = $child->getChildren();
@@ -78,7 +76,6 @@ class NodeTest extends TestCase
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
-        $this->assertIsArray($children);
         $this->assertCount(1, $children, var_export($types, true));
         $this->assertEquals($child, $children[0]);
     }

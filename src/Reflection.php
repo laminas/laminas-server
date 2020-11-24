@@ -20,6 +20,9 @@ use ReflectionObject;
 
 use function class_exists;
 use function function_exists;
+use function get_class;
+use function gettype;
+use function is_array;
 use function is_object;
 use function is_string;
 use function sprintf;
@@ -77,12 +80,21 @@ class Reflection
         ?string $namespace = null
     ): ReflectionFunction {
         if (! is_string($function) || ! function_exists($function)) {
+            $functionDesc = is_string($function) ? $function : null;
+            if (null === $functionDesc) {
+                $functionDesc = is_object($function) ? get_class($function) : gettype($function);
+            }
+
             throw new InvalidArgumentException(sprintf(
                 'Invalid function "%s" passed to reflectFunction',
-                $function
+                $functionDesc
             ));
         }
 
-        return new ReflectionFunction(new PhpReflectionFunction($function), $namespace, $argv);
+        return new ReflectionFunction(
+            new PhpReflectionFunction($function),
+            $namespace,
+            is_array($argv) ? $argv : []
+        );
     }
 }

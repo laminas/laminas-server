@@ -30,7 +30,6 @@ class DefinitionTest extends TestCase
     public function testMethodsShouldBeEmptyArrayByDefault(): void
     {
         $methods = $this->definition->getMethods();
-        $this->assertIsArray($methods);
         $this->assertEmpty($methods);
     }
 

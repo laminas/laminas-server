@@ -18,16 +18,16 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-    },
     "require": {
-        "php": "^7.2",
+        "php": "^7.3 || ~8.0.0",
         "laminas/laminas-code": "^3.4.1",
         "laminas/laminas-stdlib": "^3.2.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.0.0",
-        "phpunit/phpunit": "^8.5.2"
+        "phpunit/phpunit": "^9.3",
+        "psalm/plugin-phpunit": "^0.13.0",
+        "vimeo/psalm": "^4.2"
     },
     "autoload": {
         "psr-4": {
@@ -49,6 +49,7 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     }

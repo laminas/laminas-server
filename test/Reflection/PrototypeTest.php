@@ -11,18 +11,21 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionParameter as PhpReflectionParameter;
 
 class PrototypeTest extends TestCase
 {
     /** @var Prototype */
     protected $r;
 
-    /** @var ReflectionParameter[] */
+    /**
+     * @var PhpReflectionParameter[]
+     * @psalm-var list<PhpReflectionParameter>
+     */
     protected $parametersRaw;
 
     /** @var ReflectionParameter[] */
@@ -56,13 +59,6 @@ class PrototypeTest extends TestCase
         $this->assertInstanceOf(Prototype::class, $this->r);
     }
 
-    public function testConstructionThrowsExceptionOnInvalidParam(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('One or more params are invalid');
-        $r1 = new Prototype($this->r->getReturnValue(), $this->parametersRaw);
-    }
-
     public function testGetReturnType(): void
     {
         $this->assertEquals('void', $this->r->getReturnType());
@@ -73,7 +69,6 @@ class PrototypeTest extends TestCase
         $r = new Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
 
-        $this->assertIsArray($p);
         foreach ($p as $parameter) {
             $this->assertInstanceOf(ReflectionParameter::class, $parameter);
         }

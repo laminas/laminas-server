@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
+use Webmozart\Assert\Assert;
+
 use function array_key_exists;
 use function count;
 use function is_array;
@@ -27,15 +29,16 @@ class Prototype
      * Map parameter names to parameter index
      *
      * @var array
+     * @psalm-var array<string, int>
      */
     protected $parameterNameMap = [];
 
-    /** @var array */
+    /** @var Parameter[] */
     protected $parameters = [];
 
     public function __construct(?array $options = null)
     {
-        if ((null !== $options) && is_array($options)) {
+        if (is_array($options)) {
             $this->setOptions($options);
         }
     }
@@ -61,9 +64,9 @@ class Prototype
     {
         if ($parameter instanceof Parameter) {
             $this->parameters[] = $parameter;
-            if (null !== ($name = $parameter->getName())) {
-                $this->parameterNameMap[$name] = count($this->parameters) - 1;
-            }
+            $name               = $parameter->getName();
+            Assert::notNull($name);
+            $this->parameterNameMap[$name] = count($this->parameters) - 1;
         } else {
             $parameter          = new Parameter([
                 'type' => (string) $parameter,
@@ -116,12 +119,16 @@ class Prototype
         if (! is_string($index) && ! is_numeric($index)) {
             return null;
         }
+
         if (array_key_exists($index, $this->parameterNameMap)) {
             $index = $this->parameterNameMap[$index];
         }
+
         if (array_key_exists($index, $this->parameters)) {
             return $this->parameters[$index];
         }
+
+        return null;
     }
 
     public function setOptions(array $options): self

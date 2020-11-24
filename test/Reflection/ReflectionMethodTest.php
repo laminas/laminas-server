@@ -11,19 +11,24 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\AbstractFunction;
 use Laminas\Server\Reflection\Node;
-use Laminas\Server\Reflection\ReflectionMethod;
+use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionMethod;
 
 use function serialize;
 use function unserialize;
 
 class ReflectionMethodTest extends TestCase
 {
+    /** @var ReflectionClass */
     protected $classRaw;
+
+    /** @var Reflection\ReflectionClass */
     protected $class;
+
+    /** @var ReflectionMethod */
     protected $method;
 
     protected function setUp(): void
@@ -36,8 +41,7 @@ class ReflectionMethodTest extends TestCase
     public function testConstructor(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
-        $this->assertInstanceOf(ReflectionMethod::class, $r);
-        $this->assertInstanceOf(AbstractFunction::class, $r);
+        $this->assertEquals('', $r->getNamespace());
 
         $r = new Reflection\ReflectionMethod($this->class, $this->method, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
@@ -58,8 +62,7 @@ class ReflectionMethodTest extends TestCase
         $s = serialize($r);
         $u = unserialize($s);
 
-        $this->assertInstanceOf(ReflectionMethod::class, $u);
-        $this->assertInstanceOf(AbstractFunction::class, $u);
+        $this->assertInstanceOf(Reflection\ReflectionMethod::class, $u);
         $this->assertEquals($r->getName(), $u->getName());
         $this->assertEquals($r->getDeclaringClass()->getName(), $u->getDeclaringClass()->getName());
     }
@@ -76,6 +79,8 @@ class ReflectionMethodTest extends TestCase
         [$prototype]             = $laminasReflectionMethod->getPrototypes();
         [$first, $second]        = $prototype->getParameters();
 
+        self::assertInstanceOf(ReflectionParameter::class, $first);
+        self::assertInstanceOf(ReflectionParameter::class, $second);
         self::assertEquals('ReflectionMethodTest', $first->getType());
         self::assertEquals('array', $second->getType());
     }

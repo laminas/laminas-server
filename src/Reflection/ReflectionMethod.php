@@ -13,6 +13,7 @@ namespace Laminas\Server\Reflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
 use ReflectionMethod as PhpReflectionMethod;
+use Webmozart\Assert\Assert;
 
 use function array_map;
 use function array_merge;
@@ -142,7 +143,10 @@ class ReflectionMethod extends AbstractFunction
         return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
-    private function fetchRecursiveDocBlockFromParent(ReflectionClass $reflectionClass, string $methodName): ?array
+    /**
+     * @param ReflectionClass|PhpReflectionClass $reflectionClass
+     */
+    private function fetchRecursiveDocBlockFromParent($reflectionClass, string $methodName): ?array
     {
         $docComment            = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
@@ -150,13 +154,17 @@ class ReflectionMethod extends AbstractFunction
             return null;
         }
 
+        Assert::isInstanceOf($parentReflectionClass, PhpReflectionClass::class);
+
         if (! $parentReflectionClass->hasMethod($methodName)) {
             return null;
         }
 
         $methodReflection = $parentReflectionClass->getMethod($methodName);
         $docCommentLast   = $methodReflection->getDocComment();
-        $docComment[]     = $docCommentLast;
+        Assert::string($docCommentLast);
+
+        $docComment[] = $docCommentLast;
         if ($this->isInherit($docCommentLast)) {
             if ($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
                 $docComment = array_merge($docComment, $docCommentFetched);

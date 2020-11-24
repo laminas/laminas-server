@@ -1,4 +1,4 @@
-<?php
+<?php // phpcs:disable WebimpressCodingStandard.PHP.DisallowFqn.InvalidInPhpDocs,WebimpressCodingStandard.Commenting.TagWithType.InvalidReturnClassName
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
@@ -40,10 +40,9 @@ class Node
      * Set parent node
      *
      * @param \Laminas\Server\Reflection\Node $node
-     * @param  bool $new Whether or not the child node is newly created
-     * and should always be attached
+     * @param bool                            $new Whether or not the child node
+     *     is newly created and should always be attached
      */
-    // phpcs:enable
     public function setParent(self $node, bool $new = false): void
     {
         $this->parent = $node;
@@ -121,12 +120,12 @@ class Node
 
             if (null === $value) {
                 $endPoints[] = $this;
-            } elseif ((null !== $value) && $child->hasChildren()) {
+            } elseif ($child->hasChildren()) {
                 $childEndPoints = $child->getEndPoints();
                 if (! empty($childEndPoints)) {
                     $endPoints = array_merge($endPoints, $childEndPoints);
                 }
-            } elseif ((null !== $value) && ! $child->hasChildren()) {
+            } elseif (! $child->hasChildren()) {
                 $endPoints[] = $child;
             }
         }

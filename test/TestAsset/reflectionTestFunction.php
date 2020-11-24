@@ -19,7 +19,8 @@ namespace LaminasTest\Server\TestAsset;
  * @param string|array        $arg2
  * @param string              $arg3 Optional argument
  * @param string|struct|false $arg4 Optional argument
- * @return bool|array
+ *
+ * @return void
  */
 function reflectionTestFunction(bool $arg1, $arg2, string $arg3 = 'string', $arg4 = 'array')
 {

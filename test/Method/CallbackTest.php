@@ -62,7 +62,10 @@ class CallbackTest extends TestCase
 
     public function testFunctionMayBeCallable(): void
     {
-        $callable = function () {
+        $callable = /**
+         * @return true
+         */
+        function (): bool {
             return true;
         };
         $this->callback->setFunction($callable);
@@ -94,7 +97,6 @@ class CallbackTest extends TestCase
                        ->setMethod('bar')
                        ->setType('instance');
         $test = $this->callback->toArray();
-        $this->assertIsArray($test);
         $this->assertEquals('Foo', $test['class']);
         $this->assertEquals('bar', $test['method']);
         $this->assertEquals('instance', $test['type']);

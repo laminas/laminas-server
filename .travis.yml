@@ -12,26 +12,28 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 7.2
+    - php: 7.3
       env:
         - DEPS=lowest
-    - php: 7.2
+    - php: 7.3
+      env:
+        - DEPS=latest
+    - php: 7.4
+      env:
+        - DEPS=lowest
+    - php: 7.4
       env:
         - DEPS=latest
         - CS_CHECK=true
         - TEST_COVERAGE=true
-    - php: 7.3
+    - php: 'nightly'
       env:
         - DEPS=lowest
-    - php: 7.3
+        - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
+    - php: 'nightly'
       env:
         - DEPS=latest
-    - php: 7.4
-      env:
-        - DEPS=lowest
-    - php: 7.4
-      env:
-        - DEPS=latest
+        - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
 
 before_install:
   - if [[ $TEST_COVERAGE != 'true' ]]; then phpenv config-rm xdebug.ini || return 0 ; fi
@@ -46,6 +48,7 @@ install:
 
 script:
   - if [[ $TEST_COVERAGE == 'true' ]]; then composer test-coverage ; else composer test ; fi
+  - if [[ $TEST_COVERAGE == 'true' ]]; then composer static-analysis ; fi
   - if [[ $CS_CHECK == 'true' ]]; then composer cs-check ; fi
 
 after_script:
