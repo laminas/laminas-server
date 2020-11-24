@@ -6,124 +6,88 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
+use ReflectionClass as PhpReflectionClass;
 
-/**
- * Test case for \Laminas\Server\Reflection\ClassReflection
- *
- * @group      Laminas_Server
- */
+use function count;
+use function serialize;
+use function unserialize;
+
 class ReflectionClassTest extends TestCase
 {
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - reflection:
-     * - namespace: Optional;
-     * - argv: Optional; has default;
-     *
-     * Returns: void
-     *
-     * @return void
-     */
     public function testConstructor(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
+        $this->assertInstanceOf(ReflectionClass::class, $r);
         $this->assertEquals('', $r->getNamespace());
 
         $methods = $r->getMethods();
+        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
 
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class), 'namespace');
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class), 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
-    /**
-     * __call() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - method:
-     * - args:
-     *
-     * Returns: mixed
-     *
-     * @return void
-     */
     public function testMethodOverloading(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $this->assertIsString($r->getName());
-        $this->assertEquals('Laminas\Server\Reflection', $r->getName());
+        $this->assertEquals(Reflection::class, $r->getName());
     }
 
-    /**
-     * test __get/set
-     *
-     * @return void
-     */
     public function testGetSet(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r         = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $r->system = true;
         $this->assertTrue($r->system);
     }
 
-    /**
-     * getMethods() test
-     *
-     * Call as method call
-     *
-     * Returns: array
-     *
-     * @return void
-     */
     public function testGetMethods(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
 
         $methods = $r->getMethods();
+        $this->assertIsArray($methods);
         foreach ($methods as $m) {
             $this->assertInstanceOf(ReflectionMethod::class, $m);
         }
     }
 
-    /**
-     * namespace test
-     *
-     * @return void
-     */
     public function testGetNamespace(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $this->assertEquals('', $r->getNamespace());
         $r->setNamespace('namespace');
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
-    /**
-     * __wakeup() test
-     *
-     * Call as method call
-     *
-     * Returns: void
-     *
-     * @return void
-     */
+    public function testSetNamespaceSetsEmptyStringToNull(): void
+    {
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
+        $r->setNamespace('');
+        $this->assertNull($r->getNamespace());
+    }
+
+    public function testSetNamespaceThrowsInvalidArgumentException(): void
+    {
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
+        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
+        $r->setNamespace('äöü');
+    }
+
     public function testClassWakeup(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));
         $s = serialize($r);
         $u = unserialize($s);
 

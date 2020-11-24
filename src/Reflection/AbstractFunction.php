@@ -6,13 +6,24 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Reflection;
 
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
+use ReflectionException;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
+
+use function array_merge;
+use function array_shift;
+use function array_unshift;
+use function call_user_func_array;
+use function count;
+use function method_exists;
+use function preg_match;
 
 /**
  * Function/Method Reflection
@@ -26,13 +37,12 @@ use ReflectionMethod as PhpReflectionMethod;
  */
 abstract class AbstractFunction
 {
-    /**
-     * @var ReflectionFunctionAbstract
-     */
+    /** @var ReflectionFunctionAbstract */
     protected $reflection;
 
     /**
      * Additional arguments to pass to method on invocation
+     *
      * @var array
      */
     protected $argv = [];
@@ -42,44 +52,41 @@ abstract class AbstractFunction
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
+     *
      * @var array
      */
     protected $config = [];
 
     /**
      * Declaring class (needed for when serialization occurs)
+     *
      * @var string
      */
     protected $class;
 
     /**
      * Function name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Function/method description
+     *
      * @var string
      */
     protected $description = '';
 
     /**
      * Namespace with which to prefix function/method name
-     * @var string
+     *
+     * @var null|string
      */
     protected $namespace;
 
-    /**
-     * Prototypes
-     * @var array
-     */
     protected $prototypes = [];
 
-    /**
-     * Phpdoc comment
-     * @var string
-     */
     protected $docComment = '';
 
     protected $return;
@@ -91,13 +98,10 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
-     * @param ReflectionFunctionAbstract $r
-     * @param null|string $namespace
-     * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public function __construct(ReflectionFunctionAbstract $r, $namespace = null, $argv = [])
+    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, array $argv = [])
     {
         $this->reflection = $r;
 
@@ -107,9 +111,7 @@ abstract class AbstractFunction
         }
 
         // Determine arguments
-        if (is_array($argv)) {
-            $this->argv = $argv;
-        }
+        $this->argv = $argv;
 
         // If method call, need to store some info on the class
         if ($r instanceof PhpReflectionMethod) {
@@ -128,12 +130,8 @@ abstract class AbstractFunction
      * Recursive method to build the signature node tree. Increments through
      * each array in {@link $sigParams}, adding every value of the next level
      * to the current value (unless the current value is null).
-     *
-     * @param \Laminas\Server\Reflection\Node $parent
-     * @param int $level
-     * @return void
      */
-    protected function addTree(Node $parent, $level = 0)
+    protected function addTree(Node $parent, int $level = 0): void
     {
         if ($level >= $this->sigParamsDepth) {
             return;
@@ -153,10 +151,8 @@ abstract class AbstractFunction
      * Builds a signature tree starting at the return values and descending
      * through each method argument. Returns an array of
      * {@link \Laminas\Server\Reflection\Node}s.
-     *
-     * @return array
      */
-    protected function buildTree()
+    protected function buildTree(): array
     {
         $returnTree = [];
         foreach ($this->return as $value) {
@@ -174,14 +170,12 @@ abstract class AbstractFunction
      * Builds method signatures using the array of return types and the array of
      * parameters types
      *
-     * @param array $return Array of return types
+     * @param array  $return Array of return types
      * @param string $returnDesc Return value description
-     * @param array $paramTypes Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
-     *
-     * @return void
+     * @param array  $paramTypes Array of arguments (each an array of types)
+     * @param array  $paramDesc Array of parameter descriptions
      */
-    protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc): void
+    protected function buildSignatures(array $return, string $returnDesc, array $paramTypes, array $paramDesc): void
     {
         $this->return         = $return;
         $this->returnDesc     = $returnDesc;
@@ -224,7 +218,7 @@ abstract class AbstractFunction
                 $param = new ReflectionParameter(
                     $params[$key],
                     $type,
-                    (isset($this->paramDesc[$key]) ? $this->paramDesc[$key] : null)
+                    $this->paramDesc[$key] ?? null
                 );
                 $param->setPosition($key);
                 $tmp[] = $param;
@@ -242,10 +236,8 @@ abstract class AbstractFunction
      * ReflectionFunction and parsing of DocBlock @param and @return values.
      *
      * @throws Exception\RuntimeException
-     *
-     * @return void
      */
-    protected function reflect()
+    protected function reflect(): void
     {
         $function   = $this->reflection;
         $paramCount = $function->getNumberOfParameters();
@@ -255,11 +247,11 @@ abstract class AbstractFunction
             $this->docComment = $function->getDocComment();
         }
 
-        $scanner    = new DocBlockReflection(($this->docComment) ? : '/***/');
-        $helpText   = $scanner->getLongDescription();
-        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ParamTag[] $paramTags */
+        $scanner  = new DocBlockReflection($this->docComment ? : '/***/');
+        $helpText = $scanner->getLongDescription();
+        /** @var ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
-        /* @var \Laminas\Code\Reflection\DocBlock\Tag\ReturnTag $returnTag */
+        /** @var ReturnTag $returnTag */
         $returnTag = $scanner->getTag('return');
 
         if (empty($helpText)) {
@@ -272,7 +264,7 @@ abstract class AbstractFunction
 
         if ($returnTag) {
             $return     = [];
-            $returnDesc = $returnTag->getDescription();
+            $returnDesc = (string) $returnTag->getDescription();
             foreach ($returnTag->getTypes() as $type) {
                 $return[] = $type;
             }
@@ -285,14 +277,14 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
-                $paramTypesTmp[] = [($param->isArray()) ? 'array' : 'mixed'];
+                $paramTypesTmp[] = [$param->isArray() ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
         } else {
             $paramDesc = [];
             foreach ($paramTags as $paramTag) {
                 $paramTypesTmp[] = $paramTag->getTypes();
-                $paramDesc[]     = ($paramTag->getDescription()) ? : '';
+                $paramDesc[]     = $paramTag->getDescription() ? : '';
             }
         }
 
@@ -304,7 +296,7 @@ abstract class AbstractFunction
                 $paramTypesTmp[$i] = ['mixed'];
                 $paramDesc[$i]     = '';
             }
-        } elseif ($nParamTypesTmp != $paramCount) {
+        } elseif ($nParamTypesTmp !== $paramCount) {
             throw new Exception\RuntimeException(
                 'Variable number of arguments is not supported for services (except optional parameters). '
                 . 'Number of function arguments must correspond to actual number of arguments described in a docblock.'
@@ -325,12 +317,10 @@ abstract class AbstractFunction
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -345,16 +335,13 @@ abstract class AbstractFunction
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (isset($this->config[$key])) {
             return $this->config[$key];
         }
-
-        return;
     }
 
     /**
@@ -362,11 +349,9 @@ abstract class AbstractFunction
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
      * @param mixed $value
-     * @return void
      */
-    public function __set($key, $value)
+    public function __set(string $key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -374,30 +359,23 @@ abstract class AbstractFunction
     /**
      * Set method's namespace
      *
-     * @param string $namespace
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
-    public function setNamespace($namespace)
+    public function setNamespace(?string $namespace): void
     {
         if (empty($namespace)) {
-            $this->namespace = '';
+            $this->namespace = null;
             return;
         }
 
-        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
         $this->namespace = $namespace;
     }
 
-    /**
-     * Return method's namespace
-     *
-     * @return string
-     */
-    public function getNamespace()
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -405,25 +383,14 @@ abstract class AbstractFunction
     /**
      * Set the description
      *
-     * @param string $string
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
-    public function setDescription($string)
+    public function setDescription(string $string): void
     {
-        if (! is_string($string)) {
-            throw new Exception\InvalidArgumentException('Invalid description');
-        }
-
         $this->description = $string;
     }
 
-    /**
-     * Retrieve the description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -434,17 +401,12 @@ abstract class AbstractFunction
      *
      * @return Prototype[]
      */
-    public function getPrototypes()
+    public function getPrototypes(): array
     {
         return $this->prototypes;
     }
 
-    /**
-     * Retrieve additional invocation arguments
-     *
-     * @return array
-     */
-    public function getInvokeArguments()
+    public function getInvokeArguments(): array
     {
         return $this->argv;
     }
@@ -452,11 +414,12 @@ abstract class AbstractFunction
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         $serializable = [];
         foreach ($this as $name => $value) {
-            if ($value instanceof PhpReflectionFunction
+            if (
+                $value instanceof PhpReflectionFunction
                 || $value instanceof PhpReflectionMethod
             ) {
                 continue;
@@ -474,12 +437,12 @@ abstract class AbstractFunction
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
      *
-     * @return void
+     * @throws ReflectionException
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         if ($this->reflection instanceof PhpReflectionMethod) {
-            $class = new PhpReflectionClass($this->class);
+            $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
             $this->reflection = new PhpReflectionFunction($this->name);

@@ -6,67 +6,39 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Method;
 
-/**
- * Method parameter metadata
- */
+use function is_array;
+use function method_exists;
+use function ucfirst;
+
 class Parameter
 {
-    /**
-     * Default parameter value
-     *
-     * @var mixed
-     */
+    /** @var mixed */
     protected $defaultValue;
 
-    /**
-     * Parameter description
-     *
-     * @var string
-     */
+    /** @var string */
     protected $description = '';
 
-    /**
-     * Parameter variable name
-     *
-     * @var string
-     */
+    /** @var null|string */
     protected $name;
 
-    /**
-     * Is parameter optional?
-     *
-     * @var bool
-     */
+    /** @var bool */
     protected $optional = false;
 
-    /**
-     * Parameter type
-     *
-     * @var string
-     */
+    /** @var string */
     protected $type = 'mixed';
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $options
-     */
-    public function __construct($options = null)
+    public function __construct(?array $options = null)
     {
         if (is_array($options)) {
             $this->setOptions($options);
         }
     }
 
-    /**
-     * Set object state from array of options
-     *
-     * @param  array $options
-     * @return \Laminas\Server\Method\Parameter
-     */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -81,9 +53,9 @@ class Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return \Laminas\Server\Method\Parameter
+     * @return $this
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue($defaultValue): self
     {
         $this->defaultValue = $defaultValue;
         return $this;
@@ -99,100 +71,51 @@ class Parameter
         return $this->defaultValue;
     }
 
-    /**
-     * Set description
-     *
-     * @param  string $description
-     * @return \Laminas\Server\Method\Parameter
-     */
-    public function setDescription($description)
+    public function setDescription(string $description): self
     {
-        $this->description = (string) $description;
+        $this->description = $description;
         return $this;
     }
 
-    /**
-     * Retrieve description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Set name
-     *
-     * @param  string $name
-     * @return \Laminas\Server\Method\Parameter
-     */
-    public function setName($name)
+    public function setName(?string $name): self
     {
-        $this->name = (string) $name;
+        $this->name = $name;
         return $this;
     }
 
-    /**
-     * Retrieve name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
-    /**
-     * Set optional flag
-     *
-     * @param  bool $flag
-     * @return \Laminas\Server\Method\Parameter
-     */
-    public function setOptional($flag)
+    public function setOptional(bool $flag): self
     {
-        $this->optional = (bool) $flag;
+        $this->optional = $flag;
         return $this;
     }
 
-    /**
-     * Is the parameter optional?
-     *
-     * @return bool
-     */
-    public function isOptional()
+    public function isOptional(): bool
     {
         return $this->optional;
     }
 
-    /**
-     * Set parameter type
-     *
-     * @param  string $type
-     * @return \Laminas\Server\Method\Parameter
-     */
-    public function setType($type)
+    public function setType(string $type): self
     {
-        $this->type = (string) $type;
+        $this->type = $type;
         return $this;
     }
 
-    /**
-     * Retrieve parameter type
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Cast to array
-     *
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'type'         => $this->getType(),

@@ -6,46 +6,31 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server;
 
 use Laminas\Server;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for Laminas\Server\Definition
- *
- * @group      Laminas_Server
- */
+use function array_shift;
+use function array_values;
+
 class DefinitionTest extends TestCase
 {
     /** @var Server\Definition */
     private $definition;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->definition = new Server\Definition();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown(): void
-    {
     }
 
     public function testMethodsShouldBeEmptyArrayByDefault(): void
     {
         $methods = $this->definition->getMethods();
+        $this->assertIsArray($methods);
         $this->assertEmpty($methods);
     }
 
@@ -57,6 +42,25 @@ class DefinitionTest extends TestCase
         $this->assertCount(1, $methods);
         $this->assertSame($method, $methods['foo']);
         $this->assertSame($method, $this->definition->getMethod('foo'));
+    }
+
+    public function testConstructorNumericKeyWillBeReplacedByMethodName(): void
+    {
+        $method     = new Method\Definition(['name' => 'foo']);
+        $definition = new Server\Definition(['100' => $method]);
+
+        $this->assertCount(1, $definition);
+        $this->assertSame($method, $definition->getMethod('foo'));
+    }
+
+    public function testAddMethodNumericKeyWillBeReplacedByMethodName(): void
+    {
+        $method     = new Method\Definition(['name' => 'foo']);
+        $definition = new Server\Definition();
+        $definition->addMethod($method, '100');
+
+        $this->assertCount(1, $definition);
+        $this->assertSame($method, $definition->getMethod('foo'));
     }
 
     public function testDefinitionShouldAllowAddingMultipleMethods(): void
@@ -113,19 +117,19 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldSerializeToArray(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
         $definition = new Server\Definition();
@@ -141,24 +145,24 @@ class DefinitionTest extends TestCase
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
-        $options = [$method];
+        $options    = [$method];
         $definition = new Server\Definition($options);
-        $test = $definition->toArray();
+        $test       = $definition->toArray();
         $this->assertCount(1, $test);
         $test = array_shift($test);
         $this->assertEquals($method['name'], $test['name']);

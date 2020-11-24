@@ -1,7 +1,4 @@
-# laminas-server
-
-[![Build Status](https://travis-ci.com/laminas/laminas-server.svg)](https://travis-ci.com/laminas/laminas-server)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-server/badge.svg)](https://coveralls.io/github/laminas/laminas-server)
+# Introduction
 
 The laminas-server family of classes provides functionality for the various server
 classes, including
@@ -12,5 +9,7 @@ classes, including
 all RPC-style server classes should implement this interface in order to provide a
 standard server API.
 
-- File issues at https://github.com/laminas/laminas-server/issues
-- Documentation is at https://docs.laminas.dev/laminas-server/
+The `Laminas\Server\Reflection` tree provides a standard mechanism for performing
+function and class introspection for use as callbacks with the server classes,
+and provides data suitable for use with `Laminas\Server\Server`'s `getFunctions()`
+and `loadFunctions()` methods.

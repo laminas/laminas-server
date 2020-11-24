@@ -6,18 +6,30 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server;
 
+use ErrorException;
 use Laminas\Stdlib\ErrorHandler;
 
-/**
- * \Laminas\Server\Cache: cache server definitions
- */
+use function array_keys;
+use function dirname;
+use function file_exists;
+use function file_get_contents;
+use function file_put_contents;
+use function in_array;
+use function is_readable;
+use function is_writable;
+use function serialize;
+use function unlink;
+use function unserialize;
+
+use const E_NOTICE;
+
 class Cache
 {
-    /**
-     * @var array Methods to skip when caching server
-     */
+    /** @var string[] */
     protected static $skipMethods = [];
 
     /**
@@ -29,13 +41,11 @@ class Cache
      * Returns false on any error (typically, inability to write to file), true
      * on success.
      *
-     * @param  string $filename
-     * @param  \Laminas\Server\Server $server
-     * @return bool
+     * @throws ErrorException
      */
-    public static function save($filename, Server $server)
+    public static function save(string $filename, ServerInterface $server): bool
     {
-        if (! is_string($filename) || (! file_exists($filename) && ! is_writable(dirname($filename)))) {
+        if (! file_exists($filename) && ! is_writable(dirname($filename))) {
             return false;
         }
 
@@ -78,13 +88,11 @@ class Cache
      * echo $response;
      * </code>
      *
-     * @param  string $filename
-     * @param  \Laminas\Server\Server $server
-     * @return bool
+     * @throws ErrorException
      */
-    public static function get($filename, Server $server)
+    public static function get(string $filename, ServerInterface $server): bool
     {
-        if (! is_string($filename) || ! file_exists($filename) || ! is_readable($filename)) {
+        if (! file_exists($filename) || ! is_readable($filename)) {
             return false;
         }
 
@@ -107,13 +115,7 @@ class Cache
         return true;
     }
 
-    /**
-     * Remove a cache file
-     *
-     * @param  string $filename
-     * @return bool
-     */
-    public static function delete($filename)
+    public static function delete(string $filename): bool
     {
         if (file_exists($filename)) {
             unlink($filename);
@@ -136,10 +138,7 @@ class Cache
         return self::createDefinitionFromMethodsArray($methods);
     }
 
-    /**
-     * @return Definition
-     */
-    private static function createDefinitionFromMethodsDefinition(Definition $methods)
+    private static function createDefinitionFromMethodsDefinition(Definition $methods): Definition
     {
         $definition = new Definition();
         foreach ($methods as $method) {
@@ -151,10 +150,7 @@ class Cache
         return $definition;
     }
 
-    /**
-     * @return array
-     */
-    private static function createDefinitionFromMethodsArray(array $methods)
+    private static function createDefinitionFromMethodsArray(array $methods): array
     {
         foreach (array_keys($methods) as $methodName) {
             if (in_array($methodName, static::$skipMethods, true)) {

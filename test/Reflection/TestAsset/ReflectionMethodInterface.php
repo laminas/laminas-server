@@ -6,6 +6,8 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server\Reflection\TestAsset;
 
 use LaminasTest\Server\Reflection\ReflectionMethodTest;
@@ -18,5 +20,5 @@ interface ReflectionMethodInterface
      * @param ReflectionMethodTest $reflectionMethodTest Reflection method
      * @param array                $anything             Some array information
      */
-    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything);
+    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything): void;
 }

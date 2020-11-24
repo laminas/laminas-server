@@ -6,46 +6,33 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use Laminas\Server\Reflection\ReflectionReturnValue;
+use Laminas\Server\Reflection\Prototype;
+use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
-/**
- * Test case for \Laminas\Server\Reflection\Prototype
- *
- * @group      Laminas_Server
- */
 class PrototypeTest extends TestCase
 {
-    /**
-     * @var \Laminas\Server\Reflection\Prototype
-     */
+    /** @var Prototype */
     protected $r;
 
-    /**
-     * @var array
-     * @psalm-var array<array-key, \ReflectionParameter>
-     */
+    /** @var ReflectionParameter[] */
     protected $parametersRaw;
 
-    /**
-     * @var array
-     * @psalm-var list<Reflection\ReflectionParameter>
-     */
+    /** @var ReflectionParameter[] */
     protected $parameters;
 
-    /**
-     * Setup environment
-     */
-    public function setUp(): void
+    protected function setUp(): void
     {
-        $class = new ReflectionClass('\Laminas\Server\Reflection');
-        $method = $class->getMethod('reflectClass');
-        $parameters = $method->getParameters();
+        $class               = new ReflectionClass(Reflection::class);
+        $method              = $class->getMethod('reflectClass');
+        $parameters          = $method->getParameters();
         $this->parametersRaw = $parameters;
 
         $fParameters = [];
@@ -54,78 +41,42 @@ class PrototypeTest extends TestCase
         }
         $this->parameters = $fParameters;
 
-        $this->r = new Reflection\Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
+        $this->r = new Prototype(new Reflection\ReflectionReturnValue('void', 'No return'));
     }
 
-    /**
-     * Teardown environment
-     */
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         unset($this->r);
         unset($this->parameters);
         unset($this->parametersRaw);
     }
 
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - return:
-     * - params: Optional;
-     *
-     * Returns: void
-     *
-     * @return void
-     */
     public function testConstructWorks(): void
     {
-        $this->assertSame('void', $this->r->getReturnType());
+        $this->assertInstanceOf(Prototype::class, $this->r);
     }
 
-    /**
-     * getReturnType() test
-     *
-     * Call as method call
-     *
-     * Returns: string
-     *
-     * @return void
-     */
+    public function testConstructionThrowsExceptionOnInvalidParam(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('One or more params are invalid');
+        $r1 = new Prototype($this->r->getReturnValue(), $this->parametersRaw);
+    }
+
     public function testGetReturnType(): void
     {
         $this->assertEquals('void', $this->r->getReturnType());
     }
 
-    /**
-     * getReturnValue() test
-     *
-     * Call as method call
-     *
-     * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
-     *
-     * @return void
-     */
-    public function testGetReturnValue(): void
-    {
-        $this->assertInstanceOf(ReflectionReturnValue::class, $this->r->getReturnValue());
-    }
-
-    /**
-     * getParameters() test
-     *
-     * Call as method call
-     *
-     * Returns: array
-     *
-     * @return void
-     */
     public function testGetParameters(): void
     {
-        $r = new Reflection\Prototype($this->r->getReturnValue(), $this->parameters);
+        $r = new Prototype($this->r->getReturnValue(), $this->parameters);
         $p = $r->getParameters();
+
+        $this->assertIsArray($p);
+        foreach ($p as $parameter) {
+            $this->assertInstanceOf(ReflectionParameter::class, $parameter);
+        }
 
         $this->assertEquals($this->parameters, $p);
     }

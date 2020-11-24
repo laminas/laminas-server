@@ -6,11 +6,10 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Reflection;
 
-/**
- * Function Reflection
- */
 class ReflectionFunction extends AbstractFunction
 {
 }
