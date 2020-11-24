@@ -44,7 +44,11 @@ class DefinitionTest extends TestCase
             'function' => 'foo',
         ];
         $this->definition->setCallback($callback);
-        $test = $this->definition->getCallback()->toArray();
+
+        $definitionCallback = $this->definition->getCallback();
+        $this->assertNotNull($definitionCallback);
+
+        $test = $definitionCallback->toArray();
         $this->assertSame($callback, $test);
     }
 

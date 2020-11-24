@@ -12,6 +12,7 @@ namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Node;
+use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
@@ -78,6 +79,8 @@ class ReflectionMethodTest extends TestCase
         [$prototype]             = $laminasReflectionMethod->getPrototypes();
         [$first, $second]        = $prototype->getParameters();
 
+        self::assertInstanceOf(ReflectionParameter::class, $first);
+        self::assertInstanceOf(ReflectionParameter::class, $second);
         self::assertEquals('ReflectionMethodTest', $first->getType());
         self::assertEquals('array', $second->getType());
     }

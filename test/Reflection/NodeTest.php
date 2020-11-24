@@ -76,7 +76,6 @@ class NodeTest extends TestCase
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
-        $this->assertIsArray($children);
         $this->assertCount(1, $children, var_export($types, true));
         $this->assertEquals($child, $children[0]);
     }

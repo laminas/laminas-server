@@ -94,14 +94,14 @@ class Definition
      * @param  array|Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
      * @return $this
+     * @psalm-param Prototype|array<string, mixed> $prototype
      */
     public function addPrototype($prototype): self
     {
         if (is_array($prototype)) {
             $prototype = new Prototype($prototype);
-        } elseif (! $prototype instanceof Prototype) {
-            throw new Server\Exception\InvalidArgumentException('Invalid method prototype provided');
         }
+
         $this->prototypes[] = $prototype;
         return $this;
     }
@@ -111,6 +111,7 @@ class Definition
      *
      * @param  Prototype[] $prototypes
      * @return $this
+     * @psalm-param array<array-key, Prototype|array<string, mixed>> $prototypes
      */
     public function addPrototypes(array $prototypes): self
     {
@@ -125,6 +126,7 @@ class Definition
      *
      * @param  Prototype[] $prototypes
      * @return $this
+     * @psalm-param array<array-key, Prototype|array<string, mixed>> $prototypes
      */
     public function setPrototypes(array $prototypes): self
     {
@@ -184,9 +186,11 @@ class Definition
             $signatures[] = $prototype->toArray();
         }
 
+        $callback = $this->getCallback();
+
         return [
             'name'            => $this->getName(),
-            'callback'        => $this->getCallback()->toArray(),
+            'callback'        => $callback ? $callback->toArray() : [],
             'prototypes'      => $signatures,
             'methodHelp'      => $this->getMethodHelp(),
             'invokeArguments' => $this->getInvokeArguments(),

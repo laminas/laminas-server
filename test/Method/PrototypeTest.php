@@ -39,7 +39,6 @@ class PrototypeTest extends TestCase
     public function testParametersShouldBeEmptyArrayByDefault(): void
     {
         $params = $this->prototype->getParameters();
-        $this->assertIsArray($params);
         $this->assertEmpty($params);
     }
 
@@ -48,7 +47,6 @@ class PrototypeTest extends TestCase
         $this->testParametersShouldBeEmptyArrayByDefault();
         $this->prototype->addParameter('string');
         $params = $this->prototype->getParameters();
-        $this->assertIsArray($params);
         $this->assertCount(1, $params);
         $this->assertEquals('string', $params[0]);
 

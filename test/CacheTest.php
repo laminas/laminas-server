@@ -60,12 +60,12 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server    = $this->prophesize(ServerInterface::class);
-        $server->getFunctions()->willReturn($functions);
+        $server    = $this->createMock(ServerInterface::class);
+        $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        $this->assertTrue(Cache::save($this->cacheFile, $server));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -86,12 +86,12 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->prophesize(ServerInterface::class);
-        $server->getFunctions()->willReturn($definition);
+        $server = $this->createMock(ServerInterface::class);
+        $server->method('getFunctions')->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        $this->assertTrue(Cache::save($this->cacheFile, $server));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -107,12 +107,12 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server    = $this->prophesize(ServerInterface::class);
-        $server->getFunctions()->willReturn($functions);
+        $server    = $this->createMock(ServerInterface::class);
+        $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        $this->assertTrue(Cache::save($this->cacheFile, $server));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -139,12 +139,12 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->prophesize(ServerInterface::class);
-        $server->getFunctions()->willReturn($definition);
+        $server = $this->createMock(ServerInterface::class);
+        $server->method('getFunctions')->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
 
-        $this->assertTrue(Cache::save($this->cacheFile, $server->reveal()));
+        $this->assertTrue(Cache::save($this->cacheFile, $server));
 
         $data = file_get_contents($this->cacheFile);
         $data = unserialize($data);
@@ -170,7 +170,7 @@ class CacheTest extends TestCase
     public function testDeleteNonExistentFileReturnsFalse(): void
     {
         $server = $this->createStub(ServerInterface::class);
-        $result = Cache::delete('~/non-existent-file.tmp', $server);
+        $result = Cache::delete('~/non-existent-file.tmp');
 
         $this->assertFalse($result);
     }

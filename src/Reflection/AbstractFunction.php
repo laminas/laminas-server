@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Laminas\Code\Generator\DocBlock\Tag\ParamTag;
+use Laminas\Code\Generator\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
@@ -85,12 +87,19 @@ abstract class AbstractFunction
      */
     protected $namespace;
 
+    /** @var Prototype[] */
     protected $prototypes = [];
 
+    /** @var string */
     protected $docComment = '';
 
     protected $return;
     protected $returnDesc;
+
+    /**
+     * @var null|string[]
+     * @psalm-var null|array<array-key, string>
+     */
     protected $paramDesc;
     protected $sigParams;
     protected $sigParamsDepth;
@@ -174,6 +183,7 @@ abstract class AbstractFunction
      * @param string $returnDesc Return value description
      * @param array  $paramTypes Array of arguments (each an array of types)
      * @param array  $paramDesc Array of parameter descriptions
+     * @psalm-param array<array-key, string> $paramDesc
      */
     protected function buildSignatures(array $return, string $returnDesc, array $paramTypes, array $paramDesc): void
     {
@@ -243,15 +253,16 @@ abstract class AbstractFunction
         $paramCount = $function->getNumberOfParameters();
         $parameters = $function->getParameters();
 
-        if (! $this->docComment) {
+        if (empty($this->docComment)) {
             $this->docComment = $function->getDocComment();
         }
 
-        $scanner  = new DocBlockReflection($this->docComment ? : '/***/');
+        $scanner  = new DocBlockReflection($this->docComment ?: '/***/');
         $helpText = $scanner->getLongDescription();
         /** @var ParamTag[] $paramTags */
         $paramTags = $scanner->getTags('param');
-        /** @var ReturnTag $returnTag */
+        /** @var ReturnTag|bool $returnTag */
+        /** @psalm-var ReturnTag|false $returnTag */
         $returnTag = $scanner->getTag('return');
 
         if (empty($helpText)) {

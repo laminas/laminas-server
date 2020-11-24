@@ -12,7 +12,6 @@ namespace LaminasTest\Server;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use Laminas\Server\Reflection\ReflectionClass;
 use PHPUnit\Framework\TestCase;
 
 class ReflectionTest extends TestCase
@@ -20,10 +19,10 @@ class ReflectionTest extends TestCase
     public function testReflectClass(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class);
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
+        $this->assertSame(TestAsset\ReflectionTestClass::class, $reflection->getName());
 
         $reflection = Reflection::reflectClass(new TestAsset\ReflectionTestClass());
-        $this->assertInstanceOf(ReflectionClass::class, $reflection);
+        $this->assertSame(TestAsset\ReflectionTestClass::class, $reflection->getName());
     }
 
     public function testReflectClassThrowsExceptionOnInvalidParameter(): void
@@ -53,9 +52,9 @@ class ReflectionTest extends TestCase
         Reflection::reflectFunction(false);
     }
 
-//    public function testReflectFunction2(): void
-//    {
-//        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
-//        $this->assertEquals('zsr', $reflection->getNamespace());
-//    }
+    public function testReflectFunction2(): void
+    {
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
+        $this->assertEquals('zsr', $reflection->getNamespace());
+    }
 }

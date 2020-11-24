@@ -69,10 +69,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 #### Enhancement
 
- - [16: Psalm integration](https://github.com/laminas/laminas-server/pull/16) thanks to @weierophinney
- - [15: Add PHP 8.0 support](https://github.com/laminas/laminas-server/pull/15) thanks to @bfoosness
- - [9: Change class inheritance path by having new interfaces extend current interfaces](https://github.com/laminas/laminas-server/pull/9) thanks to @arueckauer
- - [8: 3.0 Preparation](https://github.com/laminas/laminas-server/pull/8) thanks to @arueckauer
+- [16: Psalm integration](https://github.com/laminas/laminas-server/pull/16) thanks to @weierophinney
+- [15: Add PHP 8.0 support](https://github.com/laminas/laminas-server/pull/15) thanks to @bfoosness
+- [9: Change class inheritance path by having new interfaces extend current interfaces](https://github.com/laminas/laminas-server/pull/9) thanks to @arueckauer
+- [8: 3.0 Preparation](https://github.com/laminas/laminas-server/pull/8) thanks to @arueckauer
 
 #### Documentation
 

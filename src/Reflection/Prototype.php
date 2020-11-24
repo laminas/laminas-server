@@ -45,6 +45,9 @@ class Prototype
         return $this->return;
     }
 
+    /**
+     * @return ReflectionParameter[]
+     */
     public function getParameters(): array
     {
         return $this->params;

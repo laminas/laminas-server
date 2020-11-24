@@ -32,6 +32,9 @@ class Definition implements Countable, Iterator
     /** @var bool */
     protected $overwriteExistingMethods = false;
 
+    /**
+     * @psalm-param null|array<array-key, Method\Definition|array<string, mixed>> $methods
+     */
     public function __construct(?array $methods = null)
     {
         if (is_array($methods)) {
@@ -51,13 +54,12 @@ class Definition implements Countable, Iterator
      * @param  array|Method\Definition $method
      * @return $this
      * @throws InvalidArgumentException If duplicate or invalid method provided.
+     * @psalm-param Method\Definition|array<string, mixed> $method
      */
     public function addMethod($method, ?string $name = null): self
     {
         if (is_array($method)) {
             $method = new Method\Definition($method);
-        } elseif (! $method instanceof Method\Definition) {
-            throw new InvalidArgumentException('Invalid method provided');
         }
 
         if (is_numeric($name)) {
@@ -80,6 +82,10 @@ class Definition implements Countable, Iterator
         return $this;
     }
 
+    /**
+     * @param  Method\Definition[] $methods
+     * @psalm-param array<array-key, Method\Definition|array<string, mixed>> $methods
+     */
     public function addMethods(array $methods): self
     {
         foreach ($methods as $key => $method) {
@@ -96,6 +102,7 @@ class Definition implements Countable, Iterator
      *
      * @param  Method\Definition[] $methods
      * @return $this
+     * @psalm-param array<array-key, Method\Definition|array<string, mixed>> $methods
      */
     public function setMethods(array $methods): self
     {
@@ -158,7 +165,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: current item
      *
-     * @return bool|Method\Definition
+     * @return Method\Definition
      */
     public function current()
     {
@@ -177,12 +184,10 @@ class Definition implements Countable, Iterator
 
     /**
      * Iterator: advance to next method
-     *
-     * @return bool|Method\Definition
      */
     public function next()
     {
-        return next($this->methods);
+        next($this->methods);
     }
 
     public function rewind(): void
