@@ -80,6 +80,6 @@ class Reflection
             throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectFunction');
         }
 
-        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
+        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, is_array($argv) ? $argv : []);
     }
 }

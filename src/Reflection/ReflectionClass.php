@@ -73,7 +73,7 @@ class ReflectionClass
 
             if ($method->isPublic()) {
                 // Get signatures and description
-                $this->methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), $argv);
+                $this->methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), is_array($argv) ? $argv : []);
             }
         }
     }
