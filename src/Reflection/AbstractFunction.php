@@ -285,7 +285,12 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
-                $paramTypesTmp[] = [($param->isArray()) ? 'array' : 'mixed'];
+                if (PHP_VERSION_ID >= 80000) {
+                    $isArray = ($type = $param->getType()) instanceof \ReflectionNamedType && $type->getName() === 'array';
+                } else {
+                    $isArray = $param->isArray();
+                }
+                $paramTypesTmp[] = [$isArray ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
         } else {
