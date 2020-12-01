@@ -18,6 +18,8 @@ use ReflectionException;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
+use ReflectionNamedType;
+use ReflectionParameter as PhpReflectionParameter;
 
 use function array_merge;
 use function array_shift;
@@ -26,6 +28,8 @@ use function call_user_func_array;
 use function count;
 use function method_exists;
 use function preg_match;
+
+use const PHP_VERSION_ID;
 
 /**
  * Function/Method Reflection
@@ -288,7 +292,9 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
-                $paramTypesTmp[] = [$param->isArray() ? 'array' : 'mixed'];
+                // Suppressing, because false positive
+                /** @psalm-suppress TooManyArguments **/
+                $paramTypesTmp[] = [$this->paramIsArray($param) ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
         } else {
@@ -458,5 +464,15 @@ abstract class AbstractFunction
         } else {
             $this->reflection = new PhpReflectionFunction($this->name);
         }
+    }
+
+    private function paramIsArray(PhpReflectionParameter $param): bool
+    {
+        if (PHP_VERSION_ID >= 80000) {
+            $type = $param->getType();
+            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
+        }
+
+        return $param->isArray();
     }
 }
