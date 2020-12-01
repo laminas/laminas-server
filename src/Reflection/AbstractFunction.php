@@ -13,6 +13,8 @@ use ReflectionClass as PhpReflectionClass;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
+use ReflectionNamedType;
+use ReflectionParameter as PhpReflectionParameter;
 
 /**
  * Function/Method Reflection
@@ -285,12 +287,7 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
-                if (PHP_VERSION_ID >= 80000) {
-                    $isArray = ($type = $param->getType()) instanceof \ReflectionNamedType && $type->getName() === 'array';
-                } else {
-                    $isArray = $param->isArray();
-                }
-                $paramTypesTmp[] = [$isArray ? 'array' : 'mixed'];
+                $paramTypesTmp[] = [$this->paramIsArray($param) ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
         } else {
@@ -489,5 +486,15 @@ abstract class AbstractFunction
         } else {
             $this->reflection = new PhpReflectionFunction($this->name);
         }
+    }
+
+    private function paramIsArray(PhpReflectionParameter $param): bool
+    {
+        if (PHP_VERSION_ID >= 80000) {
+            $type = $param->getType();
+            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
+        }
+
+        return $param->isArray();
     }
 }
