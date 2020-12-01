@@ -8,6 +8,7 @@
 
 namespace LaminasTest\Server;
 
+use Laminas\Server\Exception\InvalidArgumentException as ExceptionInvalidArgumentException;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -87,5 +88,54 @@ class ReflectionTest extends TestCase
     {
         $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', false, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
+    }
+
+    /**
+     * @psalm-return array<string, array{0: mixed}>
+     */
+    public function invalidArgvValues(): array
+    {
+        return [
+            'true'          => [true],
+            'zero'          => [0],
+            'floating zero' => [0.0],
+            'one'           => [1],
+            'floating one'  => [1.1],
+            'string'        => ['string'],
+            'object'        => [(object) []],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidArgvValues
+     * @param mixed $invalidValue
+     */
+    public function testReflectFunctionThrowsExceptionForInvalidArgvValue($invalidValue): void
+    {
+        $this->expectException(ExceptionInvalidArgumentException::class);
+        $this->expectExceptionMessage('argv argument');
+        // Suppressing, as the test is intended to verify this
+        /** @psalm-suppress MixedArgument */
+        Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', $invalidValue);
+    }
+
+    /**
+     * @psalm-return array<string, array{0: null|bool}>
+     */
+    public function emptyArgvValues(): array
+    {
+        return [
+            'false' => [false],
+            'null'  => [null],
+        ];
+    }
+
+    /**
+     * @dataProvider emptyArgvValues
+     */
+    public function testReflectFunctionAllowsNullOrFalseArgv(?bool $argv): void
+    {
+        $r = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', $argv);
+        $this->assertSame([], $r->getInvokeArguments());
     }
 }
