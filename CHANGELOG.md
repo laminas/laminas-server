@@ -22,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#18](https://github.com/laminas/laminas-server/pull/18) fixes detection of array function and method parameters on PHP 8.
 
 ## 2.9.0 - 2020-11-23
 
