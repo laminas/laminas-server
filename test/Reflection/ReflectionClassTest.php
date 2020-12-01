@@ -135,4 +135,39 @@ class ReflectionClassTest extends TestCase
 
         $this->assertCount(count($rMethods), $uMethods);
     }
+
+    /**
+     * @psalm-return array<string, array{0: mixed}>
+     */
+    public function nonArrayArgvValues(): array
+    {
+        return [
+            'null'          => [null],
+            'false'         => [false],
+            'true'          => [true],
+            'zero'          => [0],
+            'one'           => [1],
+            'floating zero' => [0.0],
+            'float'         => [1.1],
+            'string'        => ['string'],
+            'object'        => [(object) []],
+        ];
+    }
+
+    /**
+     * @dataProvider nonArrayArgvValues
+     * @param mixed $argv
+     */
+    public function testNonArrayArgvValuesResultInEmptyInvokationArgumentsToReflectedMethods($argv): void
+    {
+        // Suppressing, as we are validating
+        /** @psalm-suppress MixedAssignment */
+        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class), null, $argv);
+
+        $methods = $r->getMethods();
+        foreach ($methods as $m) {
+            assert($m instanceof ReflectionMethod);
+            $this->assertSame([], $m->getInvokeArguments());
+        }
+    }
 }

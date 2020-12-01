@@ -65,6 +65,8 @@ class ReflectionClass
         $this->name = $reflection->getName();
         $this->setNamespace($namespace);
 
+        $argv = is_array($argv) ? $argv : [];
+
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
             if ('__' == substr($method->getName(), 0, 2)) {
@@ -73,7 +75,7 @@ class ReflectionClass
 
             if ($method->isPublic()) {
                 // Get signatures and description
-                $this->methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), is_array($argv) ? $argv : []);
+                $this->methods[] = new ReflectionMethod($this, $method, $this->getNamespace(), $argv);
             }
         }
     }
