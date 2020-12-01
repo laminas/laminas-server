@@ -287,6 +287,8 @@ abstract class AbstractFunction
         $paramDesc     = [];
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
+                // Suppressing, because false positive
+                /** @psalm-suppress TooManyArguments **/
                 $paramTypesTmp[] = [$this->paramIsArray($param) ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
