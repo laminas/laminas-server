@@ -22,6 +22,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- [#19](https://github.com/laminas/laminas-server/pull/19) fixes a scenario whereby calling `Reflection::reflectionFunction()` or `new ReflectMethod()` with `null` or otherwise invalid `$argv` arguments could lead to fatal errors. These methods now either validate or cast on all invalid values.
+
 - [#18](https://github.com/laminas/laminas-server/pull/18) fixes detection of array function and method parameters on PHP 8.
 
 ## 2.9.0 - 2020-11-23
