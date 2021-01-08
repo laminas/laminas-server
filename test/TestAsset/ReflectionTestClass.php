@@ -36,9 +36,7 @@ class ReflectionTestClass
      *
      * Should not be reflected
      *
-     * @param string $arg1
      * @param null|array $arg2
-     * @return string
      */
     // @codingStandardsIgnoreStart
     protected function _one(string $arg1, ?array $arg2 = null): string

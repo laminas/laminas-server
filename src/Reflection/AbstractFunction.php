@@ -97,7 +97,10 @@ abstract class AbstractFunction
     /** @var string */
     protected $docComment = '';
 
+    /** @var array */
     protected $return;
+
+    /** @var string */
     protected $returnDesc;
 
     /**
@@ -105,7 +108,11 @@ abstract class AbstractFunction
      * @psalm-var null|array<array-key, string>
      */
     protected $paramDesc;
+
+    /** @var array */
     protected $sigParams;
+
+    /** @var int */
     protected $sigParamsDepth;
 
     /**
