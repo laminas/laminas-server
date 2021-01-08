@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#23](https://github.com/laminas/laminas-server/pull/23) adds support for laminas-code v4 releases.
 
 ### Changed
 
