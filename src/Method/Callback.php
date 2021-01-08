@@ -92,7 +92,7 @@ class Callback
      */
     public function setFunction($function): self
     {
-        $this->function = is_callable($function) ? $function : (string) $function;
+        $this->function = is_callable($function) ? $function : $function;
         $this->setType('function');
         return $this;
     }
