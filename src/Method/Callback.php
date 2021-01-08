@@ -15,7 +15,6 @@ use Laminas\Server;
 use function get_class;
 use function in_array;
 use function is_array;
-use function is_callable;
 use function is_object;
 use function method_exists;
 use function sprintf;
