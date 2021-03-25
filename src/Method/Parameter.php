@@ -102,7 +102,7 @@ class Parameter
     /**
      * Set description
      *
-     * @param  string $description
+     * @param  mixed $description
      * @return \Laminas\Server\Method\Parameter
      */
     public function setDescription($description)
@@ -124,7 +124,7 @@ class Parameter
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  mixed $name
      * @return \Laminas\Server\Method\Parameter
      */
     public function setName($name)
@@ -146,7 +146,7 @@ class Parameter
     /**
      * Set optional flag
      *
-     * @param  bool $flag
+     * @param  mixed $flag
      * @return \Laminas\Server\Method\Parameter
      */
     public function setOptional($flag)
@@ -168,7 +168,7 @@ class Parameter
     /**
      * Set parameter type
      *
-     * @param  string $type
+     * @param  mixed $type
      * @return \Laminas\Server\Method\Parameter
      */
     public function setType($type)
