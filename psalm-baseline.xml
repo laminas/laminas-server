@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.2.1@ea9cb72143b77e7520c52fa37290bd8d8bc88fd9">
+<files psalm-version="4.7.0@d4377c0baf3ffbf0b1ec6998e8d1be2a40971005">
   <file src="src/AbstractServer.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$class</code>
@@ -14,9 +14,6 @@
     <ImplementedReturnTypeMismatch occurrences="1">
       <code>Definition</code>
     </ImplementedReturnTypeMismatch>
-    <InvalidArgument occurrences="1">
-      <code>$param</code>
-    </InvalidArgument>
     <InvalidStringClass occurrences="1">
       <code>new $class</code>
     </InvalidStringClass>
@@ -63,18 +60,6 @@
     <MixedAssignment occurrences="1">
       <code>$dispatchArray</code>
     </MixedAssignment>
-    <MixedReturnStatement occurrences="1">
-      <code>$methods</code>
-    </MixedReturnStatement>
-    <RedundantCondition occurrences="1">
-      <code>is_array($methods)</code>
-    </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>is_string($filename)</code>
-    </RedundantConditionGivenDocblockType>
-    <TypeDoesNotContainType occurrences="1">
-      <code>$methods instanceof Definition</code>
-    </TypeDoesNotContainType>
   </file>
   <file src="src/Definition.php">
     <DocblockTypeContradiction occurrences="2">
@@ -131,10 +116,9 @@
       <code>$method</code>
       <code>$type</code>
     </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>(null !== $options) &amp;&amp; is_array($options)</code>
-      <code>is_array($options)</code>
-    </RedundantConditionGivenDocblockType>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(string) $function</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Method/Definition.php">
     <DocblockTypeContradiction occurrences="3">
@@ -161,10 +145,10 @@
       <code>$callback</code>
       <code>$name</code>
     </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>(null !== $options) &amp;&amp; is_array($options)</code>
-      <code>is_array($options)</code>
-    </RedundantConditionGivenDocblockType>
+    <RedundantCastGivenDocblockType occurrences="2">
+      <code>(string) $methodHelp</code>
+      <code>(string) $name</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Method/Parameter.php">
     <MixedArgumentTypeCoercion occurrences="1">
@@ -176,11 +160,16 @@
     <PropertyNotSetInConstructor occurrences="1">
       <code>$name</code>
     </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="4">
+      <code>(bool) $flag</code>
+      <code>(string) $description</code>
+      <code>(string) $name</code>
+      <code>(string) $type</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Method/Prototype.php">
-    <DocblockTypeContradiction occurrences="2">
+    <DocblockTypeContradiction occurrences="1">
       <code>! is_string($index) &amp;&amp; ! is_numeric($index)</code>
-      <code>$parameter instanceof Parameter</code>
     </DocblockTypeContradiction>
     <MixedArgument occurrences="2">
       <code>$index</code>
@@ -205,22 +194,14 @@
     <MixedReturnStatement occurrences="1">
       <code>$this-&gt;parameters[$index]</code>
     </MixedReturnStatement>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>(null !== $options) &amp;&amp; is_array($options)</code>
-      <code>is_array($options)</code>
-      <code>null !== ($name = $parameter-&gt;getName())</code>
-    </RedundantConditionGivenDocblockType>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(string) $parameter</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Reflection.php">
     <DocblockTypeContradiction occurrences="1">
       <code>! is_string($function)</code>
     </DocblockTypeContradiction>
-    <PossiblyFalseArgument occurrences="1">
-      <code>$argv</code>
-    </PossiblyFalseArgument>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>is_string($class)</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Reflection/AbstractFunction.php">
     <ArgumentTypeCoercion occurrences="2">
@@ -231,9 +212,8 @@
       <code>! is_string($namespace)</code>
       <code>is_string($string)</code>
     </DocblockTypeContradiction>
-    <MissingPropertyType occurrences="5">
+    <MissingPropertyType occurrences="4">
       <code>$paramDesc</code>
-      <code>$return</code>
       <code>$returnDesc</code>
       <code>$sigParams</code>
       <code>$sigParamsDepth</code>
@@ -311,10 +291,6 @@
     <PossiblyNullPropertyAssignmentValue occurrences="1">
       <code>null</code>
     </PossiblyNullPropertyAssignmentValue>
-    <RedundantCondition occurrences="2">
-      <code>(null !== $value) &amp;&amp; ! $child-&gt;hasChildren()</code>
-      <code>(null !== $value) &amp;&amp; $child-&gt;hasChildren()</code>
-    </RedundantCondition>
     <UnsafeInstantiation occurrences="1">
       <code>new static($value, $this)</code>
     </UnsafeInstantiation>
@@ -349,9 +325,6 @@
     <DocblockTypeContradiction occurrences="1">
       <code>! is_string($namespace)</code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="1">
-      <code>$argv</code>
-    </MixedArgument>
     <PossiblyNullArgument occurrences="1">
       <code>$namespace</code>
     </PossiblyNullArgument>
@@ -369,9 +342,6 @@
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;class</code>
     </ArgumentTypeCoercion>
-    <InvalidArgument occurrences="1">
-      <code>$this-&gt;classReflection</code>
-    </InvalidArgument>
     <MixedArgument occurrences="2">
       <code>$docComment</code>
       <code>$this-&gt;classReflection-&gt;getName()</code>
@@ -399,9 +369,6 @@
     <PropertyNotSetInConstructor occurrences="1">
       <code>ReflectionMethod</code>
     </PropertyNotSetInConstructor>
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>is_array($argv)</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="src/Reflection/ReflectionParameter.php">
     <DocblockTypeContradiction occurrences="2">
@@ -419,6 +386,9 @@
     <PropertyNotSetInConstructor occurrences="1">
       <code>$position</code>
     </PropertyNotSetInConstructor>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(int) $index</code>
+    </RedundantCastGivenDocblockType>
   </file>
   <file src="src/Reflection/ReflectionReturnValue.php">
     <DocblockTypeContradiction occurrences="2">
@@ -464,15 +434,7 @@
     </PossiblyNullPropertyAssignmentValue>
   </file>
   <file src="test/DefinitionTest.php">
-    <MixedArgument occurrences="3">
-      <code>$methods</code>
-      <code>$methods</code>
-      <code>$test</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="11">
-      <code>$methods['bar']</code>
-      <code>$methods['foo']</code>
-      <code>$methods['foo']</code>
+    <MixedArrayAccess occurrences="8">
       <code>$test['invokeArguments']</code>
       <code>$test['invokeArguments']</code>
       <code>$test['methodHelp']</code>
@@ -482,249 +444,10 @@
       <code>$test['prototypes']</code>
       <code>$test['prototypes']</code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="5">
-      <code>$methods</code>
-      <code>$methods</code>
-      <code>$test</code>
+    <MixedAssignment occurrences="2">
       <code>$test</code>
       <code>$test</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="18">
-      <code>addMethod</code>
-      <code>addMethods</code>
-      <code>clearMethods</code>
-      <code>getMethod</code>
-      <code>getMethod</code>
-      <code>getMethod</code>
-      <code>getMethods</code>
-      <code>getMethods</code>
-      <code>getMethods</code>
-      <code>getMethods</code>
-      <code>getMethods</code>
-      <code>getMethods</code>
-      <code>hasMethod</code>
-      <code>hasMethod</code>
-      <code>hasMethod</code>
-      <code>hasMethod</code>
-      <code>removeMethod</code>
-      <code>setMethods</code>
-    </MixedMethodCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;definition</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="8">
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-    </UndefinedThisPropertyFetch>
-  </file>
-  <file src="test/Method/CallbackTest.php">
-    <RedundantConditionGivenDocblockType occurrences="1">
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="test/Method/DefinitionTest.php">
-    <MixedArrayAccess occurrences="9">
-      <code>$test['callback']</code>
-      <code>$test['invokeArguments']</code>
-      <code>$test['methodHelp']</code>
-      <code>$test['name']</code>
-      <code>$test['object']</code>
-      <code>$test['prototypes']</code>
-      <code>$test[0]</code>
-      <code>$test[0]</code>
-      <code>$test[1]</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="3">
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="39">
-      <code>addPrototype</code>
-      <code>addPrototype</code>
-      <code>addPrototypes</code>
-      <code>getCallback</code>
-      <code>getCallback</code>
-      <code>getCallback</code>
-      <code>getInvokeArguments</code>
-      <code>getInvokeArguments</code>
-      <code>getMethodHelp</code>
-      <code>getMethodHelp</code>
-      <code>getMethodHelp</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getObject</code>
-      <code>getObject</code>
-      <code>getObject</code>
-      <code>getPrototypes</code>
-      <code>getPrototypes</code>
-      <code>getPrototypes</code>
-      <code>getPrototypes</code>
-      <code>getPrototypes</code>
-      <code>getPrototypes</code>
-      <code>setCallback</code>
-      <code>setCallback</code>
-      <code>setCallback</code>
-      <code>setInvokeArguments</code>
-      <code>setInvokeArguments</code>
-      <code>setMethodHelp</code>
-      <code>setMethodHelp</code>
-      <code>setName</code>
-      <code>setName</code>
-      <code>setObject</code>
-      <code>setObject</code>
-      <code>setObject</code>
-      <code>setPrototypes</code>
-      <code>setPrototypes</code>
-      <code>toArray</code>
-      <code>toArray</code>
-    </MixedMethodCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;definition</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="17">
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-      <code>$this-&gt;definition</code>
-    </UndefinedThisPropertyFetch>
-  </file>
-  <file src="test/Method/ParameterTest.php">
-    <MixedAssignment occurrences="4">
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-      <code>$test</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="32">
-      <code>getDefaultValue</code>
-      <code>getDefaultValue</code>
-      <code>getDefaultValue</code>
-      <code>getDescription</code>
-      <code>getDescription</code>
-      <code>getDescription</code>
-      <code>getDescription</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getName</code>
-      <code>getType</code>
-      <code>getType</code>
-      <code>getType</code>
-      <code>getType</code>
-      <code>isOptional</code>
-      <code>isOptional</code>
-      <code>isOptional</code>
-      <code>setDefaultValue</code>
-      <code>setDefaultValue</code>
-      <code>setDescription</code>
-      <code>setDescription</code>
-      <code>setDescription</code>
-      <code>setName</code>
-      <code>setName</code>
-      <code>setName</code>
-      <code>setOptional</code>
-      <code>setOptional</code>
-      <code>setType</code>
-      <code>setType</code>
-      <code>setType</code>
-      <code>toArray</code>
-    </MixedMethodCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;parameter</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="14">
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-      <code>$this-&gt;parameter</code>
-    </UndefinedThisPropertyFetch>
-  </file>
-  <file src="test/Method/PrototypeTest.php">
-    <MixedArgument occurrences="1">
-      <code>$params</code>
-    </MixedArgument>
-    <MixedArrayAccess occurrences="4">
-      <code>$params[0]</code>
-      <code>$params[1]</code>
-      <code>$test['parameters']</code>
-      <code>$test['returnType']</code>
-    </MixedArrayAccess>
-    <MixedAssignment occurrences="3">
-      <code>$parameters</code>
-      <code>$params</code>
-      <code>$test</code>
-    </MixedAssignment>
-    <MixedMethodCall occurrences="23">
-      <code>addParameter</code>
-      <code>addParameter</code>
-      <code>addParameter</code>
-      <code>addParameter</code>
-      <code>addParameters</code>
-      <code>addParameters</code>
-      <code>getParameter</code>
-      <code>getParameter</code>
-      <code>getParameter</code>
-      <code>getParameterObjects</code>
-      <code>getParameters</code>
-      <code>getParameters</code>
-      <code>getParameters</code>
-      <code>getParameters</code>
-      <code>getParameters</code>
-      <code>getReturnType</code>
-      <code>getReturnType</code>
-      <code>getReturnType</code>
-      <code>setParameters</code>
-      <code>setParameters</code>
-      <code>setReturnType</code>
-      <code>setReturnType</code>
-      <code>toArray</code>
-    </MixedMethodCall>
-    <UndefinedThisPropertyAssignment occurrences="1">
-      <code>$this-&gt;prototype</code>
-    </UndefinedThisPropertyAssignment>
-    <UndefinedThisPropertyFetch occurrences="10">
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-      <code>$this-&gt;prototype</code>
-    </UndefinedThisPropertyFetch>
   </file>
   <file src="test/Reflection/NodeTest.php">
     <InvalidScalarArgument occurrences="3">
@@ -749,37 +472,18 @@
       <code>var_export($endPointsArray, 1)</code>
       <code>var_export($test, 1)</code>
     </PossiblyNullOperand>
-    <RedundantCondition occurrences="2">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>assertInstanceOf</code>
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
+    <UnusedVariable occurrences="5">
+      <code>$child1grand1</code>
+      <code>$child1grand2</code>
+      <code>$child2grand1</code>
+      <code>$child2grand2great1</code>
+      <code>$child2grand2great2</code>
+    </UnusedVariable>
   </file>
   <file src="test/Reflection/PrototypeTest.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>'\Laminas\Server\Reflection'</code>
     </ArgumentTypeCoercion>
-    <MixedArgumentTypeCoercion occurrences="2">
-      <code>$this-&gt;parameters</code>
-      <code>$this-&gt;parametersRaw</code>
-    </MixedArgumentTypeCoercion>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="test/Reflection/ReflectionClassTest.php">
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/Reflection/ReflectionFunctionTest.php">
     <InvalidScalarArgument occurrences="1">
@@ -791,55 +495,18 @@
     <PossiblyNullArgument occurrences="1">
       <code>var_export($param, 1)</code>
     </PossiblyNullArgument>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="9">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-      <code>assertIsArray</code>
-    </RedundantConditionGivenDocblockType>
-  </file>
-  <file src="test/Reflection/ReflectionMethodTest.php">
-    <MissingPropertyType occurrences="3">
-      <code>$class</code>
-      <code>$classRaw</code>
-      <code>$method</code>
-    </MissingPropertyType>
-    <MixedArgument occurrences="6">
-      <code>$this-&gt;class</code>
-      <code>$this-&gt;class</code>
-      <code>$this-&gt;class</code>
-      <code>$this-&gt;method</code>
-      <code>$this-&gt;method</code>
-      <code>$this-&gt;method</code>
-    </MixedArgument>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-    </RedundantConditionGivenDocblockType>
+    <UnusedParam occurrences="2">
+      <code>$var1</code>
+      <code>$var1</code>
+    </UnusedParam>
+    <UnusedVariable occurrences="1">
+      <code>$params</code>
+    </UnusedVariable>
   </file>
   <file src="test/Reflection/ReflectionParameterTest.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>'\Laminas\Server\Reflection\ReflectionParameter'</code>
     </ArgumentTypeCoercion>
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
-  </file>
-  <file src="test/Reflection/ReflectionReturnValueTest.php">
-    <RedundantCondition occurrences="1">
-      <code>assertInstanceOf</code>
-    </RedundantCondition>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodInterface.php">
     <MissingReturnType occurrences="1">
@@ -855,11 +522,6 @@
       <code>false</code>
       <code>false</code>
     </PossiblyFalseArgument>
-    <RedundantConditionGivenDocblockType occurrences="3">
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-      <code>assertInstanceOf</code>
-    </RedundantConditionGivenDocblockType>
   </file>
   <file src="test/TestAsset/reflectionTestFunction.php">
     <UndefinedDocblockClass occurrences="1">
