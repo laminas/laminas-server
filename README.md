@@ -1,7 +1,6 @@
 # laminas-server
 
-[![Build Status](https://travis-ci.com/laminas/laminas-server.svg)](https://travis-ci.com/laminas/laminas-server)
-[![Coverage Status](https://coveralls.io/repos/github/laminas/laminas-server/badge.svg)](https://coveralls.io/github/laminas/laminas-server)
+[![Build Status](https://github.com/laminas/laminas-server/workflows/Continuous%20Integration/badge.svg)](https://github.com/laminas/laminas-server/actions?query=workflow%3A"Continuous+Integration")
 
 The laminas-server family of classes provides functionality for the various server
 classes, including `Laminas\XmlRpc\Server` and `Laminas\Json\Server`.
