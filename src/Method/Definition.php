@@ -82,7 +82,7 @@ class Definition
      */
     public function setName($name)
     {
-        $this->name = (string) $name;
+        $this->name = $name;
         return $this;
     }
 
@@ -187,7 +187,7 @@ class Definition
      */
     public function setMethodHelp($methodHelp)
     {
-        $this->methodHelp = (string) $methodHelp;
+        $this->methodHelp = $methodHelp;
         return $this;
     }
 

@@ -84,14 +84,18 @@ abstract class AbstractFunction
      */
     protected $docComment = '';
 
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $return = [];
 
+    /** @var string */
     protected $returnDesc;
+
     protected $paramDesc;
+
+    /** @var array */
     protected $sigParams;
+
+    /** @var int */
     protected $sigParamsDepth;
 
     /**

@@ -76,7 +76,7 @@ class Prototype
             $this->parameterNameMap[$name] = count($this->parameters) - 1;
         } else {
             $parameter = new Parameter([
-                'type' => (string) $parameter,
+                'type' => $parameter,
             ]);
             $this->parameters[] = $parameter;
         }
