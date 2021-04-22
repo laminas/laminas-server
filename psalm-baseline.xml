@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.3.2@57b53ff26237074fdf5cbcb034f7da5172be4524">
+<files psalm-version="4.7.0@d4377c0baf3ffbf0b1ec6998e8d1be2a40971005">
   <file src="src/AbstractServer.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$class</code>
@@ -164,6 +164,9 @@
       <code>$docComment</code>
       <code>$this-&gt;classReflection-&gt;getName()</code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$parentReflectionClass</code>
+    </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="4">
       <code>$docCommentList[]</code>
       <code>$interfaceReflection</code>
@@ -240,6 +243,19 @@
       <code>getValue</code>
       <code>getValue</code>
     </MixedMethodCall>
+    <UnusedVariable occurrences="5">
+      <code>$child1grand1</code>
+      <code>$child1grand2</code>
+      <code>$child2grand1</code>
+      <code>$child2grand2great1</code>
+      <code>$child2grand2great2</code>
+    </UnusedVariable>
+  </file>
+  <file src="test/Reflection/ReflectionFunctionTest.php">
+    <UnusedParam occurrences="2">
+      <code>$var1</code>
+      <code>$var1</code>
+    </UnusedParam>
   </file>
   <file src="test/ReflectionTest.php">
     <PossiblyFalseArgument occurrences="2">

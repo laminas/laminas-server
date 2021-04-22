@@ -169,7 +169,7 @@ class CacheTest extends TestCase
 
     public function testDeleteNonExistentFileReturnsFalse(): void
     {
-        $server = $this->createStub(ServerInterface::class);
+        $this->createStub(ServerInterface::class);
         $result = Cache::delete('~/non-existent-file.tmp');
 
         $this->assertFalse($result);
