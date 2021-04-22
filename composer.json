@@ -20,14 +20,14 @@
     },
     "require": {
         "php": "^7.3 || ~8.0.0",
-        "laminas/laminas-code": "^3.4.1 || ^4.0.0",
-        "laminas/laminas-stdlib": "^3.2.1"
+        "laminas/laminas-code": "^3.5.1 || ^4.0.0",
+        "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "^2.1.4",
-        "phpunit/phpunit": "^9.5.0",
-        "psalm/plugin-phpunit": "^0.14.0",
-        "vimeo/psalm": "^4.3.2"
+        "phpunit/phpunit": "^9.5.4",
+        "psalm/plugin-phpunit": "^0.15.1",
+        "vimeo/psalm": "^4.6.4"
     },
     "autoload": {
         "psr-4": {

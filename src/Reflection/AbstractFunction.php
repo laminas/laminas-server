@@ -98,7 +98,7 @@ abstract class AbstractFunction
     protected $docComment = '';
 
     /** @var array */
-    protected $return;
+    protected $return = [];
 
     /** @var string */
     protected $returnDesc;

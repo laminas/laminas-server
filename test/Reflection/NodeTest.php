@@ -114,15 +114,15 @@ class NodeTest extends TestCase
 
     public function testGetEndPoints(): void
     {
-        $root               = new Node('root');
-        $child1             = $root->createChild('child1');
-        $child2             = $root->createChild('child2');
-        $child1grand1       = $child1->createChild(null);
-        $child1grand2       = $child1->createChild('child1grand2');
-        $child2grand1       = $child2->createChild('child2grand1');
-        $child2grand2       = $child2->createChild('child2grand2');
-        $child2grand2great1 = $child2grand2->createChild(null);
-        $child2grand2great2 = $child2grand2->createChild('child2grand2great2');
+        $root   = new Node('root');
+        $child1 = $root->createChild('child1');
+        $child2 = $root->createChild('child2');
+        $child1->createChild(null);
+        $child1->createChild('child1grand2');
+        $child2->createChild('child2grand1');
+        $child2grand2 = $child2->createChild('child2grand2');
+        $child2grand2->createChild(null);
+        $child2grand2->createChild('child2grand2great2');
 
         $endPoints      = $root->getEndPoints();
         $endPointsArray = [];
