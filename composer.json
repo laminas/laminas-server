@@ -1,30 +1,20 @@
 {
     "name": "laminas/laminas-server",
     "description": "Create Reflection-based RPC servers",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "server"
     ],
     "homepage": "https://laminas.dev",
-    "support": {
-        "docs": "https://docs.laminas.dev/laminas-server/",
-        "issues": "https://github.com/laminas/laminas-server/issues",
-        "source": "https://github.com/laminas/laminas-server",
-        "rss": "https://github.com/laminas/laminas-server/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "laminas/laminas-code": "^3.5.1 || ^4.0.0",
         "laminas/laminas-stdlib": "^3.3.1",
         "laminas/laminas-zendframework-bridge": "^1.2.0"
+    },
+    "replace": {
+        "zendframework/zend-server": "^2.8.1"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -32,6 +22,10 @@
         "psalm/plugin-phpunit": "^0.15.1",
         "vimeo/psalm": "^4.6.4"
     },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {},
     "autoload": {
         "psr-4": {
             "Laminas\\Server\\": "src/"
@@ -56,7 +50,12 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-server": "^2.8.1"
+    "support": {
+        "issues": "https://github.com/laminas/laminas-server/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/laminas/laminas-server",
+        "docs": "https://docs.laminas.dev/laminas-server/",
+        "rss": "https://github.com/laminas/laminas-server/releases.atom"
     }
 }
