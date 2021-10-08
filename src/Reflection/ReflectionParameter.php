@@ -6,63 +6,49 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Reflection;
 
-/**
- * Parameter Reflection
- *
- * Decorates a ReflectionParameter to allow setting the parameter type
- */
+use ReflectionParameter as PhpReflectionParameter;
+
+use function call_user_func_array;
+use function method_exists;
+
 class ReflectionParameter
 {
-    /**
-     * @var \ReflectionParameter
-     */
+    /** @var PhpReflectionParameter */
     protected $reflection;
 
-    /**
-     * Parameter position
-     * @var int
-     */
+    /** @var int */
     protected $position;
 
-    /**
-     * Parameter type
-     * @var string
-     */
+    /** @var string */
     protected $type;
 
-    /**
-     * Parameter description
-     * @var string
-     */
+    /** @var null|string */
     protected $description;
 
     /**
      * Parameter name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
 
     /**
      * Declaring function name (needed for serialization)
+     *
      * @var string
      */
     protected $functionName;
 
-    /**
-     * Constructor
-     *
-     * @param \ReflectionParameter $r
-     * @param string $type Parameter type
-     * @param string $description Parameter description
-     */
-    public function __construct(\ReflectionParameter $r, $type = 'mixed', $description = '')
+    public function __construct(PhpReflectionParameter $r, string $type = 'mixed', ?string $description = null)
     {
         $this->reflection = $r;
 
         // Store parameters needed for (un)serialization
-        $this->name = $r->getName();
+        $this->name         = $r->getName();
         $this->functionName = $r->getDeclaringClass()
             ? [$r->getDeclaringClass()->getName(), $r->getDeclaringFunction()->getName()]
             : $r->getDeclaringFunction()->getName();
@@ -74,12 +60,11 @@ class ReflectionParameter
     /**
      * Proxy reflection calls
      *
-     * @param string $method
      * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -88,75 +73,32 @@ class ReflectionParameter
         throw new Exception\BadMethodCallException('Invalid reflection method');
     }
 
-    /**
-     * Retrieve parameter type
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Set parameter type
-     *
-     * @param string|null $type
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setType($type)
+    public function setType(string $type): void
     {
-        if (! is_string($type) && (null !== $type)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter type');
-        }
-
         $this->type = $type;
     }
 
-    /**
-     * Retrieve parameter description
-     *
-     * @return string
-     */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    /**
-     * Set parameter description
-     *
-     * @param string|null $description
-     * @throws Exception\InvalidArgumentException
-     * @return void
-     */
-    public function setDescription($description)
+    public function setDescription(?string $description = null): void
     {
-        if (! is_string($description) && (null !== $description)) {
-            throw new Exception\InvalidArgumentException('Invalid parameter description');
-        }
-
         $this->description = $description;
     }
 
-    /**
-     * Set parameter position
-     *
-     * @param int $index
-     * @return void
-     */
-    public function setPosition($index)
+    public function setPosition(int $index): void
     {
         $this->position = $index;
     }
 
-    /**
-     * Return parameter position
-     *
-     * @return int
-     */
-    public function getPosition()
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -164,13 +106,13 @@ class ReflectionParameter
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['position', 'type', 'description', 'name', 'functionName'];
     }
 
-    public function __wakeup()
+    public function __wakeup(): void
     {
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+        $this->reflection = new PhpReflectionParameter($this->functionName, $this->name);
     }
 }

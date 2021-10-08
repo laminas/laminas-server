@@ -6,14 +6,27 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server;
 
+use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionFunction;
+use ReflectionClass as PhpReflectionClass;
+use ReflectionException;
+use ReflectionFunction as PhpReflectionFunction;
+use ReflectionObject;
 
-/**
- * Reflection for determining method signatures to use with server classes
- */
+use function class_exists;
+use function function_exists;
+use function get_class;
+use function gettype;
+use function is_array;
+use function is_object;
+use function is_string;
+use function sprintf;
+
 class Reflection
 {
     /**
@@ -26,25 +39,20 @@ class Reflection
      * be provided as an array to $argv.
      *
      * @param string|object $class Class name or object
-     * @param  bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * method name (used for the signature key). Primarily to avoid collisions,
-     * also for XmlRpc namespacing
-     * @return \Laminas\Server\Reflection\ReflectionClass
-     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
+     * @param array         $argv Optional arguments to be used during the method call
+     * @param null|string   $namespace Optional namespace with which to prefix the
+     *   method name (used for the signature key). Primarily to avoid collisions,
+     *   also for XmlRpc namespacing
+     * @throws ReflectionException
      */
-    public static function reflectClass($class, $argv = false, $namespace = '')
+    public static function reflectClass($class, array $argv = [], ?string $namespace = null): ReflectionClass
     {
         if (is_object($class)) {
-            $reflection = new \ReflectionObject($class);
-        } elseif (class_exists($class)) {
-            $reflection = new \ReflectionClass($class);
+            $reflection = new ReflectionObject($class);
+        } elseif (is_string($class) && class_exists($class)) {
+            $reflection = new PhpReflectionClass($class);
         } else {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid class or object passed to attachClass()');
-        }
-
-        if ($argv && ! is_array($argv)) {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectClass');
+            throw new InvalidArgumentException('Invalid class or object passed to attachClass()');
         }
 
         return new ReflectionClass($reflection, $namespace, $argv);
@@ -59,30 +67,34 @@ class Reflection
      * If extra arguments should be passed to the dispatchable function, these
      * may be provided as an array to $argv.
      *
-     * @param string $function Function name
-     * @param  null|bool|array $argv Optional arguments to be used during the method call
-     * @param string $namespace Optional namespace with which to prefix the
-     * function name (used for the signature key). Primarily to avoid
-     * collisions, also for XmlRpc namespacing
-     * @return \Laminas\Server\Reflection\ReflectionFunction
-     * @throws \Laminas\Server\Reflection\Exception\InvalidArgumentException
+     * @param string|callable $function Function name
+     * @param  null|array      $argv Optional arguments to be used during the method call
+     * @param null|string     $namespace Optional namespace with which to prefix the
+     *     function name (used for the signature key). Primarily to avoid
+     *     collisions, also for XmlRpc namespacing
+     * @throws InvalidArgumentException|ReflectionException
      */
-    public static function reflectFunction($function, $argv = false, $namespace = '')
-    {
+    public static function reflectFunction(
+        $function,
+        ?array $argv = null,
+        ?string $namespace = null
+    ): ReflectionFunction {
         if (! is_string($function) || ! function_exists($function)) {
-            throw new Reflection\Exception\InvalidArgumentException(sprintf(
+            $functionDesc = is_string($function) ? $function : null;
+            if (null === $functionDesc) {
+                $functionDesc = is_object($function) ? get_class($function) : gettype($function);
+            }
+
+            throw new InvalidArgumentException(sprintf(
                 'Invalid function "%s" passed to reflectFunction',
-                $function
+                $functionDesc
             ));
         }
 
-        // Cast null or false values to empty array
-        $argv = in_array($argv, [false, null], true) ? [] : $argv;
-
-        if (! is_array($argv)) {
-            throw new Reflection\Exception\InvalidArgumentException('Invalid argv argument passed to reflectFunction');
-        }
-
-        return new ReflectionFunction(new \ReflectionFunction($function), $namespace, $argv);
+        return new ReflectionFunction(
+            new PhpReflectionFunction($function),
+            $namespace,
+            is_array($argv) ? $argv : []
+        );
     }
 }

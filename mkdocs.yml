@@ -1,11 +1,21 @@
 docs_dir: docs/book
 site_dir: docs/html
+extra:
+    project: Components
+    current_version: v3
+    versions:
+        - v3
+        - v2
 nav:
     - Home: index.md
-    - Intro: intro.md
-    - Reflection: reflection.md
+    - v3:
+        - Introduction: v3/intro.md
+        - Reflection: v3/reflection.md
+        - Reference:
+              - Migration: v3/reference/migration.md
+    - v2:
+        - Introduction: v2/intro.md
+        - Reflection: v2/reflection.md
 site_name: laminas-server
 site_description: laminas-server
 repo_url: 'https://github.com/laminas/laminas-server'
-extra:
-    project: Components

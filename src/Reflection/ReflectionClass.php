@@ -6,9 +6,17 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Reflection;
 
 use ReflectionClass as PhpReflectionClass;
+use ReflectionException;
+
+use function call_user_func_array;
+use function method_exists;
+use function preg_match;
+use function substr;
 
 /**
  * Class/Object reflection
@@ -21,30 +29,23 @@ class ReflectionClass
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
+     *
      * @var array
      */
     protected $config = [];
 
-    /**
-     * Array of {@link \Laminas\Server\Reflection\Method}s
-     * @var array
-     */
+    /** @var ReflectionMethod[] */
     protected $methods = [];
 
-    /**
-     * Namespace
-     * @var string
-     */
-    protected $namespace = null;
+    /** @var null|string */
+    protected $namespace;
 
-    /**
-     * ReflectionClass object
-     * @var PhpReflectionClass
-     */
+    /** @var PhpReflectionClass */
     protected $reflection;
 
     /**
      * Reflection class name (needed for serialization)
+     *
      * @var string
      */
     protected $name;
@@ -54,22 +55,19 @@ class ReflectionClass
      *
      * Create array of dispatchable methods, each a
      * {@link Laminas\Server\Reflection\ReflectionMethod}. Sets reflection object property.
-     *
-     * @param PhpReflectionClass $reflection
-     * @param string $namespace
-     * @param mixed $argv
      */
-    public function __construct(PhpReflectionClass $reflection, $namespace = null, $argv = false)
+    public function __construct(PhpReflectionClass $reflection, ?string $namespace = null, array $argv = [])
     {
         $this->reflection = $reflection;
-        $this->name = $reflection->getName();
-        $this->setNamespace($namespace);
+        $this->name       = $reflection->getName();
 
-        $argv = is_array($argv) ? $argv : [];
+        if (null !== $namespace) {
+            $this->setNamespace($namespace);
+        }
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
-            if ('__' == substr($method->getName(), 0, 2)) {
+            if ('__' === substr($method->getName(), 0, 2)) {
                 continue;
             }
 
@@ -83,12 +81,10 @@ class ReflectionClass
     /**
      * Proxy reflection calls
      *
-     * @param string $method
-     * @param array $args
      * @throws Exception\BadMethodCallException
      * @return mixed
      */
-    public function __call($method, $args)
+    public function __call(string $method, array $args)
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -103,16 +99,13 @@ class ReflectionClass
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
      *
-     * @param string $key
      * @return mixed
      */
-    public function __get($key)
+    public function __get(string $key)
     {
         if (isset($this->config[$key])) {
             return $this->config[$key];
         }
-
-        return;
     }
 
     /**
@@ -120,32 +113,19 @@ class ReflectionClass
      *
      * Values are stored by $key in {@link $config}.
      *
-     * @param string $key
      * @param mixed $value
-     * @return void
      */
-    public function __set($key, $value)
+    public function __set(string $key, $value): void
     {
         $this->config[$key] = $value;
     }
 
-    /**
-     * Return array of dispatchable {@link \Laminas\Server\Reflection\ReflectionMethod}s.
-     *
-     * @access public
-     * @return array
-     */
-    public function getMethods()
+    public function getMethods(): array
     {
         return $this->methods;
     }
 
-    /**
-     * Get namespace for this class
-     *
-     * @return string
-     */
-    public function getNamespace()
+    public function getNamespace(): ?string
     {
         return $this->namespace;
     }
@@ -153,18 +133,16 @@ class ReflectionClass
     /**
      * Set namespace for this class
      *
-     * @param string $namespace
      * @throws Exception\InvalidArgumentException
-     * @return void
      */
-    public function setNamespace($namespace)
+    public function setNamespace(?string $namespace): void
     {
         if (empty($namespace)) {
-            $this->namespace = '';
+            $this->namespace = null;
             return;
         }
 
-        if (! is_string($namespace) || ! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
+        if (! preg_match('/[a-z0-9_\.]+/i', $namespace)) {
             throw new Exception\InvalidArgumentException('Invalid namespace');
         }
 
@@ -177,9 +155,9 @@ class ReflectionClass
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
      *
-     * @return void
+     * @throws ReflectionException
      */
-    public function __wakeup()
+    public function __wakeup(): void
     {
         $this->reflection = new PhpReflectionClass($this->name);
     }
@@ -187,7 +165,7 @@ class ReflectionClass
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __sleep(): array
     {
         return ['config', 'methods', 'namespace', 'name'];
     }

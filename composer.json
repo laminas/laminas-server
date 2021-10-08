@@ -18,16 +18,13 @@
     "config": {
         "sort-packages": true
     },
-    "extra": {
-    },
     "require": {
         "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "laminas/laminas-code": "^3.5.1 || ^4.0.0",
-        "laminas/laminas-stdlib": "^3.3.1",
-        "laminas/laminas-zendframework-bridge": "^1.2.0"
+        "laminas/laminas-stdlib": "^3.3.1"
     },
     "require-dev": {
-        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-coding-standard": "^2.1.4",
         "phpunit/phpunit": "^9.5.5",
         "psalm/plugin-phpunit": "^0.15.1",
         "vimeo/psalm": "^4.6.4"
@@ -55,8 +52,5 @@
         "static-analysis": "psalm --shepherd --stats",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
-    },
-    "replace": {
-        "zendframework/zend-server": "^2.8.1"
     }
 }

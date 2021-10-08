@@ -6,41 +6,22 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server\Method;
 
-use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
-/**
- * Test class for \Laminas\Server\Method\Definition
- *
- * @group      Laminas_Server
- */
 class DefinitionTest extends TestCase
 {
     /** @var Method\Definition */
     private $definition;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->definition = new Method\Definition();
-    }
-
-    /**
-     * Tears down the fixture, for example, close a network connection.
-     * This method is called after a test is executed.
-     *
-     * @return void
-     */
-    public function tearDown(): void
-    {
     }
 
     public function testCallbackShouldBeNullByDefault(): void
@@ -63,7 +44,11 @@ class DefinitionTest extends TestCase
             'function' => 'foo',
         ];
         $this->definition->setCallback($callback);
-        $test = $this->definition->getCallback()->toArray();
+
+        $definitionCallback = $this->definition->getCallback();
+        $this->assertNotNull($definitionCallback);
+
+        $test = $definitionCallback->toArray();
         $this->assertSame($callback, $test);
     }
 
@@ -99,7 +84,7 @@ class DefinitionTest extends TestCase
     public function testObjectShouldBeMutable(): void
     {
         $this->assertNull($this->definition->getObject());
-        $object = new \stdClass;
+        $object = new stdClass();
         $this->definition->setObject($object);
         $this->assertEquals($object, $this->definition->getObject());
     }
@@ -113,7 +98,7 @@ class DefinitionTest extends TestCase
     public function testInvokeArgumentsShouldBeMutable(): void
     {
         $this->testInvokeArgumentsShouldBeEmptyArrayByDefault();
-        $args = ['foo', ['bar', 'baz'], new \stdClass];
+        $args = ['foo', ['bar', 'baz'], new stdClass()];
         $this->definition->setInvokeArguments($args);
         $this->assertSame($args, $this->definition->getInvokeArguments());
     }
@@ -127,12 +112,12 @@ class DefinitionTest extends TestCase
     public function testDefinitionShouldAllowAddingSinglePrototypes(): void
     {
         $this->testPrototypesShouldBeEmptyArrayByDefault();
-        $prototype1 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
         $this->definition->addPrototype($prototype1);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
 
-        $prototype2 = new Method\Prototype;
+        $prototype2 = new Method\Prototype();
         $this->definition->addPrototype($prototype2);
         $test = $this->definition->getPrototypes();
         $this->assertSame($prototype1, $test[0]);
@@ -141,8 +126,8 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldAllowAddingMultiplePrototypes(): void
     {
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = [$prototype1, $prototype2];
         $this->definition->addPrototypes($prototypes);
         $this->assertSame($prototypes, $this->definition->getPrototypes());
@@ -152,8 +137,8 @@ class DefinitionTest extends TestCase
     {
         $this->testDefinitionShouldAllowAddingMultiplePrototypes();
 
-        $prototype1 = new Method\Prototype;
-        $prototype2 = new Method\Prototype;
+        $prototype1 = new Method\Prototype();
+        $prototype2 = new Method\Prototype();
         $prototypes = [$prototype1, $prototype2];
         $this->assertNotSame($prototypes, $this->definition->getPrototypes());
         $this->definition->setPrototypes($prototypes);
@@ -166,7 +151,7 @@ class DefinitionTest extends TestCase
         $callback   = ['function' => 'foo', 'type' => 'function'];
         $prototypes = [['returnType' => 'struct', 'parameters' => ['string', 'array']]];
         $methodHelp = 'foo bar';
-        $object     = new \stdClass;
+        $object     = new stdClass();
         $invokeArgs = ['foo', ['bar', 'baz']];
         $this->definition->setName($name)
                          ->setCallback($callback)
@@ -185,16 +170,16 @@ class DefinitionTest extends TestCase
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
-        $options = [
+        $options    = [
             'name'            => 'foo.bar',
             'callback'        => ['function' => 'foo', 'type' => 'function'],
             'prototypes'      => [['returnType' => 'struct', 'parameters' => ['string', 'array']]],
             'methodHelp'      => 'foo bar',
-            'object'          => new \stdClass,
+            'object'          => new stdClass(),
             'invokeArguments' => ['foo', ['bar', 'baz']],
         ];
         $definition = new Method\Definition($options);
-        $test = $definition->toArray();
+        $test       = $definition->toArray();
         $this->assertEquals($options['name'], $test['name']);
         $this->assertEquals($options['callback'], $test['callback']);
         $this->assertEquals($options['prototypes'], $test['prototypes']);

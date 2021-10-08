@@ -6,59 +6,53 @@
  * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
+declare(strict_types=1);
+
 namespace Laminas\Server\Method;
 
 use Laminas\Server;
 
-/**
- * Method callback metadata
- */
+use function get_class;
+use function in_array;
+use function is_array;
+use function is_object;
+use function method_exists;
+use function sprintf;
+use function ucfirst;
+
 class Callback
 {
-    /**
-     * @var string Class name for class method callback
-     */
+    /** @var string */
     protected $class;
 
     /**
-     * @var string|callable Function name or callable for function callback
+     * Function name or callable for function callback
+     *
+     * @var string|callable
      */
     protected $function;
 
-    /**
-     * @var string Method name for class method callback
-     */
+    /** @var string */
     protected $method;
 
-    /**
-     * @var string Callback type
-     */
+    /** @var null|string */
     protected $type;
 
     /**
-     * @var array Valid callback types
+     * Valid callback types
+     *
+     * @var array
      */
     protected $types = ['function', 'static', 'instance'];
 
-    /**
-     * Constructor
-     *
-     * @param  null|array $options
-     */
-    public function __construct($options = null)
+    public function __construct(?array $options = null)
     {
         if (is_array($options)) {
             $this->setOptions($options);
         }
     }
 
-    /**
-     * Set object state from array of options
-     *
-     * @param  array $options
-     * @return \Laminas\Server\Method\Callback
-     */
-    public function setOptions(array $options)
+    public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
             $method = 'set' . ucfirst($key);
@@ -72,10 +66,10 @@ class Callback
     /**
      * Set callback class
      *
-     * @param  string $class
-     * @return \Laminas\Server\Method\Callback
+     * @param  string|object $class
+     * @return $this
      */
-    public function setClass($class)
+    public function setClass($class): self
     {
         if (is_object($class)) {
             $class = get_class($class);
@@ -84,12 +78,7 @@ class Callback
         return $this;
     }
 
-    /**
-     * Get callback class
-     *
-     * @return string|null
-     */
-    public function getClass()
+    public function getClass(): ?string
     {
         return $this->class;
     }
@@ -98,9 +87,9 @@ class Callback
      * Set callback function
      *
      * @param  string|callable $function
-     * @return \Laminas\Server\Method\Callback
+     * @return $this
      */
-    public function setFunction($function)
+    public function setFunction($function): self
     {
         $this->function = $function;
         $this->setType('function');
@@ -117,24 +106,13 @@ class Callback
         return $this->function;
     }
 
-    /**
-     * Set callback class method
-     *
-     * @param  string $method
-     * @return \Laminas\Server\Method\Callback
-     */
-    public function setMethod($method)
+    public function setMethod(string $method): self
     {
         $this->method = $method;
         return $this;
     }
 
-    /**
-     * Get callback class  method
-     *
-     * @return null|string
-     */
-    public function getMethod()
+    public function getMethod(): ?string
     {
         return $this->method;
     }
@@ -142,13 +120,11 @@ class Callback
     /**
      * Set callback type
      *
-     * @param  string $type
-     * @return \Laminas\Server\Method\Callback
      * @throws Server\Exception\InvalidArgumentException
      */
-    public function setType($type)
+    public function setType(string $type): self
     {
-        if (! in_array($type, $this->types)) {
+        if (! in_array($type, $this->types, true)) {
             throw new Server\Exception\InvalidArgumentException(sprintf(
                 'Invalid method callback type "%s" passed to %s',
                 $type,
@@ -159,28 +135,18 @@ class Callback
         return $this;
     }
 
-    /**
-     * Get callback type
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): ?string
     {
         return $this->type;
     }
 
-    /**
-     * Cast callback to array
-     *
-     * @return array
-     */
-    public function toArray()
+    public function toArray(): array
     {
-        $type = $this->getType();
+        $type  = $this->getType();
         $array = [
             'type' => $type,
         ];
-        if ('function' == $type) {
+        if ('function' === $type) {
             $array['function'] = $this->getFunction();
         } else {
             $array['class']  = $this->getClass();
