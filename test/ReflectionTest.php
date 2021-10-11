@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server;
 
-use Laminas\Server\Exception\InvalidArgumentException as ExceptionInvalidArgumentException;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
@@ -57,13 +56,15 @@ class ReflectionTest extends TestCase
 
     public function testReflectFunction2(): void
     {
-        $reflection = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null, 'zsr');
+        /** @psalm-suppress UndefinedClass **/
+        $reflection = Reflection::reflectFunction(TestAsset\reflectionTestFunction::class, null, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
     public function testReflectFunctionAllowsNullArgv(): void
     {
-        $r = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', null);
+        /** @psalm-suppress UndefinedClass **/
+        $r = Reflection::reflectFunction(TestAsset\reflectionTestFunction::class, null);
         $this->assertSame([], $r->getInvokeArguments());
     }
 }
