@@ -167,6 +167,7 @@ class Definition implements Countable, Iterator
      *
      * @return Method\Definition
      */
+    #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->methods);
@@ -177,6 +178,7 @@ class Definition implements Countable, Iterator
      *
      * @return int|string|null
      */
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->methods);
@@ -185,6 +187,7 @@ class Definition implements Countable, Iterator
     /**
      * Iterator: advance to next method
      */
+    #[ReturnTypeWillChange]
     public function next()
     {
         next($this->methods);
