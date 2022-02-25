@@ -48,6 +48,7 @@
             "LaminasTest\\Server\\": "test/"
         },
         "files": [
+            "test/Reflection/TestAsset/functions.php",
             "test/TestAsset/reflectionTestFunction.php"
         ]
     },
