@@ -16,7 +16,13 @@
         "forum": "https://discourse.laminas.dev"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "7.3.99"
+        },
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true
+        }
     },
     "extra": {
     },
@@ -42,6 +48,7 @@
             "LaminasTest\\Server\\": "test/"
         },
         "files": [
+            "test/Reflection/TestAsset/functions.php",
             "test/TestAsset/reflectionTestFunction.php"
         ]
     },
