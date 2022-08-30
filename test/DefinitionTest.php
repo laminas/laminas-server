@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
@@ -84,7 +82,7 @@ class DefinitionTest extends TestCase
         $this->assertNotEquals($methods, $this->definition->getMethods());
         $this->definition->setMethods($methods);
         $test = $this->definition->getMethods();
-        $this->assertEquals(array_values($methods), array_values($test));
+        $this->assertSame($methods, array_values($test));
     }
 
     public function testHasMethodShouldReturnFalseWhenMethodNotRegisteredWithDefinition(): void
