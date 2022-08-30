@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.7.0@d4377c0baf3ffbf0b1ec6998e8d1be2a40971005">
+<files psalm-version="4.26.0@6998fabb2bf528b65777bf9941920888d23c03ac">
   <file src="src/AbstractServer.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$class</code>
@@ -56,9 +56,6 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Method/Definition.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$callback instanceof Callback</code>
-    </DocblockTypeContradiction>
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$key</code>
     </MixedArgumentTypeCoercion>
@@ -141,11 +138,6 @@
       <code>new static($value, $this)</code>
     </UnsafeInstantiation>
   </file>
-  <file src="src/Reflection/Prototype.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>$param instanceof ReflectionParameter</code>
-    </DocblockTypeContradiction>
-  </file>
   <file src="src/Reflection/ReflectionClass.php">
     <ArgumentTypeCoercion occurrences="1">
       <code>$this-&gt;name</code>
@@ -164,9 +156,6 @@
       <code>$docComment</code>
       <code>$this-&gt;classReflection-&gt;getName()</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$parentReflectionClass</code>
-    </MixedArgumentTypeCoercion>
     <MixedAssignment occurrences="4">
       <code>$docCommentList[]</code>
       <code>$interfaceReflection</code>
@@ -243,25 +232,26 @@
       <code>getValue</code>
       <code>getValue</code>
     </MixedMethodCall>
-    <UnusedVariable occurrences="5">
-      <code>$child1grand1</code>
-      <code>$child1grand2</code>
-      <code>$child2grand1</code>
-      <code>$child2grand2great1</code>
-      <code>$child2grand2great2</code>
-    </UnusedVariable>
   </file>
   <file src="test/Reflection/ReflectionFunctionTest.php">
+    <InvalidArgument occurrences="12">
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function1'</code>
+      <code>'\LaminasTest\Server\Reflection\function2'</code>
+      <code>'\LaminasTest\Server\Reflection\function3'</code>
+    </InvalidArgument>
     <UnusedParam occurrences="2">
       <code>$var1</code>
       <code>$var1</code>
     </UnusedParam>
-  </file>
-  <file src="test/ReflectionTest.php">
-    <PossiblyFalseArgument occurrences="2">
-      <code>false</code>
-      <code>false</code>
-    </PossiblyFalseArgument>
   </file>
   <file src="test/TestAsset/reflectionTestFunction.php">
     <UndefinedDocblockClass occurrences="1">
