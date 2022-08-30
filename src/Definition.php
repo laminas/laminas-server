@@ -11,6 +11,7 @@ namespace Laminas\Server;
 use Countable;
 use Iterator;
 use Laminas\Server\Exception\InvalidArgumentException;
+use ReturnTypeWillChange;
 
 use function array_key_exists;
 use function count;
