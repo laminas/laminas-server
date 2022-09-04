@@ -8,13 +8,14 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Laminas\Server\Reflection\ReflectionReturnValue;
+
 class Prototype
 {
     /** @var ReflectionParameter[] */
     protected $params;
 
-    /** @var ReflectionReturnValue */
-    private $return;
+    private ReflectionReturnValue $return;
 
     /**
      * @param ReflectionParameter[] $params

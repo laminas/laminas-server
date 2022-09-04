@@ -9,13 +9,13 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
+use Laminas\Server\Method\Definition;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
 class DefinitionTest extends TestCase
 {
-    /** @var Method\Definition */
-    private $definition;
+    private Definition $definition;
 
     protected function setUp(): void
     {
