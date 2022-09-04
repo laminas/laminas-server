@@ -10,12 +10,12 @@ namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
 use Laminas\Server\Method\Parameter;
+use Laminas\Server\Method\Prototype;
 use PHPUnit\Framework\TestCase;
 
 class PrototypeTest extends TestCase
 {
-    /** @var Method\Prototype */
-    private $prototype;
+    private Prototype $prototype;
 
     protected function setUp(): void
     {

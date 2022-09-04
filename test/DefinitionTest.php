@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace LaminasTest\Server;
 
 use Laminas\Server;
+use Laminas\Server\Definition;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
@@ -17,8 +18,7 @@ use function array_values;
 
 class DefinitionTest extends TestCase
 {
-    /** @var Server\Definition */
-    private $definition;
+    private Definition $definition;
 
     protected function setUp(): void
     {

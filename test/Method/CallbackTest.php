@@ -10,12 +10,12 @@ namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
+use Laminas\Server\Method\Callback;
 use PHPUnit\Framework\TestCase;
 
 class CallbackTest extends TestCase
 {
-    /** @var Method\Callback */
-    private $callback;
+    private Callback $callback;
 
     protected function setUp(): void
     {
@@ -60,12 +60,11 @@ class CallbackTest extends TestCase
 
     public function testFunctionMayBeCallable(): void
     {
-        $callable = /**
-         * @return true
-         */
-        function (): bool {
-            return true;
-        };
+        $callable =
+            /**
+             * @return true
+             */
+            static fn(): bool => true;
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }
