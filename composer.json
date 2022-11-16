@@ -18,10 +18,11 @@
     "config": {
         "sort-packages": true,
         "platform": {
-            "php": "7.3.99"
+            "php": "8.0.99"
         },
         "allow-plugins": {
-            "composer/package-versions-deprecated": true
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "extra": {
