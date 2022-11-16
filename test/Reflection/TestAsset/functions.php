@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LaminasTest\Server\Reflection\TestAsset;
+
+use function is_array;
 
 /**
  * Test function for reflection unit tests
@@ -23,8 +27,6 @@ function function1($var1, $var2, $var3 = null): ?array
 /**
  * Test function for reflection unit tests; test what happens when no return
  * value or params specified in docblock.
- *
- * @return void
  */
 function function2(): void
 {

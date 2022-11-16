@@ -18,7 +18,6 @@ use ReflectionObject;
 
 use function class_exists;
 use function function_exists;
-use function get_class;
 use function gettype;
 use function is_array;
 use function is_object;
@@ -80,7 +79,7 @@ class Reflection
         if (! is_string($function) || ! function_exists($function)) {
             $functionDesc = is_string($function) ? $function : null;
             if (null === $functionDesc) {
-                $functionDesc = is_object($function) ? get_class($function) : gettype($function);
+                $functionDesc = is_object($function) ? $function::class : gettype($function);
             }
 
             throw new InvalidArgumentException(sprintf(
