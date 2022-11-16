@@ -9,13 +9,11 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\AbstractFunction;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
-use function is_array;
 use function serialize;
 use function unserialize;
 use function var_export;
@@ -24,12 +22,8 @@ class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
-        $r        = new Reflection\ReflectionFunction($function);
-        $this->assertInstanceOf(Reflection\ReflectionFunction::class, $r);
-        $this->assertInstanceOf(AbstractFunction::class, $r);
-
-        $r = new Reflection\ReflectionFunction($function, 'namespace');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
+        $r        = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
 
         $argv = ['string1', 'string2'];
@@ -43,7 +37,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testPropertyOverloading(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
 
         $r->system = true;
@@ -52,7 +46,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testNamespace(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function, 'namespace');
         $this->assertEquals('namespace', $r->getNamespace());
         $r->setNamespace('framework');
@@ -61,7 +55,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testSetNamespaceSetsEmptyStringToNull(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function, 'namespace');
         $r->setNamespace('');
         $this->assertNull($r->getNamespace());
@@ -69,7 +63,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testSetNamespaceThrowsInvalidArgumentException(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function, 'namespace');
         $this->expectException(Reflection\Exception\InvalidArgumentException::class);
         $r->setNamespace('äöü');
@@ -77,7 +71,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testDescription(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
         $this->assertStringContainsString('function for reflection', $r->getDescription());
         $r->setDescription('Testing setting descriptions');
@@ -86,11 +80,11 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetPrototypes(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
-        $this->assertCount(4, $prototypes);
+        $this->assertCount(8, $prototypes);
 
         foreach ($prototypes as $p) {
             $this->assertInstanceOf(Prototype::class, $p);
@@ -99,7 +93,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetPrototypes2(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function2');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function2');
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -113,7 +107,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testGetInvokeArguments(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
         $args     = $r->getInvokeArguments();
         $this->assertCount(0, $args);
@@ -126,17 +120,17 @@ class ReflectionFunctionTest extends TestCase
 
     public function testClassWakeup(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
         $s        = serialize($r);
         $u        = unserialize($s);
-        $this->assertInstanceOf(Reflection\ReflectionFunction::class, $u);
+        $this->assertInstanceOf(\Laminas\Server\Reflection\ReflectionFunction::class, $u);
         $this->assertEquals('', $u->getNamespace());
     }
 
     public function testMultipleWhitespaceBetweenDoctagsAndTypes(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function3');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function3');
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -154,7 +148,7 @@ class ReflectionFunctionTest extends TestCase
 
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription(): void
     {
-        $function = new ReflectionFunction('\LaminasTest\Server\Reflection\function1');
+        $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);
 
         $prototypes = $r->getPrototypes();
@@ -167,46 +161,3 @@ class ReflectionFunctionTest extends TestCase
         $this->assertStringContainsString('Some description', $description, var_export($param, true));
     }
 }
-
-// phpcs:disable
-
-/**
- * \LaminasTest\Server\Reflection\function1
- *
- * Test function for reflection unit tests
- *
- * @param string       $var1 Some description
- * @param string|array $var2
- * @param array $var3
- * @return null|array
- */
-function function1(string $var1, $var2, array $var3): ?array
-{
-    // The body of this is nonsense written to appease Psalm.
-    if (is_array($var2)) {
-        return $var3;
-    }
-
-    return null;
-}
-
-/**
- * \LaminasTest\Server\Reflection\function2
- *
- * Test function for reflection unit tests; test what happens when no return
- * value or params specified in docblock.
- */
-function function2(): void
-{
-}
-
-/**
- * \LaminasTest\Server\Reflection\function3
- *
- * @param string $var1
- */
-function function3(string $var1): void
-{
-}
-
-// phpcs:enable

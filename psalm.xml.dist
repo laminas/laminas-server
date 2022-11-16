@@ -11,6 +11,7 @@
         <directory name="test"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <file name="test/Reflection/TestAsset/functions.php"/>
         </ignoreFiles>
     </projectFiles>
 

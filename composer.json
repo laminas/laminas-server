@@ -16,16 +16,17 @@
         "forum": "https://discourse.laminas.dev"
     },
     "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
-        },
+        "sort-packages": true,
         "platform": {
-            "php": "7.4.99"
+            "php": "8.0.99"
         },
-        "sort-packages": true
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "require": {
-        "php": "^7.4 || ~8.0.0 || ~8.1.0",
+        "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
         "laminas/laminas-code": "^3.5.1 || ^4.0.0",
         "laminas/laminas-stdlib": "^3.3.1"
     },
@@ -45,6 +46,7 @@
             "LaminasTest\\Server\\": "test/"
         },
         "files": [
+            "test/Reflection/TestAsset/functions.php",
             "test/TestAsset/reflectionTestFunction.php"
         ]
     },

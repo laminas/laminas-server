@@ -10,7 +10,6 @@ namespace Laminas\Server\Method;
 
 use Laminas\Server;
 
-use function get_class;
 use function in_array;
 use function is_array;
 use function is_object;
@@ -70,7 +69,7 @@ class Callback
     public function setClass($class): self
     {
         if (is_object($class)) {
-            $class = get_class($class);
+            $class = $class::class;
         }
         $this->class = $class;
         return $this;
