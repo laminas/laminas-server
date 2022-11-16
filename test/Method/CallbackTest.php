@@ -2,35 +2,22 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
+use Laminas\Server\Method\Callback;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test class for \Laminas\Server\Method\Callback
- *
- * @group      Laminas_Server
- */
 class CallbackTest extends TestCase
 {
-    /**
-     * @var Method\Callback
-     */
-    private $callback;
+    private Callback $callback;
 
-    /**
-     * Sets up the fixture, for example, open a network connection.
-     * This method is called before a test is executed.
-     *
-     * @return void
-     */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->callback = new Method\Callback();
     }
@@ -73,17 +60,16 @@ class CallbackTest extends TestCase
 
     public function testFunctionMayBeCallable(): void
     {
-        $callable = /**
-         * @return true
-         */
-        function (): bool {
-            return true;
-        };
+        $callable =
+            /**
+             * @return true
+             */
+            static fn(): bool => true;
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }
 
-    public function testTypeShouldBeNullByDefault(): void
+    public function testTypeShouldBeAnEmptyStringByDefault(): void
     {
         $this->assertNull($this->callback->getType());
     }
@@ -115,13 +101,13 @@ class CallbackTest extends TestCase
 
     public function testConstructorShouldSetStateFromOptions(): void
     {
-        $options = [
+        $options  = [
             'type'   => 'static',
             'class'  => 'Foo',
             'method' => 'bar',
         ];
         $callback = new Method\Callback($options);
-        $test = $callback->toArray();
+        $test     = $callback->toArray();
         $this->assertSame($options, $test);
     }
 

@@ -2,28 +2,32 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
-namespace LaminasTest\Cache;
+declare(strict_types=1);
+
+namespace LaminasTest\Server;
 
 use Laminas\Server\Cache;
 use Laminas\Server\Definition;
 use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Definition as MethodDefinition;
-use Laminas\Server\Server;
+use Laminas\Server\ServerInterface;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
+use function file_get_contents;
+use function sys_get_temp_dir;
+use function tempnam;
+use function unlink;
+use function unserialize;
+
 class CacheTest extends TestCase
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $cacheFile;
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         if ($this->cacheFile) {
             unlink($this->cacheFile);
@@ -39,6 +43,14 @@ class CacheTest extends TestCase
         $r->setValue(Cache::class, $methods);
     }
 
+    public function testSaveNonExistentFileReturnsFalse(): void
+    {
+        $server = $this->createStub(ServerInterface::class);
+        $result = Cache::save('~/non-existent-file.tmp', $server);
+
+        $this->assertFalse($result);
+    }
+
     public function testCacheCanAcceptAServerReturningAnArrayOfFunctions(): void
     {
         $functions = [
@@ -46,7 +58,7 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->createMock(Server::class);
+        $server    = $this->createMock(ServerInterface::class);
         $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -72,7 +84,7 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->createMock(Server::class);
+        $server = $this->createMock(ServerInterface::class);
         $server->method('getFunctions')->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -93,7 +105,7 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->createMock(Server::class);
+        $server    = $this->createMock(ServerInterface::class);
         $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -125,7 +137,7 @@ class CacheTest extends TestCase
             $definition->addMethod($method);
         }
 
-        $server = $this->createMock(Server::class);
+        $server = $this->createMock(ServerInterface::class);
         $server->method('getFunctions')->willReturn($definition);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -143,5 +155,21 @@ class CacheTest extends TestCase
         }
 
         $this->assertEquals($expected, $actual);
+    }
+
+    public function testGetNonExistentFileReturnsFalse(): void
+    {
+        $server = $this->createStub(ServerInterface::class);
+        $result = Cache::get('~/non-existent-file.tmp', $server);
+
+        $this->assertFalse($result);
+    }
+
+    public function testDeleteNonExistentFileReturnsFalse(): void
+    {
+        $this->createStub(ServerInterface::class);
+        $result = Cache::delete('~/non-existent-file.tmp');
+
+        $this->assertFalse($result);
     }
 }

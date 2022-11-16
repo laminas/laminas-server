@@ -2,49 +2,23 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
+
+declare(strict_types=1);
 
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
+use PHPUnit\Framework\TestCase;
 
-/**
- * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
- *
- * @group      Laminas_Server
- */
-class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
+class ReflectionReturnValueTest extends TestCase
 {
-    /**
-     * __construct() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - type: Optional; has default;
-     * - description: Optional; has default;
-     *
-     * Returns: void
-     *
-     * @return void
-     */
     public function testConstructor(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
         $this->assertSame('mixed', $obj->getType());
     }
 
-    /**
-     * getType() test
-     *
-     * Call as method call
-     *
-     * Returns: string
-     *
-     * @return void
-     */
     public function testGetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
@@ -54,18 +28,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('array', $obj->getType());
     }
 
-    /**
-     * setType() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - type:
-     *
-     * Returns: void
-     *
-     * @return void
-     */
     public function testSetType(): void
     {
         $obj = new Reflection\ReflectionReturnValue();
@@ -74,15 +36,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('array', $obj->getType());
     }
 
-    /**
-     * getDescription() test
-     *
-     * Call as method call
-     *
-     * Returns: string
-     *
-     * @return void
-     */
     public function testGetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue('string', 'Some description');
@@ -92,18 +45,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('New Description', $obj->getDescription());
     }
 
-    /**
-     * setDescription() test
-     *
-     * Call as method call
-     *
-     * Expects:
-     * - description:
-     *
-     * Returns: void
-     *
-     * @return void
-     */
     public function testSetDescription(): void
     {
         $obj = new Reflection\ReflectionReturnValue();

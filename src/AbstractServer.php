@@ -2,101 +2,66 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
+
+declare(strict_types=1);
 
 namespace Laminas\Server;
 
+use Laminas\Server\Method\Callback;
 use ReflectionClass;
+use ReflectionException;
+use Webmozart\Assert\Assert;
 
-/**
- * Abstract Server implementation
- */
-abstract class AbstractServer implements Server
+use function is_object;
+
+abstract class AbstractServer implements ServerInterface
 {
-    /**
-     * @var bool Flag; whether or not overwriting existing methods is allowed
-     */
+    /** @var bool */
     protected $overwriteExistingMethods = false;
 
-    /**
-     * @var Definition
-     */
+    /** @var Definition */
     protected $table;
 
-    /**
-     * Constructor
-     *
-     * Setup server description
-     *
-     */
     public function __construct()
     {
         $this->table = new Definition();
         $this->table->setOverwriteExistingMethods($this->overwriteExistingMethods);
     }
 
-    /**
-     * Returns a list of registered methods
-     *
-     * Returns an array of method definitions.
-     *
-     * @return Definition
-     */
-    public function getFunctions()
+    public function getFunctions(): Definition
     {
         return $this->table;
     }
 
     /**
      * Build callback for method signature
-     *
-     * @param  Reflection\AbstractFunction $reflection
-     * @return Method\Callback
      */
-    protected function buildCallback(Reflection\AbstractFunction $reflection)
+    private function buildCallback(Reflection\AbstractFunction $reflection): Callback
     {
-        $callback = new Method\Callback();
+        $callback = new Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
-                     ->setClass($reflection->getDeclaringClass()->getName())
-                     ->setMethod($reflection->getName());
+                ->setClass($reflection->getDeclaringClass()->getName())
+                ->setMethod($reflection->getName());
         } elseif ($reflection instanceof Reflection\ReflectionFunction) {
             $callback->setType('function')
-                     ->setFunction($reflection->getName());
+                ->setFunction($reflection->getName());
         }
         return $callback;
     }
 
     /**
-     * Build callback for method signature
-     *
-     * @deprecated Since 2.7.0; method will be removed in 3.0, use
-     *             buildCallback() instead.
-     * @param  Reflection\AbstractFunction $reflection
-     * @return Method\Callback
-     */
-    // @codingStandardsIgnoreStart
-    protected function _buildCallback(Reflection\AbstractFunction $reflection)
-    {
-    // @codingStandardsIgnoreEnd
-        return $this->buildCallback($reflection);
-    }
-
-    /**
      * Build a method signature
      *
-     * @param  Reflection\AbstractFunction $reflection
      * @param  null|string|object $class
-     * @return Method\Definition
-     * @throws Exception\RuntimeException on duplicate entry
+     * @throws Exception\RuntimeException On duplicate entry.
      */
-    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null)
+    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
     {
-        $ns         = $reflection->getNamespace();
-        $name       = $reflection->getName();
-        $method     = empty($ns) ? $name : $ns . '.' . $name;
+        $ns     = $reflection->getNamespace();
+        $name   = $reflection->getName();
+        $method = empty($ns) ? $name : $ns . '.' . $name;
 
         if (! $this->overwriteExistingMethods && $this->table->hasMethod($method)) {
             throw new Exception\RuntimeException('Duplicate method registered: ' . $method);
@@ -104,16 +69,16 @@ abstract class AbstractServer implements Server
 
         $definition = new Method\Definition();
         $definition->setName($method)
-                   ->setCallback($this->buildCallback($reflection))
-                   ->setMethodHelp($reflection->getDescription())
-                   ->setInvokeArguments($reflection->getInvokeArguments());
+            ->setCallback($this->buildCallback($reflection))
+            ->setMethodHelp($reflection->getDescription())
+            ->setInvokeArguments($reflection->getInvokeArguments());
 
         foreach ($reflection->getPrototypes() as $proto) {
             $prototype = new Method\Prototype();
-            $prototype->setReturnType($this->_fixType($proto->getReturnType()));
+            $prototype->setReturnType($this->fixType($proto->getReturnType()));
             foreach ($proto->getParameters() as $parameter) {
                 $param = new Method\Parameter([
-                    'type'     => $this->_fixType($parameter->getType()),
+                    'type'     => $this->fixType($parameter->getType()),
                     'name'     => $parameter->getName(),
                     'optional' => $parameter->isOptional(),
                 ]);
@@ -132,48 +97,29 @@ abstract class AbstractServer implements Server
     }
 
     /**
-     * Build a method signature
-     *
-     * @deprecated Since 2.7.0; method will be removed in 3.0, use
-     *             buildSignature() instead.
-     * @param  Reflection\AbstractFunction $reflection
-     * @param  null|string|object $class
-     * @return Method\Definition
-     * @throws Exception\RuntimeException on duplicate entry
-     */
-    // @codingStandardsIgnoreStart
-    protected function _buildSignature(Reflection\AbstractFunction $reflection, $class = null)
-    {
-    // @codingStandardsIgnoreEnd
-        return $this->buildSignature($reflection, $class);
-    }
-
-    /**
      * Dispatch method
      *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
-     * @param  Method\Definition $invokable
-     * @param  array $params
      * @return mixed
+     * @throws ReflectionException
      */
-    // @codingStandardsIgnoreStart
-    protected function _dispatch(Method\Definition $invokable, array $params)
+    protected function dispatch(Method\Definition $invokable, array $params)
     {
-    // @codingStandardsIgnoreEnd
         $callback = $invokable->getCallback();
-        $type     = $callback->getType();
+        Assert::isInstanceOf($callback, Callback::class);
 
-        if ('function' == $type) {
+        $type = $callback->getType();
+        if ('function' === $type) {
             $function = $callback->getFunction();
-            return call_user_func_array($function, $params);
+            Assert::isCallable($function);
+            return $function(...$params);
         }
 
         $class  = $callback->getClass();
         $method = $callback->getMethod();
 
-        if ('static' == $type) {
-            return call_user_func_array([$class, $method], $params);
+        if ('static' === $type) {
+            $callback = [$class, $method];
+            return $callback(...$params);
         }
 
         $object = $invokable->getObject();
@@ -183,21 +129,18 @@ abstract class AbstractServer implements Server
                 $reflection = new ReflectionClass($class);
                 $object     = $reflection->newInstanceArgs($invokeArgs);
             } else {
-                $object = new $class;
+                Assert::isString($class);
+                Assert::classExists($class);
+                /** @psalm-suppress MixedMethodCall */
+                $object = new $class();
             }
         }
-        return call_user_func_array([$object, $method], $params);
+        $callback = [$object, $method];
+        return $callback(...$params);
     }
 
-    // @codingStandardsIgnoreStart
     /**
      * Map PHP type to protocol type
-     *
-     * @deprecated Since 2.7.0; method will be renamed to remove underscore
-     *     prefix in 3.0.
-     * @param  string $type
-     * @return string
      */
-    abstract protected function _fixType($type);
-    // @codingStandardsIgnoreEnd
+    abstract protected function fixType(string $type): string;
 }
