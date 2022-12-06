@@ -18,6 +18,16 @@ use function method_exists;
 use function sprintf;
 use function ucfirst;
 
+/**
+ * @psalm-type CallbackToArrayShape = array{
+ *     type: 'function',
+ *     function: callable|string|null
+ * }|array{
+ *     type: string|null,
+ *     class?: string|null,
+ *     method?: string|null
+ * }
+ */
 class Callback
 {
     /** @var string */
@@ -138,6 +148,7 @@ class Callback
         return $this->type;
     }
 
+    /** @return CallbackToArrayShape */
     public function toArray(): array
     {
         $type  = $this->getType();
