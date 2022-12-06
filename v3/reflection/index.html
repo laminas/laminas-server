@@ -15,10 +15,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-server">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-server/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-server/v3/reflection/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-server - Laminas Docs</title>
+    <title>Reflection - laminas-server - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -124,7 +124,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-server</a>
+            <a href="../..">laminas-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -137,13 +137,13 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="v3/reflection/" class="subnavigation__link">Reflection</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Reflection</a>
     </li>
 
                     
@@ -154,7 +154,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/reference/migration/" class="subnavigation__link">Migration</a>
+        <a href="../reference/migration/" class="subnavigation__link">Migration</a>
     </li>
 
             
@@ -223,7 +223,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="v3/intro/" class="dropdown-item">
+                    <a href="../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -231,7 +231,7 @@
                 
             
                 
-                    <a href="v2/intro/" class="dropdown-item">
+                    <a href="../../v2/intro/" class="dropdown-item">
                         
                             v2
                         
@@ -261,6 +261,24 @@
             <div class="col-md-9 col-sm-12 content" role="main">
                 
                 
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#usage" class="toc__link nav-link">Usage</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
 
                 
                     <nav aria-label="breadcrumb">
@@ -270,7 +288,16 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item">laminas-server</li>
+                <li class="breadcrumb-item"><a href="../..">laminas-server</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Reflection</li>
             
         
     </ol>
@@ -280,22 +307,55 @@
 
 
 
-    <h1>laminas-server</h1>
-<p>laminas-server</p>
 
+    
+    
 
-    <h2>Installation</h2>
-    <h3>Using Composer</h3>
-    <pre><code class="language-bash">$ composer require laminas/laminas-server</code></pre>
+    <h1 id="laminasserverreflection">Laminas\Server\Reflection</h1>
+<p><code>Laminas\Server\Reflection</code> provides a standard mechanism for performing function
+and class introspection for use with server classes. It is based on PHP's
+Reflection API, augmenting it with methods for retrieving parameter and return
+value types and descriptions, a full list of function and method prototypes
+(i.e., all possible valid calling combinations), and function or method
+descriptions.</p>
+<p>Typically, this functionality will only be used by developers of RPC-style
+server classes for the framework.</p>
+<h2 id="usage">Usage</h2>
+<p>Basic usage is as follows:</p>
+<pre class="highlight"><code class="language-php">use My\Entity;
+use Laminas\Server\Reflection;
 
+$class    = Reflection::reflectClass(Entity::class);
+$function = Reflection::reflectFunction('my_function');
 
-<h2>Support</h2>
-<ul>
-    <li>Issues: <a href="https://github.com/laminas/laminas-server/issues">github.com/laminas/laminas-server/issues</a></li>
-    <li>Source: <a href="https://github.com/laminas/laminas-server">github.com/laminas/laminas-server</a></li>
-    <li>Chat: <a href="https://laminas.dev/chat">laminas.dev/chat</a></li>
-    <li>Forum: <a href="https://discourse.laminas.dev/">discourse.laminas.dev</a></li>
-</ul>
+// Get prototypes
+$prototypes = $function-&gt;getPrototypes();
+
+// Loop through each prototype for the function
+foreach ($prototypes as $prototype) {
+
+    // Get prototype return type
+    printf("Return type: %s\n", $prototype-&gt;getReturnType());
+
+    // Get prototype parameters
+    $parameters = $prototype-&gt;getParameters();
+
+    echo "Parameters: \n";
+    foreach ($parameters as $parameter) {
+        // Get parameter type
+        printf("    %s\n", $parameter-&gt;getType());
+    }
+}
+
+// Get namespace for a class, function, or method.
+// Namespaces may be set at instantiation time (second argument), or using
+// setNamespace().
+$class-&gt;getNamespace();</code></pre>
+<p><code>reflectFunction()</code> returns a
+<a href="https://github.com/laminas/laminas-server/blob/master/src/Reflection/ReflectionFunction.php"><code>Laminas\Server\Reflection\ReflectionFunction</code></a>
+object; <code>reflectClass()</code> returns a
+<a href="https://github.com/laminas/laminas-server/blob/master/src/Reflection/ReflectionClass.php"><code>Laminas\Server\Reflection\ReflectionClass</code></a>
+object.</p>
 
 
 
@@ -306,14 +366,20 @@
         
         <li class="page-nav__item">
             
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Introduction
+                </a>
+            
         </li>
 
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="v3/intro/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../reference/migration/">
                     <small class="page-nav__label">Next</small>
-                    Introduction
+                    Migration
                     <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -346,7 +412,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-server</a>
+            <a href="../..">laminas-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -359,13 +425,13 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
-    <li class="subnavigation__list-item ">
-        <a href="v3/reflection/" class="subnavigation__link">Reflection</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Reflection</a>
     </li>
 
                     
@@ -376,7 +442,7 @@
             
                 
     <li class="subnavigation__list-item ">
-        <a href="v3/reference/migration/" class="subnavigation__link">Migration</a>
+        <a href="../reference/migration/" class="subnavigation__link">Migration</a>
     </li>
 
             
@@ -480,13 +546,13 @@
 </footer>
 
     <script>
-        let base_url = '.',
+        let base_url = '../..',
             project  = "components",
             siteName = 'laminas-server';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="search/main.js"></script>
+        <script src="../../search/main.js"></script>
     
 
     
@@ -515,8 +581,3 @@
 
 
 </html>
-
-<!--
-MkDocs version : 1.4.2
-Build Date UTC : 2022-12-06 00:36:18.766819+00:00
--->

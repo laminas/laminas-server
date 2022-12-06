@@ -15,10 +15,10 @@
     <meta name="docsearch:language" content="en">
     <meta name="docsearch:component" content="laminas-server">
 
-    <link rel="canonical" href="https://docs.laminas.dev/laminas-server/">
+    <link rel="canonical" href="https://docs.laminas.dev/laminas-server/v3/reference/migration/">
     <link rel="shortcut icon" href="https://docs.laminas.dev/img/trademark-laminas-foundation-rgb.svg">
 
-    <title>laminas-server - Laminas Docs</title>
+    <title>Migration - laminas-server - Laminas Docs</title>
 
     <link rel="stylesheet" href="https://docs.laminas.dev/css/styles.css">
     
@@ -124,7 +124,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-server</a>
+            <a href="../../..">laminas-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -137,13 +137,13 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/reflection/" class="subnavigation__link">Reflection</a>
+        <a href="../../reflection/" class="subnavigation__link">Reflection</a>
     </li>
 
                     
@@ -153,8 +153,8 @@
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="v3/reference/migration/" class="subnavigation__link">Migration</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration</a>
     </li>
 
             
@@ -223,7 +223,7 @@
         <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left" aria-labelledby="version-selector-dropdown">
             
                 
-                    <a href="v3/intro/" class="dropdown-item">
+                    <a href="../../intro/" class="dropdown-item active">
                         
                             v3 (latest)
                         
@@ -231,7 +231,7 @@
                 
             
                 
-                    <a href="v2/intro/" class="dropdown-item">
+                    <a href="../../../v2/intro/" class="dropdown-item">
                         
                             v2
                         
@@ -261,6 +261,32 @@
             <div class="col-md-9 col-sm-12 content" role="main">
                 
                 
+                    
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">On this page</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#php-72-support" class="toc__link nav-link">PHP 7.2 support</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#strict-typing" class="toc__link nav-link">Strict Typing</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#signature-changes" class="toc__link nav-link">Signature changes</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+                
 
                 
                     <nav aria-label="breadcrumb">
@@ -270,7 +296,23 @@
             <li class="breadcrumb-item"><a href="https://docs.laminas.dev/components/">Components</a></li>
 
             
-                <li class="breadcrumb-item">laminas-server</li>
+                <li class="breadcrumb-item"><a href="../../..">laminas-server</a></li>
+
+                
+                    
+                        
+                        
+                    
+                
+                    
+                        
+                        
+                            <li class="breadcrumb-item">Reference</li>
+                        
+                    
+                
+
+                <li class="breadcrumb-item active" aria-current="page">Migration</li>
             
         
     </ol>
@@ -280,22 +322,38 @@
 
 
 
-    <h1>laminas-server</h1>
-<p>laminas-server</p>
 
+    
+    
+        <h2 class="chapter__headline">Reference</h2>
+    
 
-    <h2>Installation</h2>
-    <h3>Using Composer</h3>
-    <pre><code class="language-bash">$ composer require laminas/laminas-server</code></pre>
-
-
-<h2>Support</h2>
-<ul>
-    <li>Issues: <a href="https://github.com/laminas/laminas-server/issues">github.com/laminas/laminas-server/issues</a></li>
-    <li>Source: <a href="https://github.com/laminas/laminas-server">github.com/laminas/laminas-server</a></li>
-    <li>Chat: <a href="https://laminas.dev/chat">laminas.dev/chat</a></li>
-    <li>Forum: <a href="https://discourse.laminas.dev/">discourse.laminas.dev</a></li>
-</ul>
+    <h1 id="migration-to-version-30">Migration to version 3.0</h1>
+<p>Starting in version 3.0, we offer a few changes affecting the
+following that you should be aware of, and potentially update your application
+to adopt:</p>
+<h2 id="php-72-support">PHP 7.2 support</h2>
+<p>Starting in 3.0 this component supports only PHP 7.2+.</p>
+<h2 id="strict-typing">Strict Typing</h2>
+<p>Argument type declarations have been added. Passing a wrong argument type which
+previously might have worked will now raise a <code>TypeError</code>.</p>
+<h2 id="signature-changes">Signature changes</h2>
+<p>The following signatures changed that could affect class extension and/or
+consumers.</p>
+<h3 id="interface-suffix">Interface suffix</h3>
+<p>For consistency with the rest of the project, where we have standardized on the
+Interface suffix, the <code>Server</code> interface has been renamed to <code>ServerInterface</code>
+and the <code>Client</code> interface to <code>ClientInterface</code>.</p>
+<h3 id="reflection">Reflection</h3>
+<p>Previously the non-represented state of <code>$argv</code> in the <code>reflectClass()</code> and
+<code>reflectFunction()</code> methods was false. This changed to <code>null</code>.</p>
+<p>To represent a non-present state of <code>$namespace</code> in the <code>reflectClass()</code> and
+<code>reflectFunction()</code>, the default value changed from an empty string to <code>null</code>.</p>
+<h3 id="server">Server</h3>
+<p>Namespacing is not required by all <code>Server</code> implementations and thus optional.
+Method argument type declarations have been updated to reflect this state.
+<code>addFunction</code> and <code>setClass</code> methods now accept namespace variables of nullable
+strings, where previously they suggested a <code>string</code>-only usage.</p>
 
 
 
@@ -306,12 +364,18 @@
         
         <li class="page-nav__item">
             
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../../reflection/">
+                    <small class="page-nav__label">Previous</small>
+                    <i class="fa fa-chevron-left"></i>
+                    Reflection
+                </a>
+            
         </li>
 
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="v3/intro/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../../../v2/intro/">
                     <small class="page-nav__label">Next</small>
                     Introduction
                     <i class="fa fa-chevron-right"></i>
@@ -346,7 +410,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href=".">laminas-server</a>
+            <a href="../../..">laminas-server</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -359,13 +423,13 @@
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/intro/" class="subnavigation__link">Introduction</a>
+        <a href="../../intro/" class="subnavigation__link">Introduction</a>
     </li>
 
                     
                         
     <li class="subnavigation__list-item ">
-        <a href="v3/reflection/" class="subnavigation__link">Reflection</a>
+        <a href="../../reflection/" class="subnavigation__link">Reflection</a>
     </li>
 
                     
@@ -375,8 +439,8 @@
         <ul class="subnavigation__list">
             
                 
-    <li class="subnavigation__list-item ">
-        <a href="v3/reference/migration/" class="subnavigation__link">Migration</a>
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">Migration</a>
     </li>
 
             
@@ -480,13 +544,13 @@
 </footer>
 
     <script>
-        let base_url = '.',
+        let base_url = '../../..',
             project  = "components",
             siteName = 'laminas-server';
     </script>
     <script src="https://docs.laminas.dev/js/scripts.js"></script>
     
-        <script src="search/main.js"></script>
+        <script src="../../../search/main.js"></script>
     
 
     
@@ -515,8 +579,3 @@
 
 
 </html>
-
-<!--
-MkDocs version : 1.4.2
-Build Date UTC : 2022-12-06 00:36:18.766819+00:00
--->
