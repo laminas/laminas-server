@@ -23,9 +23,13 @@ use function next;
 use function reset;
 use function sprintf;
 
+/**
+ * @psalm-import-type MethodDefinitionToArrayShape from Method\Definition
+ * @template-implements Iterator<string, Method\Definition>
+ */
 class Definition implements Countable, Iterator
 {
-    /** @var Method\Definition[] */
+    /** @var array<string, Method\Definition> */
     protected $methods = [];
 
     /** @var bool */
@@ -128,6 +132,7 @@ class Definition implements Countable, Iterator
         return false;
     }
 
+    /** @return array<string, Method\Definition> */
     public function getMethods(): array
     {
         return $this->methods;
@@ -147,6 +152,7 @@ class Definition implements Countable, Iterator
         return $this;
     }
 
+    /** @return array<string, MethodDefinitionToArrayShape> */
     public function toArray(): array
     {
         $methods = [];
@@ -161,31 +167,21 @@ class Definition implements Countable, Iterator
         return count($this->methods);
     }
 
-    /**
-     * Iterator: current item
-     *
-     * @return Method\Definition
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function current()
     {
         return current($this->methods);
     }
 
-    /**
-     * Iterator: current item key
-     *
-     * @return int|string|null
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->methods);
     }
 
-    /**
-     * Iterator: advance to next method
-     */
+    /** @inheritDoc */
     #[ReturnTypeWillChange]
     public function next()
     {

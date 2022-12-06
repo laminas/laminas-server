@@ -14,6 +14,18 @@ use function is_array;
 use function method_exists;
 use function ucfirst;
 
+/**
+ * @psalm-import-type CallbackToArrayShape from Callback
+ * @psalm-import-type PrototypeToArrayShape from Prototype
+ * @psalm-type MethodDefinitionToArrayShape = array{
+ *     name: string|null,
+ *     callback: array{}|CallbackToArrayShape,
+ *     prototypes: list<PrototypeToArrayShape>,
+ *     methodHelp: string,
+ *     invokeArguments: array,
+ *     object: object|null,
+ * }
+ */
 class Definition
 {
     /** @var null|Callback */
@@ -31,7 +43,7 @@ class Definition
     /** @var null|object */
     protected $object;
 
-    /** @var Prototype[] */
+    /** @var list<Prototype> */
     protected $prototypes = [];
 
     public function __construct(?array $options = null)
@@ -136,7 +148,7 @@ class Definition
     /**
      * Get all prototypes
      *
-     * @return Prototype[]
+     * @return list<Prototype>
      */
     public function getPrototypes(): array
     {
@@ -176,6 +188,7 @@ class Definition
         return $this->invokeArguments;
     }
 
+    /** @return MethodDefinitionToArrayShape */
     public function toArray(): array
     {
         $prototypes = $this->getPrototypes();

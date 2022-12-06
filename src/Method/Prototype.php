@@ -18,6 +18,12 @@ use function is_string;
 use function method_exists;
 use function ucfirst;
 
+/**
+ * @psalm-type PrototypeToArrayShape = array{
+ *     returnType: string,
+ *     parameters: list<string>
+ * }
+ */
 class Prototype
 {
     /** @var string */
@@ -92,6 +98,8 @@ class Prototype
 
     /**
      * Retrieve parameters as list of types
+     *
+     * @return list<string>
      */
     public function getParameters(): array
     {
@@ -140,6 +148,7 @@ class Prototype
         return $this;
     }
 
+    /** @return PrototypeToArrayShape */
     public function toArray(): array
     {
         return [
