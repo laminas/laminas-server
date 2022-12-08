@@ -78,7 +78,7 @@ class ReflectionClass
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
-            if ('__' == substr($method->getName(), 0, 2)) {
+            if ('__' === substr($method->getName(), 0, 2)) {
                 continue;
             }
 

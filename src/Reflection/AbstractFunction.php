@@ -330,7 +330,7 @@ abstract class AbstractFunction
                 $paramTypesTmp[$i] = ['mixed'];
                 $paramDesc[$i]     = '';
             }
-        } elseif ($nParamTypesTmp != $paramCount) {
+        } elseif ($nParamTypesTmp !== $paramCount) {
             throw new Exception\RuntimeException(
                 'Variable number of arguments is not supported for services (except optional parameters). '
                 . 'Number of function arguments must correspond to actual number of arguments described in a docblock.'
