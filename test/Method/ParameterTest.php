@@ -9,8 +9,6 @@ namespace LaminasTest\Server\Method;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
 
-use function compact;
-
 /**
  * Test class for \Laminas\Server\Method\Parameter
  *
@@ -138,26 +136,39 @@ class ParameterTest extends TestCase
         $optional     = true;
         $defaultValue = 'bar';
         $description  = 'Foo bar!';
-        $parameter    = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $this->parameter->setType($type)
-                        ->setName($name)
-                        ->setOptional($optional)
-                        ->setDefaultValue($defaultValue)
-                        ->setDescription($description);
-        $test = $this->parameter->toArray();
-        $this->assertEquals($parameter, $test);
+
+        $this->assertEquals(
+            [
+                'type'         => $type,
+                'name'         => $name,
+                'optional'     => $optional,
+                'defaultValue' => $defaultValue,
+                'description'  => $description,
+            ],
+            $this->parameter
+                ->setType($type)
+                ->setName($name)
+                ->setOptional($optional)
+                ->setDefaultValue($defaultValue)
+                ->setDescription($description)
+                ->toArray()
+        );
     }
 
     public function testConstructorShouldSetObjectStateFromPassedOptions(): void
     {
-        $type         = 'string';
-        $name         = 'foo';
-        $optional     = true;
-        $defaultValue = 'bar';
-        $description  = 'Foo bar!';
-        $options      = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $parameter    = new Method\Parameter($options);
-        $test         = $parameter->toArray();
-        $this->assertEquals($options, $test);
+        $options = [
+            'type'         => 'string',
+            'name'         => 'foo',
+            'optional'     => true,
+            'defaultValue' => 'bar',
+            'description'  => 'Foo bar!',
+        ];
+
+        $this->assertEquals(
+            $options,
+            (new Method\Parameter($options))
+                ->toArray()
+        );
     }
 }
