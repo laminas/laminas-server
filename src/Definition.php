@@ -62,7 +62,7 @@ class Definition implements Countable, Iterator
      * @param  array|\Laminas\Server\Method\Definition $method
      * @param  null|string $name
      * @return Definition
-     * @throws InvalidArgumentException if duplicate or invalid method provided
+     * @throws InvalidArgumentException If duplicate or invalid method provided.
      */
     public function addMethod($method, $name = null)
     {
