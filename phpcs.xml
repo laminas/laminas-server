@@ -18,4 +18,11 @@
     <rule ref="WebimpressCodingStandard.Formatting.StringClassReference">
         <exclude-pattern>test/ReflectionTest.php</exclude-pattern>
     </rule>
+    
+    <!-- some interfaces have already been coded outside `laminas/laminas-coding-standard:^2` rules,
+         and cannot be changed just for CS reasons -->
+    <rule ref="WebimpressCodingStandard.NamingConventions.Interface.Suffix">
+        <exclude-pattern>src/Client.php</exclude-pattern>
+        <exclude-pattern>src/Server.php</exclude-pattern>
+    </rule>
 </ruleset>
