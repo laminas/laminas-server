@@ -29,7 +29,7 @@
     },
     "require": {
         "php": "~8.0.0 || ~8.1.0 || ~8.2.0",
-        "laminas/laminas-code": "^3.5.1 || ^4.0.0",
+        "laminas/laminas-code": "^4.7.1",
         "laminas/laminas-stdlib": "^3.3.1",
         "laminas/laminas-zendframework-bridge": "^1.2.0"
     },
