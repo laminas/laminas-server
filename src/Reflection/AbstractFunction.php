@@ -109,6 +109,7 @@ abstract class AbstractFunction
     /** @var string */
     protected $returnDesc;
 
+    /** @var array<int, string> */
     protected $paramDesc;
 
     /** @var array */
@@ -204,7 +205,7 @@ abstract class AbstractFunction
      * @param array $return Array of return types
      * @param string $returnDesc Return value description
      * @param array $paramTypes Array of arguments (each an array of types)
-     * @param array $paramDesc Array of parameter descriptions
+     * @param array<int, string> $paramDesc Array of parameter descriptions
      */
     protected function buildSignatures($return, $returnDesc, $paramTypes, $paramDesc): void
     {
