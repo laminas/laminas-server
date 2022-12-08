@@ -2,30 +2,32 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace Laminas\Server\Method;
+
+use Laminas\Server\Method\Parameter;
+
+use function array_key_exists;
+use function count;
+use function is_array;
+use function is_numeric;
+use function is_string;
+use function method_exists;
+use function ucfirst;
 
 /**
  * Method prototype metadata
  */
 class Prototype
 {
-    /**
-     * @var string Return type
-     */
+    /** @var string Return type */
     protected $returnType = 'void';
 
-    /**
-     * @var array Map parameter names to parameter index
-     */
+    /** @var array Map parameter names to parameter index */
     protected $parameterNameMap = [];
 
-    /**
-     * @var array Method parameters
-     */
+    /** @var array Method parameters */
     protected $parameters = [];
 
     /**
@@ -44,7 +46,7 @@ class Prototype
      * Set return value
      *
      * @param  string $returnType
-     * @return \Laminas\Server\Method\Prototype
+     * @return Prototype
      */
     public function setReturnType($returnType)
     {
@@ -66,16 +68,16 @@ class Prototype
      * Add a parameter
      *
      * @param  string|Parameter $parameter
-     * @return \Laminas\Server\Method\Prototype
+     * @return Prototype
      */
     public function addParameter($parameter)
     {
         if ($parameter instanceof Parameter) {
-            $this->parameters[] = $parameter;
-            $name = $parameter->getName();
+            $this->parameters[]            = $parameter;
+            $name                          = $parameter->getName();
             $this->parameterNameMap[$name] = count($this->parameters) - 1;
         } else {
-            $parameter = new Parameter([
+            $parameter          = new Parameter([
                 'type' => $parameter,
             ]);
             $this->parameters[] = $parameter;
@@ -87,7 +89,7 @@ class Prototype
      * Add parameters
      *
      * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @return Prototype
      */
     public function addParameters(array $parameters)
     {
@@ -101,7 +103,7 @@ class Prototype
      * Set parameters
      *
      * @param  array $parameters
-     * @return \Laminas\Server\Method\Prototype
+     * @return Prototype
      */
     public function setParameters(array $parameters)
     {
@@ -139,7 +141,7 @@ class Prototype
      * Retrieve a single parameter by name or index
      *
      * @param  string|int $index
-     * @return null|\Laminas\Server\Method\Parameter
+     * @return null|Parameter
      */
     public function getParameter($index)
     {
@@ -159,7 +161,7 @@ class Prototype
      * Set object state from array
      *
      * @param  array $options
-     * @return \Laminas\Server\Method\Prototype
+     * @return Prototype
      */
     public function setOptions(array $options)
     {

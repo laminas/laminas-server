@@ -2,17 +2,16 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionReturnValue;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionParameter;
 
 /**
  * Test case for \Laminas\Server\Reflection\Prototype
@@ -21,14 +20,12 @@ use ReflectionClass;
  */
 class PrototypeTest extends TestCase
 {
-    /**
-     * @var \Laminas\Server\Reflection\Prototype
-     */
+    /** @var Prototype */
     protected $r;
 
     /**
      * @var array
-     * @psalm-var array<array-key, \ReflectionParameter>
+     * @psalm-var array<array-key, ReflectionParameter>
      */
     protected $parametersRaw;
 
@@ -43,9 +40,9 @@ class PrototypeTest extends TestCase
      */
     public function setUp(): void
     {
-        $class = new ReflectionClass('\Laminas\Server\Reflection');
-        $method = $class->getMethod('reflectClass');
-        $parameters = $method->getParameters();
+        $class               = new ReflectionClass(Reflection::class);
+        $method              = $class->getMethod('reflectClass');
+        $parameters          = $method->getParameters();
         $this->parametersRaw = $parameters;
 
         $fParameters = [];
@@ -77,8 +74,6 @@ class PrototypeTest extends TestCase
      * - params: Optional;
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testConstructWorks(): void
     {
@@ -91,8 +86,6 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: string
-     *
-     * @return void
      */
     public function testGetReturnType(): void
     {
@@ -105,8 +98,6 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: \Laminas\Server\Reflection\ReflectionReturnValue
-     *
-     * @return void
      */
     public function testGetReturnValue(): void
     {
@@ -119,8 +110,6 @@ class PrototypeTest extends TestCase
      * Call as method call
      *
      * Returns: array
-     *
-     * @return void
      */
     public function testGetParameters(): void
     {

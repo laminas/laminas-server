@@ -2,20 +2,19 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
  *
  * @group      Laminas_Server
  */
-class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
+class ReflectionReturnValueTest extends TestCase
 {
     /**
      * __construct() test
@@ -27,8 +26,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - description: Optional; has default;
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testConstructor(): void
     {
@@ -42,8 +39,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * Call as method call
      *
      * Returns: string
-     *
-     * @return void
      */
     public function testGetType(): void
     {
@@ -63,8 +58,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - type:
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testSetType(): void
     {
@@ -80,8 +73,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * Call as method call
      *
      * Returns: string
-     *
-     * @return void
      */
     public function testGetDescription(): void
     {
@@ -101,8 +92,6 @@ class ReflectionReturnValueTest extends \PHPUnit\Framework\TestCase
      * - description:
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testSetDescription(): void
     {

@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
@@ -12,6 +10,10 @@ use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Node;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
+use ReflectionMethod;
+
+use function serialize;
+use function unserialize;
 
 class ReflectionMethodTest extends TestCase
 {
@@ -21,7 +23,7 @@ class ReflectionMethodTest extends TestCase
     /** @var Reflection\ReflectionClass */
     protected $class;
 
-    /** @var \ReflectionMethod */
+    /** @var ReflectionMethod */
     protected $method;
 
     protected function setUp(): void
@@ -43,8 +45,6 @@ class ReflectionMethodTest extends TestCase
      * - argv: Optional; has default;
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testConstructor(): void
     {
@@ -61,8 +61,6 @@ class ReflectionMethodTest extends TestCase
      * Call as method call
      *
      * Returns: \Laminas\Server\Reflection\ReflectionClass
-     *
-     * @return void
      */
     public function testGetDeclaringClass(): void
     {
@@ -80,8 +78,6 @@ class ReflectionMethodTest extends TestCase
      * Call as method call
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testClassWakeup(): void
     {
@@ -96,20 +92,18 @@ class ReflectionMethodTest extends TestCase
 
     /**
      * Test fetch method doc block from interface
-     *
-     * @return void
      */
     public function testMethodDocBlockFromInterface(): void
     {
-        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
+        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodTestInstance::class);
         $reflectionMethod = $reflectionClass->getMethod('testMethod');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(
             new Reflection\ReflectionClass($reflectionClass),
             $reflectionMethod
         );
-        list($prototype) = $laminasReflectionMethod->getPrototypes();
-        list($first, $second) = $prototype->getParameters();
+        [$prototype]             = $laminasReflectionMethod->getPrototypes();
+        [$first, $second]        = $prototype->getParameters();
 
         self::assertEquals('ReflectionMethodTest', $first->getType());
         self::assertEquals('array', $second->getType());
@@ -117,20 +111,18 @@ class ReflectionMethodTest extends TestCase
 
     /**
      * Test fetch method doc block from parent class
-     *
-     * @return void
      */
     public function testMethodDocBlockFromParent(): void
     {
-        $reflectionClass = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
+        $reflectionClass  = new ReflectionClass(TestAsset\ReflectionMethodNode::class);
         $reflectionMethod = $reflectionClass->getMethod('setParent');
 
         $laminasReflectionMethod = new Reflection\ReflectionMethod(
             new Reflection\ReflectionClass($reflectionClass),
             $reflectionMethod
         );
-        $prototypes = $laminasReflectionMethod->getPrototypes();
-        list($first, $second) = $prototypes[1]->getParameters();
+        $prototypes              = $laminasReflectionMethod->getPrototypes();
+        [$first, $second]        = $prototypes[1]->getParameters();
 
         self::assertEquals('\\' . Node::class, $first->getType());
         self::assertEquals('bool', $second->getType());

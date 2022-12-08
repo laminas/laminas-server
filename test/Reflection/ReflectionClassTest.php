@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
@@ -12,6 +10,11 @@ use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
 use PHPUnit\Framework\TestCase;
+
+use function assert;
+use function count;
+use function serialize;
+use function unserialize;
 
 /**
  * Test case for \Laminas\Server\Reflection\ClassReflection
@@ -31,8 +34,6 @@ class ReflectionClassTest extends TestCase
      * - argv: Optional; has default;
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testConstructor(): void
     {
@@ -58,24 +59,20 @@ class ReflectionClassTest extends TestCase
      * - args:
      *
      * Returns: mixed
-     *
-     * @return void
      */
     public function testMethodOverloading(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $this->assertIsString($r->getName());
-        $this->assertEquals('Laminas\Server\Reflection', $r->getName());
+        $this->assertEquals(Reflection::class, $r->getName());
     }
 
     /**
      * test __get/set
-     *
-     * @return void
      */
     public function testGetSet(): void
     {
-        $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
+        $r         = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $r->system = true;
         $this->assertTrue($r->system);
     }
@@ -86,8 +83,6 @@ class ReflectionClassTest extends TestCase
      * Call as method call
      *
      * Returns: array
-     *
-     * @return void
      */
     public function testGetMethods(): void
     {
@@ -101,8 +96,6 @@ class ReflectionClassTest extends TestCase
 
     /**
      * namespace test
-     *
-     * @return void
      */
     public function testGetNamespace(): void
     {
@@ -118,8 +111,6 @@ class ReflectionClassTest extends TestCase
      * Call as method call
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testClassWakeup(): void
     {
