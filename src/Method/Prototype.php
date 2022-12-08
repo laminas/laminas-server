@@ -146,7 +146,7 @@ class Prototype
     public function getParameter($index)
     {
         if (! is_string($index) && ! is_numeric($index)) {
-            return;
+            return null;
         }
         if (array_key_exists($index, $this->parameterNameMap)) {
             $index = $this->parameterNameMap[$index];
@@ -154,7 +154,7 @@ class Prototype
         if (array_key_exists($index, $this->parameters)) {
             return $this->parameters[$index];
         }
-        return;
+        return null;
     }
 
     /**
