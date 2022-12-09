@@ -9,8 +9,8 @@ namespace Laminas\Server\Reflection;
 use function array_map;
 use function array_merge;
 use function implode;
+use function str_contains;
 use function str_replace;
-use function strpos;
 
 use const PHP_EOL;
 
@@ -105,7 +105,7 @@ class ReflectionMethod extends AbstractFunction
     protected function reflect()
     {
         $docComment = $this->reflection->getDocComment();
-        if (strpos($docComment, self::INHERIT_TAG) !== false) {
+        if (str_contains($docComment, self::INHERIT_TAG)) {
             $this->docComment = $this->fetchRecursiveDocComment();
         }
 
@@ -190,6 +190,6 @@ class ReflectionMethod extends AbstractFunction
      */
     private function isInherit($docComment)
     {
-        return strpos($docComment, self::INHERIT_TAG) !== false;
+        return str_contains($docComment, self::INHERIT_TAG);
     }
 }

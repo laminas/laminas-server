@@ -13,6 +13,7 @@ use function is_array;
 use function is_string;
 use function method_exists;
 use function preg_match;
+use function str_starts_with;
 use function substr;
 
 /**
@@ -78,7 +79,7 @@ class ReflectionClass
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
-            if ('__' === substr($method->getName(), 0, 2)) {
+            if (str_starts_with($method->getName(), '__')) {
                 continue;
             }
 
