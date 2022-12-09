@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
-<ruleset name="Laminas coding standard">
-    <rule ref="./vendor/laminas/laminas-coding-standard/ruleset.xml"/>
+<ruleset
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="./vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
+    <rule ref="LaminasCodingStandard">
+        <!-- do not apply strict types: too risky on an old component - to be re-evaluated in future -->
+        <exclude name="SlevomatCodingStandard.TypeHints.DeclareStrictTypes.DeclareStrictTypesMissing"/>
+    </rule>
 
     <!-- Paths to check -->
     <file>src</file>
@@ -8,5 +14,15 @@
 
     <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
         <exclude-pattern>/test/TestAsset/ReflectionTestClass.php</exclude-pattern>
+    </rule>
+    <rule ref="WebimpressCodingStandard.Formatting.StringClassReference">
+        <exclude-pattern>test/ReflectionTest.php</exclude-pattern>
+    </rule>
+    
+    <!-- some interfaces have already been coded outside `laminas/laminas-coding-standard:^2` rules,
+         and cannot be changed just for CS reasons -->
+    <rule ref="WebimpressCodingStandard.NamingConventions.Interface.Suffix">
+        <exclude-pattern>src/Client.php</exclude-pattern>
+        <exclude-pattern>src/Server.php</exclude-pattern>
     </rule>
 </ruleset>

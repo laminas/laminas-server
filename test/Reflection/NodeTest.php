@@ -2,14 +2,14 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection\Node;
 use PHPUnit\Framework\TestCase;
+
+use function var_export;
 
 /**
  * Test case for \Laminas\Server\Node
@@ -20,8 +20,6 @@ class NodeTest extends TestCase
 {
     /**
      * __construct() test
-     *
-     * @return void
      */
     public function testConstructor(): void
     {
@@ -43,8 +41,6 @@ class NodeTest extends TestCase
 
     /**
      * setParent() test
-     *
-     * @return void
      */
     public function testSetParent(): void
     {
@@ -58,13 +54,11 @@ class NodeTest extends TestCase
 
     /**
      * createChild() test
-     *
-     * @return void
      */
     public function testCreateChild(): void
     {
         $parent = new Node('string');
-        $child = $parent->createChild('array');
+        $child  = $parent->createChild('array');
 
         $this->assertEquals($parent, $child->getParent());
         $children = $parent->getChildren();
@@ -73,8 +67,6 @@ class NodeTest extends TestCase
 
     /**
      * attachChild() test
-     *
-     * @return void
      */
     public function testAttachChild(): void
     {
@@ -89,16 +81,14 @@ class NodeTest extends TestCase
 
     /**
      * getChildren() test
-     *
-     * @return void
      */
     public function testGetChildren(): void
     {
         $parent = new Node('string');
-        $child = $parent->createChild('array');
+        $child  = $parent->createChild('array');
 
         $children = $parent->getChildren();
-        $types = [];
+        $types    = [];
         foreach ($children as $c) {
             $types[] = $c->getValue();
         }
@@ -108,8 +98,6 @@ class NodeTest extends TestCase
 
     /**
      * hasChildren() test
-     *
-     * @return void
      */
     public function testHasChildren(): void
     {
@@ -122,13 +110,11 @@ class NodeTest extends TestCase
 
     /**
      * getParent() test
-     *
-     * @return void
      */
     public function testGetParent(): void
     {
         $parent = new Node('string');
-        $child = $parent->createChild('array');
+        $child  = $parent->createChild('array');
 
         $this->assertNull($parent->getParent());
         $this->assertEquals($parent, $child->getParent());
@@ -136,8 +122,6 @@ class NodeTest extends TestCase
 
     /**
      * getValue() test
-     *
-     * @return void
      */
     public function testGetValue(): void
     {
@@ -147,8 +131,6 @@ class NodeTest extends TestCase
 
     /**
      * setValue() test
-     *
-     * @return void
      */
     public function testSetValue(): void
     {
@@ -160,22 +142,20 @@ class NodeTest extends TestCase
 
     /**
      * getEndPoints() test
-     *
-     * @return void
      */
     public function testGetEndPoints(): void
     {
-        $root = new Node('root');
-        $child1 = $root->createChild('child1');
-        $child2 = $root->createChild('child2');
-        $child1grand1 = $child1->createChild(null);
-        $child1grand2 = $child1->createChild('child1grand2');
-        $child2grand1 = $child2->createChild('child2grand1');
-        $child2grand2 = $child2->createChild('child2grand2');
+        $root               = new Node('root');
+        $child1             = $root->createChild('child1');
+        $child2             = $root->createChild('child2');
+        $child1grand1       = $child1->createChild(null);
+        $child1grand2       = $child1->createChild('child1grand2');
+        $child2grand1       = $child2->createChild('child2grand1');
+        $child2grand2       = $child2->createChild('child2grand2');
         $child2grand2great1 = $child2grand2->createChild(null);
         $child2grand2great2 = $child2grand2->createChild('child2grand2great2');
 
-        $endPoints = $root->getEndPoints();
+        $endPoints      = $root->getEndPoints();
         $endPointsArray = [];
         foreach ($endPoints as $endPoint) {
             $endPointsArray[] = $endPoint->getValue();
@@ -186,7 +166,7 @@ class NodeTest extends TestCase
             'child1grand2',
             'child2grand1',
             'child2grand2',
-            'child2grand2great2'
+            'child2grand2great2',
         ];
 
         $this->assertEquals(

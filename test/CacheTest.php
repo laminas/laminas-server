@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Cache;
@@ -16,11 +14,15 @@ use Laminas\Server\Server;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
+use function file_get_contents;
+use function sys_get_temp_dir;
+use function tempnam;
+use function unlink;
+use function unserialize;
+
 class CacheTest extends TestCase
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $cacheFile;
 
     public function tearDown(): void
@@ -46,7 +48,7 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->createMock(Server::class);
+        $server    = $this->createMock(Server::class);
         $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');
@@ -93,7 +95,7 @@ class CacheTest extends TestCase
             'substr' => 'substr',
             'strlen' => 'strlen',
         ];
-        $server = $this->createMock(Server::class);
+        $server    = $this->createMock(Server::class);
         $server->method('getFunctions')->willReturn($functions);
 
         $this->cacheFile = tempnam(sys_get_temp_dir(), 'zs');

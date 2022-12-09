@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Method;
@@ -25,8 +23,6 @@ class PrototypeTest extends TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -36,8 +32,6 @@ class PrototypeTest extends TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -151,7 +145,7 @@ class PrototypeTest extends TestCase
 
     public function testConstructorShouldSetObjectStateFromOptions(): void
     {
-        $options = [
+        $options   = [
             'returnType' => 'string',
             'parameters' => [
                 'bool',
@@ -160,7 +154,7 @@ class PrototypeTest extends TestCase
             ],
         ];
         $prototype = new Method\Prototype($options);
-        $test = $prototype->toArray();
+        $test      = $prototype->toArray();
         $this->assertSame($options, $test);
     }
 }

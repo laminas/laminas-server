@@ -2,16 +2,14 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use Laminas\Server\Reflection\ReflectionParameter;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
+use ReflectionParameter;
 
 /**
  * Test case for \Laminas\Server\Reflection\ReflectionParameter
@@ -20,9 +18,9 @@ use ReflectionMethod;
  */
 class ReflectionParameterTest extends TestCase
 {
-    protected function getParameter(): \ReflectionParameter
+    protected function getParameter(): ReflectionParameter
     {
-        $method = new ReflectionMethod('\Laminas\Server\Reflection\ReflectionParameter', 'setType');
+        $method     = new ReflectionMethod(\Laminas\Server\Reflection\ReflectionParameter::class, 'setType');
         $parameters = $method->getParameters();
         return $parameters[0];
     }
@@ -38,8 +36,6 @@ class ReflectionParameterTest extends TestCase
      * - description: Optional; has default;
      *
      * Returns: void
-     *
-     * @return void
      */
     public function testConstructor(): void
     {
@@ -59,8 +55,6 @@ class ReflectionParameterTest extends TestCase
      * - args:
      *
      * Returns: mixed
-     *
-     * @return void
      */
     public function testMethodOverloading(): void
     {
@@ -73,8 +67,6 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setType() test
-     *
-     * @return void
      */
     public function testGetSetType(): void
     {
@@ -87,8 +79,6 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setDescription() test
-     *
-     * @return void
      */
     public function testGetDescription(): void
     {
@@ -101,8 +91,6 @@ class ReflectionParameterTest extends TestCase
 
     /**
      * get/setPosition() test
-     *
-     * @return void
      */
     public function testSetPosition(): void
     {

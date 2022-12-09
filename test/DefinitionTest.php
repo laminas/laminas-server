@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server;
@@ -11,6 +9,9 @@ namespace LaminasTest\Server;
 use Laminas\Server;
 use Laminas\Server\Method;
 use PHPUnit\Framework\TestCase;
+
+use function array_shift;
+use function array_values;
 
 /**
  * Test class for Laminas\Server\Definition
@@ -25,8 +26,6 @@ class DefinitionTest extends TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -36,8 +35,6 @@ class DefinitionTest extends TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -113,19 +110,19 @@ class DefinitionTest extends TestCase
 
     public function testDefinitionShouldSerializeToArray(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
         $definition = new Server\Definition();
@@ -141,24 +138,24 @@ class DefinitionTest extends TestCase
 
     public function testPassingOptionsToConstructorShouldSetObjectState(): void
     {
-        $method = [
-            'name' => 'foo.bar',
-            'callback' => [
+        $method     = [
+            'name'            => 'foo.bar',
+            'callback'        => [
                 'type'     => 'function',
                 'function' => 'bar',
             ],
-            'prototypes' => [
+            'prototypes'      => [
                 [
                     'returnType' => 'string',
                     'parameters' => ['string'],
                 ],
             ],
-            'methodHelp' => 'Foo Bar!',
+            'methodHelp'      => 'Foo Bar!',
             'invokeArguments' => ['foo'],
         ];
-        $options = [$method];
+        $options    = [$method];
         $definition = new Server\Definition($options);
-        $test = $definition->toArray();
+        $test       = $definition->toArray();
         $this->assertCount(1, $test);
         $test = array_shift($test);
         $this->assertEquals($method['name'], $test['name']);

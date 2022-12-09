@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\TestAsset;
@@ -29,8 +27,6 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param array $arg2
-     *
-     * @return void
      */
     public function one($arg1, $arg2 = null): void
     {
@@ -43,8 +39,6 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param array $arg2
-     *
-     * @return void
      */
     protected function _one($arg1, $arg2 = null): void
     {
@@ -56,8 +50,6 @@ class ReflectionTestClass
      *
      * @param string $arg1
      * @param string $arg2
-     *
-     * @return void
      */
     public static function two($arg1, $arg2): void
     {

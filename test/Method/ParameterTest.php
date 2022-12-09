@@ -2,8 +2,6 @@
 
 /**
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
- * @copyright https://github.com/laminas/laminas-server/blob/master/COPYRIGHT.md
- * @license   https://github.com/laminas/laminas-server/blob/master/LICENSE.md New BSD License
  */
 
 namespace LaminasTest\Server\Method;
@@ -24,8 +22,6 @@ class ParameterTest extends TestCase
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
-     *
-     * @return void
      */
     public function setUp(): void
     {
@@ -35,8 +31,6 @@ class ParameterTest extends TestCase
     /**
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
-     *
-     * @return void
      */
     public function tearDown(): void
     {
@@ -142,26 +136,39 @@ class ParameterTest extends TestCase
         $optional     = true;
         $defaultValue = 'bar';
         $description  = 'Foo bar!';
-        $parameter    = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $this->parameter->setType($type)
-                        ->setName($name)
-                        ->setOptional($optional)
-                        ->setDefaultValue($defaultValue)
-                        ->setDescription($description);
-        $test = $this->parameter->toArray();
-        $this->assertEquals($parameter, $test);
+
+        $this->assertEquals(
+            [
+                'type'         => $type,
+                'name'         => $name,
+                'optional'     => $optional,
+                'defaultValue' => $defaultValue,
+                'description'  => $description,
+            ],
+            $this->parameter
+                ->setType($type)
+                ->setName($name)
+                ->setOptional($optional)
+                ->setDefaultValue($defaultValue)
+                ->setDescription($description)
+                ->toArray()
+        );
     }
 
     public function testConstructorShouldSetObjectStateFromPassedOptions(): void
     {
-        $type         = 'string';
-        $name         = 'foo';
-        $optional     = true;
-        $defaultValue = 'bar';
-        $description  = 'Foo bar!';
-        $options      = compact('type', 'name', 'optional', 'defaultValue', 'description');
-        $parameter    = new Method\Parameter($options);
-        $test         = $parameter->toArray();
-        $this->assertEquals($options, $test);
+        $options = [
+            'type'         => 'string',
+            'name'         => 'foo',
+            'optional'     => true,
+            'defaultValue' => 'bar',
+            'description'  => 'Foo bar!',
+        ];
+
+        $this->assertEquals(
+            $options,
+            (new Method\Parameter($options))
+                ->toArray()
+        );
     }
 }
