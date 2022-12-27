@@ -6,8 +6,6 @@
 
 namespace Laminas\Server\Reflection;
 
-use Laminas\Server\Reflection\ReflectionReturnValue;
-
 /**
  * Method/Function prototypes
  *
@@ -17,6 +15,14 @@ class Prototype
 {
     /** @var ReflectionParameter[] */
     protected $params;
+
+    /**
+     * @deprecated This property was previously undeclared therefore it requires public access to maintain BC.
+     *             It will be declared private in the next major version of this component.
+     *
+     * @var ReflectionReturnValue
+     */
+    public $return;
 
     /**
      * Constructor
