@@ -38,7 +38,7 @@ class CacheTest extends TestCase
     {
         $r = new ReflectionProperty(Cache::class, 'skipMethods');
         $r->setAccessible(true);
-        $r->setValue(Cache::class, $methods);
+        $r->setValue(null, $methods);
     }
 
     public function testCacheCanAcceptAServerReturningAnArrayOfFunctions(): void

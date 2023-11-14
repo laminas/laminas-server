@@ -214,8 +214,9 @@
       <code>Prototype[]</code>
       <code>string[]</code>
     </MixedReturnTypeCoercion>
-    <PossiblyNullArgument occurrences="1">
+    <PossiblyNullArgument occurrences="2">
       <code>$this-&gt;paramDesc[$key] ?? null</code>
+      <code>$returnDesc</code>
     </PossiblyNullArgument>
     <PropertyNotSetInConstructor occurrences="2">
       <code>$class</code>
