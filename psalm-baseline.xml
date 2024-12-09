@@ -1,449 +1,521 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.30.0@d0bc6e25d89f649e4f36a534f330f8bb4643dd69">
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/AbstractServer.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$class</code>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$class]]></code>
     </ArgumentTypeCoercion>
-    <DeprecatedInterface occurrences="1">
-      <code>AbstractServer</code>
+    <DeprecatedInterface>
+      <code><![CDATA[AbstractServer]]></code>
     </DeprecatedInterface>
-    <DeprecatedMethod occurrences="2">
-      <code>_fixType</code>
-      <code>_fixType</code>
+    <DeprecatedMethod>
+      <code><![CDATA[_fixType]]></code>
+      <code><![CDATA[_fixType]]></code>
     </DeprecatedMethod>
-    <ImplementedReturnTypeMismatch occurrences="1">
-      <code>Definition</code>
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[Definition]]></code>
     </ImplementedReturnTypeMismatch>
-    <InvalidStringClass occurrences="1">
-      <code>new $class()</code>
+    <InvalidStringClass>
+      <code><![CDATA[new $class()]]></code>
     </InvalidStringClass>
-    <MixedArgument occurrences="5">
-      <code>$method</code>
-      <code>$method</code>
-      <code>$reflection-&gt;getDeclaringClass()-&gt;getName()</code>
-      <code>$reflection-&gt;getName()</code>
-      <code>$reflection-&gt;getName()</code>
+    <MixedArgument>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$method]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$invokeArgs</code>
-    </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="2">
-      <code>$method</code>
-      <code>$name</code>
+    <MixedAssignment>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$name]]></code>
     </MixedAssignment>
-    <MixedOperand occurrences="2">
-      <code>$method</code>
-      <code>$name</code>
+    <MixedOperand>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$name]]></code>
     </MixedOperand>
-    <PossiblyNullArgument occurrences="1">
-      <code>$class</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[$class]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullFunctionCall occurrences="1">
-      <code>call_user_func_array($function, $params)</code>
+    <PossiblyNullFunctionCall>
+      <code><![CDATA[call_user_func_array($function, $params)]]></code>
     </PossiblyNullFunctionCall>
-    <UndefinedClass occurrences="1">
-      <code>new $class()</code>
+    <UndefinedClass>
+      <code><![CDATA[new $class()]]></code>
     </UndefinedClass>
+    <UnusedClass>
+      <code><![CDATA[AbstractServer]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Cache.php">
-    <DeprecatedClass occurrences="2">
-      <code>Server</code>
-      <code>Server</code>
-    </DeprecatedClass>
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($filename)</code>
-      <code>! is_string($filename)</code>
+    <DeprecatedInterface>
+      <code><![CDATA[Server]]></code>
+      <code><![CDATA[Server]]></code>
+    </DeprecatedInterface>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_string($filename)]]></code>
+      <code><![CDATA[! is_string($filename)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="1">
-      <code>$dispatchArray</code>
+    <MixedArgument>
+      <code><![CDATA[$dispatchArray]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$dispatchArray</code>
+    <MixedAssignment>
+      <code><![CDATA[$dispatchArray]]></code>
     </MixedAssignment>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[delete]]></code>
+      <code><![CDATA[get]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/Client.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[call]]></code>
+    </PossiblyUnusedMethod>
+  </file>
+  <file src="src/ClientInterface.php">
+    <UnusedClass>
+      <code><![CDATA[ClientInterface]]></code>
+    </UnusedClass>
   </file>
   <file src="src/Definition.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>null === $name</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[null === $name]]></code>
     </DocblockTypeContradiction>
-    <FalsableReturnStatement occurrences="1">
-      <code>false</code>
-    </FalsableReturnStatement>
-    <ImplementedReturnTypeMismatch occurrences="1">
-      <code>Method\Definition</code>
+    <ImplementedReturnTypeMismatch>
+      <code><![CDATA[Method\Definition]]></code>
     </ImplementedReturnTypeMismatch>
-    <MixedArgument occurrences="1">
-      <code>$method</code>
+    <MissingTemplateParam>
+      <code><![CDATA[Iterator]]></code>
+    </MissingTemplateParam>
+    <MixedArgument>
+      <code><![CDATA[$method]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="3">
-      <code>$method</code>
-      <code>$method</code>
-      <code>$methods[$key]</code>
+    <MixedAssignment>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$methods[$key]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="3">
-      <code>Method\Definition</code>
-      <code>Method\Definition</code>
-      <code>null|\Laminas\Server\Method\Definition</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[Method\Definition]]></code>
+      <code><![CDATA[Method\Definition]]></code>
+      <code><![CDATA[null|false|\Laminas\Server\Method\Definition]]></code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="1">
-      <code>toArray</code>
+    <MixedMethodCall>
+      <code><![CDATA[toArray]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="3">
-      <code>$this-&gt;methods[$method]</code>
-      <code>current($this-&gt;methods)</code>
-      <code>next($this-&gt;methods)</code>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->methods[$method]]]></code>
+      <code><![CDATA[current($this->methods)]]></code>
+      <code><![CDATA[current($this->methods)]]></code>
+      <code><![CDATA[next($this->methods)]]></code>
+      <code><![CDATA[next($this->methods)]]></code>
     </MixedReturnStatement>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[count]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="src/Method/Callback.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>is_object($class)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[is_object($class)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="1">
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$class]]></code>
+      <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <PropertyNotSetInConstructor occurrences="4">
-      <code>$class</code>
-      <code>$function</code>
-      <code>$method</code>
-      <code>$type</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$class]]></code>
+      <code><![CDATA[$function]]></code>
+      <code><![CDATA[$method]]></code>
+      <code><![CDATA[$type]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Method/Definition.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_object($object)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_object($object)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="1">
-      <code>$prototype</code>
+    <MixedArgument>
+      <code><![CDATA[$prototype]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="4">
-      <code>$prototype</code>
-      <code>$prototype</code>
-      <code>$signatures[]</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$prototype]]></code>
+      <code><![CDATA[$prototype]]></code>
+      <code><![CDATA[$signatures[]]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>toArray</code>
+    <MixedMethodCall>
+      <code><![CDATA[toArray]]></code>
     </MixedMethodCall>
-    <PropertyNotSetInConstructor occurrences="2">
-      <code>$callback</code>
-      <code>$name</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$callback]]></code>
+      <code><![CDATA[$name]]></code>
     </PropertyNotSetInConstructor>
+    <RedundantCondition>
+      <code><![CDATA[! is_object($object) && (null !== $object)]]></code>
+    </RedundantCondition>
   </file>
   <file src="src/Method/Parameter.php">
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="1">
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$name</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$name]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Method/Prototype.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_string($index) &amp;&amp; ! is_numeric($index)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_string($index) && ! is_numeric($index)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="2">
-      <code>$index</code>
-      <code>$parameter</code>
+    <MixedArgument>
+      <code><![CDATA[$index]]></code>
+      <code><![CDATA[$parameter]]></code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
-      <code>$key</code>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
-    <MixedAssignment occurrences="5">
-      <code>$index</code>
-      <code>$parameter</code>
-      <code>$parameter</code>
-      <code>$types[]</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$index]]></code>
+      <code><![CDATA[$parameter]]></code>
+      <code><![CDATA[$parameter]]></code>
+      <code><![CDATA[$types[]]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>null|Parameter</code>
+    <MixedInferredReturnType>
+      <code><![CDATA[null|Parameter]]></code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="1">
-      <code>getType</code>
+    <MixedMethodCall>
+      <code><![CDATA[getType]]></code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;parameters[$index]</code>
+    <MixedReturnStatement>
+      <code><![CDATA[$this->parameters[$index]]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/Reflection.php">
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_string($function)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_string($function)]]></code>
     </DocblockTypeContradiction>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$argv]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Reflection/AbstractFunction.php">
-    <ArgumentTypeCoercion occurrences="2">
-      <code>$this-&gt;class</code>
-      <code>$this-&gt;name</code>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$this->name]]></code>
     </ArgumentTypeCoercion>
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($namespace)</code>
-      <code>is_string($string)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[is_string($string)]]></code>
     </DocblockTypeContradiction>
-    <MixedArgument occurrences="3">
-      <code>$tmp</code>
-      <code>$type</code>
-      <code>array_shift($signature)</code>
+    <InvalidArrayOffset>
+      <code><![CDATA[$parameters[$i]]]></code>
+    </InvalidArrayOffset>
+    <MixedArgument>
+      <code><![CDATA[$tmp]]></code>
+      <code><![CDATA[$type]]></code>
+      <code><![CDATA[array_shift($signature)]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="8">
-      <code>$name</code>
-      <code>$root</code>
-      <code>$serializable[]</code>
-      <code>$tmp</code>
-      <code>$type</code>
-      <code>$value</code>
-      <code>$value</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$name]]></code>
+      <code><![CDATA[$root]]></code>
+      <code><![CDATA[$serializable[]]]></code>
+      <code><![CDATA[$tmp]]></code>
+      <code><![CDATA[$type]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>getEndPoints</code>
+    <MixedMethodCall>
+      <code><![CDATA[getEndPoints]]></code>
+      <code><![CDATA[isOptional]]></code>
     </MixedMethodCall>
-    <MixedReturnTypeCoercion occurrences="4">
-      <code>$serializable</code>
-      <code>$this-&gt;prototypes</code>
-      <code>Prototype[]</code>
-      <code>string[]</code>
+    <MixedReturnTypeCoercion>
+      <code><![CDATA[$serializable]]></code>
+      <code><![CDATA[$this->prototypes]]></code>
+      <code><![CDATA[Prototype[]]]></code>
+      <code><![CDATA[string[]]]></code>
     </MixedReturnTypeCoercion>
-    <PossiblyNullArgument occurrences="2">
-      <code>$this-&gt;paramDesc[$key] ?? null</code>
-      <code>$returnDesc</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[$returnDesc]]></code>
+      <code><![CDATA[$this->paramDesc[$key] ?? null]]></code>
     </PossiblyNullArgument>
-    <PropertyNotSetInConstructor occurrences="2">
-      <code>$class</code>
-      <code>$namespace</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$class]]></code>
+      <code><![CDATA[$namespace]]></code>
     </PropertyNotSetInConstructor>
-    <RawObjectIteration occurrences="1">
-      <code>$this</code>
+    <RawObjectIteration>
+      <code><![CDATA[$this]]></code>
     </RawObjectIteration>
-    <RedundantConditionGivenDocblockType occurrences="2">
-      <code>$returnTag</code>
-      <code>$returnTag</code>
+    <RedundantConditionGivenDocblockType>
+      <code><![CDATA[$returnTag]]></code>
     </RedundantConditionGivenDocblockType>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$paramTag->getDescription()]]></code>
+      <code><![CDATA[$this->docComment]]></code>
+    </RiskyTruthyFalsyComparison>
+    <TooManyArguments>
+      <code><![CDATA[paramIsArray]]></code>
+    </TooManyArguments>
+    <TypeDoesNotContainType>
+      <code><![CDATA[! is_string($namespace)]]></code>
+    </TypeDoesNotContainType>
   </file>
   <file src="src/Reflection/Node.php">
-    <MixedArgument occurrences="1">
-      <code>$childEndPoints</code>
+    <InvalidReturnStatement>
+      <code><![CDATA[$this]]></code>
+    </InvalidReturnStatement>
+    <MixedArgument>
+      <code><![CDATA[$childEndPoints]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="4">
-      <code>$child</code>
-      <code>$childEndPoints</code>
-      <code>$endPoints[]</code>
-      <code>$value</code>
+    <MixedAssignment>
+      <code><![CDATA[$child]]></code>
+      <code><![CDATA[$childEndPoints]]></code>
+      <code><![CDATA[$endPoints[]]]></code>
+      <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="4">
-      <code>getEndPoints</code>
-      <code>getValue</code>
-      <code>hasChildren</code>
-      <code>hasChildren</code>
+    <MixedMethodCall>
+      <code><![CDATA[getEndPoints]]></code>
+      <code><![CDATA[getValue]]></code>
+      <code><![CDATA[hasChildren]]></code>
+      <code><![CDATA[hasChildren]]></code>
     </MixedMethodCall>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$parent</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$parent]]></code>
     </PropertyNotSetInConstructor>
-    <UnsafeInstantiation occurrences="1">
-      <code>new static($value, $this)</code>
+    <UnsafeInstantiation>
+      <code><![CDATA[new static($value, $this)]]></code>
     </UnsafeInstantiation>
   </file>
   <file src="src/Reflection/Prototype.php">
-    <DeprecatedProperty occurrences="3">
-      <code>$this-&gt;return</code>
-      <code>$this-&gt;return</code>
-      <code>$this-&gt;return</code>
+    <DeprecatedProperty>
+      <code><![CDATA[$this->return]]></code>
+      <code><![CDATA[$this->return]]></code>
+      <code><![CDATA[$this->return]]></code>
     </DeprecatedProperty>
   </file>
   <file src="src/Reflection/ReflectionClass.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$this-&gt;name</code>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->name]]></code>
     </ArgumentTypeCoercion>
-    <DocblockTypeContradiction occurrences="1">
-      <code>! is_string($namespace)</code>
-    </DocblockTypeContradiction>
-    <PossiblyNullArgument occurrences="1">
-      <code>$namespace</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[$namespace]]></code>
     </PossiblyNullArgument>
+    <TypeDoesNotContainType>
+      <code><![CDATA[! is_string($namespace)]]></code>
+    </TypeDoesNotContainType>
   </file>
   <file src="src/Reflection/ReflectionFunction.php">
-    <PropertyNotSetInConstructor occurrences="2">
-      <code>ReflectionFunction</code>
-      <code>ReflectionFunction</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[ReflectionFunction]]></code>
+      <code><![CDATA[ReflectionFunction]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Reflection/ReflectionMethod.php">
-    <ArgumentTypeCoercion occurrences="1">
-      <code>$this-&gt;class</code>
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->class]]></code>
     </ArgumentTypeCoercion>
-    <MixedArgument occurrences="2">
-      <code>$docComment</code>
-      <code>$this-&gt;classReflection-&gt;getName()</code>
+    <InvalidArgument>
+      <code><![CDATA[$normalizedDocCommentList]]></code>
+    </InvalidArgument>
+    <MixedArgument>
+      <code><![CDATA[$docComment]]></code>
+      <code><![CDATA[$this->classReflection->getName()]]></code>
     </MixedArgument>
-    <MixedAssignment occurrences="4">
-      <code>$docCommentList[]</code>
-      <code>$interfaceReflection</code>
-      <code>$interfaceReflectionList</code>
-      <code>$this-&gt;class</code>
+    <MixedAssignment>
+      <code><![CDATA[$docCommentList[]]]></code>
+      <code><![CDATA[$interfaceReflection]]></code>
+      <code><![CDATA[$interfaceReflectionList]]></code>
+      <code><![CDATA[$this->class]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="3">
-      <code>getDocComment</code>
-      <code>getMethod</code>
-      <code>hasMethod</code>
+    <MixedMethodCall>
+      <code><![CDATA[getDocComment]]></code>
+      <code><![CDATA[getMethod]]></code>
+      <code><![CDATA[hasMethod]]></code>
     </MixedMethodCall>
-    <PossiblyFalseArgument occurrences="1">
-      <code>$docComment</code>
-    </PossiblyFalseArgument>
-    <PossiblyInvalidArgument occurrences="1">
-      <code>$this-&gt;classReflection</code>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$this->classReflection]]></code>
     </PossiblyInvalidArgument>
-    <PossiblyUndefinedVariable occurrences="1">
-      <code>$docCommentList</code>
+    <PossiblyUndefinedVariable>
+      <code><![CDATA[$docCommentList]]></code>
     </PossiblyUndefinedVariable>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>ReflectionMethod</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[ReflectionMethod]]></code>
     </PropertyNotSetInConstructor>
+    <RiskyTruthyFalsyComparison>
+      <code><![CDATA[$docCommentFetched]]></code>
+      <code><![CDATA[$docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)]]></code>
+      <code><![CDATA[empty($namespace)]]></code>
+    </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Reflection/ReflectionParameter.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($description) &amp;&amp; (null !== $description)</code>
-      <code>! is_string($type) &amp;&amp; (null !== $type)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_string($description) && (null !== $description)]]></code>
+      <code><![CDATA[! is_string($type) && (null !== $type)]]></code>
     </DocblockTypeContradiction>
-    <PossiblyInvalidPropertyAssignmentValue occurrences="1"/>
-    <PossiblyNullPropertyAssignmentValue occurrences="2">
-      <code>$description</code>
-      <code>$type</code>
+    <PossiblyInvalidPropertyAssignmentValue>
+      <code><![CDATA[$r->getDeclaringClass()
+            ? [$r->getDeclaringClass()->getName(), $r->getDeclaringFunction()->getName()]
+            : $r->getDeclaringFunction()->getName()]]></code>
+    </PossiblyInvalidPropertyAssignmentValue>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[$description]]></code>
+      <code><![CDATA[$type]]></code>
     </PossiblyNullPropertyAssignmentValue>
-    <PossiblyNullReference occurrences="1">
-      <code>getName</code>
+    <PossiblyNullReference>
+      <code><![CDATA[getName]]></code>
     </PossiblyNullReference>
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>$position</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[$position]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Reflection/ReflectionReturnValue.php">
-    <DocblockTypeContradiction occurrences="2">
-      <code>! is_string($description) &amp;&amp; (null !== $description)</code>
-      <code>! is_string($type) &amp;&amp; (null !== $type)</code>
+    <DocblockTypeContradiction>
+      <code><![CDATA[! is_string($description) && (null !== $description)]]></code>
+      <code><![CDATA[! is_string($type) && (null !== $type)]]></code>
     </DocblockTypeContradiction>
-    <PossiblyNullPropertyAssignmentValue occurrences="2">
-      <code>$description</code>
-      <code>$type</code>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[$description]]></code>
+      <code><![CDATA[$type]]></code>
     </PossiblyNullPropertyAssignmentValue>
+  </file>
+  <file src="src/Server.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[addFunction]]></code>
+      <code><![CDATA[fault]]></code>
+      <code><![CDATA[getResponse]]></code>
+      <code><![CDATA[getReturnResponse]]></code>
+      <code><![CDATA[handle]]></code>
+      <code><![CDATA[setClass]]></code>
+      <code><![CDATA[setPersistence]]></code>
+      <code><![CDATA[setReturnResponse]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/CacheTest.php">
-    <DeprecatedClass occurrences="4">
-      <code>$this-&gt;createMock(Server::class)</code>
-      <code>$this-&gt;createMock(Server::class)</code>
-      <code>$this-&gt;createMock(Server::class)</code>
-      <code>$this-&gt;createMock(Server::class)</code>
-    </DeprecatedClass>
-    <InvalidArgument occurrences="1">
-      <code>Cache::class</code>
-    </InvalidArgument>
-    <MissingConstructor occurrences="1">
-      <code>$cacheFile</code>
+    <MissingConstructor>
+      <code><![CDATA[$cacheFile]]></code>
     </MissingConstructor>
-    <MixedAssignment occurrences="6">
-      <code>$actual[]</code>
-      <code>$data</code>
-      <code>$data</code>
-      <code>$data</code>
-      <code>$data</code>
-      <code>$method</code>
+    <MixedAssignment>
+      <code><![CDATA[$actual[]]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$method]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="1">
-      <code>getName</code>
+    <MixedMethodCall>
+      <code><![CDATA[getName]]></code>
     </MixedMethodCall>
-    <PossiblyNullPropertyAssignmentValue occurrences="1">
-      <code>null</code>
+    <PossiblyNullPropertyAssignmentValue>
+      <code><![CDATA[null]]></code>
     </PossiblyNullPropertyAssignmentValue>
+    <UnusedMethodCall>
+      <code><![CDATA[setAccessible]]></code>
+    </UnusedMethodCall>
   </file>
   <file src="test/DefinitionTest.php">
-    <MixedArrayAccess occurrences="8">
-      <code>$test['invokeArguments']</code>
-      <code>$test['invokeArguments']</code>
-      <code>$test['methodHelp']</code>
-      <code>$test['methodHelp']</code>
-      <code>$test['name']</code>
-      <code>$test['name']</code>
-      <code>$test['prototypes']</code>
-      <code>$test['prototypes']</code>
+    <MixedArrayAccess>
+      <code><![CDATA[$test['invokeArguments']]]></code>
+      <code><![CDATA[$test['invokeArguments']]]></code>
+      <code><![CDATA[$test['methodHelp']]]></code>
+      <code><![CDATA[$test['methodHelp']]]></code>
+      <code><![CDATA[$test['name']]]></code>
+      <code><![CDATA[$test['name']]]></code>
+      <code><![CDATA[$test['prototypes']]]></code>
+      <code><![CDATA[$test['prototypes']]]></code>
+      <code><![CDATA[$test['prototypes'][0]]]></code>
+      <code><![CDATA[$test['prototypes'][0]]]></code>
+      <code><![CDATA[$test['prototypes'][0]['returnType']]]></code>
+      <code><![CDATA[$test['prototypes'][0]['returnType']]]></code>
     </MixedArrayAccess>
-    <MixedAssignment occurrences="2">
-      <code>$test</code>
-      <code>$test</code>
+    <MixedAssignment>
+      <code><![CDATA[$test]]></code>
+      <code><![CDATA[$test]]></code>
     </MixedAssignment>
   </file>
   <file src="test/Reflection/NodeTest.php">
-    <InvalidScalarArgument occurrences="3">
-      <code>1</code>
-      <code>1</code>
-      <code>1</code>
+    <InvalidScalarArgument>
+      <code><![CDATA[1]]></code>
+      <code><![CDATA[1]]></code>
+      <code><![CDATA[1]]></code>
     </InvalidScalarArgument>
-    <MixedAssignment occurrences="4">
-      <code>$c</code>
-      <code>$endPoint</code>
-      <code>$endPointsArray[]</code>
-      <code>$types[]</code>
+    <MixedAssignment>
+      <code><![CDATA[$endPointsArray[]]]></code>
+      <code><![CDATA[$types[]]]></code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="2">
-      <code>getValue</code>
-      <code>getValue</code>
-    </MixedMethodCall>
-    <PossiblyNullArgument occurrences="1">
-      <code>var_export($types, 1)</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[var_export($types, 1)]]></code>
     </PossiblyNullArgument>
-    <PossiblyNullOperand occurrences="2">
-      <code>var_export($endPointsArray, 1)</code>
-      <code>var_export($test, 1)</code>
+    <PossiblyNullOperand>
+      <code><![CDATA[var_export($endPointsArray, 1)]]></code>
+      <code><![CDATA[var_export($test, 1)]]></code>
     </PossiblyNullOperand>
-    <UnusedVariable occurrences="5">
-      <code>$child1grand1</code>
-      <code>$child1grand2</code>
-      <code>$child2grand1</code>
-      <code>$child2grand2great1</code>
-      <code>$child2grand2great2</code>
+    <UnusedVariable>
+      <code><![CDATA[$child1grand1]]></code>
+      <code><![CDATA[$child1grand2]]></code>
+      <code><![CDATA[$child2grand1]]></code>
+      <code><![CDATA[$child2grand2great1]]></code>
+      <code><![CDATA[$child2grand2great2]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Reflection/ReflectionFunctionTest.php">
-    <InvalidScalarArgument occurrences="1">
-      <code>1</code>
+    <InvalidScalarArgument>
+      <code><![CDATA[1]]></code>
     </InvalidScalarArgument>
-    <MixedAssignment occurrences="1">
-      <code>$params</code>
+    <MixedAssignment>
+      <code><![CDATA[$params]]></code>
     </MixedAssignment>
-    <PossiblyNullArgument occurrences="1">
-      <code>var_export($param, 1)</code>
+    <PossiblyNullArgument>
+      <code><![CDATA[var_export($param, 1)]]></code>
     </PossiblyNullArgument>
-    <UnusedVariable occurrences="1">
-      <code>$params</code>
+    <UnusedVariable>
+      <code><![CDATA[$params]]></code>
     </UnusedVariable>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodInterface.php">
-    <MissingReturnType occurrences="1">
-      <code>testMethod</code>
+    <MissingReturnType>
+      <code><![CDATA[testMethod]]></code>
     </MissingReturnType>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[testMethod]]></code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodNode.php">
-    <PropertyNotSetInConstructor occurrences="1">
-      <code>ReflectionMethodNode</code>
+    <PropertyNotSetInConstructor>
+      <code><![CDATA[ReflectionMethodNode]]></code>
     </PropertyNotSetInConstructor>
   </file>
   <file src="test/ReflectionTest.php">
-    <InvalidScalarArgument occurrences="2">
-      <code>'string'</code>
-      <code>'string'</code>
-    </InvalidScalarArgument>
+    <InvalidArgument>
+      <code><![CDATA['string']]></code>
+      <code><![CDATA['string']]></code>
+    </InvalidArgument>
+  </file>
+  <file src="test/TestAsset/ReflectionTestClass.php">
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__construct]]></code>
+      <code><![CDATA[_one]]></code>
+      <code><![CDATA[one]]></code>
+      <code><![CDATA[two]]></code>
+    </PossiblyUnusedMethod>
+    <PossiblyUnusedParam>
+      <code><![CDATA[$arg]]></code>
+      <code><![CDATA[$arg1]]></code>
+      <code><![CDATA[$arg1]]></code>
+      <code><![CDATA[$arg1]]></code>
+      <code><![CDATA[$arg2]]></code>
+      <code><![CDATA[$arg2]]></code>
+      <code><![CDATA[$arg2]]></code>
+    </PossiblyUnusedParam>
   </file>
   <file src="test/TestAsset/reflectionTestFunction.php">
-    <UndefinedDocblockClass occurrences="1">
-      <code>string|struct|false</code>
+    <UndefinedDocblockClass>
+      <code><![CDATA[string|struct|false]]></code>
     </UndefinedDocblockClass>
   </file>
 </files>

@@ -50,7 +50,6 @@ class Callback
     /**
      * Set object state from array of options
      *
-     * @param  array $options
      * @return Callback
      */
     public function setOptions(array $options)

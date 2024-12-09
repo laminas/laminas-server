@@ -54,6 +54,7 @@ class Node
      *
      * //phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
      * //phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
+     *
      * @param \Laminas\Server\Reflection\Node $node
      * //phpcs:enable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
      * //phpcs:enable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName

@@ -65,7 +65,6 @@ class Parameter
     /**
      * Set object state from array of options
      *
-     * @param  array $options
      * @return Parameter
      */
     public function setOptions(array $options)

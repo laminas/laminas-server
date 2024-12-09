@@ -94,7 +94,8 @@ class ReflectionMethod extends AbstractFunction
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
-        $this->reflection      = new \ReflectionMethod($this->classReflection->getName(), $this->name);
+
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
     /**

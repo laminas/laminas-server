@@ -88,7 +88,6 @@ class Prototype
     /**
      * Add parameters
      *
-     * @param  array $parameters
      * @return Prototype
      */
     public function addParameters(array $parameters)
@@ -102,7 +101,6 @@ class Prototype
     /**
      * Set parameters
      *
-     * @param  array $parameters
      * @return Prototype
      */
     public function setParameters(array $parameters)
@@ -160,7 +158,6 @@ class Prototype
     /**
      * Set object state from array
      *
-     * @param  array $options
      * @return Prototype
      */
     public function setOptions(array $options)

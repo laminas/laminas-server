@@ -87,6 +87,7 @@ class NodeTest extends TestCase
         $parent = new Node('string');
         $child  = $parent->createChild('array');
 
+        /** @var Node[] $children */
         $children = $parent->getChildren();
         $types    = [];
         foreach ($children as $c) {
@@ -155,6 +156,7 @@ class NodeTest extends TestCase
         $child2grand2great1 = $child2grand2->createChild(null);
         $child2grand2great2 = $child2grand2->createChild('child2grand2great2');
 
+        /** @var Node[] $endPoints */
         $endPoints      = $root->getEndPoints();
         $endPointsArray = [];
         foreach ($endPoints as $endPoint) {

@@ -54,7 +54,6 @@ class Definition
     /**
      * Set object state from options
      *
-     * @param  array $options
      * @return Definition
      */
     public function setOptions(array $options)
@@ -227,7 +226,6 @@ class Definition
     /**
      * Set invoke arguments
      *
-     * @param  array $invokeArguments
      * @return Definition
      */
     public function setInvokeArguments(array $invokeArguments)

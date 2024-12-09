@@ -133,7 +133,7 @@ class Definition implements Countable, Iterator
      * Get a given method definition
      *
      * @param  string $method
-     * @return null|\Laminas\Server\Method\Definition
+     * @return null|false|\Laminas\Server\Method\Definition
      */
     public function getMethod($method)
     {
@@ -189,6 +189,7 @@ class Definition implements Countable, Iterator
         foreach ($this->getMethods() as $key => $method) {
             $methods[$key] = $method->toArray();
         }
+
         return $methods;
     }
 
