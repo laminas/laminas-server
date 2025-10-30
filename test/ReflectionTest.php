@@ -85,7 +85,7 @@ class ReflectionTest extends TestCase
     /**
      * @psalm-return array<string, array{0: mixed}>
      */
-    public function invalidArgvValues(): array
+    public static function invalidArgvValues(): array
     {
         return [
             'true'          => [true],
@@ -114,7 +114,7 @@ class ReflectionTest extends TestCase
     /**
      * @psalm-return array<string, array{0: null|bool}>
      */
-    public function emptyArgvValues(): array
+    public static function emptyArgvValues(): array
     {
         return [
             'false' => [false],
