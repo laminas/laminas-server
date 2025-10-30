@@ -20,7 +20,7 @@ use function tempnam;
 use function unlink;
 use function unserialize;
 
-class CacheTest extends TestCase
+final class CacheTest extends TestCase
 {
     /** @var string */
     private $cacheFile;

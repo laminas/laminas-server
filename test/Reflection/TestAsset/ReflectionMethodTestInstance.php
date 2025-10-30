@@ -8,7 +8,7 @@ namespace LaminasTest\Server\Reflection\TestAsset;
 
 use LaminasTest\Server\Reflection\ReflectionMethodTest;
 
-class ReflectionMethodTestInstance implements ReflectionMethodInterface
+final class ReflectionMethodTestInstance implements ReflectionMethodInterface
 {
     /**
      * {@inheritdoc}

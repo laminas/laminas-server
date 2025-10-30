@@ -16,7 +16,7 @@ use function var_export;
  *
  * @group      Laminas_Server
  */
-class NodeTest extends TestCase
+final class NodeTest extends TestCase
 {
     /**
      * __construct() test

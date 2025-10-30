@@ -12,6 +12,8 @@ use function is_string;
  * Return value reflection
  *
  * Stores the return value type and description
+ *
+ * @final This class should not be extended
  */
 class ReflectionReturnValue
 {

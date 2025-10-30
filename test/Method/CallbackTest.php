@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group      Laminas_Server
  */
-class CallbackTest extends TestCase
+final class CallbackTest extends TestCase
 {
     /** @var Method\Callback */
     private $callback;

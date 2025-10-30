@@ -16,7 +16,7 @@ use ReflectionParameter;
  *
  * @group      Laminas_Server
  */
-class ReflectionParameterTest extends TestCase
+final class ReflectionParameterTest extends TestCase
 {
     protected function getParameter(): ReflectionParameter
     {

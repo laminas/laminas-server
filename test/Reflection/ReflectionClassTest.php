@@ -21,7 +21,7 @@ use function unserialize;
  *
  * @group      Laminas_Server
  */
-class ReflectionClassTest extends TestCase
+final class ReflectionClassTest extends TestCase
 {
     /**
      * __construct() test

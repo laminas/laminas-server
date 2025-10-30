@@ -15,7 +15,7 @@ use ReflectionMethod;
 use function serialize;
 use function unserialize;
 
-class ReflectionMethodTest extends TestCase
+final class ReflectionMethodTest extends TestCase
 {
     /** @var ReflectionClass */
     protected $classRaw;

@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group      Laminas_Server
  */
-class ParameterTest extends TestCase
+final class ParameterTest extends TestCase
 {
     /** @var Method\Parameter */
     private $parameter;

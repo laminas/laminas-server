@@ -18,7 +18,7 @@ use ReflectionParameter;
  *
  * @group      Laminas_Server
  */
-class PrototypeTest extends TestCase
+final class PrototypeTest extends TestCase
 {
     /** @var Prototype */
     protected $r;

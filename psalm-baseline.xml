@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/AbstractServer.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$class]]></code>
@@ -17,6 +17,9 @@
     <InvalidStringClass>
       <code><![CDATA[new $class()]]></code>
     </InvalidStringClass>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function getFunctions()]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$method]]></code>
       <code><![CDATA[$method]]></code>
@@ -38,6 +41,17 @@
     <UndefinedClass>
       <code><![CDATA[new $class()]]></code>
     </UndefinedClass>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getDefaultValue]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[isDefaultValueAvailable]]></code>
+      <code><![CDATA[isOptional]]></code>
+      <code><![CDATA[isStatic]]></code>
+    </UndefinedMagicMethod>
     <UnusedClass>
       <code><![CDATA[AbstractServer]]></code>
     </UnusedClass>
@@ -76,9 +90,24 @@
     <DocblockTypeContradiction>
       <code><![CDATA[null === $name]]></code>
     </DocblockTypeContradiction>
+    <FalsableReturnStatement>
+      <code><![CDATA[current($this->methods)]]></code>
+      <code><![CDATA[next($this->methods)]]></code>
+    </FalsableReturnStatement>
     <ImplementedReturnTypeMismatch>
       <code><![CDATA[Method\Definition]]></code>
     </ImplementedReturnTypeMismatch>
+    <InvalidNullableReturnType>
+      <code><![CDATA[int|string]]></code>
+    </InvalidNullableReturnType>
+    <MissingOverrideAttribute>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+      <code><![CDATA[#[ReturnTypeWillChange]]]></code>
+    </MissingOverrideAttribute>
     <MissingTemplateParam>
       <code><![CDATA[Iterator]]></code>
     </MissingTemplateParam>
@@ -93,11 +122,6 @@
       <code><![CDATA[$method]]></code>
       <code><![CDATA[$methods[$key]]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[Method\Definition]]></code>
-      <code><![CDATA[Method\Definition]]></code>
-      <code><![CDATA[null|false|\Laminas\Server\Method\Definition]]></code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[toArray]]></code>
     </MixedMethodCall>
@@ -108,6 +132,9 @@
       <code><![CDATA[next($this->methods)]]></code>
       <code><![CDATA[next($this->methods)]]></code>
     </MixedReturnStatement>
+    <NullableReturnStatement>
+      <code><![CDATA[key($this->methods)]]></code>
+    </NullableReturnStatement>
     <PossiblyUnusedMethod>
       <code><![CDATA[count]]></code>
     </PossiblyUnusedMethod>
@@ -187,9 +214,6 @@
       <code><![CDATA[$types[]]]></code>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[null|Parameter]]></code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
       <code><![CDATA[getType]]></code>
     </MixedMethodCall>
@@ -244,7 +268,11 @@
     <PossiblyNullArgument>
       <code><![CDATA[$returnDesc]]></code>
       <code><![CDATA[$this->paramDesc[$key] ?? null]]></code>
+      <code><![CDATA[array_shift($signature)]]></code>
     </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__get]]></code>
+    </PossiblyUnusedMethod>
     <PropertyNotSetInConstructor>
       <code><![CDATA[$class]]></code>
       <code><![CDATA[$namespace]]></code>
@@ -259,9 +287,6 @@
       <code><![CDATA[$paramTag->getDescription()]]></code>
       <code><![CDATA[$this->docComment]]></code>
     </RiskyTruthyFalsyComparison>
-    <TooManyArguments>
-      <code><![CDATA[paramIsArray]]></code>
-    </TooManyArguments>
     <TypeDoesNotContainType>
       <code><![CDATA[! is_string($namespace)]]></code>
     </TypeDoesNotContainType>
@@ -306,6 +331,9 @@
     <PossiblyNullArgument>
       <code><![CDATA[$namespace]]></code>
     </PossiblyNullArgument>
+    <PossiblyUnusedMethod>
+      <code><![CDATA[__get]]></code>
+    </PossiblyUnusedMethod>
     <TypeDoesNotContainType>
       <code><![CDATA[! is_string($namespace)]]></code>
     </TypeDoesNotContainType>
@@ -323,21 +351,17 @@
     <InvalidArgument>
       <code><![CDATA[$normalizedDocCommentList]]></code>
     </InvalidArgument>
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function reflect()]]></code>
+      <code><![CDATA[public function __wakeup()]]></code>
+    </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$docComment]]></code>
       <code><![CDATA[$this->classReflection->getName()]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$docCommentList[]]]></code>
-      <code><![CDATA[$interfaceReflection]]></code>
-      <code><![CDATA[$interfaceReflectionList]]></code>
       <code><![CDATA[$this->class]]></code>
     </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[getDocComment]]></code>
-      <code><![CDATA[getMethod]]></code>
-      <code><![CDATA[hasMethod]]></code>
-    </MixedMethodCall>
     <PossiblyInvalidArgument>
       <code><![CDATA[$this->classReflection]]></code>
     </PossiblyInvalidArgument>
@@ -352,6 +376,11 @@
       <code><![CDATA[$docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)]]></code>
       <code><![CDATA[empty($namespace)]]></code>
     </RiskyTruthyFalsyComparison>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getInterfaces]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+    </UndefinedMagicMethod>
   </file>
   <file src="src/Reflection/ReflectionParameter.php">
     <DocblockTypeContradiction>
@@ -397,9 +426,18 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/CacheTest.php">
+    <DeprecatedInterface>
+      <code><![CDATA[$this->createMock(Server::class)]]></code>
+      <code><![CDATA[$this->createMock(Server::class)]]></code>
+      <code><![CDATA[$this->createMock(Server::class)]]></code>
+      <code><![CDATA[$this->createMock(Server::class)]]></code>
+    </DeprecatedInterface>
     <MissingConstructor>
       <code><![CDATA[$cacheFile]]></code>
     </MissingConstructor>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
     <MixedAssignment>
       <code><![CDATA[$actual[]]]></code>
       <code><![CDATA[$data]]></code>
@@ -411,14 +449,35 @@
     <MixedMethodCall>
       <code><![CDATA[getName]]></code>
     </MixedMethodCall>
+    <PossiblyFalseArgument>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$data]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+    </PossiblyFalseArgument>
+    <PossiblyFalsePropertyAssignmentValue>
+      <code><![CDATA[tempnam(sys_get_temp_dir(), 'zs')]]></code>
+      <code><![CDATA[tempnam(sys_get_temp_dir(), 'zs')]]></code>
+      <code><![CDATA[tempnam(sys_get_temp_dir(), 'zs')]]></code>
+      <code><![CDATA[tempnam(sys_get_temp_dir(), 'zs')]]></code>
+    </PossiblyFalsePropertyAssignmentValue>
     <PossiblyNullPropertyAssignmentValue>
       <code><![CDATA[null]]></code>
     </PossiblyNullPropertyAssignmentValue>
-    <UnusedMethodCall>
-      <code><![CDATA[setAccessible]]></code>
-    </UnusedMethodCall>
   </file>
   <file src="test/DefinitionTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
     <MixedArrayAccess>
       <code><![CDATA[$test['invokeArguments']]]></code>
       <code><![CDATA[$test['invokeArguments']]]></code>
@@ -437,6 +496,57 @@
       <code><![CDATA[$test]]></code>
       <code><![CDATA[$test]]></code>
     </MixedAssignment>
+    <PossiblyNullArrayAccess>
+      <code><![CDATA[$test['invokeArguments']]]></code>
+      <code><![CDATA[$test['invokeArguments']]]></code>
+      <code><![CDATA[$test['methodHelp']]]></code>
+      <code><![CDATA[$test['methodHelp']]]></code>
+      <code><![CDATA[$test['name']]]></code>
+      <code><![CDATA[$test['name']]]></code>
+      <code><![CDATA[$test['prototypes']]]></code>
+      <code><![CDATA[$test['prototypes']]]></code>
+      <code><![CDATA[$test['prototypes'][0]]]></code>
+      <code><![CDATA[$test['prototypes'][0]]]></code>
+      <code><![CDATA[$test['prototypes'][0]['returnType']]]></code>
+      <code><![CDATA[$test['prototypes'][0]['returnType']]]></code>
+    </PossiblyNullArrayAccess>
+  </file>
+  <file src="test/Method/CallbackTest.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[assertNull]]></code>
+      <code><![CDATA[assertNull]]></code>
+      <code><![CDATA[assertNull]]></code>
+    </DocblockTypeContradiction>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="test/Method/DefinitionTest.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[assertNull]]></code>
+      <code><![CDATA[assertNull]]></code>
+      <code><![CDATA[assertNull]]></code>
+    </DocblockTypeContradiction>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="test/Method/ParameterTest.php">
+    <DocblockTypeContradiction>
+      <code><![CDATA[assertNull]]></code>
+      <code><![CDATA[assertNull]]></code>
+    </DocblockTypeContradiction>
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="test/Method/PrototypeTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/Reflection/NodeTest.php">
     <InvalidScalarArgument>
@@ -463,6 +573,26 @@
       <code><![CDATA[$child2grand2great2]]></code>
     </UnusedVariable>
   </file>
+  <file src="test/Reflection/PrototypeTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setUp(): void]]></code>
+      <code><![CDATA[public function tearDown(): void]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="test/Reflection/ReflectionClassTest.php">
+    <RedundantCondition>
+      <code><![CDATA[assertTrue]]></code>
+    </RedundantCondition>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+    </UndefinedMagicMethod>
+    <UndefinedMagicPropertyAssignment>
+      <code><![CDATA[$r->system]]></code>
+    </UndefinedMagicPropertyAssignment>
+  </file>
   <file src="test/Reflection/ReflectionFunctionTest.php">
     <InvalidScalarArgument>
       <code><![CDATA[1]]></code>
@@ -473,9 +603,36 @@
     <PossiblyNullArgument>
       <code><![CDATA[var_export($param, 1)]]></code>
     </PossiblyNullArgument>
+    <RedundantCondition>
+      <code><![CDATA[assertTrue]]></code>
+    </RedundantCondition>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getParameters]]></code>
+    </UndefinedMagicMethod>
+    <UndefinedMagicPropertyAssignment>
+      <code><![CDATA[$r->system]]></code>
+    </UndefinedMagicPropertyAssignment>
     <UnusedVariable>
       <code><![CDATA[$params]]></code>
     </UnusedVariable>
+  </file>
+  <file src="test/Reflection/ReflectionMethodTest.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[protected function setUp(): void]]></code>
+    </MissingOverrideAttribute>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+    </UndefinedMagicMethod>
+  </file>
+  <file src="test/Reflection/ReflectionParameterTest.php">
+    <UndefinedMagicMethod>
+      <code><![CDATA[allowsNull]]></code>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[isOptional]]></code>
+    </UndefinedMagicMethod>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodInterface.php">
     <MissingReturnType>
@@ -486,15 +643,27 @@
     </PossiblyUnusedMethod>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodNode.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function setParent(Node $node, $new = false)]]></code>
+    </MissingOverrideAttribute>
     <PropertyNotSetInConstructor>
       <code><![CDATA[ReflectionMethodNode]]></code>
     </PropertyNotSetInConstructor>
+  </file>
+  <file src="test/Reflection/TestAsset/ReflectionMethodTestInstance.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything)]]></code>
+    </MissingOverrideAttribute>
   </file>
   <file src="test/ReflectionTest.php">
     <InvalidArgument>
       <code><![CDATA['string']]></code>
       <code><![CDATA['string']]></code>
     </InvalidArgument>
+    <UndefinedMagicMethod>
+      <code><![CDATA[getName]]></code>
+      <code><![CDATA[getName]]></code>
+    </UndefinedMagicMethod>
   </file>
   <file src="test/TestAsset/ReflectionTestClass.php">
     <PossiblyUnusedMethod>
@@ -503,7 +672,7 @@
       <code><![CDATA[one]]></code>
       <code><![CDATA[two]]></code>
     </PossiblyUnusedMethod>
-    <PossiblyUnusedParam>
+    <UnusedParam>
       <code><![CDATA[$arg]]></code>
       <code><![CDATA[$arg1]]></code>
       <code><![CDATA[$arg1]]></code>
@@ -511,7 +680,7 @@
       <code><![CDATA[$arg2]]></code>
       <code><![CDATA[$arg2]]></code>
       <code><![CDATA[$arg2]]></code>
-    </PossiblyUnusedParam>
+    </UnusedParam>
   </file>
   <file src="test/TestAsset/reflectionTestFunction.php">
     <UndefinedDocblockClass>

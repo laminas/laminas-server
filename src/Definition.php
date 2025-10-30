@@ -23,6 +23,8 @@ use function sprintf;
 
 /**
  * Server methods metadata
+ *
+ * @final This class should not be extended
  */
 class Definition implements Countable, Iterator
 {

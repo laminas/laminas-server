@@ -15,7 +15,7 @@ use stdClass;
  *
  * @group      Laminas_Server
  */
-class DefinitionTest extends TestCase
+final class DefinitionTest extends TestCase
 {
     /** @var Method\Definition */
     private $definition;

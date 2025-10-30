@@ -18,7 +18,7 @@ use function array_values;
  *
  * @group      Laminas_Server
  */
-class DefinitionTest extends TestCase
+final class DefinitionTest extends TestCase
 {
     /** @var Server\Definition */
     private $definition;

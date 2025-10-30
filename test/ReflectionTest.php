@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @group      Laminas_Server
  */
-class ReflectionTest extends TestCase
+final class ReflectionTest extends TestCase
 {
     /**
      * reflectClass() test

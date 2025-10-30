@@ -8,7 +8,7 @@ namespace LaminasTest\Server\Reflection\TestAsset;
 
 use Laminas\Server\Reflection\Node;
 
-class ReflectionMethodNode extends Node
+final class ReflectionMethodNode extends Node
 {
     /**
      * {@inheritdoc}

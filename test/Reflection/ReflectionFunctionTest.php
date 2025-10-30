@@ -18,7 +18,7 @@ use function var_export;
 /**
  * @group      Laminas_Server
  */
-class ReflectionFunctionTest extends TestCase
+final class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor(): void
     {

@@ -15,6 +15,7 @@ interface ReflectionMethodInterface
      *
      * @param ReflectionMethodTest $reflectionMethodTest Reflection method
      * @param array                $anything             Some array information
+     * @return void
      */
     public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything);
 }

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @group      Laminas_Server
  */
-class PrototypeTest extends TestCase
+final class PrototypeTest extends TestCase
 {
     /** @var Method\Prototype */
     private $prototype;

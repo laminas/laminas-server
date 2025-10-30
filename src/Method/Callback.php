@@ -17,6 +17,8 @@ use function ucfirst;
 
 /**
  * Method callback metadata
+ *
+ * @final This class should not be extended
  */
 class Callback
 {
