@@ -509,6 +509,42 @@ abstract class AbstractFunction
         }
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function __serialize(): array
+    {
+        return [
+            'argv' => $this->argv,
+            'config' => $this->config,
+            'class' => $this->class,
+            'name' => $this->name,
+            'description' => $this->description,
+            'namespace' => $this->namespace,
+            'prototypes' => $this->prototypes,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->argv = $data['argv'];
+        $this->config = $data['config'];
+        $this->class = $data['class'];
+        $this->name = $data['name'];
+        $this->description = $data['description'];
+        $this->namespace = $data['namespace'];
+        $this->prototypes = $data['prototypes'];
+        if (isset($data['class']) && $data['class'] !== null) {
+            $class            = new PhpReflectionClass($this->class);
+            $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
+        } else {
+            $this->reflection = new PhpReflectionFunction($this->name);
+        }
+    }
+
     private function paramIsArray(PhpReflectionParameter $param): bool
     {
         if (PHP_VERSION_ID >= 80000) {

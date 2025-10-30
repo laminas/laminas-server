@@ -196,4 +196,29 @@ class ReflectionClass
     {
         return ['config', 'methods', 'namespace', 'name'];
     }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function __serialize(): array
+    {
+        return [
+            'config' => $this->config,
+            'methods' => $this->methods,
+            'namespace' => $this->namespace,
+            'name' => $this->name,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->config = $data['config'];
+        $this->methods = $data['methods'];
+        $this->namespace = $data['namespace'];
+        $this->name = $data['name'];
+        $this->reflection = new PhpReflectionClass($this->name);
+    }
 }

@@ -635,9 +635,6 @@
     </UndefinedMagicMethod>
   </file>
   <file src="test/Reflection/TestAsset/ReflectionMethodInterface.php">
-    <MissingReturnType>
-      <code><![CDATA[testMethod]]></code>
-    </MissingReturnType>
     <PossiblyUnusedMethod>
       <code><![CDATA[testMethod]]></code>
     </PossiblyUnusedMethod>

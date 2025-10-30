@@ -177,4 +177,31 @@ class ReflectionParameter
     {
         $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
     }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function __serialize(): array
+    {
+        return [
+            'position' => $this->position,
+            'type' => $this->type,
+            'description' => $this->description,
+            'name' => $this->name,
+            'functionName' => $this->functionName,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->position = $data['position'];
+        $this->type = $data['type'];
+        $this->description = $data['description'];
+        $this->name = $data['name'];
+        $this->functionName = $data['functionName'];
+        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+    }
 }

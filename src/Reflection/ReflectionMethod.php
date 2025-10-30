@@ -99,6 +99,42 @@ class ReflectionMethod extends AbstractFunction
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    public function __serialize(): array
+    {
+        return [
+            'class' => $this->class,
+            'argv' => $this->argv,
+            'config' => $this->config,
+            'name' => $this->name,
+            'description' => $this->description,
+            'namespace' => $this->namespace,
+            'prototypes' => $this->prototypes,
+        ];
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->class = $data['class'];
+        $this->argv = $data['argv'];
+        $this->config = $data['config'];
+        $this->name = $data['name'];
+        $this->description = $data['description'];
+        $this->namespace = $data['namespace'];
+        $this->prototypes = $data['prototypes'];
+        $this->classReflection = new ReflectionClass(
+            new \ReflectionClass($this->class),
+            $this->getNamespace(),
+            $this->getInvokeArguments()
+        );
+        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
+    }
+
+    /**
      * {@inheritdoc}
      *
      * @return void
