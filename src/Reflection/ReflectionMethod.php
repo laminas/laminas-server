@@ -16,6 +16,8 @@ use const PHP_EOL;
 
 /**
  * Method Reflection
+ *
+ * @final This class should not be extended
  */
 class ReflectionMethod extends AbstractFunction
 {
@@ -104,13 +106,19 @@ class ReflectionMethod extends AbstractFunction
     public function __serialize(): array
     {
         return [
-            'class' => $this->class,
-            'argv' => $this->argv,
-            'config' => $this->config,
-            'name' => $this->name,
-            'description' => $this->description,
-            'namespace' => $this->namespace,
-            'prototypes' => $this->prototypes,
+            'class'          => $this->class,
+            'argv'           => $this->argv,
+            'config'         => $this->config,
+            'name'           => $this->name,
+            'description'    => $this->description,
+            'namespace'      => $this->namespace,
+            'prototypes'     => $this->prototypes,
+            'docComment'     => $this->docComment,
+            'return'         => $this->return,
+            'returnDesc'     => $this->returnDesc,
+            'paramDesc'      => $this->paramDesc,
+            'sigParams'      => $this->sigParams,
+            'sigParamsDepth' => $this->sigParamsDepth,
         ];
     }
 
@@ -119,19 +127,31 @@ class ReflectionMethod extends AbstractFunction
      */
     public function __unserialize(array $data): void
     {
-        $this->class = $data['class'];
-        $this->argv = $data['argv'];
-        $this->config = $data['config'];
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->namespace = $data['namespace'];
-        $this->prototypes = $data['prototypes'];
+        $this->class          = $data['class'];
+        $this->argv           = $data['argv'] ?? [];
+        $this->config         = $data['config'] ?? [];
+        $this->name           = $data['name'];
+        $this->description    = $data['description'] ?? '';
+        $this->namespace      = $data['namespace'] ?? null;
+        $this->prototypes     = $data['prototypes'] ?? [];
+        $this->docComment     = $data['docComment'] ?? '';
+        $this->return         = $data['return'] ?? [];
+        $this->returnDesc     = $data['returnDesc'] ?? null;
+        $this->paramDesc      = $data['paramDesc'] ?? [];
+        $this->sigParams      = $data['sigParams'] ?? [];
+        $this->sigParamsDepth = $data['sigParamsDepth'] ?? 0;
+
+        /** @psalm-var class-string $className */
+        $className             = $this->class;
         $this->classReflection = new ReflectionClass(
-            new \ReflectionClass($this->class),
+            new \ReflectionClass($className),
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
-        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
+        /** @psalm-suppress UndefinedMagicMethod */
+        /** @psalm-var class-string $classReflectionName */
+        $classReflectionName = $this->classReflection->getName();
+        $this->reflection    = new \ReflectionMethod($classReflectionName, $this->name);
     }
 
     /**

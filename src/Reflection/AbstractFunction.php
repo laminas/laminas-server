@@ -515,28 +515,47 @@ abstract class AbstractFunction
     public function __serialize(): array
     {
         return [
-            'argv' => $this->argv,
-            'config' => $this->config,
-            'class' => $this->class,
-            'name' => $this->name,
-            'description' => $this->description,
-            'namespace' => $this->namespace,
-            'prototypes' => $this->prototypes,
+            'argv'           => $this->argv,
+            'config'         => $this->config,
+            'class'          => $this->class,
+            'name'           => $this->name,
+            'description'    => $this->description,
+            'namespace'      => $this->namespace,
+            'prototypes'     => $this->prototypes,
+            'docComment'     => $this->docComment,
+            'return'         => $this->return,
+            'returnDesc'     => $this->returnDesc,
+            'paramDesc'      => $this->paramDesc,
+            'sigParams'      => $this->sigParams,
+            'sigParamsDepth' => $this->sigParamsDepth,
         ];
     }
 
     /**
+     * Unserialize object
+     *
+     * Restores all properties and recreates reflection object.
+     * Note: If computed properties are missing, they will be regenerated
+     * via reflect() method when needed.
+     *
      * @param array<string, mixed> $data
      */
     public function __unserialize(array $data): void
     {
-        $this->argv = $data['argv'];
-        $this->config = $data['config'];
-        $this->class = $data['class'];
-        $this->name = $data['name'];
-        $this->description = $data['description'];
-        $this->namespace = $data['namespace'];
-        $this->prototypes = $data['prototypes'];
+        $this->argv           = $data['argv'] ?? [];
+        $this->config         = $data['config'] ?? [];
+        $this->class          = $data['class'] ?? null;
+        $this->name           = $data['name'] ?? '';
+        $this->description    = $data['description'] ?? '';
+        $this->namespace      = $data['namespace'] ?? null;
+        $this->prototypes     = $data['prototypes'] ?? [];
+        $this->docComment     = $data['docComment'] ?? '';
+        $this->return         = $data['return'] ?? [];
+        $this->returnDesc     = $data['returnDesc'] ?? null;
+        $this->paramDesc      = $data['paramDesc'] ?? [];
+        $this->sigParams      = $data['sigParams'] ?? [];
+        $this->sigParamsDepth = $data['sigParamsDepth'] ?? 0;
+
         if (isset($data['class']) && $data['class'] !== null) {
             $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);

@@ -14,6 +14,8 @@ use function method_exists;
  * Parameter Reflection
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
+ *
+ * @final This class should not be extended
  */
 class ReflectionParameter
 {
@@ -184,10 +186,10 @@ class ReflectionParameter
     public function __serialize(): array
     {
         return [
-            'position' => $this->position,
-            'type' => $this->type,
-            'description' => $this->description,
-            'name' => $this->name,
+            'position'     => $this->position,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'name'         => $this->name,
             'functionName' => $this->functionName,
         ];
     }
@@ -197,11 +199,11 @@ class ReflectionParameter
      */
     public function __unserialize(array $data): void
     {
-        $this->position = $data['position'];
-        $this->type = $data['type'];
-        $this->description = $data['description'];
-        $this->name = $data['name'];
+        $this->position     = $data['position'] ?? 0;
+        $this->type         = $data['type'] ?? 'mixed';
+        $this->description  = $data['description'] ?? '';
+        $this->name         = $data['name'] ?? '';
         $this->functionName = $data['functionName'];
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+        $this->reflection   = new \ReflectionParameter($this->functionName, $this->name);
     }
 }

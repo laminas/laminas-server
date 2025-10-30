@@ -20,6 +20,8 @@ use function str_starts_with;
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ *
+ * @final This class should not be extended
  */
 class ReflectionClass
 {
@@ -203,10 +205,10 @@ class ReflectionClass
     public function __serialize(): array
     {
         return [
-            'config' => $this->config,
-            'methods' => $this->methods,
+            'config'    => $this->config,
+            'methods'   => $this->methods,
             'namespace' => $this->namespace,
-            'name' => $this->name,
+            'name'      => $this->name,
         ];
     }
 
@@ -215,10 +217,10 @@ class ReflectionClass
      */
     public function __unserialize(array $data): void
     {
-        $this->config = $data['config'];
-        $this->methods = $data['methods'];
-        $this->namespace = $data['namespace'];
-        $this->name = $data['name'];
+        $this->config     = $data['config'] ?? [];
+        $this->methods    = $data['methods'] ?? [];
+        $this->namespace  = $data['namespace'] ?? null;
+        $this->name       = $data['name'] ?? '';
         $this->reflection = new PhpReflectionClass($this->name);
     }
 }

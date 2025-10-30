@@ -241,6 +241,9 @@
       <code><![CDATA[$parameters[$i]]]></code>
     </InvalidArrayOffset>
     <MixedArgument>
+      <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$this->name]]></code>
+      <code><![CDATA[$this->name]]></code>
       <code><![CDATA[$tmp]]></code>
       <code><![CDATA[$type]]></code>
       <code><![CDATA[array_shift($signature)]]></code>
@@ -249,6 +252,19 @@
       <code><![CDATA[$name]]></code>
       <code><![CDATA[$root]]></code>
       <code><![CDATA[$serializable[]]]></code>
+      <code><![CDATA[$this->argv]]></code>
+      <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$this->config]]></code>
+      <code><![CDATA[$this->description]]></code>
+      <code><![CDATA[$this->docComment]]></code>
+      <code><![CDATA[$this->name]]></code>
+      <code><![CDATA[$this->namespace]]></code>
+      <code><![CDATA[$this->paramDesc]]></code>
+      <code><![CDATA[$this->prototypes]]></code>
+      <code><![CDATA[$this->return]]></code>
+      <code><![CDATA[$this->returnDesc]]></code>
+      <code><![CDATA[$this->sigParams]]></code>
+      <code><![CDATA[$this->sigParamsDepth]]></code>
       <code><![CDATA[$tmp]]></code>
       <code><![CDATA[$type]]></code>
       <code><![CDATA[$value]]></code>
@@ -265,8 +281,12 @@
       <code><![CDATA[Prototype[]]]></code>
       <code><![CDATA[string[]]]></code>
     </MixedReturnTypeCoercion>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$this->name]]></code>
+    </PossiblyInvalidArgument>
     <PossiblyNullArgument>
       <code><![CDATA[$returnDesc]]></code>
+      <code><![CDATA[$this->class]]></code>
       <code><![CDATA[$this->paramDesc[$key] ?? null]]></code>
       <code><![CDATA[array_shift($signature)]]></code>
     </PossiblyNullArgument>
@@ -328,6 +348,15 @@
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->name]]></code>
     </ArgumentTypeCoercion>
+    <MixedArgument>
+      <code><![CDATA[$this->name]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$this->config]]></code>
+      <code><![CDATA[$this->methods]]></code>
+      <code><![CDATA[$this->name]]></code>
+      <code><![CDATA[$this->namespace]]></code>
+    </MixedAssignment>
     <PossiblyNullArgument>
       <code><![CDATA[$namespace]]></code>
     </PossiblyNullArgument>
@@ -353,14 +382,30 @@
     </InvalidArgument>
     <MissingOverrideAttribute>
       <code><![CDATA[protected function reflect()]]></code>
+      <code><![CDATA[public function __serialize(): array]]></code>
+      <code><![CDATA[public function __unserialize(array $data): void]]></code>
       <code><![CDATA[public function __wakeup()]]></code>
     </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$docComment]]></code>
       <code><![CDATA[$this->classReflection->getName()]]></code>
+      <code><![CDATA[$this->name]]></code>
     </MixedArgument>
     <MixedAssignment>
+      <code><![CDATA[$this->argv]]></code>
       <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$this->class]]></code>
+      <code><![CDATA[$this->config]]></code>
+      <code><![CDATA[$this->description]]></code>
+      <code><![CDATA[$this->docComment]]></code>
+      <code><![CDATA[$this->name]]></code>
+      <code><![CDATA[$this->namespace]]></code>
+      <code><![CDATA[$this->paramDesc]]></code>
+      <code><![CDATA[$this->prototypes]]></code>
+      <code><![CDATA[$this->return]]></code>
+      <code><![CDATA[$this->returnDesc]]></code>
+      <code><![CDATA[$this->sigParams]]></code>
+      <code><![CDATA[$this->sigParamsDepth]]></code>
     </MixedAssignment>
     <PossiblyInvalidArgument>
       <code><![CDATA[$this->classReflection]]></code>
@@ -387,6 +432,17 @@
       <code><![CDATA[! is_string($description) && (null !== $description)]]></code>
       <code><![CDATA[! is_string($type) && (null !== $type)]]></code>
     </DocblockTypeContradiction>
+    <MixedArgument>
+      <code><![CDATA[$this->functionName]]></code>
+      <code><![CDATA[$this->name]]></code>
+    </MixedArgument>
+    <MixedAssignment>
+      <code><![CDATA[$this->description]]></code>
+      <code><![CDATA[$this->functionName]]></code>
+      <code><![CDATA[$this->name]]></code>
+      <code><![CDATA[$this->position]]></code>
+      <code><![CDATA[$this->type]]></code>
+    </MixedAssignment>
     <PossiblyInvalidPropertyAssignmentValue>
       <code><![CDATA[$r->getDeclaringClass()
             ? [$r->getDeclaringClass()->getName(), $r->getDeclaringFunction()->getName()]
