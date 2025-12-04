@@ -27,7 +27,6 @@ use function is_string;
 use function method_exists;
 use function preg_match;
 
-
 /**
  * Function/Method Reflection
  *
