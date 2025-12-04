@@ -27,7 +27,6 @@ use function is_string;
 use function method_exists;
 use function preg_match;
 
-use const PHP_VERSION_ID;
 
 /**
  * Function/Method Reflection
@@ -566,11 +565,7 @@ abstract class AbstractFunction
 
     private function paramIsArray(PhpReflectionParameter $param): bool
     {
-        if (PHP_VERSION_ID >= 80000) {
-            $type = $param->getType();
-            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
-        }
-
-        return $param->isArray();
+        $type = $param->getType();
+        return $type instanceof ReflectionNamedType && $type->getName() === 'array';
     }
 }
