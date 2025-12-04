@@ -72,14 +72,7 @@ final class ReflectionMethodTest extends TestCase
         $this->assertEquals($this->class, $class);
     }
 
-    /**
-     * __wakeup() test
-     *
-     * Call as method call
-     *
-     * Returns: void
-     */
-    public function testClassWakeup(): void
+    public function testSerializationAndDeserialization(): void
     {
         $r = new Reflection\ReflectionMethod($this->class, $this->method);
         $s = serialize($r);

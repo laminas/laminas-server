@@ -105,14 +105,7 @@ final class ReflectionClassTest extends TestCase
         $this->assertEquals('namespace', $r->getNamespace());
     }
 
-    /**
-     * __wakeup() test
-     *
-     * Call as method call
-     *
-     * Returns: void
-     */
-    public function testClassWakeup(): void
+    public function testSerializationAndDeserialization(): void
     {
         $r = new Reflection\ReflectionClass(new \ReflectionClass(Reflection::class));
         $s = serialize($r);

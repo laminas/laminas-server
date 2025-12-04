@@ -470,44 +470,6 @@ abstract class AbstractFunction
     }
 
     /**
-     * @return string[]
-     */
-    public function __sleep()
-    {
-        $serializable = [];
-        foreach ($this as $name => $value) {
-            if (
-                $value instanceof PhpReflectionFunction
-                || $value instanceof PhpReflectionMethod
-            ) {
-                continue;
-            }
-
-            $serializable[] = $name;
-        }
-
-        return $serializable;
-    }
-
-    /**
-     * Wakeup from serialization
-     *
-     * Reflection needs explicit instantiation to work correctly. Re-instantiate
-     * reflection object on wakeup.
-     *
-     * @return void
-     */
-    public function __wakeup()
-    {
-        if ($this->reflection instanceof PhpReflectionMethod) {
-            $class            = new PhpReflectionClass($this->class);
-            $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
-        } else {
-            $this->reflection = new PhpReflectionFunction($this->name);
-        }
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function __serialize(): array

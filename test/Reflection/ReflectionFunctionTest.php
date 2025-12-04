@@ -105,7 +105,7 @@ final class ReflectionFunctionTest extends TestCase
         $this->assertEquals($argv, $args);
     }
 
-    public function testClassWakeup(): void
+    public function testSerializationAndDeserialization(): void
     {
         $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');
         $r        = new Reflection\ReflectionFunction($function);

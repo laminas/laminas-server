@@ -179,27 +179,6 @@ class ReflectionClass
     }
 
     /**
-     * Wakeup from serialization
-     *
-     * Reflection needs explicit instantiation to work correctly. Re-instantiate
-     * reflection object on wakeup.
-     *
-     * @return void
-     */
-    public function __wakeup()
-    {
-        $this->reflection = new PhpReflectionClass($this->name);
-    }
-
-    /**
-     * @return string[]
-     */
-    public function __sleep()
-    {
-        return ['config', 'methods', 'namespace', 'name'];
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function __serialize(): array

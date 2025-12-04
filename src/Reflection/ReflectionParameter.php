@@ -168,19 +168,6 @@ class ReflectionParameter
     }
 
     /**
-     * @return string[]
-     */
-    public function __sleep()
-    {
-        return ['position', 'type', 'description', 'name', 'functionName'];
-    }
-
-    public function __wakeup()
-    {
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function __serialize(): array

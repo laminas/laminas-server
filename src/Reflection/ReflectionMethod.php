@@ -82,25 +82,6 @@ class ReflectionMethod extends AbstractFunction
     }
 
     /**
-     * Wakeup from serialization
-     *
-     * Reflection needs explicit instantiation to work correctly. Re-instantiate
-     * reflection object on wakeup.
-     *
-     * @return void
-     */
-    public function __wakeup()
-    {
-        $this->classReflection = new ReflectionClass(
-            new \ReflectionClass($this->class),
-            $this->getNamespace(),
-            $this->getInvokeArguments()
-        );
-
-        $this->reflection = new \ReflectionMethod($this->classReflection->getName(), $this->name);
-    }
-
-    /**
      * @return array<string, mixed>
      */
     public function __serialize(): array
