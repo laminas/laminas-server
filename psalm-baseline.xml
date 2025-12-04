@@ -230,10 +230,6 @@
     </RiskyTruthyFalsyComparison>
   </file>
   <file src="src/Reflection/AbstractFunction.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->class]]></code>
-      <code><![CDATA[$this->name]]></code>
-    </ArgumentTypeCoercion>
     <DocblockTypeContradiction>
       <code><![CDATA[is_string($string)]]></code>
     </DocblockTypeContradiction>
@@ -249,9 +245,7 @@
       <code><![CDATA[array_shift($signature)]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code><![CDATA[$name]]></code>
       <code><![CDATA[$root]]></code>
-      <code><![CDATA[$serializable[]]]></code>
       <code><![CDATA[$this->argv]]></code>
       <code><![CDATA[$this->class]]></code>
       <code><![CDATA[$this->config]]></code>
@@ -269,17 +263,14 @@
       <code><![CDATA[$type]]></code>
       <code><![CDATA[$value]]></code>
       <code><![CDATA[$value]]></code>
-      <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <MixedMethodCall>
       <code><![CDATA[getEndPoints]]></code>
       <code><![CDATA[isOptional]]></code>
     </MixedMethodCall>
     <MixedReturnTypeCoercion>
-      <code><![CDATA[$serializable]]></code>
       <code><![CDATA[$this->prototypes]]></code>
       <code><![CDATA[Prototype[]]]></code>
-      <code><![CDATA[string[]]]></code>
     </MixedReturnTypeCoercion>
     <PossiblyInvalidArgument>
       <code><![CDATA[$this->name]]></code>
@@ -297,9 +288,6 @@
       <code><![CDATA[$class]]></code>
       <code><![CDATA[$namespace]]></code>
     </PropertyNotSetInConstructor>
-    <RawObjectIteration>
-      <code><![CDATA[$this]]></code>
-    </RawObjectIteration>
     <RedundantConditionGivenDocblockType>
       <code><![CDATA[$returnTag]]></code>
     </RedundantConditionGivenDocblockType>
@@ -345,9 +333,6 @@
     </DeprecatedProperty>
   </file>
   <file src="src/Reflection/ReflectionClass.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->name]]></code>
-    </ArgumentTypeCoercion>
     <MixedArgument>
       <code><![CDATA[$this->name]]></code>
     </MixedArgument>
@@ -374,9 +359,6 @@
     </PropertyNotSetInConstructor>
   </file>
   <file src="src/Reflection/ReflectionMethod.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->class]]></code>
-    </ArgumentTypeCoercion>
     <InvalidArgument>
       <code><![CDATA[$normalizedDocCommentList]]></code>
     </InvalidArgument>
@@ -384,11 +366,9 @@
       <code><![CDATA[protected function reflect()]]></code>
       <code><![CDATA[public function __serialize(): array]]></code>
       <code><![CDATA[public function __unserialize(array $data): void]]></code>
-      <code><![CDATA[public function __wakeup()]]></code>
     </MissingOverrideAttribute>
     <MixedArgument>
       <code><![CDATA[$docComment]]></code>
-      <code><![CDATA[$this->classReflection->getName()]]></code>
       <code><![CDATA[$this->name]]></code>
     </MixedArgument>
     <MixedAssignment>
@@ -423,7 +403,6 @@
     </RiskyTruthyFalsyComparison>
     <UndefinedMagicMethod>
       <code><![CDATA[getInterfaces]]></code>
-      <code><![CDATA[getName]]></code>
       <code><![CDATA[getName]]></code>
     </UndefinedMagicMethod>
   </file>
