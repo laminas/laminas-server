@@ -7,16 +7,16 @@
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use ReflectionParameter;
 
 /**
  * Test case for \Laminas\Server\Reflection\ReflectionParameter
- *
- * @group      Laminas_Server
  */
-class ReflectionParameterTest extends TestCase
+#[Group('Laminas_Server')]
+final class ReflectionParameterTest extends TestCase
 {
     protected function getParameter(): ReflectionParameter
     {

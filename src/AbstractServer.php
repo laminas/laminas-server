@@ -6,6 +6,7 @@
 
 namespace Laminas\Server;
 
+use Override;
 use ReflectionClass;
 
 use function call_user_func_array;
@@ -40,6 +41,7 @@ abstract class AbstractServer implements Server
      *
      * @return Definition
      */
+    #[Override]
     public function getFunctions()
     {
         return $this->table;

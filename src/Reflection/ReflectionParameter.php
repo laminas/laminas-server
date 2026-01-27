@@ -14,6 +14,8 @@ use function method_exists;
  * Parameter Reflection
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
+ *
+ * @final This class should not be extended
  */
 class ReflectionParameter
 {

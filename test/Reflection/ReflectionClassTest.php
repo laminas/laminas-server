@@ -9,6 +9,8 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
@@ -18,10 +20,9 @@ use function unserialize;
 
 /**
  * Test case for \Laminas\Server\Reflection\ClassReflection
- *
- * @group      Laminas_Server
  */
-class ReflectionClassTest extends TestCase
+#[Group('Laminas_Server')]
+final class ReflectionClassTest extends TestCase
 {
     /**
      * __construct() test
@@ -130,7 +131,7 @@ class ReflectionClassTest extends TestCase
     /**
      * @psalm-return array<string, array{0: mixed}>
      */
-    public function nonArrayArgvValues(): array
+    public static function nonArrayArgvValues(): array 
     {
         return [
             'null'          => [null],
@@ -146,9 +147,9 @@ class ReflectionClassTest extends TestCase
     }
 
     /**
-     * @dataProvider nonArrayArgvValues
      * @param mixed $argv
      */
+    #[DataProvider('nonArrayArgvValues')]
     public function testNonArrayArgvValuesResultInEmptyInvokationArgumentsToReflectedMethods($argv): void
     {
         // Suppressing, as we are validating

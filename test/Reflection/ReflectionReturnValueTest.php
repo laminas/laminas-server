@@ -7,14 +7,14 @@
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
- *
- * @group      Laminas_Server
  */
-class ReflectionReturnValueTest extends TestCase
+#[Group('Laminas_Server')]
+final class ReflectionReturnValueTest extends TestCase
 {
     /**
      * __construct() test

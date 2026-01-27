@@ -6,6 +6,9 @@
 
 namespace Laminas\Server\Exception;
 
+/**
+ * @psalm-suppress ClassMustBeFinal
+ */
 class BadMethodCallException extends \BadMethodCallException implements ExceptionInterface
 {
 }

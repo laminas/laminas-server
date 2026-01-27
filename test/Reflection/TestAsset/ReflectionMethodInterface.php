@@ -16,5 +16,5 @@ interface ReflectionMethodInterface
      * @param ReflectionMethodTest $reflectionMethodTest Reflection method
      * @param array                $anything             Some array information
      */
-    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything);
+    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything): void;
 }

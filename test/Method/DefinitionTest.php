@@ -7,23 +7,24 @@
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
+use Override;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Group;
 use stdClass;
 
 /**
  * Test class for \Laminas\Server\Method\Definition
- *
- * @group      Laminas_Server
  */
-class DefinitionTest extends TestCase
+#[Group('Laminas_Server')]
+final class DefinitionTest extends TestCase
 {
-    /** @var Method\Definition */
-    private $definition;
+    private Method\Definition $definition;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
+    #[Override]
     public function setUp(): void
     {
         $this->definition = new Method\Definition();
@@ -33,6 +34,7 @@ class DefinitionTest extends TestCase
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
      */
+    #[Override]
     public function tearDown(): void
     {
     }

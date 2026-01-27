@@ -7,15 +7,17 @@
 namespace LaminasTest\Server\Reflection\TestAsset;
 
 use LaminasTest\Server\Reflection\ReflectionMethodTest;
+use Override;
 
-class ReflectionMethodTestInstance implements ReflectionMethodInterface
+final class ReflectionMethodTestInstance implements ReflectionMethodInterface
 {
     /**
      * {@inheritdoc}
      *
      * @return void
      */
-    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything)
+    #[Override]
+    public function testMethod(ReflectionMethodTest $reflectionMethodTest, array $anything): void
     {
         // it doesn`t matter
     }

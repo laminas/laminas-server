@@ -26,6 +26,8 @@ use const E_NOTICE;
 
 /**
  * \Laminas\Server\Cache: cache server definitions
+ *
+ * @final This class should not be extended
  */
 class Cache
 {

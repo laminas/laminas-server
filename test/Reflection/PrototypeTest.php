@@ -9,16 +9,17 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionReturnValue;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionParameter;
 
 /**
  * Test case for \Laminas\Server\Reflection\Prototype
- *
- * @group      Laminas_Server
  */
-class PrototypeTest extends TestCase
+#[Group('Laminas_Server')]
+final class PrototypeTest extends TestCase
 {
     /** @var Prototype */
     protected $r;
@@ -38,6 +39,7 @@ class PrototypeTest extends TestCase
     /**
      * Setup environment
      */
+    #[Override]
     public function setUp(): void
     {
         $class               = new ReflectionClass(Reflection::class);
@@ -57,6 +59,7 @@ class PrototypeTest extends TestCase
     /**
      * Teardown environment
      */
+    #[Override]
     public function tearDown(): void
     {
         unset($this->r);

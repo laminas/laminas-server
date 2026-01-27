@@ -12,6 +12,8 @@ use function ucfirst;
 
 /**
  * Method parameter metadata
+ *
+ * @final This class should not be extended
  */
 class Parameter
 {

@@ -21,6 +21,8 @@ use function sprintf;
 
 /**
  * Reflection for determining method signatures to use with server classes
+ *
+ * @final This class should not be extended
  */
 class Reflection
 {

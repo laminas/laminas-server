@@ -18,6 +18,8 @@ use function ucfirst;
 
 /**
  * Method prototype metadata
+ *
+ * @final This class should not be extended
  */
 class Prototype
 {

@@ -7,16 +7,16 @@
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection\Node;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function var_export;
 
 /**
  * Test case for \Laminas\Server\Node
- *
- * @group      Laminas_Server
  */
-class NodeTest extends TestCase
+#[Group('Laminas_Server')]
+final class NodeTest extends TestCase
 {
     /**
      * __construct() test

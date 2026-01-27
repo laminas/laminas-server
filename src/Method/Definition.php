@@ -18,6 +18,8 @@ use function ucfirst;
 
 /**
  * Method definition metadata
+ *
+ * @final This class should not be extended
  */
 class Definition
 {

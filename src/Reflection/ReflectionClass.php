@@ -20,6 +20,8 @@ use function str_starts_with;
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ *
+ * @final This class should not be extended
  */
 class ReflectionClass
 {
