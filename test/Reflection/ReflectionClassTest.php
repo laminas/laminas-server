@@ -131,7 +131,7 @@ final class ReflectionClassTest extends TestCase
     /**
      * @psalm-return array<string, array{0: mixed}>
      */
-    public static function nonArrayArgvValues(): array 
+    public static function nonArrayArgvValues(): array
     {
         return [
             'null'          => [null],

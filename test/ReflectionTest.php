@@ -9,9 +9,9 @@ namespace LaminasTest\Server;
 use Laminas\Server\Exception\InvalidArgumentException as ExceptionInvalidArgumentException;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
 #[Group('Laminas_server')]
 final class ReflectionTest extends TestCase

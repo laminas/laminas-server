@@ -170,13 +170,27 @@ class ReflectionParameter
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __serialize(): array
     {
-        return ['position', 'type', 'description', 'name', 'functionName'];
+        return [
+            'position'     => $this->position,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'name'         => $this->name,
+            'functionName' => $this->functionName,
+        ];
     }
 
-    public function __wakeup()
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
     {
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+        $this->position     = $data['position'] ?? '0';
+        $this->type         = $data['type'] ?? 'mixed';
+        $this->description  = $data['description'] ?? '';
+        $this->name         = $data['name'] ?? '';
+        $this->functionName = $data['functionName'] ?? '';
+        $this->reflection   = new \ReflectionParameter($this->functionName, $this->name);
     }
 }

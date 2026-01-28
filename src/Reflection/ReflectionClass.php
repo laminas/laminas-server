@@ -183,19 +183,28 @@ class ReflectionClass
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @return void
      */
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
+        $this->config    = $data['config'] ?? '';
+        $this->methods   = $data['methods'] ?? '';
+        $this->namespace = $data['namespace'] ?? '';
+        $this->name      = $data['name'] ?? '';
+
+        // Restore runtime-only dependency
         $this->reflection = new PhpReflectionClass($this->name);
     }
 
     /**
      * @return string[]
      */
-    public function __sleep()
+    public function __serialize(): array
     {
-        return ['config', 'methods', 'namespace', 'name'];
+        return [
+            'config'    => $this->config,
+            'methods'   => $this->methods,
+            'namespace' => $this->namespace,
+            'name'      => $this->name,
+        ];
     }
 }

@@ -38,7 +38,6 @@ final class CacheTest extends TestCase
     public function resetSkipMethods(array $methods = []): void
     {
         $r = new ReflectionProperty(Cache::class, 'skipMethods');
-        $r->setAccessible(true);
         $r->setValue(null, $methods);
     }
 

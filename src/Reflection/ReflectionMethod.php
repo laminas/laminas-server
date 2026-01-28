@@ -88,12 +88,13 @@ class ReflectionMethod extends AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @return void
      */
     #[Override]
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
+        $this->class = $data['class'];
+        $this->name  = $data['name'];
+
         $this->classReflection = new ReflectionClass(
             new \ReflectionClass($this->class),
             $this->getNamespace(),

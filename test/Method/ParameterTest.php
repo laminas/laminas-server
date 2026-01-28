@@ -8,8 +8,8 @@ namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
 use Override;
-use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for \Laminas\Server\Method\Parameter
