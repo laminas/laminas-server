@@ -2,14 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.laminas.dev/laminas-server/</loc>
-         <lastmod>2024-12-09</lastmod>
+         <lastmod>2026-02-06</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-server/intro/</loc>
-         <lastmod>2024-12-09</lastmod>
+         <lastmod>2026-02-06</lastmod>
     </url>
     <url>
          <loc>https://docs.laminas.dev/laminas-server/reflection/</loc>
-         <lastmod>2024-12-09</lastmod>
+         <lastmod>2026-02-06</lastmod>
     </url>
 </urlset>
