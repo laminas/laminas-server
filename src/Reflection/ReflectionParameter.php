@@ -6,6 +6,9 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
+use ReflectionException;
+
 use function call_user_func_array;
 use function is_string;
 use function method_exists;
@@ -170,6 +173,15 @@ class ReflectionParameter
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
+    public function __sleep()
+    {
+        return $this->__serialize();
+    }
+
+    /**
+     * @return string[]
+     */
     public function __serialize(): array
     {
         return [
@@ -182,7 +194,18 @@ class ReflectionParameter
     }
 
     /**
+     * @return void
+     * @throws ReflectionException
+     */
+    #[Deprecated('Use __unserialize instead')]
+    public function __wakeup()
+    {
+        $this->__unserialize($this->__serialize());
+    }
+
+    /**
      * @param array<string, mixed> $data
+     * @throws ReflectionException
      */
     public function __unserialize(array $data): void
     {

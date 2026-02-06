@@ -6,6 +6,7 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
 use ReflectionClass as PhpReflectionClass;
 
 use function call_user_func_array;
@@ -179,6 +180,15 @@ class ReflectionClass
     }
 
     /**
+     * @return void
+     */
+    #[Deprecated('Use __unserialize instead')]
+    public function __wakeup()
+    {
+        $this->__unserialize($this->__serialize());
+    }
+
+    /**
      * Wakeup from serialization
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
@@ -193,6 +203,15 @@ class ReflectionClass
 
         // Restore runtime-only dependency
         $this->reflection = new PhpReflectionClass($this->name);
+    }
+
+    /**
+     * @return string[]
+     */
+    #[Deprecated('Use __serialize instead')]
+    public function __sleep()
+    {
+        return $this->__serialize();
     }
 
     /**

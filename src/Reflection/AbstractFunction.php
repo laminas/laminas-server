@@ -6,10 +6,10 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
 use Laminas\Code\Reflection\DocBlock\Tag\ParamTag;
 use Laminas\Code\Reflection\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
-use Laminas\Server\Reflection\Node;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
@@ -474,6 +474,15 @@ abstract class AbstractFunction
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
+    public function __sleep()
+    {
+        return $this->__serialize();
+    }
+
+    /**
+     * @return string[]
+     */
     public function __serialize(): array
     {
         $data = [];
@@ -492,6 +501,15 @@ abstract class AbstractFunction
             $this->reflection instanceof PhpReflectionMethod ? 'method' : 'function';
 
         return $data;
+    }
+
+    /**
+     * @return void
+     */
+    #[Deprecated('Use __unserialize instead')]
+    public function __wakeup()
+    {
+        $this->__unserialize($this->__serialize());
     }
 
     /**

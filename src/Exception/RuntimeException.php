@@ -7,7 +7,7 @@
 namespace Laminas\Server\Exception;
 
 /**
- * @psalm-suppress ClassMustBeFinal
+ * @final This class should not be extended
  */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
