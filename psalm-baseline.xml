@@ -414,6 +414,9 @@
       <code><![CDATA[$this->functionName]]></code>
       <code><![CDATA[$this->name]]></code>
     </MixedArgument>
+    <MixedArgumentTypeCoercion>
+      <code><![CDATA[$this->__serialize()]]></code>
+    </MixedArgumentTypeCoercion>
     <MixedAssignment>
       <code><![CDATA[$this->description]]></code>
       <code><![CDATA[$this->functionName]]></code>

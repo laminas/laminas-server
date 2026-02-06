@@ -6,9 +6,6 @@
 
 namespace Laminas\Server\Exception;
 
-/**
- * @final This class should not be extended
- */
 class RuntimeException extends \RuntimeException implements ExceptionInterface
 {
 }
