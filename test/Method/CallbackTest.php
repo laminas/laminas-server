@@ -8,22 +8,23 @@ namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Exception\InvalidArgumentException;
 use Laminas\Server\Method;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for \Laminas\Server\Method\Callback
- *
- * @group      Laminas_Server
  */
-class CallbackTest extends TestCase
+#[Group('Laminas_Server')]
+final class CallbackTest extends TestCase
 {
-    /** @var Method\Callback */
-    private $callback;
+    private Method\Callback $callback;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
+    #[Override]
     public function setUp(): void
     {
         $this->callback = new Method\Callback();

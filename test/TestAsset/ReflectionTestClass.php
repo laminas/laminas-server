@@ -9,7 +9,7 @@ namespace LaminasTest\Server\TestAsset;
 /**
  * \LaminasTest\Server\TestAsset\ReflectionTestClass -- test class reflection
  */
-class ReflectionTestClass
+final class ReflectionTestClass
 {
     /**
      * Constructor

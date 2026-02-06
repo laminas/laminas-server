@@ -6,10 +6,10 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
 use Laminas\Code\Reflection\DocBlock\Tag\ParamTag;
 use Laminas\Code\Reflection\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
-use Laminas\Server\Reflection\Node;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
@@ -22,12 +22,12 @@ use function array_shift;
 use function array_unshift;
 use function call_user_func_array;
 use function count;
+use function get_object_vars;
 use function is_array;
 use function is_string;
 use function method_exists;
 use function preg_match;
-
-use const PHP_VERSION_ID;
+use function property_exists;
 
 /**
  * Function/Method Reflection
@@ -474,21 +474,42 @@ abstract class AbstractFunction
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
     public function __sleep()
     {
-        $serializable = [];
-        foreach ($this as $name => $value) {
+        return $this->__serialize();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function __serialize(): array
+    {
+        $data = [];
+        foreach (get_object_vars($this) as $name => $value) {
             if (
                 $value instanceof PhpReflectionFunction
                 || $value instanceof PhpReflectionMethod
             ) {
-                continue;
+                continue; // never serialize reflection objects
             }
 
-            $serializable[] = $name;
+            $data[$name] = $value;
         }
 
-        return $serializable;
+        $data['__reflection_kind'] =
+            $this->reflection instanceof PhpReflectionMethod ? 'method' : 'function';
+
+        return $data;
+    }
+
+    /**
+     * @return void
+     */
+    #[Deprecated('Use __unserialize instead')]
+    public function __wakeup()
+    {
+        $this->__unserialize($this->__serialize());
     }
 
     /**
@@ -496,12 +517,19 @@ abstract class AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @return void
      */
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
-        if ($this->reflection instanceof PhpReflectionMethod) {
+        $kind = $data['__reflection_kind'] ?? 'function';
+        unset($data['__reflection_kind']);
+
+        foreach ($data as $name => $value) {
+            if (property_exists($this, $name)) {
+                $this->$name = $value;
+            }
+        }
+
+        if ($kind === 'method') {
             $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
@@ -511,11 +539,7 @@ abstract class AbstractFunction
 
     private function paramIsArray(PhpReflectionParameter $param): bool
     {
-        if (PHP_VERSION_ID >= 80000) {
-            $type = $param->getType();
-            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
-        }
-
-        return $param->isArray();
+        $type = $param->getType();
+        return $type instanceof ReflectionNamedType && $type->getName() === 'array';
     }
 }

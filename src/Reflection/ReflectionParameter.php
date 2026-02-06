@@ -6,6 +6,9 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
+use ReflectionException;
+
 use function call_user_func_array;
 use function is_string;
 use function method_exists;
@@ -14,6 +17,8 @@ use function method_exists;
  * Parameter Reflection
  *
  * Decorates a ReflectionParameter to allow setting the parameter type
+ *
+ * @final This class should not be extended
  */
 class ReflectionParameter
 {
@@ -168,13 +173,47 @@ class ReflectionParameter
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
     public function __sleep()
     {
-        return ['position', 'type', 'description', 'name', 'functionName'];
+        return $this->__serialize();
     }
 
+    /**
+     * @return string[]
+     */
+    public function __serialize(): array
+    {
+        return [
+            'position'     => $this->position,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'name'         => $this->name,
+            'functionName' => $this->functionName,
+        ];
+    }
+
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
+    #[Deprecated('Use __unserialize instead')]
     public function __wakeup()
     {
-        $this->reflection = new \ReflectionParameter($this->functionName, $this->name);
+        $this->__unserialize($this->__serialize());
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @throws ReflectionException
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->position     = $data['position'] ?? '0';
+        $this->type         = $data['type'] ?? 'mixed';
+        $this->description  = $data['description'] ?? '';
+        $this->name         = $data['name'] ?? '';
+        $this->functionName = $data['functionName'] ?? '';
+        $this->reflection   = new \ReflectionParameter($this->functionName, $this->name);
     }
 }

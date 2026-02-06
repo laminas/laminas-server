@@ -7,22 +7,23 @@
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for \Laminas\Server\Method\Parameter
- *
- * @group      Laminas_Server
  */
-class ParameterTest extends TestCase
+#[Group('Laminas_Server')]
+final class ParameterTest extends TestCase
 {
-    /** @var Method\Parameter */
-    private $parameter;
+    private Method\Parameter $parameter;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
+    #[Override]
     public function setUp(): void
     {
         $this->parameter = new Method\Parameter();
@@ -32,6 +33,7 @@ class ParameterTest extends TestCase
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
      */
+    #[Override]
     public function tearDown(): void
     {
     }

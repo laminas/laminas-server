@@ -8,6 +8,8 @@ namespace Laminas\Server\Reflection;
 
 /**
  * Function Reflection
+ *
+ * @final This class should not be extended
  */
 class ReflectionFunction extends AbstractFunction
 {

@@ -11,6 +11,7 @@ use Laminas\Server\Definition;
 use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Definition as MethodDefinition;
 use Laminas\Server\Server;
+use Override;
 use PHPUnit\Framework\TestCase;
 use ReflectionProperty;
 
@@ -20,11 +21,11 @@ use function tempnam;
 use function unlink;
 use function unserialize;
 
-class CacheTest extends TestCase
+final class CacheTest extends TestCase
 {
-    /** @var string */
-    private $cacheFile;
+    private string|null $cacheFile;
 
+    #[Override]
     public function tearDown(): void
     {
         if ($this->cacheFile) {
@@ -37,7 +38,6 @@ class CacheTest extends TestCase
     public function resetSkipMethods(array $methods = []): void
     {
         $r = new ReflectionProperty(Cache::class, 'skipMethods');
-        $r->setAccessible(true);
         $r->setValue(null, $methods);
     }
 

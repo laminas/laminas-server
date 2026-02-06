@@ -10,6 +10,8 @@ namespace Laminas\Server\Reflection;
  * Method/Function prototypes
  *
  * Contains accessors for the return value and all method arguments.
+ *
+ * @final This class should not be extended
  */
 class Prototype
 {

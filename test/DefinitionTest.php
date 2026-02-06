@@ -8,6 +8,8 @@ namespace LaminasTest\Server;
 
 use Laminas\Server;
 use Laminas\Server\Method;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function array_shift;
@@ -15,18 +17,17 @@ use function array_values;
 
 /**
  * Test class for Laminas\Server\Definition
- *
- * @group      Laminas_Server
  */
-class DefinitionTest extends TestCase
+#[Group('Laminas_Server')]
+final class DefinitionTest extends TestCase
 {
-    /** @var Server\Definition */
-    private $definition;
+    private Server\Definition $definition;
 
     /**
      * Sets up the fixture, for example, open a network connection.
      * This method is called before a test is executed.
      */
+    #[Override]
     public function setUp(): void
     {
         $this->definition = new Server\Definition();
@@ -36,6 +37,7 @@ class DefinitionTest extends TestCase
      * Tears down the fixture, for example, close a network connection.
      * This method is called after a test is executed.
      */
+    #[Override]
     public function tearDown(): void
     {
     }

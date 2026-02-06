@@ -9,12 +9,12 @@ namespace LaminasTest\Server;
 use Laminas\Server\Exception\InvalidArgumentException as ExceptionInvalidArgumentException;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group      Laminas_Server
- */
-class ReflectionTest extends TestCase
+#[Group('Laminas_server')]
+final class ReflectionTest extends TestCase
 {
     /**
      * reflectClass() test
@@ -85,7 +85,7 @@ class ReflectionTest extends TestCase
     /**
      * @psalm-return array<string, array{0: mixed}>
      */
-    public function invalidArgvValues(): array
+    public static function invalidArgvValues(): array
     {
         return [
             'true'          => [true],
@@ -99,9 +99,9 @@ class ReflectionTest extends TestCase
     }
 
     /**
-     * @dataProvider invalidArgvValues
      * @param mixed $invalidValue
      */
+    #[DataProvider('invalidArgvValues')]
     public function testReflectFunctionThrowsExceptionForInvalidArgvValue($invalidValue): void
     {
         $this->expectException(ExceptionInvalidArgumentException::class);
@@ -114,7 +114,7 @@ class ReflectionTest extends TestCase
     /**
      * @psalm-return array<string, array{0: null|bool}>
      */
-    public function emptyArgvValues(): array
+    public static function emptyArgvValues(): array
     {
         return [
             'false' => [false],
@@ -122,9 +122,7 @@ class ReflectionTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider emptyArgvValues
-     */
+    #[DataProvider('emptyArgvValues')]
     public function testReflectFunctionAllowsNullOrFalseArgv(?bool $argv): void
     {
         $r = Reflection::reflectFunction('LaminasTest\Server\TestAsset\reflectionTestFunction', $argv);

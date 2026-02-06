@@ -6,6 +6,8 @@
 
 namespace Laminas\Server\Reflection;
 
+use Override;
+
 use function array_map;
 use function array_merge;
 use function implode;
@@ -16,6 +18,8 @@ use const PHP_EOL;
 
 /**
  * Method Reflection
+ *
+ * @final This class should not be extended
  */
 class ReflectionMethod extends AbstractFunction
 {
@@ -84,11 +88,13 @@ class ReflectionMethod extends AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @return void
      */
-    public function __wakeup()
+    #[Override]
+    public function __unserialize(array $data): void
     {
+        $this->class = $data['class'];
+        $this->name  = $data['name'];
+
         $this->classReflection = new ReflectionClass(
             new \ReflectionClass($this->class),
             $this->getNamespace(),
@@ -103,6 +109,7 @@ class ReflectionMethod extends AbstractFunction
      *
      * @return void
      */
+    #[Override]
     protected function reflect()
     {
         $docComment = $this->reflection->getDocComment();

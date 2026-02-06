@@ -6,6 +6,7 @@
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
 use ReflectionClass as PhpReflectionClass;
 
 use function call_user_func_array;
@@ -20,6 +21,8 @@ use function str_starts_with;
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ *
+ * @final This class should not be extended
  */
 class ReflectionClass
 {
@@ -177,23 +180,50 @@ class ReflectionClass
     }
 
     /**
+     * @return void
+     */
+    #[Deprecated('Use __unserialize instead')]
+    public function __wakeup()
+    {
+        $this->__unserialize($this->__serialize());
+    }
+
+    /**
      * Wakeup from serialization
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @return void
      */
-    public function __wakeup()
+    public function __unserialize(array $data): void
     {
+        $this->config    = $data['config'] ?? '';
+        $this->methods   = $data['methods'] ?? '';
+        $this->namespace = $data['namespace'] ?? '';
+        $this->name      = $data['name'] ?? '';
+
+        // Restore runtime-only dependency
         $this->reflection = new PhpReflectionClass($this->name);
     }
 
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
     public function __sleep()
     {
-        return ['config', 'methods', 'namespace', 'name'];
+        return $this->__serialize();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function __serialize(): array
+    {
+        return [
+            'config'    => $this->config,
+            'methods'   => $this->methods,
+            'namespace' => $this->namespace,
+            'name'      => $this->name,
+        ];
     }
 }

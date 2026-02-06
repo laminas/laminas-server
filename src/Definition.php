@@ -9,6 +9,7 @@ namespace Laminas\Server;
 use Countable;
 use Iterator;
 use Laminas\Server\Exception\InvalidArgumentException;
+use Override;
 use ReturnTypeWillChange;
 
 use function array_key_exists;
@@ -23,6 +24,8 @@ use function sprintf;
 
 /**
  * Server methods metadata
+ *
+ * @final This class should not be extended
  */
 class Definition implements Countable, Iterator
 {
@@ -198,6 +201,7 @@ class Definition implements Countable, Iterator
      *
      * @return int
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function count()
     {
@@ -209,6 +213,7 @@ class Definition implements Countable, Iterator
      *
      * @return Method\Definition
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function current()
     {
@@ -220,6 +225,7 @@ class Definition implements Countable, Iterator
      *
      * @return int|string
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function key()
     {
@@ -231,6 +237,7 @@ class Definition implements Countable, Iterator
      *
      * @return Method\Definition
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function next()
     {
@@ -242,6 +249,7 @@ class Definition implements Countable, Iterator
      *
      * @return void
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function rewind()
     {
@@ -253,6 +261,7 @@ class Definition implements Countable, Iterator
      *
      * @return bool
      */
+    #[Override]
     #[ReturnTypeWillChange]
     public function valid()
     {
