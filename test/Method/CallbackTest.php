@@ -71,7 +71,7 @@ final class CallbackTest extends TestCase
         $callable = /**
          * @return true
          */
-        fn(): bool => true;
+        static fn(): bool => true;
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }

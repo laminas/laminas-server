@@ -147,7 +147,7 @@ class ReflectionMethod extends AbstractFunction
         }
 
         $normalizedDocCommentList = array_map(
-            function ($docComment) {
+            static function ($docComment) {
                 $docComment = str_replace('/**', '', $docComment);
                 $docComment = str_replace('*/', '', $docComment);
 
