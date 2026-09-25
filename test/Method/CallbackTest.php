@@ -68,7 +68,8 @@ final class CallbackTest extends TestCase
 
     public function testFunctionMayBeCallable(): void
     {
-        $callable = /**
+        $callable =
+        /**
          * @return true
          */
         static fn(): bool => true;
