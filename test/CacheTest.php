@@ -4,7 +4,7 @@
  * @see       https://github.com/laminas/laminas-server for the canonical source repository
  */
 
-namespace LaminasTest\Cache;
+namespace LaminasTest\Server;
 
 use Laminas\Server\Cache;
 use Laminas\Server\Definition;

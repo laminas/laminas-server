@@ -68,10 +68,11 @@ final class CallbackTest extends TestCase
 
     public function testFunctionMayBeCallable(): void
     {
-        $callable = /**
+        $callable =
+        /**
          * @return true
          */
-        fn(): bool => true;
+        static fn(): bool => true;
         $this->callback->setFunction($callable);
         $this->assertEquals($callable, $this->callback->getFunction());
     }
