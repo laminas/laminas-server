@@ -9,9 +9,14 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-class ReflectionReturnValueTest extends TestCase
+/**
+ * Test case for \Laminas\Server\Reflection\ReflectionReturnValue
+ */
+#[Group('Laminas_Server')]
+final class ReflectionReturnValueTest extends TestCase
 {
     public function testConstructor(): void
     {

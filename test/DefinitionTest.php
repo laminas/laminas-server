@@ -11,15 +11,26 @@ namespace LaminasTest\Server;
 use Laminas\Server;
 use Laminas\Server\Definition;
 use Laminas\Server\Method;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function array_shift;
 use function array_values;
 
-class DefinitionTest extends TestCase
+/**
+ * Test class for Laminas\Server\Definition
+ */
+#[Group('Laminas_Server')]
+final class DefinitionTest extends TestCase
 {
     private Definition $definition;
 
+    /**
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     */
+    #[Override]
     protected function setUp(): void
     {
         $this->definition = new Server\Definition();

@@ -3,15 +3,17 @@ name: docs-build
 on:
   release:
     types: [published]
-  repository_dispatch:
-    types: docs-build
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Build Docs
-        uses: laminas/documentation-theme/github-actions/docs@master
+        uses: laminas/documentation-theme/github-actions/docs@fe3863ca6da14ac84356c5fac64d48108f58b335 # master
         env:
-          DOCS_DEPLOY_KEY: ${{ secrets.DOCS_DEPLOY_KEY }}
-          "GITHUB_TOKEN": ${{ secrets.GITHUB_TOKEN }}
+          DEPLOY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

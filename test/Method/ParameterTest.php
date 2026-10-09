@@ -9,13 +9,24 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use Laminas\Server\Method\Parameter;
 use PHPUnit\Framework\TestCase;
 
-class ParameterTest extends TestCase
+/**
+ * Test class for \Laminas\Server\Method\Parameter
+ */
+#[Group('Laminas_Server')]
+final class ParameterTest extends TestCase
 {
     private Parameter $parameter;
 
+    /**
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     */
+    #[Override]
     protected function setUp(): void
     {
         $this->parameter = new Method\Parameter();

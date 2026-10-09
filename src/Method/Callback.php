@@ -17,16 +17,17 @@ use function method_exists;
 use function sprintf;
 use function ucfirst;
 
+/**
+ * Method callback metadata
+ *
+ * @final This class should not be extended
+ */
 class Callback
 {
     /** @var string */
     protected $class;
 
-    /**
-     * Function name or callable for function callback
-     *
-     * @var string|callable
-     */
+    /** @var string|callable Function name or callable for function callback */
     protected $function;
 
     /** @var string */
@@ -35,11 +36,7 @@ class Callback
     /** @var null|string */
     protected $type;
 
-    /**
-     * Valid callback types
-     *
-     * @var array
-     */
+    /** @var array Valid callback types */
     protected $types = ['function', 'static', 'instance'];
 
     public function __construct(?array $options = null)
@@ -49,6 +46,9 @@ class Callback
         }
     }
 
+    /**
+     * Set object state from array of options
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -103,6 +103,9 @@ class Callback
         return $this->function;
     }
 
+    /**
+     * Set callback class method
+     */
     public function setMethod(string $method): self
     {
         $this->method = $method;

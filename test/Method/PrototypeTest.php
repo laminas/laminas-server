@@ -10,13 +10,24 @@ namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
 use Laminas\Server\Method\Parameter;
+use Override;
+use PHPUnit\Framework\Attributes\Group;
 use Laminas\Server\Method\Prototype;
 use PHPUnit\Framework\TestCase;
 
-class PrototypeTest extends TestCase
+/**
+ * Test class for \Laminas\Server\Method\Prototype
+ */
+#[Group('Laminas_Server')]
+final class PrototypeTest extends TestCase
 {
     private Prototype $prototype;
 
+    /**
+     * Sets up the fixture, for example, open a network connection.
+     * This method is called before a test is executed.
+     */
+    #[Override]
     protected function setUp(): void
     {
         $this->prototype = new Method\Prototype();

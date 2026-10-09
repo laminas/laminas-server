@@ -24,8 +24,12 @@ use function array_shift;
 use function array_unshift;
 use function call_user_func_array;
 use function count;
+use function get_object_vars;
+use function is_array;
+use function is_string;
 use function method_exists;
 use function preg_match;
+use function property_exists;
 
 use const PHP_VERSION_ID;
 
@@ -116,6 +120,7 @@ abstract class AbstractFunction
     /**
      * Constructor
      *
+     * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
@@ -298,7 +303,6 @@ abstract class AbstractFunction
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
                 // Suppressing, because false positive
-                /** @psalm-suppress TooManyArguments **/
                 $paramTypesTmp[] = [$this->paramIsArray($param) ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
@@ -361,9 +365,7 @@ abstract class AbstractFunction
      */
     public function __get(string $key)
     {
-        if (isset($this->config[$key])) {
-            return $this->config[$key];
-        }
+        return $this->config[$key] ?? null;
     }
 
     /**
@@ -436,21 +438,24 @@ abstract class AbstractFunction
     /**
      * @return string[]
      */
-    public function __sleep(): array
+    public function __serialize(): array
     {
-        $serializable = [];
-        foreach ($this as $name => $value) {
+        $data = [];
+        foreach (get_object_vars($this) as $name => $value) {
             if (
                 $value instanceof PhpReflectionFunction
                 || $value instanceof PhpReflectionMethod
             ) {
-                continue;
+                continue; // never serialize reflection objects
             }
 
-            $serializable[] = $name;
+            $data[$name] = $value;
         }
 
-        return $serializable;
+        $data['__reflection_kind'] =
+            $this->reflection instanceof PhpReflectionMethod ? 'method' : 'function';
+
+        return $data;
     }
 
     /**
@@ -458,12 +463,19 @@ abstract class AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @throws ReflectionException
      */
-    public function __wakeup(): void
+    public function __unserialize(array $data): void
     {
-        if ($this->reflection instanceof PhpReflectionMethod) {
+        $kind = $data['__reflection_kind'] ?? 'function';
+        unset($data['__reflection_kind']);
+
+        foreach ($data as $name => $value) {
+            if (property_exists($this, $name)) {
+                $this->$name = $value;
+            }
+        }
+
+        if ($kind === 'method') {
             $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
@@ -473,11 +485,7 @@ abstract class AbstractFunction
 
     private function paramIsArray(PhpReflectionParameter $param): bool
     {
-        if (PHP_VERSION_ID >= 80000) {
-            $type = $param->getType();
-            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
-        }
-
-        return $param->isArray();
+        $type = $param->getType();
+        return $type instanceof ReflectionNamedType && $type->getName() === 'array';
     }
 }

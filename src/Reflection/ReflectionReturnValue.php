@@ -8,18 +8,26 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use function is_string;
+
 /**
  * Return value reflection
  *
  * Stores the return value type and description
+ *
+ * @final This class should not be extended
  */
 class ReflectionReturnValue
 {
-    /** @var string */
-    protected $type;
+    /**
+     * Return value type
+     */
+    protected string $type;
 
-    /** @var string */
-    protected $description;
+    /**
+     * Return value description
+     */
+    protected string $description;
 
     public function __construct(string $type = 'mixed', string $description = '')
     {

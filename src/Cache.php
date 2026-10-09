@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Laminas\Server;
 
 use ErrorException;
+use Laminas\Server\Server;
 use Laminas\Stdlib\ErrorHandler;
 
 use function array_keys;
@@ -18,6 +19,7 @@ use function file_get_contents;
 use function file_put_contents;
 use function in_array;
 use function is_readable;
+use function is_string;
 use function is_writable;
 use function serialize;
 use function unlink;
@@ -25,6 +27,11 @@ use function unserialize;
 
 use const E_NOTICE;
 
+/**
+ * \Laminas\Server\Cache: cache server definitions
+ *
+ * @final This class should not be extended
+ */
 class Cache
 {
     /** @var string[] */

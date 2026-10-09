@@ -8,8 +8,13 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-use Laminas\Server\Reflection\ReflectionReturnValue;
-
+/**
+ * Method/Function prototypes
+ *
+ * Contains accessors for the return value and all method arguments.
+ *
+ * @final This class should not be extended
+ */
 class Prototype
 {
     /** @var ReflectionParameter[] */
@@ -39,6 +44,9 @@ class Prototype
         return $this->return->getType();
     }
 
+    /**
+     * Retrieve the return value object
+     */
     public function getReturnValue(): ReflectionReturnValue
     {
         return $this->return;

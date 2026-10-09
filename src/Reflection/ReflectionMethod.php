@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Override;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
 use ReflectionMethod as PhpReflectionMethod;
@@ -16,11 +17,16 @@ use Webmozart\Assert\Assert;
 use function array_map;
 use function array_merge;
 use function implode;
+use function str_contains;
 use function str_replace;
-use function strpos;
 
 use const PHP_EOL;
 
+/**
+ * Method Reflection
+ *
+ * @final This class should not be extended
+ */
 class ReflectionMethod extends AbstractFunction
 {
     /**
@@ -81,23 +87,32 @@ class ReflectionMethod extends AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @throws ReflectionException
      */
-    public function __wakeup(): void
+    #[Override]
+    public function __unserialize(array $data): void
     {
+        $this->class = $data['class'];
+        $this->name  = $data['name'];
+
         $this->classReflection = new ReflectionClass(
             new PhpReflectionClass($this->class),
             $this->getNamespace(),
             $this->getInvokeArguments()
         );
+
         $this->reflection      = new PhpReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
-    protected function reflect(): void
+    /**
+     * {@inheritdoc}
+     *
+     * @return void
+     */
+    #[Override]
+    protected function reflect()
     {
         $docComment = $this->reflection->getDocComment();
-        if (false !== $docComment && strpos($docComment, self::INHERIT_TAG) !== false) {
+        if (str_contains($docComment, self::INHERIT_TAG)) {
             $this->docComment = $this->fetchRecursiveDocComment();
         }
 
@@ -141,10 +156,7 @@ class ReflectionMethod extends AbstractFunction
         return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
-    /**
-     * @param ReflectionClass|PhpReflectionClass $reflectionClass
-     */
-    private function fetchRecursiveDocBlockFromParent($reflectionClass, string $methodName): ?array
+    private function fetchRecursiveDocBlockFromParent(ReflectionClass|PhpReflectionClass $reflectionClass, string $methodName): ?array
     {
         $docComment            = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
@@ -162,7 +174,7 @@ class ReflectionMethod extends AbstractFunction
         $docCommentLast   = $methodReflection->getDocComment();
         Assert::string($docCommentLast);
 
-        $docComment[] = $docCommentLast;
+        $docComment[]     = $docCommentLast;
         if ($this->isInherit($docCommentLast)) {
             if ($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
                 $docComment = array_merge($docComment, $docCommentFetched);
@@ -174,6 +186,6 @@ class ReflectionMethod extends AbstractFunction
 
     private function isInherit(string $docComment): bool
     {
-        return strpos($docComment, self::INHERIT_TAG) !== false;
+        return str_contains($docComment, self::INHERIT_TAG);
     }
 }

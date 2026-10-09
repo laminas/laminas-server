@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
 
@@ -15,31 +16,36 @@ use function call_user_func_array;
 use function method_exists;
 use function preg_match;
 use function substr;
+use function is_array;
+use function is_string;
+use function str_starts_with;
 
 /**
  * Class/Object reflection
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
+ *
+ * @final This class should not be extended
  */
 class ReflectionClass
 {
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /** @var ReflectionMethod[] */
-    protected $methods = [];
+    protected array $methods = [];
 
     /** @var null|string */
-    protected $namespace;
+    protected ?string $namespace;
 
-    /** @var PhpReflectionClass */
-    protected $reflection;
+    /**
+     * ReflectionClass object
+     */
+    protected PhpReflectionClass $reflection;
 
     /**
      * Reflection class name (needed for serialization)
@@ -65,7 +71,7 @@ class ReflectionClass
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
-            if ('__' === substr($method->getName(), 0, 2)) {
+            if (str_starts_with($method->getName(), '__')) {
                 continue;
             }
 
@@ -101,9 +107,7 @@ class ReflectionClass
      */
     public function __get(string $key)
     {
-        if (isset($this->config[$key])) {
-            return $this->config[$key];
-        }
+        return $this->config[$key] ?? null;
     }
 
     /**
@@ -155,16 +159,27 @@ class ReflectionClass
      *
      * @throws ReflectionException
      */
-    public function __wakeup(): void
+    public function __unserialize(array $data): void
     {
+        $this->config    = $data['config'] ?? '';
+        $this->methods   = $data['methods'] ?? '';
+        $this->namespace = $data['namespace'] ?? '';
+        $this->name      = $data['name'] ?? '';
+
+        // Restore runtime-only dependency
         $this->reflection = new PhpReflectionClass($this->name);
     }
 
     /**
      * @return string[]
      */
-    public function __sleep(): array
+    public function __serialize(): array
     {
-        return ['config', 'methods', 'namespace', 'name'];
+        return [
+            'config'    => $this->config,
+            'methods'   => $this->methods,
+            'namespace' => $this->namespace,
+            'name'      => $this->name,
+        ];
     }
 }

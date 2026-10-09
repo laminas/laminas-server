@@ -11,6 +11,9 @@ namespace Laminas\Server\Reflection;
 use function array_merge;
 use function count;
 
+/**
+ * Node Tree class for Laminas\Server reflection operations
+ */
 class Node
 {
     /** @var mixed */
@@ -19,8 +22,10 @@ class Node
     /** @var self[] */
     protected $children = [];
 
-    /** @var null|self */
-    protected $parent;
+    /**
+     * Parent node (if any)
+     */
+    protected ?self $parent = null;
 
     /**
      * @param mixed $value
@@ -37,7 +42,12 @@ class Node
     /**
      * Set parent node
      *
+     * //phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
+     * //phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
+     *
      * @param \Laminas\Server\Reflection\Node $node
+     * //phpcs:enable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
+     * //phpcs:enable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
      * @param bool                            $new Whether or not the child node
      *     is newly created and should always be attached
      */
@@ -59,6 +69,9 @@ class Node
         return new static($value, $this);
     }
 
+    /**
+     * Attach a child node
+     */
     public function attachChild(self $node): void
     {
         $this->children[] = $node;
@@ -78,6 +91,9 @@ class Node
         return count($this->children) > 0;
     }
 
+    /**
+     * Return the parent node
+     */
     public function getParent(): ?self
     {
         return $this->parent;

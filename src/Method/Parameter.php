@@ -12,6 +12,11 @@ use function is_array;
 use function method_exists;
 use function ucfirst;
 
+/**
+ * Method parameter metadata
+ *
+ * @final This class should not be extended
+ */
 class Parameter
 {
     /** @var mixed */
@@ -36,6 +41,9 @@ class Parameter
         }
     }
 
+    /**
+     * Set object state from array of options
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -51,7 +59,6 @@ class Parameter
      * Set default value
      *
      * @param  mixed $defaultValue
-     * @return $this
      */
     public function setDefaultValue($defaultValue): self
     {
@@ -69,6 +76,9 @@ class Parameter
         return $this->defaultValue;
     }
 
+    /**
+     * Set description
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -80,6 +90,9 @@ class Parameter
         return $this->description;
     }
 
+    /**
+     * Set name
+     */
     public function setName(?string $name): self
     {
         $this->name = $name;
@@ -91,6 +104,9 @@ class Parameter
         return $this->name;
     }
 
+    /**
+     * Set optional flag
+     */
     public function setOptional(bool $flag): self
     {
         $this->optional = $flag;
@@ -102,6 +118,9 @@ class Parameter
         return $this->optional;
     }
 
+    /**
+     * Set parameter type
+     */
     public function setType(string $type): self
     {
         $this->type = $type;

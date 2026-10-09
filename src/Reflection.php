@@ -18,13 +18,16 @@ use ReflectionObject;
 
 use function class_exists;
 use function function_exists;
-use function gettype;
+use function in_array;
 use function is_array;
 use function is_object;
 use function is_string;
 use function sprintf;
 
-class Reflection
+/**
+ * Reflection for determining method signatures to use with server classes
+ */
+final class Reflection
 {
     /**
      * Perform class reflection to create dispatch signatures
@@ -42,7 +45,7 @@ class Reflection
      *   also for XmlRpc namespacing
      * @throws ReflectionException
      */
-    public static function reflectClass($class, array $argv = [], ?string $namespace = null): ReflectionClass
+    public static function reflectClass(string|object $class, array $argv = [], ?string $namespace = null): ReflectionClass
     {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
@@ -72,7 +75,7 @@ class Reflection
      * @throws InvalidArgumentException|ReflectionException
      */
     public static function reflectFunction(
-        $function,
+        string|callable $function,
         ?array $argv = null,
         ?string $namespace = null
     ): ReflectionFunction {

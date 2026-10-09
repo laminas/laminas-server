@@ -8,7 +8,10 @@ declare(strict_types=1);
 
 namespace LaminasTest\Server\TestAsset;
 
-class ReflectionTestClass
+/**
+ * \LaminasTest\Server\TestAsset\ReflectionTestClass -- test class reflection
+ */
+final class ReflectionTestClass
 {
     /**
      * Constructor
