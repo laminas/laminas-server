@@ -9,10 +9,12 @@ declare(strict_types=1);
 namespace Laminas\Server;
 
 use Laminas\Server\Method\Callback;
+use Override;
 use ReflectionClass;
 use ReflectionException;
 use Webmozart\Assert\Assert;
 
+use function call_user_func_array;
 use function is_object;
 
 abstract class AbstractServer implements ServerInterface
@@ -29,6 +31,7 @@ abstract class AbstractServer implements ServerInterface
         $this->table->setOverwriteExistingMethods($this->overwriteExistingMethods);
     }
 
+    #[Override]
     public function getFunctions(): Definition
     {
         return $this->table;
@@ -41,12 +44,18 @@ abstract class AbstractServer implements ServerInterface
     {
         $callback = new Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
+            /** @var string $declaringClass */
+            $declaringClass = $reflection->getDeclaringClass()->getName();
+            /** @var string $methodName */
+            $methodName = $reflection->getName();
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
-                ->setClass($reflection->getDeclaringClass()->getName())
-                ->setMethod($reflection->getName());
+                ->setClass($declaringClass)
+                ->setMethod($methodName);
         } elseif ($reflection instanceof Reflection\ReflectionFunction) {
+            /** @var string $functionName */
+            $functionName = $reflection->getName();
             $callback->setType('function')
-                ->setFunction($reflection->getName());
+                ->setFunction($functionName);
         }
         return $callback;
     }

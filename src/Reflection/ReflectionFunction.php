@@ -8,6 +8,9 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-class ReflectionFunction extends AbstractFunction
+/**
+ * Function Reflection
+ */
+final class ReflectionFunction extends AbstractFunction
 {
 }

@@ -8,24 +8,37 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use Deprecated;
+use ReflectionException;
 use ReflectionParameter as PhpReflectionParameter;
 
 use function call_user_func_array;
+use function is_string;
 use function method_exists;
 
-class ReflectionParameter
+/**
+ * Parameter Reflection
+ *
+ * Decorates a ReflectionParameter to allow setting the parameter type
+ */
+final class ReflectionParameter
 {
-    /** @var PhpReflectionParameter */
-    protected $reflection;
+    protected PhpReflectionParameter $reflection;
 
-    /** @var int */
-    protected $position;
+    /**
+     * Parameter position
+     */
+    protected int $position;
 
-    /** @var string */
-    protected $type;
+    /**
+     * Parameter type
+     */
+    protected string $type;
 
-    /** @var null|string */
-    protected $description;
+    /**
+     * Parameter description
+     */
+    protected ?string $description;
 
     /**
      * Parameter name (needed for serialization)
@@ -104,13 +117,47 @@ class ReflectionParameter
     /**
      * @return string[]
      */
+    #[Deprecated('Use __serialize instead')]
     public function __sleep(): array
     {
-        return ['position', 'type', 'description', 'name', 'functionName'];
+        return $this->__serialize();
     }
 
+    /**
+     * @return string[]
+     */
+    public function __serialize(): array
+    {
+        return [
+            'position'     => $this->position,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'name'         => $this->name,
+            'functionName' => $this->functionName,
+        ];
+    }
+
+    /**
+     * @return void
+     * @throws ReflectionException
+     */
+    #[Deprecated('Use __unserialize instead')]
     public function __wakeup(): void
     {
-        $this->reflection = new PhpReflectionParameter($this->functionName, $this->name);
+        $this->__unserialize($this->__serialize());
+    }
+
+    /**
+     * @param array<string, mixed> $data
+     * @throws ReflectionException
+     */
+    public function __unserialize(array $data): void
+    {
+        $this->position     = $data['position'] ?? '0';
+        $this->type         = $data['type'] ?? 'mixed';
+        $this->description  = $data['description'] ?? '';
+        $this->name         = $data['name'] ?? '';
+        $this->functionName = $data['functionName'] ?? '';
+        $this->reflection   = new PhpReflectionParameter($this->functionName, $this->name);
     }
 }

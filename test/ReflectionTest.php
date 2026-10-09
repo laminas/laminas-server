@@ -10,9 +10,12 @@ namespace LaminasTest\Server;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
-class ReflectionTest extends TestCase
+#[Group('Laminas_server')]
+final class ReflectionTest extends TestCase
 {
     public function testReflectClass(): void
     {
@@ -31,6 +34,9 @@ class ReflectionTest extends TestCase
         Reflection::reflectClass(false);
     }
 
+    /**
+     * reflectClass() test; test namespaces
+     */
     public function testReflectClass2(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, [], 'zsr');
@@ -52,6 +58,9 @@ class ReflectionTest extends TestCase
         Reflection::reflectFunction(false);
     }
 
+    /**
+     * reflectFunction() test; test namespaces
+     */
     public function testReflectFunction2(): void
     {
         /** @psalm-suppress UndefinedClass **/

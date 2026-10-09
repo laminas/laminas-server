@@ -10,6 +10,6 @@ namespace Laminas\Server\Reflection\Exception;
 
 use Laminas\Server\Exception;
 
-class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
+final class BadMethodCallException extends Exception\BadMethodCallException implements ExceptionInterface
 {
 }

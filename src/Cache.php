@@ -25,7 +25,10 @@ use function unserialize;
 
 use const E_NOTICE;
 
-class Cache
+/**
+ * \Laminas\Server\Cache: cache server definitions
+ */
+final class Cache
 {
     /** @var string[] */
     protected static $skipMethods = [];

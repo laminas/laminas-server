@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
-use Webmozart\Assert\Assert;
+use Laminas\Server\Method\Parameter;
 
 use function array_key_exists;
 use function count;
@@ -18,21 +18,22 @@ use function is_string;
 use function method_exists;
 use function ucfirst;
 
-class Prototype
+/**
+ * Method prototype metadata
+ */
+final class Prototype
 {
-    /** @var string */
-    protected $returnType = 'void';
+    protected string $returnType = 'void';
 
     /**
      * Map parameter names to parameter index
      *
-     * @var array
      * @psalm-var array<string, int>
      */
-    protected $parameterNameMap = [];
+    protected array $parameterNameMap = [];
 
     /** @var Parameter[] */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     public function __construct(?array $options = null)
     {
@@ -41,6 +42,9 @@ class Prototype
         }
     }
 
+    /**
+     * Set return value
+     */
     public function setReturnType(string $returnType): self
     {
         $this->returnType = $returnType;
@@ -54,11 +58,8 @@ class Prototype
 
     /**
      * Add a parameter
-     *
-     * @param  string|Parameter $parameter
-     * @return $this
      */
-    public function addParameter($parameter): self
+    public function addParameter(string|Parameter $parameter): self
     {
         if ($parameter instanceof Parameter) {
             $this->parameters[] = $parameter;
@@ -82,6 +83,9 @@ class Prototype
         return $this;
     }
 
+    /**
+     * Set parameters
+     */
     public function setParameters(array $parameters): self
     {
         $this->parameters       = [];
@@ -109,10 +113,8 @@ class Prototype
 
     /**
      * Retrieve a single parameter by name or index
-     *
-     * @param  string|int $index
      */
-    public function getParameter($index): ?Parameter
+    public function getParameter(string|int $index): ?Parameter
     {
         if (! is_string($index) && ! is_numeric($index)) {
             return null;
@@ -129,6 +131,9 @@ class Prototype
         return null;
     }
 
+    /**
+     * Set object state from array
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
