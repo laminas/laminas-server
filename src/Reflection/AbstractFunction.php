@@ -45,82 +45,62 @@ use const PHP_VERSION_ID;
  */
 abstract class AbstractFunction
 {
-    /** @var ReflectionFunctionAbstract */
-    protected $reflection;
+    protected ReflectionFunctionAbstract $reflection;
 
     /**
      * Additional arguments to pass to method on invocation
-     *
-     * @var array
      */
-    protected $argv = [];
+    protected array $argv = [];
 
     /**
      * Used to store extra configuration for the method (typically done by the
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /**
      * Declaring class (needed for when serialization occurs)
-     *
-     * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * Function name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Function/method description
-     *
-     * @var string
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * Namespace with which to prefix function/method name
-     *
-     * @var null|string
      */
-    protected $namespace;
+    protected ?string $namespace;
 
     /** @var Prototype[] */
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
-    /** @var string */
-    protected $docComment = '';
+    protected string $docComment = '';
 
-    /** @var array */
-    protected $return = [];
+    protected array $return = [];
 
-    /** @var string */
-    protected $returnDesc;
+    protected string $returnDesc;
 
     /**
-     * @var null|string[]
      * @psalm-var null|array<array-key, string>
      */
-    protected $paramDesc;
+    protected null|array $paramDesc;
 
-    /** @var array */
-    protected $sigParams;
+    protected array $sigParams;
 
-    /** @var int */
-    protected $sigParamsDepth;
+    protected int $sigParamsDepth;
 
     /**
      * Constructor
      *
-     * @param null|array $argv
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */

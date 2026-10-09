@@ -20,28 +20,22 @@ use function ucfirst;
 
 /**
  * Method definition metadata
- *
- * @final This class should not be extended
  */
-class Definition
+final class Definition
 {
     /** @var null|Callback */
-    protected $callback;
+    protected ?Callback $callback;
 
-    /** @var array */
-    protected $invokeArguments = [];
+    protected array $invokeArguments = [];
 
-    /** @var string */
-    protected $methodHelp = '';
+    protected string $methodHelp = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name;
 
-    /** @var null|object */
-    protected $object;
+    protected ?object $object;
 
     /** @var Prototype[] */
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
     public function __construct(?array $options = null)
     {

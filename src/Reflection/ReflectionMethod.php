@@ -10,7 +10,6 @@ namespace Laminas\Server\Reflection;
 
 use Override;
 use ReflectionClass as PhpReflectionClass;
-use ReflectionException;
 use ReflectionMethod as PhpReflectionMethod;
 use Webmozart\Assert\Assert;
 
@@ -24,10 +23,8 @@ use const PHP_EOL;
 
 /**
  * Method Reflection
- *
- * @final This class should not be extended
  */
-class ReflectionMethod extends AbstractFunction
+final class ReflectionMethod extends AbstractFunction
 {
     /**
      * Doc block inherit tag for search
@@ -36,17 +33,13 @@ class ReflectionMethod extends AbstractFunction
 
     /**
      * Parent class name
-     *
-     * @var string
      */
-    protected $class;
+    protected string $class;
 
     /**
      * Parent class reflection
-     *
-     * @var ReflectionClass
      */
-    protected $classReflection;
+    protected ReflectionClass $classReflection;
 
     public function __construct(
         ReflectionClass $class,

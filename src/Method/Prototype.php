@@ -20,23 +20,20 @@ use function ucfirst;
 
 /**
  * Method prototype metadata
- *
- * @final This class should not be extended
  */
-class Prototype
+final class Prototype
 {
     protected string $returnType = 'void';
 
     /**
      * Map parameter names to parameter index
      *
-     * @var array
      * @psalm-var array<string, int>
      */
-    protected $parameterNameMap = [];
+    protected array $parameterNameMap = [];
 
     /** @var Parameter[] */
-    protected $parameters = [];
+    protected array $parameters = [];
 
     public function __construct(?array $options = null)
     {

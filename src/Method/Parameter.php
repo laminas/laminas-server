@@ -14,25 +14,18 @@ use function ucfirst;
 
 /**
  * Method parameter metadata
- *
- * @final This class should not be extended
  */
-class Parameter
+final class Parameter
 {
-    /** @var mixed */
-    protected $defaultValue;
+    protected mixed $defaultValue;
 
-    /** @var string */
-    protected $description = '';
+    protected string $description = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name;
 
-    /** @var bool */
-    protected $optional = false;
+    protected bool $optional = false;
 
-    /** @var string */
-    protected $type = 'mixed';
+    protected string $type = 'mixed';
 
     public function __construct(?array $options = null)
     {

@@ -19,22 +19,17 @@ use function ucfirst;
 
 /**
  * Method callback metadata
- *
- * @final This class should not be extended
  */
-class Callback
+final class Callback
 {
-    /** @var string */
-    protected $class;
+    protected string $class;
 
     /** @var string|callable Function name or callable for function callback */
-    protected $function;
+    protected string $function;
 
-    /** @var string */
-    protected $method;
+    protected string $method;
 
-    /** @var null|string */
-    protected $type;
+    protected ?string $type;
 
     /** @var array Valid callback types */
     protected $types = ['function', 'static', 'instance'];

@@ -26,10 +26,8 @@ use function sprintf;
 
 /**
  * Server methods metadata
- *
- * @final This class should not be extended
  */
-class Definition implements Countable, Iterator
+final class Definition implements Countable, Iterator
 {
     /** @var Method\Definition[] */
     protected $methods = [];
@@ -58,7 +56,6 @@ class Definition implements Countable, Iterator
 
     /**
      * Add method to definition
-     *
      * @throws \Laminas\Server\Exception\InvalidArgumentException If duplicate or invalid method provided
      *  @psalm-param Method\Definition|array<string, mixed> $method
      */
@@ -92,6 +89,7 @@ class Definition implements Countable, Iterator
      * Add multiple methods
      *
      * @param  Method\Definition[] $methods
+     *
      * @psalm-param array<array-key, Method\Definition|array<string, mixed>> $methods
      */
     public function addMethods(array $methods): self

@@ -25,10 +25,8 @@ use function str_starts_with;
  *
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
- *
- * @final This class should not be extended
  */
-class ReflectionClass
+final class ReflectionClass
 {
     /**
      * Optional configuration parameters; accessible via {@link __get} and
@@ -39,20 +37,14 @@ class ReflectionClass
     /** @var ReflectionMethod[] */
     protected array $methods = [];
 
-    /** @var null|string */
     protected ?string $namespace;
 
-    /**
-     * ReflectionClass object
-     */
     protected PhpReflectionClass $reflection;
 
     /**
      * Reflection class name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Constructor

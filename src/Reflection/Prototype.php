@@ -12,13 +12,11 @@ namespace Laminas\Server\Reflection;
  * Method/Function prototypes
  *
  * Contains accessors for the return value and all method arguments.
- *
- * @final This class should not be extended
  */
-class Prototype
+final class Prototype
 {
     /** @var ReflectionParameter[] */
-    protected $params;
+    protected array $params;
 
     private ReflectionReturnValue $return;
 
