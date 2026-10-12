@@ -24,15 +24,15 @@ final class Callback
 {
     protected string $class;
 
-    /** @var string|callable Function name or callable for function callback */
-    protected string $function;
+    /** @var string|\Closure|null Function name or callable for function callback */
+    protected string|\Closure|null $function;
 
     protected string $method;
 
     protected ?string $type;
 
     /** @var array Valid callback types */
-    protected $types = ['function', 'static', 'instance'];
+    protected array $types = ['function', 'static', 'instance'];
 
     public function __construct(?array $options = null)
     {
@@ -57,11 +57,8 @@ final class Callback
 
     /**
      * Set callback class
-     *
-     * @param  string|object $class
-     * @return $this
      */
-    public function setClass($class): self
+    public function setClass(string|object $class): self
     {
         if (is_object($class)) {
             $class = $class::class;
@@ -77,11 +74,8 @@ final class Callback
 
     /**
      * Set callback function
-     *
-     * @param  string|callable $function
-     * @return $this
      */
-    public function setFunction($function): self
+    public function setFunction(string|\Closure $function): self
     {
         $this->function = $function;
         $this->setType('function');
@@ -90,10 +84,8 @@ final class Callback
 
     /**
      * Get callback function
-     *
-     * @return null|string|callable
      */
-    public function getFunction()
+    public function getFunction(): string|callable|null
     {
         return $this->function;
     }

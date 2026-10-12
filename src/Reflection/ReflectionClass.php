@@ -33,7 +33,7 @@ final class ReflectionClass
     /** @var ReflectionMethod[] */
     protected array $methods = [];
 
-    protected ?string $namespace;
+    protected ?string $namespace = null;
 
     protected PhpReflectionClass $reflection;
 

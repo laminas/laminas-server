@@ -73,7 +73,7 @@ abstract class AbstractFunction
     /**
      * Namespace with which to prefix function/method name
      */
-    protected ?string $namespace;
+    protected ?string $namespace = null;
 
     /** @var Prototype[] */
     protected array $prototypes = [];

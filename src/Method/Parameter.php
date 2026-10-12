@@ -21,7 +21,7 @@ final class Parameter
 
     protected string $description = '';
 
-    protected ?string $name;
+    protected ?string $name = null;
 
     protected bool $optional = false;
 

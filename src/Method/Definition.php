@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace Laminas\Server\Method;
 
 use Laminas\Server;
-use Laminas\Server\Method\Callback;
-use Laminas\Server\Method\Prototype;
 
 use function is_array;
 use function method_exists;
@@ -27,9 +25,9 @@ final class Definition
 
     protected string $methodHelp = '';
 
-    protected ?string $name;
+    protected ?string $name = null;
 
-    protected ?object $object;
+    protected ?object $object = null;
 
     /** @var Prototype[] */
     protected array $prototypes = [];
