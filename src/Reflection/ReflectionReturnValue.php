@@ -8,8 +8,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-use function is_string;
-
 /**
  * Return value reflection
  *

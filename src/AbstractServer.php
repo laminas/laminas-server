@@ -14,7 +14,6 @@ use ReflectionClass;
 use ReflectionException;
 use Webmozart\Assert\Assert;
 
-use function call_user_func_array;
 use function is_object;
 
 abstract class AbstractServer implements ServerInterface

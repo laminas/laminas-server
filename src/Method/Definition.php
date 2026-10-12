@@ -13,9 +13,7 @@ use Laminas\Server\Method\Callback;
 use Laminas\Server\Method\Prototype;
 
 use function is_array;
-use function is_object;
 use function method_exists;
-use function sprintf;
 use function ucfirst;
 
 /**
@@ -23,7 +21,6 @@ use function ucfirst;
  */
 final class Definition
 {
-    /** @var null|Callback */
     protected ?Callback $callback;
 
     protected array $invokeArguments = [];

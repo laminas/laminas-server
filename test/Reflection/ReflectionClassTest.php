@@ -11,12 +11,10 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass as PhpReflectionClass;
 
-use function assert;
 use function count;
 use function serialize;
 use function unserialize;

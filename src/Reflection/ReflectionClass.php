@@ -8,16 +8,12 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-use Deprecated;
 use ReflectionClass as PhpReflectionClass;
 use ReflectionException;
 
 use function call_user_func_array;
 use function method_exists;
 use function preg_match;
-use function substr;
-use function is_array;
-use function is_string;
 use function str_starts_with;
 
 /**

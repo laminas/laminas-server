@@ -13,7 +13,6 @@ use ReflectionException;
 use ReflectionParameter as PhpReflectionParameter;
 
 use function call_user_func_array;
-use function is_string;
 use function method_exists;
 
 /**
@@ -138,7 +137,6 @@ final class ReflectionParameter
     }
 
     /**
-     * @return void
      * @throws ReflectionException
      */
     #[Deprecated('Use __unserialize instead')]

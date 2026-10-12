@@ -151,7 +151,7 @@ final class NodeTest extends TestCase
         $child1->createChild(null);
         $child1->createChild('child1grand2');
         $child2->createChild('child2grand1');
-        $child2grand2       = $child2->createChild('child2grand2');
+        $child2grand2 = $child2->createChild('child2grand2');
         $child2grand2->createChild(null);
         $child2grand2->createChild('child2grand2great2');
 

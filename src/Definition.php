@@ -56,7 +56,8 @@ final class Definition implements Countable, Iterator
 
     /**
      * Add method to definition
-     * @throws \Laminas\Server\Exception\InvalidArgumentException If duplicate or invalid method provided
+     *
+     * @throws InvalidArgumentException If duplicate or invalid method provided
      *  @psalm-param Method\Definition|array<string, mixed> $method
      */
     public function addMethod(array|Method\Definition $method, ?string $name = null): self
@@ -89,7 +90,6 @@ final class Definition implements Countable, Iterator
      * Add multiple methods
      *
      * @param  Method\Definition[] $methods
-     *
      * @psalm-param array<array-key, Method\Definition|array<string, mixed>> $methods
      */
     public function addMethods(array $methods): self

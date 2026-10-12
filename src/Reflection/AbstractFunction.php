@@ -12,7 +12,6 @@ use Laminas\Code\Generator\DocBlock\Tag\ParamTag;
 use Laminas\Code\Generator\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
-use ReflectionException;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
@@ -25,13 +24,9 @@ use function array_unshift;
 use function call_user_func_array;
 use function count;
 use function get_object_vars;
-use function is_array;
-use function is_string;
 use function method_exists;
 use function preg_match;
 use function property_exists;
-
-use const PHP_VERSION_ID;
 
 /**
  * Function/Method Reflection
@@ -89,9 +84,7 @@ abstract class AbstractFunction
 
     protected string $returnDesc;
 
-    /**
-     * @psalm-var null|array<array-key, string>
-     */
+    /** @psalm-var null|array<array-key, string> */
     protected null|array $paramDesc;
 
     protected array $sigParams;

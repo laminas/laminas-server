@@ -18,7 +18,7 @@ use ReflectionObject;
 
 use function class_exists;
 use function function_exists;
-use function in_array;
+use function gettype;
 use function is_array;
 use function is_object;
 use function is_string;

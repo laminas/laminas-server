@@ -10,7 +10,6 @@ namespace LaminasTest\Server;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
-use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 

@@ -23,30 +23,4 @@ final class ReflectionTestClass
     public function __construct($arg = null)
     {
     }
-
-    /**
-     * Public one
-     */
-    public function one(string $arg1, ?array $arg2 = null): string
-    {
-        return 'foo';
-    }
-
-    /**
-     * Protected _one
-     *
-     * Should not be reflected
-     *
-     * @param null|array $arg2
-     */
-    // @codingStandardsIgnoreStart
-    protected function _one(string $arg1, ?array $arg2 = null): string
-    {
-        // @codingStandardsIgnoreEnd
-        return 'foo';
-    }
-
-    public static function two(string $arg1, string $arg2): void
-    {
-    }
 }

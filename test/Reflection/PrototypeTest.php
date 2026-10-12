@@ -32,7 +32,7 @@ final class PrototypeTest extends TestCase
     protected array $parametersRaw;
 
     /** @var ReflectionParameter[] */
-    protected $parameters;
+    protected array $parameters;
 
     /**
      * Setup environment

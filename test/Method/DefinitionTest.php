@@ -9,9 +9,9 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Method;
+use Laminas\Server\Method\Definition;
 use Override;
 use PHPUnit\Framework\Attributes\Group;
-use Laminas\Server\Method\Definition;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 

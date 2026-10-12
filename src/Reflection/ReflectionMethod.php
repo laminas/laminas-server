@@ -10,6 +10,7 @@ namespace Laminas\Server\Reflection;
 
 use Override;
 use ReflectionClass as PhpReflectionClass;
+use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
 use Webmozart\Assert\Assert;
 
@@ -41,16 +42,18 @@ final class ReflectionMethod extends AbstractFunction
      */
     protected ReflectionClass $classReflection;
 
-    public function __construct(
-        ReflectionClass $class,
-        PhpReflectionMethod $r,
-        ?string $namespace = null,
-        array $argv = []
-    ) {
+    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, array $argv = [])
+    {
+        // If method call, need to store some info on the class
+        $class = null;
+        if ($r instanceof PhpReflectionMethod) {
+            $class = $r->getDeclaringClass();
+        }
+
         $this->classReflection = $class;
         $this->reflection      = $r;
 
-        $classNamespace = $class->getNamespace();
+        $classNamespace = null;
 
         // Determine namespace
         if (! empty($namespace)) {
@@ -93,7 +96,7 @@ final class ReflectionMethod extends AbstractFunction
             $this->getInvokeArguments()
         );
 
-        $this->reflection      = new PhpReflectionMethod($this->classReflection->getName(), $this->name);
+        $this->reflection = new PhpReflectionMethod($this->classReflection->getName(), $this->name);
     }
 
     /**
@@ -102,7 +105,7 @@ final class ReflectionMethod extends AbstractFunction
      * @return void
      */
     #[Override]
-    protected function reflect()
+    protected function reflect(): void
     {
         $docComment = $this->reflection->getDocComment();
         if (str_contains($docComment, self::INHERIT_TAG)) {
@@ -167,7 +170,7 @@ final class ReflectionMethod extends AbstractFunction
         $docCommentLast   = $methodReflection->getDocComment();
         Assert::string($docCommentLast);
 
-        $docComment[]     = $docCommentLast;
+        $docComment[] = $docCommentLast;
         if ($this->isInherit($docCommentLast)) {
             if ($docCommentFetched = $this->fetchRecursiveDocBlockFromParent($parentReflectionClass, $methodName)) {
                 $docComment = array_merge($docComment, $docCommentFetched);

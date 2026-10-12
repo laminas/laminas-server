@@ -10,8 +10,8 @@ namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Node;
-use Override;
 use Laminas\Server\Reflection\ReflectionParameter;
+use Override;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 use ReflectionMethod;
@@ -21,14 +21,11 @@ use function unserialize;
 
 final class ReflectionMethodTest extends TestCase
 {
-    /** @var ReflectionClass */
-    protected $classRaw;
+    protected ReflectionClass $classRaw;
 
-    /** @var Reflection\ReflectionClass */
-    protected $class;
+    protected Reflection\ReflectionClass $class;
 
-    /** @var ReflectionMethod */
-    protected $method;
+    protected ReflectionMethod $method;
 
     #[Override]
     protected function setUp(): void

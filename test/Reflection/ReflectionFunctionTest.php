@@ -9,13 +9,12 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Reflection;
 
 use Laminas\Server\Reflection;
-use PHPUnit\Framework\Attributes\Group;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionParameter;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
-use function in_array;
 use function serialize;
 use function unserialize;
 use function var_export;

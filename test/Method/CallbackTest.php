@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace LaminasTest\Server\Method;
 
 use Laminas\Server\Exception\InvalidArgumentException;
-use Laminas\Server\Method;
 use Laminas\Server\Method\Callback;
 use Override;
 use PHPUnit\Framework\Attributes\Group;
