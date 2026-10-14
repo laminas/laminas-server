@@ -19,7 +19,7 @@ use function ucfirst;
  */
 final class Definition
 {
-    protected ?Callback $callback;
+    protected ?Callback $callback = null;
 
     protected array $invokeArguments = [];
 

@@ -241,7 +241,7 @@ abstract class AbstractFunction
         $parameters = $function->getParameters();
 
         if (empty($this->docComment)) {
-            $this->docComment = $function->getDocComment();
+            $this->docComment = $function->getDocComment() ?: '';
         }
 
         $scanner  = new DocBlockReflection($this->docComment ?: '/***/');
@@ -409,7 +409,9 @@ abstract class AbstractFunction
     }
 
     /**
-     * @return string[]
+     * @return ((Prototype|mixed|string)[]|ReflectionFunctionAbstract|int|mixed|null|string)[]
+     *
+     * @psalm-return array{__reflection_kind: 'function'|'method',...}
      */
     public function __serialize(): array
     {

@@ -57,7 +57,7 @@ final class Definition implements Countable, Iterator
     /**
      * Add method to definition
      *
-     * @throws InvalidArgumentException If duplicate or invalid method provided
+     * @throws InvalidArgumentException If duplicate or invalid method provided.
      *  @psalm-param Method\Definition|array<string, mixed> $method
      */
     public function addMethod(array|Method\Definition $method, ?string $name = null): self
@@ -125,12 +125,12 @@ final class Definition implements Countable, Iterator
     /**
      * Get a given method definition
      */
-    public function getMethod(string $method): null|\Method\Definition
+    public function getMethod(string $method): ?Method\Definition
     {
         if ($this->hasMethod($method)) {
             return $this->methods[$method];
         }
-        return false;
+        return null;
     }
 
     public function getMethods(): array
@@ -179,12 +179,10 @@ final class Definition implements Countable, Iterator
 
     /**
      * Iterator: current item
-     *
-     * @return Method\Definition
      */
     #[Override]
     #[ReturnTypeWillChange]
-    public function current()
+    public function current(): Method\Definition|false
     {
         return current($this->methods);
     }

@@ -159,7 +159,9 @@ final class ReflectionClass
     }
 
     /**
-     * @return string[]
+     * @return ((ReflectionMethod|mixed)[]|null|string)[]
+     *
+     * @psalm-return array{config: array, methods: array<ReflectionMethod>, namespace: null|string, name: string}
      */
     public function __serialize(): array
     {

@@ -143,6 +143,10 @@ final class Cache
     {
         $definition = new Definition();
         foreach ($methods as $method) {
+            if ($method === false || is_null($method->getName()) || empty($method->getName())) {
+                continue;
+            }
+
             if (in_array($method->getName(), static::$skipMethods, true)) {
                 continue;
             }

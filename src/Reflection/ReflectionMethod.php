@@ -10,13 +10,13 @@ namespace Laminas\Server\Reflection;
 
 use Override;
 use ReflectionClass as PhpReflectionClass;
-use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
 use Webmozart\Assert\Assert;
 
 use function array_map;
 use function array_merge;
 use function implode;
+use function is_string;
 use function str_contains;
 use function str_replace;
 
@@ -42,18 +42,16 @@ final class ReflectionMethod extends AbstractFunction
      */
     protected ReflectionClass $classReflection;
 
-    public function __construct(ReflectionFunctionAbstract $r, ?string $namespace = null, array $argv = [])
-    {
-        // If method call, need to store some info on the class
-        $class = null;
-        if ($r instanceof PhpReflectionMethod) {
-            $class = $r->getDeclaringClass();
-        }
-
+    public function __construct(
+        ReflectionClass $class,
+        PhpReflectionMethod $r,
+        ?string $namespace = null,
+        array $argv = []
+    ) {
         $this->classReflection = $class;
         $this->reflection      = $r;
 
-        $classNamespace = null;
+        $classNamespace = $class->getNamespace();
 
         // Determine namespace
         if (! empty($namespace)) {
@@ -108,7 +106,7 @@ final class ReflectionMethod extends AbstractFunction
     protected function reflect(): void
     {
         $docComment = $this->reflection->getDocComment();
-        if (str_contains($docComment, self::INHERIT_TAG)) {
+        if (is_string($docComment) && str_contains($docComment, self::INHERIT_TAG)) {
             $this->docComment = $this->fetchRecursiveDocComment();
         }
 
@@ -152,8 +150,10 @@ final class ReflectionMethod extends AbstractFunction
         return '/**' . implode(PHP_EOL, $normalizedDocCommentList) . '*/';
     }
 
-    private function fetchRecursiveDocBlockFromParent(ReflectionClass|PhpReflectionClass $reflectionClass, string $methodName): ?array
-    {
+    private function fetchRecursiveDocBlockFromParent(
+        ReflectionClass|PhpReflectionClass $reflectionClass,
+        string $methodName
+    ): ?array {
         $docComment            = [];
         $parentReflectionClass = $reflectionClass->getParentClass();
         if (! $parentReflectionClass) {

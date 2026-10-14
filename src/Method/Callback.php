@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
+use Closure;
 use Laminas\Server;
 
 use function in_array;
@@ -22,14 +23,14 @@ use function ucfirst;
  */
 final class Callback
 {
-    protected string $class;
+    protected ?string $class = null;
 
-    /** @var string|\Closure|null Function name or callable for function callback */
-    protected string|\Closure|null $function;
+    /** @var string|Closure|null Function name or callable for function callback */
+    protected string|Closure|null $function = null;
 
-    protected string $method;
+    protected ?string $method = null;
 
-    protected ?string $type;
+    protected ?string $type = null;
 
     /** @var array Valid callback types */
     protected array $types = ['function', 'static', 'instance'];
@@ -75,7 +76,7 @@ final class Callback
     /**
      * Set callback function
      */
-    public function setFunction(string|\Closure $function): self
+    public function setFunction(string|Closure $function): self
     {
         $this->function = $function;
         $this->setType('function');

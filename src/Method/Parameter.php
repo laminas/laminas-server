@@ -29,6 +29,8 @@ final class Parameter
 
     public function __construct(?array $options = null)
     {
+        $this->defaultValue = null;
+
         if (is_array($options)) {
             $this->setOptions($options);
         }

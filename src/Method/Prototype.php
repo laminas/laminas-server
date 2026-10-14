@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Laminas\Server\Method;
 
 use Laminas\Server\Method\Parameter;
+use Webmozart\Assert\Assert;
 
 use function array_key_exists;
 use function count;

@@ -25,7 +25,7 @@ use function unserialize;
 
 final class CacheTest extends TestCase
 {
-    private string|null $cacheFile;
+    private string|null $cacheFile = null;
 
     #[Override]
     protected function tearDown(): void

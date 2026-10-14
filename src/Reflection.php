@@ -45,8 +45,11 @@ final class Reflection
      *   also for XmlRpc namespacing
      * @throws ReflectionException
      */
-    public static function reflectClass(string|object $class, array $argv = [], ?string $namespace = null): ReflectionClass
-    {
+    public static function reflectClass(
+        string|object $class,
+        array $argv = [],
+        ?string $namespace = null
+    ): ReflectionClass {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
         } elseif (is_string($class) && class_exists($class)) {

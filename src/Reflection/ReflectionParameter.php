@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
-use Deprecated;
 use ReflectionException;
 use ReflectionParameter as PhpReflectionParameter;
 
@@ -27,7 +26,7 @@ final class ReflectionParameter
     /**
      * Parameter position
      */
-    protected int $position;
+    protected int $position = 0;
 
     /**
      * Parameter type
@@ -114,16 +113,9 @@ final class ReflectionParameter
     }
 
     /**
-     * @return string[]
-     */
-    #[Deprecated('Use __serialize instead')]
-    public function __sleep(): array
-    {
-        return $this->__serialize();
-    }
-
-    /**
-     * @return string[]
+     * @return (int|null|string)[]
+     *
+     * @psalm-return array{position: int, type: string, description: null|string, name: string, functionName: string}
      */
     public function __serialize(): array
     {
@@ -134,15 +126,6 @@ final class ReflectionParameter
             'name'         => $this->name,
             'functionName' => $this->functionName,
         ];
-    }
-
-    /**
-     * @throws ReflectionException
-     */
-    #[Deprecated('Use __unserialize instead')]
-    public function __wakeup(): void
-    {
-        $this->__unserialize($this->__serialize());
     }
 
     /**
