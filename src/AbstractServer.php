@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Laminas\Server;
 
 use Laminas\Server\Method\Callback;
+use Override;
 use ReflectionClass;
 use ReflectionException;
 use Webmozart\Assert\Assert;
@@ -17,11 +18,9 @@ use function is_object;
 
 abstract class AbstractServer implements ServerInterface
 {
-    /** @var bool */
-    protected $overwriteExistingMethods = false;
+    protected bool $overwriteExistingMethods = false;
 
-    /** @var Definition */
-    protected $table;
+    protected Definition $table;
 
     public function __construct()
     {
@@ -29,9 +28,13 @@ abstract class AbstractServer implements ServerInterface
         $this->table->setOverwriteExistingMethods($this->overwriteExistingMethods);
     }
 
-    public function getFunctions(): Definition
+    #[Override]
+    /**
+     * @return Definition[]
+     */
+    public function getFunctions(): array
     {
-        return $this->table;
+        return [$this->table];
     }
 
     /**
@@ -41,12 +44,18 @@ abstract class AbstractServer implements ServerInterface
     {
         $callback = new Callback();
         if ($reflection instanceof Reflection\ReflectionMethod) {
+            /** @var string $declaringClass */
+            $declaringClass = $reflection->getDeclaringClass()->getName();
+            /** @var string $methodName */
+            $methodName = $reflection->getName();
             $callback->setType($reflection->isStatic() ? 'static' : 'instance')
-                ->setClass($reflection->getDeclaringClass()->getName())
-                ->setMethod($reflection->getName());
+                ->setClass($declaringClass)
+                ->setMethod($methodName);
         } elseif ($reflection instanceof Reflection\ReflectionFunction) {
+            /** @var string $functionName */
+            $functionName = $reflection->getName();
             $callback->setType('function')
-                ->setFunction($reflection->getName());
+                ->setFunction($functionName);
         }
         return $callback;
     }
@@ -54,11 +63,12 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Build a method signature
      *
-     * @param  null|string|object $class
      * @throws Exception\RuntimeException On duplicate entry.
      */
-    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
-    {
+    final protected function buildSignature(
+        Reflection\AbstractFunction $reflection,
+        null|string|object $class = null
+    ): Method\Definition {
         $ns     = $reflection->getNamespace();
         $name   = $reflection->getName();
         $method = empty($ns) ? $name : $ns . '.' . $name;
@@ -99,10 +109,9 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Dispatch method
      *
-     * @return mixed
      * @throws ReflectionException
      */
-    protected function dispatch(Method\Definition $invokable, array $params)
+    protected function dispatch(Method\Definition $invokable, array $params): mixed
     {
         $callback = $invokable->getCallback();
         Assert::isInstanceOf($callback, Callback::class);

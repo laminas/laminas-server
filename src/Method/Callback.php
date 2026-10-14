@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
+use Closure;
 use Laminas\Server;
 
 use function in_array;
@@ -17,30 +18,22 @@ use function method_exists;
 use function sprintf;
 use function ucfirst;
 
-class Callback
+/**
+ * Method callback metadata
+ */
+final class Callback
 {
-    /** @var string */
-    protected $class;
+    protected ?string $class = null;
 
-    /**
-     * Function name or callable for function callback
-     *
-     * @var string|callable
-     */
-    protected $function;
+    /** @var string|Closure|null Function name or callable for function callback */
+    protected string|Closure|null $function = null;
 
-    /** @var string */
-    protected $method;
+    protected ?string $method = null;
 
-    /** @var null|string */
-    protected $type;
+    protected ?string $type = null;
 
-    /**
-     * Valid callback types
-     *
-     * @var array
-     */
-    protected $types = ['function', 'static', 'instance'];
+    /** @var string[] Valid callback types */
+    protected array $types = ['function', 'static', 'instance'];
 
     public function __construct(?array $options = null)
     {
@@ -49,6 +42,9 @@ class Callback
         }
     }
 
+    /**
+     * Set object state from array of options
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -62,11 +58,8 @@ class Callback
 
     /**
      * Set callback class
-     *
-     * @param  string|object $class
-     * @return $this
      */
-    public function setClass($class): self
+    public function setClass(string|object $class): self
     {
         if (is_object($class)) {
             $class = $class::class;
@@ -82,11 +75,8 @@ class Callback
 
     /**
      * Set callback function
-     *
-     * @param  string|callable $function
-     * @return $this
      */
-    public function setFunction($function): self
+    public function setFunction(string|Closure $function): self
     {
         $this->function = $function;
         $this->setType('function');
@@ -95,14 +85,15 @@ class Callback
 
     /**
      * Get callback function
-     *
-     * @return null|string|callable
      */
-    public function getFunction()
+    public function getFunction(): string|Closure|null
     {
         return $this->function;
     }
 
+    /**
+     * Set callback class method
+     */
     public function setMethod(string $method): self
     {
         $this->method = $method;

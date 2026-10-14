@@ -8,38 +8,45 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Reflection;
 
+use ReflectionException;
 use ReflectionParameter as PhpReflectionParameter;
 
 use function call_user_func_array;
 use function method_exists;
 
-class ReflectionParameter
+/**
+ * Parameter Reflection
+ *
+ * Decorates a ReflectionParameter to allow setting the parameter type
+ */
+final class ReflectionParameter
 {
-    /** @var PhpReflectionParameter */
-    protected $reflection;
+    protected PhpReflectionParameter $reflection;
 
-    /** @var int */
-    protected $position;
+    /**
+     * Parameter position
+     */
+    protected int $position = 0;
 
-    /** @var string */
-    protected $type;
+    /**
+     * Parameter type
+     */
+    protected string $type;
 
-    /** @var null|string */
-    protected $description;
+    /**
+     * Parameter description
+     */
+    protected ?string $description;
 
     /**
      * Parameter name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Declaring function name (needed for serialization)
-     *
-     * @var string
      */
-    protected $functionName;
+    protected mixed $functionName;
 
     public function __construct(PhpReflectionParameter $r, string $type = 'mixed', ?string $description = null)
     {
@@ -58,11 +65,9 @@ class ReflectionParameter
     /**
      * Proxy reflection calls
      *
-     * @param array $args
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -102,15 +107,31 @@ class ReflectionParameter
     }
 
     /**
-     * @return string[]
+     * @return (int|null|string)[]
+     * @psalm-return array{position: int, type: string, description: null|string, name: string, functionName: string}
      */
-    public function __sleep(): array
+    public function __serialize(): array
     {
-        return ['position', 'type', 'description', 'name', 'functionName'];
+        return [
+            'position'     => $this->position,
+            'type'         => $this->type,
+            'description'  => $this->description,
+            'name'         => $this->name,
+            'functionName' => $this->functionName,
+        ];
     }
 
-    public function __wakeup(): void
+    /**
+     * @param array<string, mixed> $data
+     * @throws ReflectionException
+     */
+    public function __unserialize(array $data): void
     {
-        $this->reflection = new PhpReflectionParameter($this->functionName, $this->name);
+        $this->position     = $data['position'] ?? '0';
+        $this->type         = $data['type'] ?? 'mixed';
+        $this->description  = $data['description'] ?? '';
+        $this->name         = $data['name'] ?? '';
+        $this->functionName = $data['functionName'] ?? '';
+        $this->reflection   = new PhpReflectionParameter($this->functionName, $this->name);
     }
 }

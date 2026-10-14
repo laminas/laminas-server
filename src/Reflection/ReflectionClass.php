@@ -14,7 +14,7 @@ use ReflectionException;
 use function call_user_func_array;
 use function method_exists;
 use function preg_match;
-use function substr;
+use function str_starts_with;
 
 /**
  * Class/Object reflection
@@ -22,31 +22,25 @@ use function substr;
  * Proxies calls to a ReflectionClass object, and decorates getMethods() by
  * creating its own list of {@link Laminas\Server\Reflection\ReflectionMethod}s.
  */
-class ReflectionClass
+final class ReflectionClass
 {
     /**
      * Optional configuration parameters; accessible via {@link __get} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /** @var ReflectionMethod[] */
-    protected $methods = [];
+    protected array $methods = [];
 
-    /** @var null|string */
-    protected $namespace;
+    protected ?string $namespace = null;
 
-    /** @var PhpReflectionClass */
-    protected $reflection;
+    protected PhpReflectionClass $reflection;
 
     /**
      * Reflection class name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Constructor
@@ -65,7 +59,7 @@ class ReflectionClass
 
         foreach ($reflection->getMethods() as $method) {
             // Don't aggregate magic methods
-            if ('__' === substr($method->getName(), 0, 2)) {
+            if (str_starts_with($method->getName(), '__')) {
                 continue;
             }
 
@@ -80,9 +74,8 @@ class ReflectionClass
      * Proxy reflection calls
      *
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, array $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -96,24 +89,18 @@ class ReflectionClass
      *
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
-     *
-     * @return mixed
      */
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
-        if (isset($this->config[$key])) {
-            return $this->config[$key];
-        }
+        return $this->config[$key] ?? null;
     }
 
     /**
      * Set configuration parameters
      *
      * Values are stored by $key in {@link $config}.
-     *
-     * @param mixed $value
      */
-    public function __set(string $key, $value): void
+    public function __set(string $key, mixed $value): void
     {
         $this->config[$key] = $value;
     }
@@ -155,16 +142,28 @@ class ReflectionClass
      *
      * @throws ReflectionException
      */
-    public function __wakeup(): void
+    public function __unserialize(array $data): void
     {
+        $this->config    = $data['config'] ?? '';
+        $this->methods   = $data['methods'] ?? '';
+        $this->namespace = $data['namespace'] ?? '';
+        $this->name      = $data['name'] ?? '';
+
+        // Restore runtime-only dependency
         $this->reflection = new PhpReflectionClass($this->name);
     }
 
     /**
-     * @return string[]
+     * @return ((ReflectionMethod|mixed)[]|null|string)[]
+     * @psalm-return array{config: array, methods: array<ReflectionMethod>, namespace: null|string, name: string}
      */
-    public function __sleep(): array
+    public function __serialize(): array
     {
-        return ['config', 'methods', 'namespace', 'name'];
+        return [
+            'config'    => $this->config,
+            'methods'   => $this->methods,
+            'namespace' => $this->namespace,
+            'name'      => $this->name,
+        ];
     }
 }

@@ -24,7 +24,10 @@ use function is_object;
 use function is_string;
 use function sprintf;
 
-class Reflection
+/**
+ * Reflection for determining method signatures to use with server classes
+ */
+final class Reflection
 {
     /**
      * Perform class reflection to create dispatch signatures
@@ -40,10 +43,12 @@ class Reflection
      * @param null|string   $namespace Optional namespace with which to prefix the
      *   method name (used for the signature key). Primarily to avoid collisions,
      *   also for XmlRpc namespacing
-     * @throws ReflectionException
      */
-    public static function reflectClass($class, array $argv = [], ?string $namespace = null): ReflectionClass
-    {
+    public static function reflectClass(
+        string|object $class,
+        array $argv = [],
+        ?string $namespace = null
+    ): ReflectionClass {
         if (is_object($class)) {
             $reflection = new ReflectionObject($class);
         } elseif (is_string($class) && class_exists($class)) {
@@ -72,7 +77,7 @@ class Reflection
      * @throws InvalidArgumentException|ReflectionException
      */
     public static function reflectFunction(
-        $function,
+        string|callable $function,
         ?array $argv = null,
         ?string $namespace = null
     ): ReflectionFunction {

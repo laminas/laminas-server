@@ -11,6 +11,7 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\ReflectionClass;
 use Laminas\Server\Reflection\ReflectionMethod;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionClass as PhpReflectionClass;
 
@@ -18,7 +19,11 @@ use function count;
 use function serialize;
 use function unserialize;
 
-class ReflectionClassTest extends TestCase
+/**
+ * Test case for \Laminas\Server\Reflection\ClassReflection
+ */
+#[Group('Laminas_Server')]
+final class ReflectionClassTest extends TestCase
 {
     public function testConstructor(): void
     {
@@ -59,6 +64,9 @@ class ReflectionClassTest extends TestCase
         }
     }
 
+    /**
+     * namespace test
+     */
     public function testGetNamespace(): void
     {
         $r = new Reflection\ReflectionClass(new PhpReflectionClass(Reflection::class));

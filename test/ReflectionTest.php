@@ -10,9 +10,12 @@ namespace LaminasTest\Server;
 
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Exception\InvalidArgumentException;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use TypeError;
 
-class ReflectionTest extends TestCase
+#[Group('Laminas_server')]
+final class ReflectionTest extends TestCase
 {
     public function testReflectClass(): void
     {
@@ -25,12 +28,14 @@ class ReflectionTest extends TestCase
 
     public function testReflectClassThrowsExceptionOnInvalidParameter(): void
     {
-        $this->expectException(Reflection\Exception\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid class or object passed to attachClass');
+        $this->expectException(TypeError::class);
         /** @psalm-suppress InvalidArgument */
         Reflection::reflectClass(false);
     }
 
+    /**
+     * reflectClass() test; test namespaces
+     */
     public function testReflectClass2(): void
     {
         $reflection = Reflection::reflectClass(TestAsset\ReflectionTestClass::class, [], 'zsr');
@@ -46,23 +51,23 @@ class ReflectionTest extends TestCase
 
     public function testReflectFunctionThrowsExceptionOnInvalidParam(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid function');
+        $this->expectException(TypeError::class);
         /** @psalm-suppress InvalidArgument */
         Reflection::reflectFunction(false);
     }
 
+    /**
+     * reflectFunction() test; test namespaces
+     */
     public function testReflectFunction2(): void
     {
-        /** @psalm-suppress UndefinedClass **/
-        $reflection = Reflection::reflectFunction(TestAsset\reflectionTestFunction::class, null, 'zsr');
+        $reflection = Reflection::reflectFunction('LaminasTest\Server\Reflection\TestAsset\function1', null, 'zsr');
         $this->assertEquals('zsr', $reflection->getNamespace());
     }
 
     public function testReflectFunctionAllowsNullArgv(): void
     {
-        /** @psalm-suppress UndefinedClass **/
-        $r = Reflection::reflectFunction(TestAsset\reflectionTestFunction::class, null);
+        $r = Reflection::reflectFunction('LaminasTest\Server\Reflection\TestAsset\function1', null);
         $this->assertSame([], $r->getInvokeArguments());
     }
 }

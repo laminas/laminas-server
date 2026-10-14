@@ -13,13 +13,17 @@ namespace Laminas\Server\Reflection;
  *
  * Stores the return value type and description
  */
-class ReflectionReturnValue
+final class ReflectionReturnValue
 {
-    /** @var string */
-    protected $type;
+    /**
+     * Return value type
+     */
+    protected string $type;
 
-    /** @var string */
-    protected $description;
+    /**
+     * Return value description
+     */
+    protected string $description;
 
     public function __construct(string $type = 'mixed', string $description = '')
     {

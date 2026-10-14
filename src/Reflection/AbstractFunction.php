@@ -12,7 +12,6 @@ use Laminas\Code\Generator\DocBlock\Tag\ParamTag;
 use Laminas\Code\Generator\DocBlock\Tag\ReturnTag;
 use Laminas\Code\Reflection\DocBlockReflection;
 use ReflectionClass as PhpReflectionClass;
-use ReflectionException;
 use ReflectionFunction as PhpReflectionFunction;
 use ReflectionFunctionAbstract;
 use ReflectionMethod as PhpReflectionMethod;
@@ -24,10 +23,10 @@ use function array_shift;
 use function array_unshift;
 use function call_user_func_array;
 use function count;
+use function get_object_vars;
 use function method_exists;
 use function preg_match;
-
-use const PHP_VERSION_ID;
+use function property_exists;
 
 /**
  * Function/Method Reflection
@@ -41,77 +40,56 @@ use const PHP_VERSION_ID;
  */
 abstract class AbstractFunction
 {
-    /** @var ReflectionFunctionAbstract */
-    protected $reflection;
+    protected ReflectionFunctionAbstract $reflection;
 
     /**
      * Additional arguments to pass to method on invocation
-     *
-     * @var array
      */
-    protected $argv = [];
+    protected array $argv = [];
 
     /**
      * Used to store extra configuration for the method (typically done by the
      * server class, e.g., to indicate whether or not to instantiate a class).
      * Associative array; access is as properties via {@link __get()} and
      * {@link __set()}
-     *
-     * @var array
      */
-    protected $config = [];
+    protected array $config = [];
 
     /**
      * Declaring class (needed for when serialization occurs)
-     *
-     * @var string
      */
-    protected $class;
+    protected string $class = '';
 
     /**
      * Function name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name = '';
 
     /**
      * Function/method description
-     *
-     * @var string
      */
-    protected $description = '';
+    protected string $description = '';
 
     /**
      * Namespace with which to prefix function/method name
-     *
-     * @var null|string
      */
-    protected $namespace;
+    protected ?string $namespace = null;
 
     /** @var Prototype[] */
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
-    /** @var string */
-    protected $docComment = '';
+    protected string $docComment = '';
 
-    /** @var array */
-    protected $return = [];
+    protected array $return = [];
 
-    /** @var string */
-    protected $returnDesc;
+    protected string $returnDesc;
 
-    /**
-     * @var null|string[]
-     * @psalm-var null|array<array-key, string>
-     */
-    protected $paramDesc;
+    /** @psalm-var null|array<array-key, string> */
+    protected null|array $paramDesc;
 
-    /** @var array */
-    protected $sigParams;
+    protected array $sigParams;
 
-    /** @var int */
-    protected $sigParamsDepth;
+    protected int $sigParamsDepth;
 
     /**
      * Constructor
@@ -263,7 +241,7 @@ abstract class AbstractFunction
         $parameters = $function->getParameters();
 
         if (empty($this->docComment)) {
-            $this->docComment = $function->getDocComment();
+            $this->docComment = $function->getDocComment() ?: '';
         }
 
         $scanner  = new DocBlockReflection($this->docComment ?: '/***/');
@@ -298,7 +276,6 @@ abstract class AbstractFunction
         if (empty($paramTags)) {
             foreach ($parameters as $param) {
                 // Suppressing, because false positive
-                /** @psalm-suppress TooManyArguments **/
                 $paramTypesTmp[] = [$this->paramIsArray($param) ? 'array' : 'mixed'];
                 $paramDesc[]     = '';
             }
@@ -340,9 +317,8 @@ abstract class AbstractFunction
      * Proxy reflection calls
      *
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, array $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -356,24 +332,18 @@ abstract class AbstractFunction
      *
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
-     *
-     * @return mixed
      */
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
-        if (isset($this->config[$key])) {
-            return $this->config[$key];
-        }
+        return $this->config[$key] ?? null;
     }
 
     /**
      * Set configuration parameters
      *
      * Values are stored by $key in {@link $config}.
-     *
-     * @param mixed $value
      */
-    public function __set(string $key, $value): void
+    public function __set(string $key, mixed $value): void
     {
         $this->config[$key] = $value;
     }
@@ -434,23 +404,27 @@ abstract class AbstractFunction
     }
 
     /**
-     * @return string[]
+     * @return ((Prototype|mixed|string)[]|ReflectionFunctionAbstract|int|mixed|null|string)[]
+     * @psalm-return array{__reflection_kind: 'function'|'method',...}
      */
-    public function __sleep(): array
+    public function __serialize(): array
     {
-        $serializable = [];
-        foreach ($this as $name => $value) {
+        $data = [];
+        foreach (get_object_vars($this) as $name => $value) {
             if (
                 $value instanceof PhpReflectionFunction
                 || $value instanceof PhpReflectionMethod
             ) {
-                continue;
+                continue; // never serialize reflection objects
             }
 
-            $serializable[] = $name;
+            $data[$name] = $value;
         }
 
-        return $serializable;
+        $data['__reflection_kind'] =
+            $this->reflection instanceof PhpReflectionMethod ? 'method' : 'function';
+
+        return $data;
     }
 
     /**
@@ -458,12 +432,19 @@ abstract class AbstractFunction
      *
      * Reflection needs explicit instantiation to work correctly. Re-instantiate
      * reflection object on wakeup.
-     *
-     * @throws ReflectionException
      */
-    public function __wakeup(): void
+    public function __unserialize(array $data): void
     {
-        if ($this->reflection instanceof PhpReflectionMethod) {
+        $kind = $data['__reflection_kind'] ?? 'function';
+        unset($data['__reflection_kind']);
+
+        foreach ($data as $name => $value) {
+            if (property_exists($this, $name)) {
+                $this->$name = $value;
+            }
+        }
+
+        if ($kind === 'method') {
             $class            = new PhpReflectionClass($this->class);
             $this->reflection = new PhpReflectionMethod($class->newInstance(), $this->name);
         } else {
@@ -473,11 +454,7 @@ abstract class AbstractFunction
 
     private function paramIsArray(PhpReflectionParameter $param): bool
     {
-        if (PHP_VERSION_ID >= 80000) {
-            $type = $param->getType();
-            return $type instanceof ReflectionNamedType && $type->getName() === 'array';
-        }
-
-        return $param->isArray();
+        $type = $param->getType();
+        return $type instanceof ReflectionNamedType && $type->getName() === 'array';
     }
 }

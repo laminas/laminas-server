@@ -10,6 +10,6 @@ namespace Laminas\Server\Reflection\Exception;
 
 use Laminas\Server\Exception;
 
-class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
+final class RuntimeException extends Exception\RuntimeException implements ExceptionInterface
 {
 }

@@ -14,25 +14,23 @@ use function is_array;
 use function method_exists;
 use function ucfirst;
 
-class Definition
+/**
+ * Method definition metadata
+ */
+final class Definition
 {
-    /** @var null|Callback */
-    protected $callback;
+    protected ?Callback $callback = null;
 
-    /** @var array */
-    protected $invokeArguments = [];
+    protected array $invokeArguments = [];
 
-    /** @var string */
-    protected $methodHelp = '';
+    protected string $methodHelp = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var null|object */
-    protected $object;
+    protected ?object $object = null;
 
     /** @var Prototype[] */
-    protected $prototypes = [];
+    protected array $prototypes = [];
 
     public function __construct(?array $options = null)
     {
@@ -41,6 +39,9 @@ class Definition
         }
     }
 
+    /**
+     * Set object state from options
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -52,6 +53,9 @@ class Definition
         return $this;
     }
 
+    /**
+     * Set method name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -66,11 +70,9 @@ class Definition
     /**
      * Set method callback
      *
-     * @param  array|Callback $callback
      * @throws Server\Exception\InvalidArgumentException
-     * @return $this
      */
-    public function setCallback($callback): self
+    public function setCallback(array|Callback $callback): self
     {
         if (is_array($callback)) {
             $callback = new Callback($callback);
@@ -81,6 +83,9 @@ class Definition
         return $this;
     }
 
+    /**
+     * Get method callback
+     */
     public function getCallback(): ?Callback
     {
         return $this->callback;
@@ -89,12 +94,10 @@ class Definition
     /**
      * Add prototype to method definition
      *
-     * @param  array|Prototype $prototype
      * @throws Server\Exception\InvalidArgumentException
-     * @return $this
      * @psalm-param Prototype|array<string, mixed> $prototype
      */
-    public function addPrototype($prototype): self
+    public function addPrototype(array|Prototype $prototype): self
     {
         if (is_array($prototype)) {
             $prototype = new Prototype($prototype);
@@ -108,7 +111,6 @@ class Definition
      * Add multiple prototypes at once
      *
      * @param  Prototype[] $prototypes
-     * @return $this
      * @psalm-param array<array-key, Prototype|array<string, mixed>> $prototypes
      */
     public function addPrototypes(array $prototypes): self
@@ -123,7 +125,6 @@ class Definition
      * Set all prototypes at once (overwrites)
      *
      * @param  Prototype[] $prototypes
-     * @return $this
      * @psalm-param array<array-key, Prototype|array<string, mixed>> $prototypes
      */
     public function setPrototypes(array $prototypes): self
@@ -143,6 +144,9 @@ class Definition
         return $this->prototypes;
     }
 
+    /**
+     * Set method help
+     */
     public function setMethodHelp(string $methodHelp): self
     {
         $this->methodHelp = $methodHelp;
@@ -154,6 +158,11 @@ class Definition
         return $this->methodHelp;
     }
 
+    /**
+     * Set object to use with method calls
+     *
+     * @throws Server\Exception\InvalidArgumentException
+     */
     public function setObject(object $object): self
     {
         $this->object = $object;
@@ -165,6 +174,9 @@ class Definition
         return $this->object;
     }
 
+    /**
+     * Set invoke arguments
+     */
     public function setInvokeArguments(array $invokeArguments): self
     {
         $this->invokeArguments = $invokeArguments;

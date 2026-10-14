@@ -12,30 +12,33 @@ use function is_array;
 use function method_exists;
 use function ucfirst;
 
-class Parameter
+/**
+ * Method parameter metadata
+ */
+final class Parameter
 {
-    /** @var mixed */
-    protected $defaultValue;
+    protected mixed $defaultValue;
 
-    /** @var string */
-    protected $description = '';
+    protected string $description = '';
 
-    /** @var null|string */
-    protected $name;
+    protected ?string $name = null;
 
-    /** @var bool */
-    protected $optional = false;
+    protected bool $optional = false;
 
-    /** @var string */
-    protected $type = 'mixed';
+    protected string $type = 'mixed';
 
     public function __construct(?array $options = null)
     {
+        $this->defaultValue = null;
+
         if (is_array($options)) {
             $this->setOptions($options);
         }
     }
 
+    /**
+     * Set object state from array of options
+     */
     public function setOptions(array $options): self
     {
         foreach ($options as $key => $value) {
@@ -50,10 +53,9 @@ class Parameter
     /**
      * Set default value
      *
-     * @param  mixed $defaultValue
-     * @return $this
+     * @psalm-param 'bar'|'foo' $defaultValue
      */
-    public function setDefaultValue($defaultValue): self
+    public function setDefaultValue(mixed $defaultValue): self
     {
         $this->defaultValue = $defaultValue;
         return $this;
@@ -61,14 +63,15 @@ class Parameter
 
     /**
      * Retrieve default value
-     *
-     * @return mixed
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): mixed
     {
         return $this->defaultValue;
     }
 
+    /**
+     * Set description
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -80,6 +83,9 @@ class Parameter
         return $this->description;
     }
 
+    /**
+     * Set name
+     */
     public function setName(?string $name): self
     {
         $this->name = $name;
@@ -91,6 +97,9 @@ class Parameter
         return $this->name;
     }
 
+    /**
+     * Set optional flag
+     */
     public function setOptional(bool $flag): self
     {
         $this->optional = $flag;
@@ -102,6 +111,9 @@ class Parameter
         return $this->optional;
     }
 
+    /**
+     * Set parameter type
+     */
     public function setType(string $type): self
     {
         $this->type = $type;

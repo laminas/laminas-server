@@ -25,10 +25,13 @@ use function unserialize;
 
 use const E_NOTICE;
 
-class Cache
+/**
+ * \Laminas\Server\Cache: cache server definitions
+ */
+final class Cache
 {
     /** @var string[] */
-    protected static $skipMethods = [];
+    protected static array $skipMethods = [];
 
     /**
      * Cache a file containing the dispatch list.
@@ -124,10 +127,10 @@ class Cache
     }
 
     /**
-     * @param array|Definition $methods
-     * @return array|Definition
+     * @param Definition[]|Definition $methods
+     * @return Definition[]|Definition
      */
-    private static function createDefinition($methods)
+    private static function createDefinition(array|Definition $methods): array|Definition
     {
         if ($methods instanceof Definition) {
             return self::createDefinitionFromMethodsDefinition($methods);
@@ -140,6 +143,10 @@ class Cache
     {
         $definition = new Definition();
         foreach ($methods as $method) {
+            if ($method === false || $method->getName() === null || empty($method->getName())) {
+                continue;
+            }
+
             if (in_array($method->getName(), static::$skipMethods, true)) {
                 continue;
             }
@@ -148,6 +155,10 @@ class Cache
         return $definition;
     }
 
+    /**
+     * @param Definition[] $methods
+     * @return Definition[]
+     */
     private static function createDefinitionFromMethodsArray(array $methods): array
     {
         foreach (array_keys($methods) as $methodName) {

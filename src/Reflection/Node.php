@@ -11,21 +11,22 @@ namespace Laminas\Server\Reflection;
 use function array_merge;
 use function count;
 
+/**
+ * Node Tree class for Laminas\Server reflection operations
+ */
 class Node
 {
-    /** @var mixed */
-    protected $value;
+    protected mixed $value;
 
     /** @var self[] */
-    protected $children = [];
-
-    /** @var null|self */
-    protected $parent;
+    protected array $children = [];
 
     /**
-     * @param mixed $value
+     * Parent node (if any)
      */
-    public function __construct($value, ?self $parent = null)
+    protected ?self $parent = null;
+
+    public function __construct(mixed $value, ?self $parent = null)
     {
         $this->value = $value;
         if (null !== $parent) {
@@ -37,7 +38,12 @@ class Node
     /**
      * Set parent node
      *
+     * //phpcs:disable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
+     * //phpcs:disable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
+     *
      * @param \Laminas\Server\Reflection\Node $node
+     * //phpcs:enable SlevomatCodingStandard.TypeHints.ParameterTypeHint.UselessAnnotation
+     * //phpcs:enable SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFullyQualifiedName
      * @param bool                            $new Whether or not the child node
      *     is newly created and should always be attached
      */
@@ -51,14 +57,16 @@ class Node
     }
 
     /**
-     * @param mixed $value
-     * @return static
+     * @param null|string $value
      */
-    public function createChild($value): self
+    public function createChild(string|null $value): self
     {
         return new static($value, $this);
     }
 
+    /**
+     * Attach a child node
+     */
     public function attachChild(self $node): void
     {
         $this->children[] = $node;
@@ -78,23 +86,23 @@ class Node
         return count($this->children) > 0;
     }
 
+    /**
+     * Return the parent node
+     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
     /**
-     * @param mixed $value
+     * @psalm-param 'array' $value
      */
-    public function setValue($value): void
+    public function setValue(string $value): void
     {
         $this->value = $value;
     }

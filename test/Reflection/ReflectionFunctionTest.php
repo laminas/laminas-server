@@ -11,6 +11,7 @@ namespace LaminasTest\Server\Reflection;
 use Laminas\Server\Reflection;
 use Laminas\Server\Reflection\Prototype;
 use Laminas\Server\Reflection\ReflectionParameter;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 use ReflectionFunction;
 
@@ -18,7 +19,8 @@ use function serialize;
 use function unserialize;
 use function var_export;
 
-class ReflectionFunctionTest extends TestCase
+#[Group('Laminas_Server')]
+final class ReflectionFunctionTest extends TestCase
 {
     public function testConstructor(): void
     {
@@ -146,6 +148,7 @@ class ReflectionFunctionTest extends TestCase
         $this->assertEquals('string', $param->getType());
     }
 
+    #[Group('Laminas-6996')]
     public function testParameterReflectionShouldReturnTypeAndVarnameAndDescription(): void
     {
         $function = new ReflectionFunction('LaminasTest\Server\Reflection\TestAsset\function1');

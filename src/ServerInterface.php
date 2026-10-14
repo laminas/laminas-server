@@ -36,15 +36,12 @@ interface ServerInterface
      * @param  null|array  $argv Optional array of arguments to pass to callbacks at
      *                           dispatch.
      */
-    public function setClass($class, ?string $namespace = null, ?array $argv = null): void;
+    public function setClass(mixed $class, ?string $namespace = null, ?array $argv = null): void;
 
     /**
      * Generate a server fault
-     *
-     * @param  null|mixed $fault
-     * @return mixed
      */
-    public function fault($fault = null, int $code = 404);
+    public function fault(mixed $fault = null, int $code = 404): mixed;
 
     /**
      * Handle a request
@@ -52,11 +49,8 @@ interface ServerInterface
      * Requests may be passed in, or the server may automatically determine the
      * request based on defaults. Dispatches server request to appropriate
      * method and returns a response
-     *
-     * @param  null|mixed $request
-     * @return mixed
      */
-    public function handle($request = null);
+    public function handle(mixed $request = null): mixed;
 
     /**
      * Return a server definition array
@@ -65,9 +59,9 @@ interface ServerInterface
      * {@link Reflection}. Can be used for server introspection,
      * documentation, or persistence.
      *
-     * @return array
+     * @return Definition[]
      */
-    public function getFunctions();
+    public function getFunctions(): array;
 
     /**
      * Load server definition
@@ -101,5 +95,5 @@ interface ServerInterface
      * @return string|object Content of last response, or response object that
      *                       implements __toString() methods.
      */
-    public function getResponse();
+    public function getResponse(): string|object;
 }

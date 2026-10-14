@@ -10,6 +10,6 @@ namespace Laminas\Server\Reflection\Exception;
 
 use Laminas\Server\Exception;
 
-class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
+final class InvalidArgumentException extends Exception\InvalidArgumentException implements ExceptionInterface
 {
 }
