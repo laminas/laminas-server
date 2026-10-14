@@ -46,7 +46,7 @@ final class ReflectionParameter
     /**
      * Declaring function name (needed for serialization)
      */
-    protected string $functionName;
+    protected mixed $functionName;
 
     public function __construct(PhpReflectionParameter $r, string $type = 'mixed', ?string $description = null)
     {

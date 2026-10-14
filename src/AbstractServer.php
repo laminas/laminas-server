@@ -29,9 +29,12 @@ abstract class AbstractServer implements ServerInterface
     }
 
     #[Override]
-    public function getFunctions(): Definition
+    /**
+     * @return Definition[]
+     */
+    public function getFunctions(): array
     {
-        return $this->table;
+        return [$this->table];
     }
 
     /**
@@ -62,8 +65,10 @@ abstract class AbstractServer implements ServerInterface
      *
      * @throws Exception\RuntimeException On duplicate entry.
      */
-    final protected function buildSignature(Reflection\AbstractFunction $reflection, null|string|object $class = null): Method\Definition
-    {
+    final protected function buildSignature(
+        Reflection\AbstractFunction $reflection,
+        null|string|object $class = null
+    ): Method\Definition {
         $ns     = $reflection->getNamespace();
         $name   = $reflection->getName();
         $method = empty($ns) ? $name : $ns . '.' . $name;

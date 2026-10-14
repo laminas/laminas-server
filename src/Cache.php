@@ -17,7 +17,6 @@ use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
 use function in_array;
-use function is_null;
 use function is_readable;
 use function is_writable;
 use function serialize;
@@ -144,7 +143,7 @@ final class Cache
     {
         $definition = new Definition();
         foreach ($methods as $method) {
-            if ($method === false || is_null($method->getName()) || empty($method->getName())) {
+            if ($method === false || $method->getName() === null || empty($method->getName())) {
                 continue;
             }
 

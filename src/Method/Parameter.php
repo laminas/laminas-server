@@ -17,7 +17,7 @@ use function ucfirst;
  */
 final class Parameter
 {
-    protected ?string $defaultValue;
+    protected mixed $defaultValue;
 
     protected string $description = '';
 
@@ -64,7 +64,7 @@ final class Parameter
     /**
      * Retrieve default value
      */
-    public function getDefaultValue(): ?string
+    public function getDefaultValue(): mixed
     {
         return $this->defaultValue;
     }

@@ -159,7 +159,7 @@ final class Definition implements Countable, Iterator
 
     public function toArray(): array
     {
-        return array_map(static fn (Definition $method)  => $method->toArray(), $this->getMethods());
+        return array_map(static fn (Method\Definition $method)  => $method->toArray(), $this->getMethods());
     }
 
     /**

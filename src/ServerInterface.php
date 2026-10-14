@@ -58,8 +58,10 @@ interface ServerInterface
      * Returns a server definition array as created using
      * {@link Reflection}. Can be used for server introspection,
      * documentation, or persistence.
+     *
+     * @return Definition[]
      */
-    public function getFunctions(): Definition;
+    public function getFunctions(): array;
 
     /**
      * Load server definition
