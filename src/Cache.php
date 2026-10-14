@@ -17,6 +17,7 @@ use function file_exists;
 use function file_get_contents;
 use function file_put_contents;
 use function in_array;
+use function is_null;
 use function is_readable;
 use function is_writable;
 use function serialize;
@@ -31,7 +32,7 @@ use const E_NOTICE;
 final class Cache
 {
     /** @var string[] */
-    protected static $skipMethods = [];
+    protected static array $skipMethods = [];
 
     /**
      * Cache a file containing the dispatch list.
@@ -127,10 +128,10 @@ final class Cache
     }
 
     /**
-     * @param array|Definition $methods
-     * @return array|Definition
+     * @param Definition[]|Definition $methods
+     * @return Definition[]|Definition
      */
-    private static function createDefinition($methods)
+    private static function createDefinition(array|Definition $methods): array|Definition
     {
         if ($methods instanceof Definition) {
             return self::createDefinitionFromMethodsDefinition($methods);
@@ -155,6 +156,10 @@ final class Cache
         return $definition;
     }
 
+    /**
+     * @param Definition[] $methods
+     * @return Definition[]
+     */
     private static function createDefinitionFromMethodsArray(array $methods): array
     {
         foreach (array_keys($methods) as $methodName) {

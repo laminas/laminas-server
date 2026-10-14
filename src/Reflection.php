@@ -43,7 +43,6 @@ final class Reflection
      * @param null|string   $namespace Optional namespace with which to prefix the
      *   method name (used for the signature key). Primarily to avoid collisions,
      *   also for XmlRpc namespacing
-     * @throws ReflectionException
      */
     public static function reflectClass(
         string|object $class,

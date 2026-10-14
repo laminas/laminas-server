@@ -99,8 +99,6 @@ final class ReflectionMethod extends AbstractFunction
 
     /**
      * {@inheritdoc}
-     *
-     * @return void
      */
     #[Override]
     protected function reflect(): void

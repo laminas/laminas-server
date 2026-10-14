@@ -58,12 +58,12 @@ abstract class AbstractFunction
     /**
      * Declaring class (needed for when serialization occurs)
      */
-    protected string $class;
+    protected string $class = '';
 
     /**
      * Function name (needed for serialization)
      */
-    protected string $name;
+    protected string $name = '';
 
     /**
      * Function/method description
@@ -317,9 +317,8 @@ abstract class AbstractFunction
      * Proxy reflection calls
      *
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, array $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -333,10 +332,8 @@ abstract class AbstractFunction
      *
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
-     *
-     * @return mixed
      */
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
         return $this->config[$key] ?? null;
     }
@@ -345,10 +342,8 @@ abstract class AbstractFunction
      * Set configuration parameters
      *
      * Values are stored by $key in {@link $config}.
-     *
-     * @param mixed $value
      */
-    public function __set(string $key, $value): void
+    public function __set(string $key, mixed $value): void
     {
         $this->config[$key] = $value;
     }
@@ -410,7 +405,6 @@ abstract class AbstractFunction
 
     /**
      * @return ((Prototype|mixed|string)[]|ReflectionFunctionAbstract|int|mixed|null|string)[]
-     *
      * @psalm-return array{__reflection_kind: 'function'|'method',...}
      */
     public function __serialize(): array

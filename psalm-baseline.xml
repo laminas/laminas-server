@@ -7,6 +7,7 @@
     <MixedArgument>
       <code><![CDATA[$method]]></code>
       <code><![CDATA[$method]]></code>
+      <code><![CDATA[$parameter->getDefaultValue()]]></code>
     </MixedArgument>
     <MixedAssignment>
       <code><![CDATA[$method]]></code>
@@ -56,13 +57,6 @@
     <MissingTemplateParam>
       <code><![CDATA[Iterator]]></code>
     </MissingTemplateParam>
-    <MixedAssignment>
-      <code><![CDATA[$method]]></code>
-      <code><![CDATA[$methods[$key]]]></code>
-    </MixedAssignment>
-    <MixedMethodCall>
-      <code><![CDATA[toArray]]></code>
-    </MixedMethodCall>
     <PossiblyUnusedMethod>
       <code><![CDATA[count]]></code>
     </PossiblyUnusedMethod>
@@ -92,14 +86,10 @@
     </MixedAssignment>
   </file>
   <file src="src/Method/Prototype.php">
-    <MixedArgument>
-      <code><![CDATA[$parameter]]></code>
-    </MixedArgument>
     <MixedArgumentTypeCoercion>
       <code><![CDATA[$key]]></code>
     </MixedArgumentTypeCoercion>
     <MixedAssignment>
-      <code><![CDATA[$parameter]]></code>
       <code><![CDATA[$value]]></code>
     </MixedAssignment>
     <TypeDoesNotContainType>
@@ -148,9 +138,6 @@
     <PossiblyUnusedMethod>
       <code><![CDATA[__get]]></code>
     </PossiblyUnusedMethod>
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[$class]]></code>
-    </PropertyNotSetInConstructor>
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[$function->getDocComment()]]></code>
       <code><![CDATA[$paramTag->getDescription()]]></code>
@@ -181,11 +168,6 @@
     <RiskyTruthyFalsyComparison>
       <code><![CDATA[empty($namespace)]]></code>
     </RiskyTruthyFalsyComparison>
-  </file>
-  <file src="src/Reflection/ReflectionFunction.php">
-    <PropertyNotSetInConstructor>
-      <code><![CDATA[ReflectionFunction]]></code>
-    </PropertyNotSetInConstructor>
   </file>
   <file src="src/Reflection/ReflectionMethod.php">
     <InvalidArgument>

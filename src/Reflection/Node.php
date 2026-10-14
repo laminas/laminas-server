@@ -16,21 +16,17 @@ use function count;
  */
 class Node
 {
-    /** @var mixed */
-    protected $value;
+    protected mixed $value;
 
     /** @var self[] */
-    protected $children = [];
+    protected array $children = [];
 
     /**
      * Parent node (if any)
      */
     protected ?self $parent = null;
 
-    /**
-     * @param mixed $value
-     */
-    public function __construct($value, ?self $parent = null)
+    public function __construct(mixed $value, ?self $parent = null)
     {
         $this->value = $value;
         if (null !== $parent) {
@@ -61,10 +57,9 @@ class Node
     }
 
     /**
-     * @param mixed $value
-     * @return static
+     * @param null|string $value
      */
-    public function createChild($value): self
+    public function createChild(string|null $value): self
     {
         return new static($value, $this);
     }
@@ -99,18 +94,15 @@ class Node
         return $this->parent;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
     /**
-     * @param mixed $value
+     * @psalm-param 'array' $value
      */
-    public function setValue($value): void
+    public function setValue(string $value): void
     {
         $this->value = $value;
     }

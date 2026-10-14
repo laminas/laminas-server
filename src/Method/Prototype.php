@@ -8,7 +8,6 @@ declare(strict_types=1);
 
 namespace Laminas\Server\Method;
 
-use Laminas\Server\Method\Parameter;
 use Webmozart\Assert\Assert;
 
 use function array_key_exists;
@@ -76,6 +75,9 @@ final class Prototype
         return $this;
     }
 
+    /**
+     * @param (Parameter|string)[] $parameters
+     */
     public function addParameters(array $parameters): self
     {
         foreach ($parameters as $parameter) {
@@ -86,6 +88,8 @@ final class Prototype
 
     /**
      * Set parameters
+     *
+     * @param (Parameter|string)[] $parameters
      */
     public function setParameters(array $parameters): self
     {
@@ -97,6 +101,8 @@ final class Prototype
 
     /**
      * Retrieve parameters as list of types
+     *
+     * @return string[]
      */
     public function getParameters(): array
     {
@@ -107,6 +113,9 @@ final class Prototype
         return $types;
     }
 
+    /**
+     * @return Parameter[]
+     */
     public function getParameterObjects(): array
     {
         return $this->parameters;

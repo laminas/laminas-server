@@ -19,5 +19,5 @@ interface ClientInterface
      * @param  array  $params Call parameters.
      * @return mixed Remote call results.
      */
-    public function call(string $method, array $params = []);
+    public function call(string $method, array $params = []): mixed;
 }

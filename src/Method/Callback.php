@@ -32,7 +32,7 @@ final class Callback
 
     protected ?string $type = null;
 
-    /** @var array Valid callback types */
+    /** @var string[] Valid callback types */
     protected array $types = ['function', 'static', 'instance'];
 
     public function __construct(?array $options = null)
@@ -86,7 +86,7 @@ final class Callback
     /**
      * Get callback function
      */
-    public function getFunction(): string|callable|null
+    public function getFunction(): string|Closure|null
     {
         return $this->function;
     }

@@ -17,7 +17,7 @@ use function ucfirst;
  */
 final class Parameter
 {
-    protected mixed $defaultValue;
+    protected ?string $defaultValue;
 
     protected string $description = '';
 
@@ -53,9 +53,9 @@ final class Parameter
     /**
      * Set default value
      *
-     * @param  mixed $defaultValue
+     * @psalm-param 'bar'|'foo' $defaultValue
      */
-    public function setDefaultValue($defaultValue): self
+    public function setDefaultValue(mixed $defaultValue): self
     {
         $this->defaultValue = $defaultValue;
         return $this;
@@ -63,10 +63,8 @@ final class Parameter
 
     /**
      * Retrieve default value
-     *
-     * @return mixed
      */
-    public function getDefaultValue()
+    public function getDefaultValue(): ?string
     {
         return $this->defaultValue;
     }

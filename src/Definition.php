@@ -15,6 +15,7 @@ use Override;
 use ReturnTypeWillChange;
 
 use function array_key_exists;
+use function array_map;
 use function count;
 use function current;
 use function is_array;
@@ -30,10 +31,9 @@ use function sprintf;
 final class Definition implements Countable, Iterator
 {
     /** @var Method\Definition[] */
-    protected $methods = [];
+    protected array $methods = [];
 
-    /** @var bool */
-    protected $overwriteExistingMethods = false;
+    protected bool $overwriteExistingMethods = false;
 
     /**
      * @psalm-param null|array<array-key, Method\Definition|array<string, mixed>> $methods
@@ -107,7 +107,6 @@ final class Definition implements Countable, Iterator
      * Set all methods at once (overwrite)
      *
      * @param  Method\Definition[] $methods
-     * @return $this
      * @psalm-param array<array-key, Method\Definition|array<string, mixed>> $methods
      */
     public function setMethods(array $methods): self
@@ -160,12 +159,7 @@ final class Definition implements Countable, Iterator
 
     public function toArray(): array
     {
-        $methods = [];
-        foreach ($this->getMethods() as $key => $method) {
-            $methods[$key] = $method->toArray();
-        }
-
-        return $methods;
+        return array_map(static fn (Definition $method)  => $method->toArray(), $this->getMethods());
     }
 
     /**
@@ -189,12 +183,10 @@ final class Definition implements Countable, Iterator
 
     /**
      * Iterator: current item key
-     *
-     * @return int|string|null
      */
     #[Override]
     #[ReturnTypeWillChange]
-    public function key()
+    public function key(): int|string|null
     {
         return key($this->methods);
     }
@@ -204,7 +196,7 @@ final class Definition implements Countable, Iterator
      */
     #[Override]
     #[ReturnTypeWillChange]
-    public function next()
+    public function next(): void
     {
         next($this->methods);
     }

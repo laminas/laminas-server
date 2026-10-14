@@ -40,17 +40,13 @@ final class ReflectionParameter
 
     /**
      * Parameter name (needed for serialization)
-     *
-     * @var string
      */
-    protected $name;
+    protected string $name;
 
     /**
      * Declaring function name (needed for serialization)
-     *
-     * @var string
      */
-    protected $functionName;
+    protected string $functionName;
 
     public function __construct(PhpReflectionParameter $r, string $type = 'mixed', ?string $description = null)
     {
@@ -69,11 +65,9 @@ final class ReflectionParameter
     /**
      * Proxy reflection calls
      *
-     * @param array $args
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -114,7 +108,6 @@ final class ReflectionParameter
 
     /**
      * @return (int|null|string)[]
-     *
      * @psalm-return array{position: int, type: string, description: null|string, name: string, functionName: string}
      */
     public function __serialize(): array

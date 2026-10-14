@@ -74,9 +74,8 @@ final class ReflectionClass
      * Proxy reflection calls
      *
      * @throws Exception\BadMethodCallException
-     * @return mixed
      */
-    public function __call(string $method, array $args)
+    public function __call(string $method, array $args): mixed
     {
         if (method_exists($this->reflection, $method)) {
             return call_user_func_array([$this->reflection, $method], $args);
@@ -90,10 +89,8 @@ final class ReflectionClass
      *
      * Values are retrieved by key from {@link $config}. Returns null if no
      * value found.
-     *
-     * @return mixed
      */
-    public function __get(string $key)
+    public function __get(string $key): mixed
     {
         return $this->config[$key] ?? null;
     }
@@ -102,10 +99,8 @@ final class ReflectionClass
      * Set configuration parameters
      *
      * Values are stored by $key in {@link $config}.
-     *
-     * @param mixed $value
      */
-    public function __set(string $key, $value): void
+    public function __set(string $key, mixed $value): void
     {
         $this->config[$key] = $value;
     }
@@ -160,7 +155,6 @@ final class ReflectionClass
 
     /**
      * @return ((ReflectionMethod|mixed)[]|null|string)[]
-     *
      * @psalm-return array{config: array, methods: array<ReflectionMethod>, namespace: null|string, name: string}
      */
     public function __serialize(): array

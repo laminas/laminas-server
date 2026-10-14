@@ -18,11 +18,9 @@ use function is_object;
 
 abstract class AbstractServer implements ServerInterface
 {
-    /** @var bool */
-    protected $overwriteExistingMethods = false;
+    protected bool $overwriteExistingMethods = false;
 
-    /** @var Definition */
-    protected $table;
+    protected Definition $table;
 
     public function __construct()
     {
@@ -62,10 +60,9 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Build a method signature
      *
-     * @param  null|string|object $class
      * @throws Exception\RuntimeException On duplicate entry.
      */
-    final protected function buildSignature(Reflection\AbstractFunction $reflection, $class = null): Method\Definition
+    final protected function buildSignature(Reflection\AbstractFunction $reflection, null|string|object $class = null): Method\Definition
     {
         $ns     = $reflection->getNamespace();
         $name   = $reflection->getName();
@@ -107,10 +104,9 @@ abstract class AbstractServer implements ServerInterface
     /**
      * Dispatch method
      *
-     * @return mixed
      * @throws ReflectionException
      */
-    protected function dispatch(Method\Definition $invokable, array $params)
+    protected function dispatch(Method\Definition $invokable, array $params): mixed
     {
         $callback = $invokable->getCallback();
         Assert::isInstanceOf($callback, Callback::class);
