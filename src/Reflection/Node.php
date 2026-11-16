@@ -32,8 +32,7 @@ class Node
      * Constructor
      *
      * @param mixed $value
-     * @param Node $parent Optional
-     * @return Node
+     * @param ?Node $parent Optional
      */
     public function __construct(
         /**
@@ -45,8 +44,6 @@ class Node
         if (null !== $parent) {
             $this->setParent($parent, true);
         }
-
-        return $this;
     }
 
     /**
