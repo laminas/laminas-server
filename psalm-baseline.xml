@@ -286,9 +286,6 @@
     </TypeDoesNotContainType>
   </file>
   <file src="src/Reflection/Node.php">
-    <InvalidReturnStatement>
-      <code><![CDATA[$this]]></code>
-    </InvalidReturnStatement>
     <MixedArgument>
       <code><![CDATA[$childEndPoints]]></code>
     </MixedArgument>
@@ -469,9 +466,6 @@
       <code><![CDATA[$this->createMock(Server::class)]]></code>
       <code><![CDATA[$this->createMock(Server::class)]]></code>
     </DeprecatedInterface>
-    <MissingConstructor>
-      <code><![CDATA[$cacheFile]]></code>
-    </MissingConstructor>
     <MixedAssignment>
       <code><![CDATA[$actual[]]]></code>
       <code><![CDATA[$data]]></code>
