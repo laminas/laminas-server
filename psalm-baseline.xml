@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="6.14.3@d0b040a91f280f071c1abcb1b77ce3822058725a">
+<files psalm-version="6.20.12@56e5217b13db8789c2b8cfcc73d0f902df2cda11">
   <file src="src/AbstractServer.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$class]]></code>
@@ -286,9 +286,6 @@
     </TypeDoesNotContainType>
   </file>
   <file src="src/Reflection/Node.php">
-    <InvalidReturnStatement>
-      <code><![CDATA[$this]]></code>
-    </InvalidReturnStatement>
     <MixedArgument>
       <code><![CDATA[$childEndPoints]]></code>
     </MixedArgument>
@@ -469,9 +466,6 @@
       <code><![CDATA[$this->createMock(Server::class)]]></code>
       <code><![CDATA[$this->createMock(Server::class)]]></code>
     </DeprecatedInterface>
-    <MissingConstructor>
-      <code><![CDATA[$cacheFile]]></code>
-    </MissingConstructor>
     <MixedAssignment>
       <code><![CDATA[$actual[]]]></code>
       <code><![CDATA[$data]]></code>
