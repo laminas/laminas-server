@@ -3,5 +3,9 @@
         {
             "name": "PHPUnit on PHP 8.1 with lowest dependencies"
         }
-    ]
+    ],
+    "backwardCompatibilityCheck": true,
+    "ignore_php_platform_requirements": {
+        "8.6": true
+    }
 }
